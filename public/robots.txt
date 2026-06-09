@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Bots de retrieval (citation IA en temps reel) explicitement permis
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://fournia.net/sitemap-index.xml

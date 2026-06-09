@@ -1,0 +1,32 @@
+---
+// Page d'accueil PLACEHOLDER. À remplacer par le vrai design de fournia.net.
+const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'FournIA',
+  url: siteUrl,
+  founder: { '@type': 'Person', name: 'Simon Fournier' },
+  areaServed: 'Québec, Rive-Nord de Montréal',
+  description: "Consultation en IA pour PME québécoises : automatisations N8N, agents Claude API, formation. Conforme à la Loi 25.",
+};
+---
+<!doctype html>
+<html lang="fr-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FournIA | Consultation IA pour PME québécoises</title>
+    <meta name="description" content="FournIA accompagne les PME du Québec dans l'adoption de l'IA : audits, automatisations N8N, agents IA, formation. Rive-Nord de Montréal. Conforme Loi 25." />
+    <link rel="canonical" href={`${siteUrl}/`} />
+    <script type="application/ld+json" set:html={JSON.stringify(orgLd)} />
+  </head>
+  <body>
+    <main>
+      <h1>FournIA</h1>
+      <p>Consultation en IA pour les PME québécoises. On construit et on implante : automatisations N8N, agents Claude API, formation. Rive-Nord de Montréal. Conforme à la Loi 25.</p>
+      <p><a href="/blog">Lire le blog</a></p>
+      <p>[Placeholder. Remplacer par le vrai design de fournia.net.]</p>
+    </main>
+  </body>
+</html>
