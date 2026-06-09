@@ -25,11 +25,12 @@ npm run build    # génère dist/
 npm run preview  # prévisualise dist/
 ```
 
-## Déploiement (Cloudflare Pages, auto sur push)
+## Déploiement (Netlify, auto sur push)
+Voir le pas-à-pas complet dans `GUIDE-DEPLOIEMENT.md`. En bref :
 1. Créer un repo GitHub public (ex. `fournia-site`) et y pousser ce dossier.
-2. Cloudflare Pages : Connect to Git -> ce repo. Preset : Astro. Build : `npm run build`, output `dist`.
-3. Custom domain : pointer `fournia.net` vers le projet Cloudflare Pages (DNS).
-4. Chaque `git push` sur la branche principale = rebuild + deploy automatique.
+2. Netlify : Add new site -> Import from GitHub -> ce repo. Build : `npm run build`, publish `dist`.
+3. Domaine : réassigner `fournia.net` au nouveau site Netlify (le DNS est déjà chez Netlify).
+4. Chaque `git push` sur `main` = rebuild + deploy automatique. Le formulaire utilise Netlify Forms.
 
 ## Publier un nouveau post (fait par le skill geo-content-team)
 1. Le skill dépose `src/content/blog/<slug>.md` (frontmatter + corps + champ `faq`).
