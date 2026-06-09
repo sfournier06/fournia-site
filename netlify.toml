@@ -1,0 +1,10 @@
+# Configuration Netlify pour fournia-site (Astro).
+# La détection des formulaires Netlify est activée par défaut (rien à désactiver ici).
+# Le formulaire est détecté via public/__forms.html (ghost form) + le formulaire réel dans index.astro.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"

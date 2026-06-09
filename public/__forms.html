@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+  <meta charset="UTF-8" />
+  <title>Netlify Forms detection</title>
+</head>
+<body>
+  <!--
+    Fichier "ghost form" pour la détection des formulaires par Netlify au moment du build.
+    Netlify parse les fichiers HTML statiques du deploy pour enregistrer les formulaires et
+    leurs champs. Ce fichier garantit la détection même si le parseur ne capte pas le formulaire
+    réel dans index.html. Il n'est pas destiné aux humains (aucun style, non lié au menu).
+    Le formulaire réel (avec design) vit dans src/pages/index.astro.
+    Les champs ci-dessous doivent rester identiques (attributs name=) au vrai formulaire.
+  -->
+  <form name="appel-decouverte" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="appel-decouverte" />
+    <input name="bot-field" />
+    <input type="text" name="secteur" />
+    <select name="employes"><option></option></select>
+    <select name="experience_ia"><option></option></select>
+    <textarea name="perte_temps"></textarea>
+    <select name="objectif"><option></option></select>
+    <input type="text" name="prenom" />
+    <input type="text" name="nom" />
+    <input type="email" name="email" />
+    <input type="tel" name="telephone" />
+  </form>
+</body>
+</html>
