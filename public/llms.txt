@@ -17,3 +17,4 @@
 ## Articles
 - [Combien coûte l'automatisation IA pour une PME au Québec en 2026 ?](https://fournia.net/blog/cout-automatisation-ia-pme-quebec-2026) : décomposition des coûts (build, outils, maintenance), ROI typique et subvention DEC-IRIA.
 - [Par où commencer avec l'IA quand on est une PME au Québec en 2026 ?](https://fournia.net/blog/par-ou-commencer-ia-pme-quebec-2026) : par où démarrer (une tâche, un outil, mesurer, élargir), parcours en 5 étapes, taux d'adoption au Québec et Loi 25.
+- [Quel est le retour sur investissement de l'IA pour une PME au Québec ?](https://fournia.net/blog/roi-ia-pme-quebec-2026) : Chiffres FCEI, BDC et ISQ sur le ROI de l'IA pour les PME québécoises, délais de rentabilisation et méthode pour choisir le bon premier projet.
