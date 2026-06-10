@@ -1,12 +1,16 @@
 ---
-// Layout d'article de blog. Émet le JSON-LD statique au build :
-// Article + FAQPage + Organization + BreadcrumbList.
+// Layout d'article de blog. Utilise le shell Base (nav + footer + design system)
+// et émet le JSON-LD statique au build : Article + FAQPage + Organization + BreadcrumbList.
+import Base from './Base.astro';
+
 const { id, title, description, pubDate, updatedDate, author, publisher, heroImage, heroAlt, tags, faq } = Astro.props;
 
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 const canonical = `${siteUrl}/blog/${id}`;
 const published = (pubDate instanceof Date ? pubDate : new Date(pubDate)).toISOString();
 const modified = (updatedDate ? (updatedDate instanceof Date ? updatedDate : new Date(updatedDate)) : (pubDate instanceof Date ? pubDate : new Date(pubDate))).toISOString();
+const heroSrc = heroImage ? heroImage.replace('./', `/blog/${id}/`) : null;
+const fmtDate = (d) => new Date(d).toLocaleDateString('fr-CA', { year: 'numeric', month: 'long', day: 'numeric' });
 
 const organization = {
   '@type': 'Organization',
@@ -16,7 +20,6 @@ const organization = {
   areaServed: 'Québec, Rive-Nord de Montréal',
   description: "Consultation en IA pour PME québécoises : automatisations N8N, agents Claude API, formation. Conforme à la Loi 25.",
 };
-
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -28,10 +31,9 @@ const articleLd = {
   author: { '@type': 'Person', name: author ?? 'Simon Fournier' },
   publisher: organization,
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-  ...(heroImage ? { image: new URL(heroImage.replace('./', `/blog/`), siteUrl).href } : {}),
+  ...(heroSrc ? { image: new URL(heroSrc, siteUrl).href } : {}),
   keywords: (tags ?? []).join(', '),
 };
-
 const faqLd = (faq && faq.length > 0)
   ? {
       '@context': 'https://schema.org',
@@ -43,7 +45,6 @@ const faqLd = (faq && faq.length > 0)
       })),
     }
   : null;
-
 const breadcrumbLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -54,35 +55,63 @@ const breadcrumbLd = {
   ],
 };
 ---
-<!doctype html>
-<html lang="fr-CA">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} | FournIA</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content="fr_CA" />
-    <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
-    {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
-    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
-  </head>
-  <body>
-    <header><a href="/">FournIA</a> &rsaquo; <a href="/blog">Blog</a></header>
-    <main>
-      <article>
-        <h1>{title}</h1>
-        <p><time datetime={published}>Publié le {published.slice(0, 10)}</time> par {author ?? 'Simon Fournier'}</p>
-        {heroImage && <img src={heroImage.replace('./', '/blog/')} alt={heroAlt ?? title} />}
-        <slot />
-      </article>
-    </main>
-    <footer>
-      <p>FournIA, consultation en IA pour PME québécoises (Rive-Nord de Montréal). Conforme Loi 25.</p>
-    </footer>
-  </body>
-</html>
+<Base title={`${title} | FournIA`} description={description} canonical={canonical} ogType="article">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleLd)} />
+  {faqLd && <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqLd)} />}
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbLd)} />
+
+  <main>
+    <article class="post">
+      <div class="wrap-narrow">
+        <nav class="crumbs reveal"><a href="/">Accueil</a> <span>/</span> <a href="/blog">Blog</a></nav>
+        {tags?.[0] && <span class="post-tag reveal">{tags[0]}</span>}
+        <h1 class="reveal" data-d="1">{title}</h1>
+        <p class="meta reveal" data-d="2"><time datetime={published}>{fmtDate(pubDate)}</time> · par {author ?? 'Simon Fournier'}</p>
+        {heroSrc && <img class="hero reveal" data-d="3" src={heroSrc} alt={heroAlt ?? title} />}
+        <div class="prose reveal" data-d="3"><slot /></div>
+
+        <div class="post-cta">
+          <h3>Un processus manuel vous coûte du temps ?</h3>
+          <p>Un appel découverte gratuit de 20 minutes pour voir si l'IA peut vous aider. Sans engagement.</p>
+          <a class="btn btn-primary" href="https://calendly.com/s-fournier-fournia/discovery-call-fournia" target="_blank" rel="noopener">Réserver un appel <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </article>
+  </main>
+</Base>
+
+<style>
+  main { position: relative; z-index: 1; }
+  .post { padding: 8.5rem 0 4rem; }
+  .wrap-narrow { width: min(760px, 92vw); margin: 0 auto; }
+
+  .crumbs { font-size: .85rem; color: var(--mute-d); margin-bottom: 1.4rem; }
+  .crumbs a:hover { color: var(--teal); }
+  .crumbs span { margin: 0 .4rem; }
+
+  .post-tag { display: inline-block; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); background: rgba(21,201,164,.1); padding: .3rem .8rem; border-radius: 100px; margin-bottom: 1.1rem; }
+  .post h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.08; letter-spacing: -.02em; font-weight: 700; margin-bottom: 1rem; }
+  .meta { color: var(--mute-d); font-size: .92rem; margin-bottom: 2rem; }
+  .hero { width: 100%; border-radius: 18px; border: 1px solid var(--line); margin-bottom: 2.6rem; display: block; }
+
+  /* prose (markdown rendu) */
+  .prose { color: var(--mute); font-size: 1.06rem; line-height: 1.75; }
+  .prose :global(h2) { font-family: 'Space Grotesk', sans-serif; color: var(--white); font-size: 1.7rem; line-height: 1.2; letter-spacing: -.01em; margin: 2.6rem 0 1rem; }
+  .prose :global(h3) { font-family: 'Space Grotesk', sans-serif; color: var(--white); font-size: 1.3rem; margin: 2rem 0 .8rem; }
+  .prose :global(p) { margin-bottom: 1.2rem; }
+  .prose :global(ul), .prose :global(ol) { margin: 0 0 1.2rem 1.3rem; }
+  .prose :global(li) { margin-bottom: .5rem; }
+  .prose :global(a) { color: var(--teal); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(21,201,164,.4); }
+  .prose :global(a:hover) { text-decoration-color: var(--teal); }
+  .prose :global(strong) { color: var(--white); font-weight: 600; }
+  .prose :global(blockquote) { border-left: 3px solid var(--teal); padding-left: 1.2rem; margin: 1.6rem 0; color: var(--mute); }
+  .prose :global(table) { width: 100%; border-collapse: collapse; margin: 1.6rem 0; font-size: .95rem; }
+  .prose :global(th), .prose :global(td) { border: 1px solid var(--line); padding: .7rem .9rem; text-align: left; }
+  .prose :global(th) { color: var(--white); background: var(--glass); }
+  .prose :global(code) { background: var(--glass); border: 1px solid var(--line); border-radius: 6px; padding: .12em .4em; font-size: .9em; }
+
+  .post-cta { margin-top: 3.5rem; padding: 2.2rem; border-radius: 22px;
+    background: linear-gradient(160deg, rgba(21,201,164,.10), rgba(13,39,63,.55)); border: 1px solid var(--glass-b); }
+  .post-cta h3 { font-size: 1.4rem; margin-bottom: .6rem; color: var(--white); }
+  .post-cta p { color: var(--mute); margin-bottom: 1.4rem; }
+</style>

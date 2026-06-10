@@ -103,6 +103,7 @@ const orgLd = {
     padding: 1.1rem 0; transition: padding .3s;
   }
   .nav-inner {
+    position: relative;
     width: min(1160px, 94vw);
     display: flex; align-items: center; justify-content: space-between;
     padding: .6rem .6rem .6rem 1.4rem;
@@ -324,8 +325,22 @@ const orgLd = {
 
   /* ── responsive ──────────────────────────────── */
   @media (max-width: 900px) {
-    .nav-links { display: none; }
     .hamburger { display: flex; }
+    .nav-links {
+      position: absolute; top: calc(100% + 12px); left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: .3rem;
+      background: rgba(8,22,36,.96); border: 1px solid var(--glass-b);
+      border-radius: 20px; padding: .8rem; box-shadow: 0 16px 44px rgba(0,0,0,.45);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      opacity: 0; transform: translateY(-10px); pointer-events: none;
+      transition: opacity .25s, transform .25s;
+    }
+    .nav-links a { padding: .8rem 1rem; border-radius: 12px; font-size: 1rem; color: var(--white); }
+    .nav-links a:hover { background: rgba(21,201,164,.1); color: var(--teal); }
+    nav.open .nav-links { opacity: 1; transform: none; pointer-events: auto; }
+    nav.open .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    nav.open .hamburger span:nth-child(2) { opacity: 0; }
+    nav.open .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     .about-grid, .cta-shell { grid-template-columns: 1fr; }
     .cta-left { border-right: none; border-bottom: 1px solid var(--line); }
     .stats, .cards-3 { grid-template-columns: 1fr; }
@@ -593,10 +608,11 @@ const orgLd = {
     });
   });
 
-  // mobile burger -> smooth scroll to contact
-  document.getElementById('burger').addEventListener('click', () => {
-    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-  });
+  // mobile burger -> toggle dropdown menu (mêmes sections que desktop)
+  const burger = document.getElementById('burger');
+  burger.addEventListener('click', (e) => { e.stopPropagation(); nav.classList.toggle('open'); });
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+  document.addEventListener('click', (e) => { if (!nav.contains(e.target)) nav.classList.remove('open'); });
 </script>
 </body>
 </html>
