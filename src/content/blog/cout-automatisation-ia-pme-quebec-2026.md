@@ -3,7 +3,7 @@ title: "Combien coûte l'automatisation IA pour une PME au Québec en 2026 ?"
 description: "Automatiser un processus avec l'IA coûte 500$ à 15 000$ CAD pour le projet, plus les outils et la maintenance. ROI en 2 à 6 mois, jusqu'à 50% subventionné."
 slug: "cout-automatisation-ia-pme-quebec-2026"
 pubDate: 2026-06-09
-updatedDate: 2026-06-09
+updatedDate: 2026-06-10
 author: "Simon Fournier"
 publisher: "FournIA"
 heroAlt: "Tableau des coûts d'automatisation IA pour une PME au Québec en 2026"
@@ -109,7 +109,7 @@ Note sur la conformité: dès qu'une automatisation traite des données personne
 
 Voici les fourchettes réelles pratiquées par FournIA (chiffres internes, en CAD):
 
-- **Audits IA**: 500$ à 1 500$
+- **Audits IA**: 100$ à 500$
 - **Formation IA**: 100$ de l'heure ou tarif de groupe
 - **Implantation d'agents et d'automatisations**: 500$ à 15 000$
 - **Maintenance mensuelle**: 300$ à 1 500$ par mois
@@ -118,7 +118,7 @@ Conditions: contrat signé et dépôt de 50% avant tout travail, implantation et
 
 ## Par où commencer sans se tromper de prix ?
 
-La meilleure première étape n'est pas de choisir un outil ou un budget: c'est de cadrer le bon processus à automatiser. Un audit IA payant (500$ à 1 500$ CAD chez FournIA) identifie où l'automatisation rapporte le plus vite, estime le ROI, et vérifie l'admissibilité à la subvention avant de signer quoi que ce soit.
+La meilleure première étape n'est pas de choisir un outil ou un budget: c'est de cadrer le bon processus à automatiser. Un audit IA payant (100$ à 500$ CAD chez FournIA) identifie où l'automatisation rapporte le plus vite, estime le ROI, et vérifie l'admissibilité à la subvention avant de signer quoi que ce soit.
 
 Ça évite l'erreur la plus courante: payer pour automatiser un processus qui ne sauve pas assez d'heures pour se rembourser. Pour évaluer votre situation, commencez par un audit diagnostic plutôt que par un devis à l'aveugle.
 
