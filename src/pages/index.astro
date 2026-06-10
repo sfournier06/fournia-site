@@ -152,6 +152,8 @@ const orgLd = {
   /* ── HERO ────────────────────────────────────── */
   header { position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: center; padding: 9rem 0 5rem; }
   .hero { position: relative; text-align: center; }
+  /* Le contenu du hero passe toujours au-dessus des bulles flottantes */
+  .hero .eyebrow, .hero h1.hero-title, .hero .hero-sub, .hero .hero-cta { position: relative; z-index: 2; }
 
   .eyebrow {
     display: inline-flex; align-items: center; gap: .5rem;
@@ -182,7 +184,7 @@ const orgLd = {
 
   /* floating nodes */
   .node {
-    position: absolute; display: flex; align-items: center; gap: .6rem;
+    position: absolute; z-index: 0; display: flex; align-items: center; gap: .6rem;
     padding: .55rem .8rem; border-radius: 100px;
     background: var(--glass); border: 1px solid var(--glass-b);
     backdrop-filter: blur(10px); font-size: .82rem;
@@ -192,10 +194,10 @@ const orgLd = {
   .node .ico svg { width: 16px; height: 16px; }
   .node b { font-family: 'Space Grotesk'; display: block; line-height: 1.1; }
   .node small { color: var(--mute-d); font-size: .72rem; }
-  .node-1 { top: 16%; left: 4%; animation-delay: 0s; }
-  .node-2 { top: 24%; right: 5%; animation-delay: 1.2s; }
-  .node-3 { bottom: 20%; left: 8%; animation-delay: .6s; }
-  .node-4 { bottom: 26%; right: 7%; animation-delay: 1.8s; }
+  .node-1 { top: 11%; left: 1%; animation-delay: 0s; }
+  .node-2 { top: 11%; right: 1%; animation-delay: 1.2s; }
+  .node-3 { bottom: 12%; left: 1%; animation-delay: .6s; }
+  .node-4 { bottom: 12%; right: 1%; animation-delay: 1.8s; }
   @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-14px);} }
 
   /* ── SECTION shells ──────────────────────────── */
