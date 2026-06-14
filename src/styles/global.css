@@ -126,10 +126,10 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--line); padd
 
 @media (max-width: 900px) {
   .hamburger { display: flex; }
-  .nav-inner { padding-left: 1rem; }
-  .logo { font-size: 1.22rem; }
-  .logo .mark { width: 1.5em; height: 1.5em; }
-  .nav-inner > .cta-nav { padding: .44rem .85rem; font-size: .76rem; gap: 0; }
+  .nav-inner { padding-left: .95rem; gap: .7rem; }
+  .logo { flex: 0 1 auto; min-width: 0; font-size: 1.12rem; }
+  .logo .mark { width: 1.4em; height: 1.4em; }
+  .nav-inner > .cta-nav { padding: .38rem .68rem; font-size: .68rem; letter-spacing: -.01em; gap: 0; }
   .cta-nav .arrow { display: none; }
   .nav-links {
     position: absolute; top: calc(100% + 12px); left: 0; right: 0;
