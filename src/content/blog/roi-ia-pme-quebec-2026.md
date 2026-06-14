@@ -25,7 +25,7 @@ faq:
   - q: "Les PME de moins de 10 employés peuvent-elles aussi avoir un ROI positif avec l'IA ?"
     a: "Oui. Investissement Québec rapporte que près de la moitié des microentreprises québécoises rentabilisent leur projet d'automatisation en moins d'un an. Les petites équipes ont moins de couches de validation, ce qui accélère le déploiement et la mesure du gain."
   - q: "Y a-t-il des subventions au Québec qui améliorent le ROI d'un projet IA ?"
-    a: "Oui. Le crédit d'impôt DEC-IRIA couvre jusqu'à 50 % des dépenses admissibles d'un projet d'intégration de l'IA, jusqu'au 31 mars 2029. Cette subvention change radicalement le calcul de ROI et doit être déposée avant la signature du contrat."
+    a: "Oui. La subvention DEC-IRIA (programme fédéral, contribution non remboursable) couvre jusqu'à 50 % des dépenses admissibles d'un projet d'intégration de l'IA, jusqu'au 31 mars 2029. Ce levier change radicalement le calcul de ROI et doit être déposée avant la signature du contrat."
   - q: "Et la sécurité des données dans tout ça ?"
     a: "Tout projet IA qui touche des données personnelles de clients ou d'employés doit respecter la Loi 25 du Québec. Le ROI ne se calcule pas seulement en dollars : un projet qui expose des données sensibles peut coûter beaucoup plus cher qu'il ne rapporte. Validez la conformité avant de bâtir."
 ---
@@ -63,7 +63,7 @@ Un calcul de ROI honnête repose sur quatre éléments mesurables.
 1. **Coût total du projet** : build initial plus coûts récurrents annuels (licences, API, maintenance).
 2. **Heures sauvées par semaine** : multipliées par le taux horaire chargé de la personne concernée (salaire plus charges sociales), puis annualisées sur 50 semaines.
 3. **Gains indirects** : ventes additionnelles, erreurs évitées, délais de réponse réduits, rétention améliorée. Ces gains sont souvent plus gros que les heures sauvées, mais plus difficiles à chiffrer.
-4. **Subventions applicables** : le crédit d'impôt DEC-IRIA couvre jusqu'à 50 % des dépenses admissibles d'un projet d'intégration de l'IA, jusqu'au 31 mars 2029. Ce levier change le calcul.
+4. **Subventions applicables** : la subvention DEC-IRIA (programme fédéral, contribution non remboursable) couvre jusqu'à 50 % des dépenses admissibles d'un projet d'intégration de l'IA, jusqu'au 31 mars 2029. Ce levier change le calcul.
 
 Exemple concret. Une adjointe administrative passe 6 heures par semaine à trier des courriels et à relancer des comptes recevables, à un taux chargé de 35 $/h. Gain annuel brut : 6 x 35 x 50 = 10 500 $. Si l'automatisation coûte 4 000 $ à construire plus 600 $ par an en licences, le ROI net de l'année 1 est de 5 900 $, soit un payback en environ 5 mois. Avec la subvention DEC-IRIA, le payback tombe sous 3 mois.
 
