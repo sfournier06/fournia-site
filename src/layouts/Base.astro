@@ -6,6 +6,16 @@ import '../styles/global.css';
 const { title, description, canonical, ogType = 'website' } = Astro.props;
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 const cta = 'https://calendly.com/s-fournier-fournia/discovery-call-fournia';
+// Symbole de marque (hexagone-reseau original) recolore lime (même mark que l'accueil).
+const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs><filter id="fglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <g fill="none" stroke="#b7d94c" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M50 16 L79 33 L79 67 L50 84 L21 67 L21 33 Z" stroke-width="3"/>
+    <path d="M50 50 L50 16 M50 50 L79 67 M50 50 L21 67" stroke-width="2.2" opacity="0.9"/>
+  </g>
+  <g fill="#b7d94c"><circle cx="50" cy="16" r="4.6"/><circle cx="79" cy="33" r="4.6"/><circle cx="79" cy="67" r="4.6"/><circle cx="50" cy="84" r="4.6"/><circle cx="21" cy="67" r="4.6"/><circle cx="21" cy="33" r="4.6"/></g>
+  <circle cx="50" cy="50" r="7" fill="#c9e86b" filter="url(#fglow)"/>
+</svg>`;
 ---
 <!doctype html>
 <html lang="fr-CA">
@@ -29,12 +39,12 @@ const cta = 'https://calendly.com/s-fournier-fournia/discovery-call-fournia';
   <div class="bg-fx">
     <div class="grid-lines"></div>
     <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
+    <div class="grain"></div>
   </div>
 
   <nav id="nav">
     <div class="nav-inner">
-      <a href="/" class="logo"><span class="dot"></span><span>Fourn<span class="ia">IA</span></span></a>
+      <a href="/" class="logo"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
       <ul class="nav-links">
         <li><a href="/#apropos">À propos</a></li>
         <li><a href="/#services">Services</a></li>
@@ -42,7 +52,7 @@ const cta = 'https://calendly.com/s-fournier-fournia/discovery-call-fournia';
         <li><a href="/blog">Blog</a></li>
         <li><a href="/#contact">Contact</a></li>
       </ul>
-      <a href={cta} target="_blank" rel="noopener" class="btn btn-primary">Réserver un appel <span class="arrow">→</span></a>
+      <a href={cta} target="_blank" rel="noopener" class="btn btn-primary cta-nav">Réserver un appel <span class="arrow">→</span></a>
       <div class="hamburger" id="burger"><span></span><span></span><span></span></div>
     </div>
   </nav>
@@ -53,8 +63,8 @@ const cta = 'https://calendly.com/s-fournier-fournia/discovery-call-fournia';
     <div class="wrap">
       <div class="foot-grid">
         <div>
-          <a href="/" class="logo" style="font-size:1.5rem"><span class="dot"></span><span>Fourn<span class="ia">IA</span></span></a>
-          <p style="color:var(--mute-d); margin-top:1rem; max-width:280px; font-size:.92rem;">L'IA concrète, clé en main, pour les PME québécoises.</p>
+          <a href="/" class="logo" style="font-size:1.5rem"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
+          <p style="color:var(--mute-d); margin-top:1rem; max-width:280px; font-size:.92rem;">Des systèmes concrets, clé en main, pour les PME québécoises.</p>
         </div>
         <div class="foot-contact">
           <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>
