@@ -43,13 +43,15 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 <link rel="apple-touch-icon" href="/brand/fournia-icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Syne:wght@800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Syne:wght@800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Syne:wght@800&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Syne:wght@800&family=Inter:wght@400;500;600&display=swap"></noscript>
 {FB_PIXEL_ID && <script is:inline set:html={pixelInit} />}
 
 <style>
   html, body { min-height: 100vh; overflow-x: hidden; max-width: 100%; }
   .bg-soft { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .bg-soft .halo { position: absolute; top: -18vh; left: 50%; transform: translateX(-50%); width: 70vw; height: 70vw; max-width: 900px; max-height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(183,217,76,.10), transparent 65%); filter: blur(40px); }
+  .bg-soft .halo { position: absolute; top: -18vh; left: 50%; transform: translateX(-50%); width: 70vw; height: 70vw; max-width: 900px; max-height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(183,217,76,.10), transparent 65%); }
   .bg-soft .grid-lines { position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse 75% 55% at 50% 0%, #000 20%, transparent 70%); opacity: .5; }
 
   .shell { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 2.4rem 1.2rem 3rem; }
@@ -58,7 +60,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   .brand .mark svg { width: 100%; height: 100%; }
   .brand .ia { color: var(--lime); }
 
-  .card { width: 100%; max-width: min(560px, 100%); background: rgba(18,18,18,.72); border: 1px solid var(--glass-b); border-radius: 22px; padding: 2.4rem; backdrop-filter: blur(14px); box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+  .card { width: 100%; max-width: min(560px, 100%); background: #141414; border: 1px solid var(--glass-b); border-radius: 22px; padding: 2.4rem; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
   @media (max-width: 560px) { .card { padding: 1.7rem 1.3rem; } }
 
   .eyebrow { margin-bottom: 1.2rem; }
