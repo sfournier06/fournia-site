@@ -95,6 +95,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   .result-icon svg { width: 28px; height: 28px; }
   .result h2 { font-family: 'Space Grotesk'; font-size: 1.5rem; line-height: 1.15; margin-bottom: .7rem; }
   .result p { color: var(--mute); margin-bottom: 1.2rem; }
+  .book-btn { display: inline-flex; margin-bottom: 1.4rem; }
   .calendly-inline-widget { min-width: 280px; height: 660px; border-radius: 14px; overflow: hidden; }
   .alt-link { display: inline-block; margin-top: .4rem; color: var(--lime); font-size: .92rem; }
 
@@ -182,6 +183,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
       <div class="result-icon ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h2>C'est un fit. Réservez votre appel.</h2>
       <p>20 minutes, sans engagement.</p>
+      <a class="btn btn-primary book-btn" href={calendly} target="_blank" rel="noopener">Réserver mon appel <span class="arrow">&#8594;</span></a>
       <div id="cal" class="calendly-inline-widget" data-cal-url={calendly}></div>
     </div>
 
@@ -210,6 +212,12 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
     const el = document.getElementById('cal');
     if (!el || el.querySelector('iframe')) return;
     const url = el.dataset.calUrl;
+    if (!document.getElementById('cal-css')) {
+      const l = document.createElement('link');
+      l.id = 'cal-css'; l.rel = 'stylesheet';
+      l.href = 'https://assets.calendly.com/assets/external/widget.css';
+      document.head.appendChild(l);
+    }
     const init = () => window.Calendly && window.Calendly.initInlineWidget({ url, parentElement: el });
     if (window.Calendly) { init(); return; }
     const s = document.createElement('script');
