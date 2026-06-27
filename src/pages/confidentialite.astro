@@ -1,0 +1,136 @@
+---
+// Politique de confidentialite FournIA (Loi 25).
+// Page legale requise pour la pub Meta et le pixel. Utilise le shell Base.
+// Note : baseline conforme Loi 25, pas un avis juridique. A faire reviser si besoin.
+import Base from '../layouts/Base.astro';
+
+const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
+const canonical = `${siteUrl}/confidentialite`;
+const maj = '27 juin 2026';
+---
+<Base
+  title="Politique de confidentialité | FournIA"
+  description="Comment FournIA recueille, utilise et protège vos renseignements personnels, en conformité avec la Loi 25."
+  canonical={canonical}
+>
+  <main>
+    <article class="post">
+      <div class="wrap-narrow">
+        <nav class="crumbs"><a href="/">Accueil</a> <span>/</span> Confidentialité</nav>
+        <h1>Politique de confidentialité</h1>
+        <p class="meta">Dernière mise à jour : {maj}</p>
+        <div class="prose">
+          <p>
+            FournIA (Simon Fournier, entreprise enregistrée au Québec, NEQ 2282026550) accorde de
+            l'importance à la protection de vos renseignements personnels. Cette politique explique
+            quels renseignements nous recueillons, pourquoi, avec qui ils sont partagés et quels
+            droits vous avez, conformément à la Loi 25 (Loi modernisant des dispositions législatives
+            en matière de protection des renseignements personnels).
+          </p>
+
+          <h2>Responsable de la protection des renseignements personnels</h2>
+          <p>
+            Simon Fournier agit comme responsable de la protection des renseignements personnels chez
+            FournIA. Pour toute question ou demande : <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>.
+          </p>
+
+          <h2>Renseignements que nous recueillons</h2>
+          <ul>
+            <li><strong>Quand vous réservez un appel</strong> (via Calendly) : votre nom, votre adresse courriel, et toute information que vous nous fournissez sur votre entreprise et vos besoins.</li>
+            <li><strong>Quand vous remplissez un formulaire</strong> (sur le site ou dans une publicité Meta) : les coordonnées et réponses que vous y inscrivez.</li>
+            <li><strong>Quand vous naviguez sur le site</strong> : des données techniques (pages vues, appareil, source de la visite) au moyen de témoins et d'outils de mesure, dont le pixel Meta.</li>
+          </ul>
+          <p>Nous ne recueillons que ce qui est nécessaire pour vous répondre et préparer un éventuel mandat. Nous ne demandons pas de renseignements sensibles.</p>
+
+          <h2>Pourquoi nous les utilisons</h2>
+          <ul>
+            <li>Communiquer avec vous, planifier et tenir l'appel découverte ou le diagnostic.</li>
+            <li>Comprendre vos besoins et préparer une recommandation ou une proposition.</li>
+            <li>Mesurer la performance de nos publicités et améliorer le site.</li>
+          </ul>
+          <p>Nous n'utilisons pas vos renseignements pour d'autres fins sans votre consentement.</p>
+
+          <h2>Témoins et pixel Meta</h2>
+          <p>
+            Le site utilise des témoins (cookies) et le pixel Meta (Facebook, Instagram) pour mesurer
+            l'efficacité de nos publicités et présenter du contenu pertinent. Vous pouvez refuser ou
+            supprimer les témoins dans les réglages de votre navigateur, et gérer vos préférences
+            publicitaires directement dans votre compte Meta. Refuser les témoins n'empêche pas de
+            réserver un appel.
+          </p>
+
+          <h2>Partage et transfert hors Québec</h2>
+          <p>
+            Nous ne vendons jamais vos renseignements. Nous utilisons des fournisseurs établis hors
+            Québec pour faire fonctionner nos outils. En soumettant vos renseignements, vous
+            comprenez qu'ils peuvent être traités à l'extérieur du Québec, encadrés par les ententes
+            de ces fournisseurs :
+          </p>
+          <ul>
+            <li><strong>Meta</strong> (publicités, pixel) : États-Unis.</li>
+            <li><strong>Calendly</strong> (prise de rendez-vous) : États-Unis.</li>
+            <li><strong>HubSpot</strong> (gestion de la relation client) : États-Unis.</li>
+            <li><strong>Google</strong> (courriel, agenda) : États-Unis.</li>
+            <li><strong>Netlify</strong> (hébergement du site) : États-Unis.</li>
+          </ul>
+          <p>Nous limitons les renseignements transmis à ces outils au strict nécessaire.</p>
+
+          <h2>Conservation</h2>
+          <p>
+            Nous conservons vos renseignements le temps nécessaire pour donner suite à votre demande
+            et, le cas échéant, pour la durée de notre relation d'affaires. Lorsqu'ils ne sont plus
+            requis, nous les supprimons ou les anonymisons.
+          </p>
+
+          <h2>Sécurité</h2>
+          <p>
+            Nous prenons des mesures raisonnables pour protéger vos renseignements contre la perte et
+            l'accès non autorisé. Vos renseignements ne sont jamais stockés en clair dans un dépôt de
+            code public.
+          </p>
+
+          <h2>Vos droits</h2>
+          <p>
+            Vous pouvez en tout temps demander l'accès à vos renseignements, leur rectification, ou
+            leur suppression, et retirer votre consentement. Écrivez-nous à
+            <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a> et nous donnerons suite
+            dans les délais prévus par la loi. Si vous n'êtes pas satisfait, vous pouvez porter plainte
+            à la Commission d'accès à l'information du Québec (CAI).
+          </p>
+
+          <h2>Modifications</h2>
+          <p>
+            Nous pouvons mettre cette politique à jour. La date de la dernière mise à jour apparaît en
+            haut de la page.
+          </p>
+
+          <h2>Nous joindre</h2>
+          <p>
+            FournIA — Simon Fournier<br />
+            <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a><br />
+            <a href="tel:+15148632973">514 863 2973</a>
+          </p>
+        </div>
+      </div>
+    </article>
+  </main>
+</Base>
+
+<style>
+  main { position: relative; z-index: 1; }
+  .post { padding: 8.5rem 0 4rem; }
+  .wrap-narrow { width: min(760px, 92vw); margin: 0 auto; }
+  .crumbs { font-size: .85rem; color: var(--mute-d); margin-bottom: 1.4rem; }
+  .crumbs a:hover { color: var(--lime); }
+  .crumbs span { margin: 0 .4rem; }
+  .post h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.08; letter-spacing: -.02em; font-weight: 700; margin-bottom: 1rem; }
+  .meta { color: var(--mute-d); font-size: .92rem; margin-bottom: 2rem; }
+  .prose { color: var(--mute); font-size: 1.06rem; line-height: 1.75; }
+  .prose :global(h2) { font-family: 'Space Grotesk', sans-serif; color: var(--white); font-size: 1.5rem; line-height: 1.2; letter-spacing: -.01em; margin: 2.4rem 0 .9rem; }
+  .prose :global(p) { margin-bottom: 1.2rem; }
+  .prose :global(ul) { margin: 0 0 1.2rem 1.3rem; }
+  .prose :global(li) { margin-bottom: .5rem; }
+  .prose :global(a) { color: var(--lime); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(183,217,76,.4); }
+  .prose :global(a:hover) { text-decoration-color: var(--lime); }
+  .prose :global(strong) { color: var(--white); font-weight: 600; }
+</style>
