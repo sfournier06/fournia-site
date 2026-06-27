@@ -43,7 +43,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 <link rel="apple-touch-icon" href="/brand/fournia-icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Syne:wght@800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 {FB_PIXEL_ID && <script is:inline set:html={pixelInit} />}
 
 <style>
@@ -180,7 +180,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
       <div class="result-icon ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h2>C'est un fit. Réservez votre appel.</h2>
       <p>20 minutes, sans engagement.</p>
-      <div class="calendly-inline-widget" data-url={calendly}></div>
+      <div id="cal" class="calendly-inline-widget" data-cal-url={calendly}></div>
     </div>
 
     <!-- ETAPE 2B : non qualifie -->
@@ -197,12 +197,24 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   </div>
 </div>
 
-<script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script is:inline>
   const form = document.getElementById('qualForm');
   const stepForm = document.getElementById('step-form');
   const stepOk = document.getElementById('step-qualified');
   const stepNo = document.getElementById('step-rejected');
+
+  // Calendly chargé seulement à la qualification (sinon il plombe le chargement de la page).
+  function loadCalendly() {
+    const el = document.getElementById('cal');
+    if (!el || el.querySelector('iframe')) return;
+    const url = el.dataset.calUrl;
+    const init = () => window.Calendly && window.Calendly.initInlineWidget({ url, parentElement: el });
+    if (window.Calendly) { init(); return; }
+    const s = document.createElement('script');
+    s.src = 'https://assets.calendly.com/assets/external/widget.js';
+    s.async = true; s.onload = init;
+    document.head.appendChild(s);
+  }
 
   function isQualified(d) {
     if (d.type === 'particulier') return false;
@@ -225,13 +237,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 
     stepForm.classList.add('hidden');
     (ok ? stepOk : stepNo).classList.remove('hidden');
-    // Re-init du widget Calendly au cas ou il etait masque au chargement.
-    if (ok && window.Calendly) {
-      const el = stepOk.querySelector('.calendly-inline-widget');
-      if (el && !el.querySelector('iframe')) {
-        window.Calendly.initInlineWidget({ url: el.dataset.url, parentElement: el });
-      }
-    }
+    if (ok) loadCalendly();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>
