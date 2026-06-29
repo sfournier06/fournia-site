@@ -32,10 +32,10 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diagnostic IA gratuit pour PME québécoises | FournIA</title>
-<meta name="description" content="Répondez à 5 questions. Si l'IA peut vraiment vous faire gagner du temps, on réserve un diagnostic gratuit de 20 minutes.">
+<meta name="description" content="Répondez à 3 questions. Si l'IA peut vraiment vous faire gagner du temps, on réserve un diagnostic gratuit de 20 minutes.">
 <link rel="canonical" href={`${siteUrl}/diagnostic`} />
 <meta property="og:title" content="Diagnostic IA gratuit pour PME québécoises | FournIA">
-<meta property="og:description" content="5 questions pour voir si c'est un fit. Si oui, on réserve un diagnostic gratuit de 20 minutes.">
+<meta property="og:description" content="3 questions pour voir si c'est un fit. Si oui, on réserve un diagnostic gratuit de 20 minutes.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_CA">
 <meta property="og:image" content={`${siteUrl}/brand/fournia-lockup-horizontal-dark.png`}>
@@ -71,6 +71,10 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   .chip { font-size: .8rem; color: var(--white); background: var(--glass); border: 1px solid var(--glass-b); border-radius: 100px; padding: .42rem .9rem; display: inline-flex; align-items: center; gap: .45rem; }
   .chip::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--lime); }
   .formhint { font-size: .85rem; color: var(--mute-d); margin-bottom: 1.4rem; }
+
+  .proof { display: grid; gap: .55rem; margin-bottom: 1.6rem; padding: 1rem 1.1rem; background: var(--glass); border: 1px solid var(--glass-b); border-radius: 14px; }
+  .proof-line { display: flex; align-items: flex-start; gap: .6rem; font-size: .9rem; color: var(--white); line-height: 1.35; margin: 0; }
+  .proof-ico { color: var(--lime); font-weight: 700; flex: none; line-height: 1.35; }
 
   form { display: grid; gap: 1.1rem; }
   .field { display: grid; gap: .45rem; min-width: 0; }
@@ -124,7 +128,14 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
         <span class="chip">Automatisations sur mesure</span>
         <span class="chip">Formation incluse</span>
       </div>
-      <p class="formhint">5 questions. Si c'est un fit, on réserve un appel.</p>
+
+      <div class="proof">
+        <p class="proof-line"><span class="proof-ico">&#10003;</span> On automatise déjà des PME en restauration corporative, comptabilité, finance et gestion immobilière.</p>
+        <p class="proof-line"><span class="proof-ico">&#10003;</span> DEC-IRIA : jusqu'à 50&#8239;% du projet financé par subvention.</p>
+        <p class="proof-line"><span class="proof-ico">&#10003;</span> Conforme Loi 25. Vos données restent protégées.</p>
+      </div>
+
+      <p class="formhint">3 questions. Si c'est un fit, on réserve l'appel tout de suite.</p>
 
       <form id="qualForm" name="diagnostic-qualification" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="diagnostic-qualification" />
@@ -153,11 +164,6 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
         </div>
 
         <div class="field">
-          <label for="defi">Quelle tâche manuelle vous gruge le plus de temps ?</label>
-          <input type="text" id="defi" name="defi" placeholder="Ex : relances clients, saisie, rapports..." required />
-        </div>
-
-        <div class="field">
           <label for="intention">Où en êtes-vous ?</label>
           <select id="intention" name="intention" required>
             <option value="">Choisir...</option>
@@ -167,14 +173,8 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
           </select>
         </div>
 
-        <div class="row2">
-          <div class="field"><label for="prenom">Prénom</label><input type="text" id="prenom" name="prenom" placeholder="Prénom" required /></div>
-          <div class="field"><label for="nom">Nom</label><input type="text" id="nom" name="nom" placeholder="Nom" required /></div>
-        </div>
-        <div class="field"><label for="email">Courriel</label><input type="email" id="email" name="email" placeholder="vous@entreprise.com" required /></div>
-        <div class="field"><label for="telephone">Téléphone</label><input type="tel" id="telephone" name="telephone" placeholder="514 000 0000" required /></div>
-
         <button type="submit" class="btn btn-primary submit">Voir si je suis admissible <span class="arrow">&#8594;</span></button>
+        <p class="note">3 questions. Vos coordonnées restent à l'étape du rendez-vous.</p>
       </form>
     </div>
 
@@ -245,10 +245,21 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
       fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
     } catch (_) {}
 
+    // Pixel : signal d'intention quand la personne est qualifiee.
+    if (ok && window.fbq) fbq('track', 'Lead');
+
     stepForm.classList.add('hidden');
     (ok ? stepOk : stepNo).classList.remove('hidden');
     if (ok) loadCalendly();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Vraie conversion : RDV pris dans Calendly -> event Schedule pour Meta.
+  // Calendly emet ce message postMessage quand le booking est confirme.
+  window.addEventListener('message', (e) => {
+    if (e.data && e.data.event === 'calendly.event_scheduled' && window.fbq) {
+      fbq('track', 'Schedule');
+    }
   });
 </script>
 </body>
