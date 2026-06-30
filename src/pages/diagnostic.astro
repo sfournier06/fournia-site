@@ -11,7 +11,7 @@ const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 const calendly = 'https://calendly.com/s-fournier-fournia/discovery-call-fournia';
 
 // Pixel Meta : inactif tant que vide. Pre-requis : /confidentialite en ligne + artefact Loi 25.
-const FB_PIXEL_ID = '860303930060779';
+const FB_PIXEL_ID = '2092349601673992';
 const pixelInit = FB_PIXEL_ID
   ? `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${FB_PIXEL_ID}');fbq('track','PageView');`
   : '';
@@ -183,7 +183,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
       <div class="result-icon ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h2>C'est un fit. Réservez votre appel.</h2>
       <p>20 minutes, sans engagement.</p>
-      <a class="btn btn-primary book-btn" href={calendly} target="_blank" rel="noopener">Réserver mon appel <span class="arrow">&#8594;</span></a>
+      <a id="book-link" class="btn btn-primary book-btn" href={calendly} target="_blank" rel="noopener">Réserver mon appel <span class="arrow">&#8594;</span></a>
       <div id="cal" class="calendly-inline-widget" data-cal-url={calendly}></div>
     </div>
 
@@ -260,6 +260,13 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
     if (e.data && e.data.event === 'calendly.event_scheduled' && window.fbq) {
       fbq('track', 'Schedule');
     }
+  });
+
+  // Clic sur "Reserver mon appel" (ouvre Calendly en nouvel onglet) : signal
+  // d'intention de booking, capte le geste meme si le postMessage Schedule ne revient pas.
+  const bookLink = document.getElementById('book-link');
+  if (bookLink) bookLink.addEventListener('click', () => {
+    if (window.fbq) fbq('track', 'InitiateCheckout');
   });
 </script>
 </body>
