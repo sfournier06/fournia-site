@@ -1,0 +1,94 @@
+---
+// Conditions du service de messagerie texte (SMS) FournIA.
+// Page requise pour l'enregistrement de campagne A2P 10DLC (Twilio). Utilise le shell Base.
+// Note : baseline, pas un avis juridique.
+import Base from '../layouts/Base.astro';
+
+const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
+const canonical = `${siteUrl}/sms-conditions`;
+const maj = '4 juillet 2026';
+---
+<Base
+  title="Conditions du service SMS | FournIA"
+  description="Modalités du service de messagerie texte (SMS) de FournIA : consentement, fréquence, désabonnement et frais."
+  canonical={canonical}
+>
+  <main>
+    <article class="post">
+      <div class="wrap-narrow">
+        <nav class="crumbs"><a href="/">Accueil</a> <span>/</span> Conditions SMS</nav>
+        <h1>Conditions du service de messagerie texte (SMS)</h1>
+        <p class="meta">Dernière mise à jour : {maj}</p>
+        <div class="prose">
+          <p>
+            Ces conditions encadrent le service de messagerie texte (SMS) offert par FournIA (Simon
+            Fournier, entreprise enregistrée au Québec, NEQ 2282026550), incluant les rappels et suivis
+            que FournIA envoie au nom de ses clients (par exemple un conseiller) à leurs propres clients.
+          </p>
+
+          <h2>Programme et objet</h2>
+          <p>
+            Les messages sont des rappels de suivi et des avis de service (par exemple : suivi de
+            placement, révision d'assurance) envoyés à des clients existants. Il ne s'agit pas de
+            messages promotionnels ou de marketing.
+          </p>
+
+          <h2>Consentement</h2>
+          <p>
+            En fournissant votre numéro de téléphone mobile dans le cadre de votre relation d'affaires
+            existante, vous consentez à recevoir ces messages texte. Vous pouvez retirer votre
+            consentement en tout temps (voir Désabonnement).
+          </p>
+
+          <h2>Fréquence et frais</h2>
+          <p>
+            La fréquence des messages est variable : généralement quelques messages par année (rappels
+            de suivi et une relance), selon votre dossier. <strong>Des frais de messagerie et de données
+            peuvent s'appliquer</strong> selon votre forfait mobile.
+          </p>
+
+          <h2>Désabonnement et aide</h2>
+          <p>
+            Répondez <strong>STOP</strong> en tout temps pour ne plus recevoir de messages. Répondez
+            <strong>AIDE</strong> pour obtenir de l'assistance, ou écrivez-nous à
+            <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>.
+          </p>
+
+          <h2>Confidentialité</h2>
+          <p>
+            Nous ne vendons ni ne partageons vos numéros de téléphone mobile ni vos données d'adhésion
+            aux SMS avec des tiers à des fins de marketing. Le détail se trouve dans notre
+            <a href="/confidentialite">politique de confidentialité</a>. Les messages sont acheminés par
+            notre fournisseur Twilio (États-Unis).
+          </p>
+
+          <h2>Nous joindre</h2>
+          <p>
+            FournIA — Simon Fournier<br />
+            <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a><br />
+            <a href="tel:+15148632973">514 863 2973</a>
+          </p>
+        </div>
+      </div>
+    </article>
+  </main>
+</Base>
+
+<style>
+  main { position: relative; z-index: 1; }
+  .post { padding: 8.5rem 0 4rem; }
+  .wrap-narrow { width: min(760px, 92vw); margin: 0 auto; }
+  .crumbs { font-size: .85rem; color: var(--mute-d); margin-bottom: 1.4rem; }
+  .crumbs a:hover { color: var(--lime); }
+  .crumbs span { margin: 0 .4rem; }
+  .post h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.08; letter-spacing: -.02em; font-weight: 700; margin-bottom: 1rem; }
+  .meta { color: var(--mute-d); font-size: .92rem; margin-bottom: 2rem; }
+  .prose { color: var(--mute); font-size: 1.06rem; line-height: 1.75; }
+  .prose :global(h2) { font-family: 'Space Grotesk', sans-serif; color: var(--white); font-size: 1.5rem; line-height: 1.2; letter-spacing: -.01em; margin: 2.4rem 0 .9rem; }
+  .prose :global(p) { margin-bottom: 1.2rem; }
+  .prose :global(ul) { margin: 0 0 1.2rem 1.3rem; }
+  .prose :global(li) { margin-bottom: .5rem; }
+  .prose :global(a) { color: var(--lime); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(183,217,76,.4); }
+  .prose :global(a:hover) { text-decoration-color: var(--lime); }
+  .prose :global(strong) { color: var(--white); font-weight: 600; }
+</style>

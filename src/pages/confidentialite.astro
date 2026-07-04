@@ -6,7 +6,7 @@ import Base from '../layouts/Base.astro';
 
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 const canonical = `${siteUrl}/confidentialite`;
-const maj = '27 juin 2026';
+const maj = '4 juillet 2026';
 ---
 <Base
   title="Politique de confidentialité | FournIA"
@@ -72,8 +72,26 @@ const maj = '27 juin 2026';
             <li><strong>HubSpot</strong> (gestion de la relation client) : États-Unis.</li>
             <li><strong>Google</strong> (courriel, agenda) : États-Unis.</li>
             <li><strong>Netlify</strong> (hébergement du site) : États-Unis.</li>
+            <li><strong>Twilio</strong> (envoi de messages texte / SMS) : États-Unis.</li>
           </ul>
           <p>Nous limitons les renseignements transmis à ces outils au strict nécessaire.</p>
+
+          <h2>Messagerie texte (SMS)</h2>
+          <p>
+            Si vous consentez à recevoir des messages texte de FournIA ou d'un client de FournIA (par
+            exemple des rappels de suivi de la part de votre conseiller), les modalités suivantes
+            s'appliquent :
+          </p>
+          <ul>
+            <li>Nous ne vendons ni ne partageons vos numéros de téléphone mobile ni vos données
+              d'adhésion aux SMS avec des tiers à des fins de marketing ou de promotion.</li>
+            <li>La fréquence des messages est variable : généralement quelques messages par année
+              (rappels de suivi et une relance), selon votre dossier.</li>
+            <li>Des frais de messagerie et de données peuvent s'appliquer.</li>
+            <li>Vous pouvez vous désabonner en tout temps en répondant STOP, et obtenir de l'aide en
+              répondant AIDE.</li>
+            <li>Les messages sont acheminés par notre fournisseur Twilio (États-Unis).</li>
+          </ul>
 
           <h2>Conservation</h2>
           <p>
