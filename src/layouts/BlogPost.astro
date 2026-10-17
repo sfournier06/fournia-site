@@ -2,6 +2,7 @@
 // Layout d'article de blog. Utilise le shell Base (nav + footer + design system)
 // et émet le JSON-LD statique au build : Article + FAQPage + Organization + BreadcrumbList.
 import Base from './Base.astro';
+import { publisherLd } from '../data/entite.mjs';
 
 const { id, title, description, pubDate, updatedDate, author, publisher, heroImage, heroAlt, tags, faq } = Astro.props;
 
@@ -12,14 +13,7 @@ const modified = (updatedDate ? (updatedDate instanceof Date ? updatedDate : new
 const heroSrc = heroImage ? heroImage.replace('./', `/blog/${id}/`) : null;
 const fmtDate = (d) => new Date(d).toLocaleDateString('fr-CA', { year: 'numeric', month: 'long', day: 'numeric' });
 
-const organization = {
-  '@type': 'Organization',
-  name: 'FournIA',
-  url: siteUrl,
-  founder: { '@type': 'Person', name: 'Simon Fournier' },
-  areaServed: 'Québec, Rive-Nord de Montréal',
-  description: "Consultation en IA pour PME québécoises : automatisations N8N, agents Claude API, formation. Conforme à la Loi 25.",
-};
+const organization = publisherLd;
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -28,7 +22,7 @@ const articleLd = {
   inLanguage: 'fr-CA',
   datePublished: published,
   dateModified: modified,
-  author: { '@type': 'Person', name: author ?? 'Simon Fournier' },
+  author: { '@type': 'Person', '@id': `${siteUrl}/#simon-fournier`, name: author ?? 'Simon Fournier' },
   publisher: organization,
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
   ...(heroSrc ? { image: new URL(heroSrc, siteUrl).href } : {}),
@@ -63,7 +57,7 @@ const breadcrumbLd = {
   <main>
     <article class="post">
       <div class="wrap-narrow">
-        <nav class="crumbs reveal"><a href="/">Accueil</a> <span>/</span> <a href="/blog">Blog</a></nav>
+        <div class="crumbs reveal"><a href="/">Accueil</a> <span>/</span> <a href="/blog">Blog</a></div>
         {tags?.[0] && <span class="post-tag reveal">{tags[0]}</span>}
         <h1 class="reveal" data-d="1">{title}</h1>
         <p class="meta reveal" data-d="2"><time datetime={published}>{fmtDate(pubDate)}</time> · par {author ?? 'Simon Fournier'}</p>

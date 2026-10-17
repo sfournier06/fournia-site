@@ -1,0 +1,64 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+
+const faq = [
+  {
+    q: "C'est quoi un accompagnement en intelligence artificielle ?",
+    a: "C'est un accompagnement de bout en bout pour intégrer l'IA dans une entreprise : diagnostic des processus, choix des bons outils, construction et installation des systèmes, formation de l'équipe, puis suivi après la livraison. L'entreprise n'a pas besoin d'expertise technique à l'interne.",
+  },
+  {
+    q: "Mon équipe ne connaît rien à l'IA. Est-ce un problème ?",
+    a: "Non. Aucune connaissance de l'IA n'est requise au départ. La formation se fait dans le contexte de travail réel de l'équipe, sans jargon, sur les outils qu'elle va vraiment utiliser.",
+  },
+  {
+    q: "Quelle est la différence entre une formation IA et un accompagnement ?",
+    a: "Une formation enseigne à utiliser des outils. Un accompagnement livre aussi les systèmes : FournIA construit et installe les automatisations ou les agents IA dans vos opérations, puis forme l'équipe à s'en servir. Les deux peuvent se faire séparément, mais une implantation ne se livre jamais sans formation.",
+  },
+  {
+    q: "Comment savoir par où commencer avec l'IA ?",
+    a: "Par une seule tâche qui coûte du temps chaque semaine et qui suit des règles claires. L'audit sert à la trouver : on chiffre le temps que prend chaque étape du processus, et c'est ce chiffre qui décide du premier projet.",
+  },
+  {
+    q: "L'accompagnement se fait-il en personne ?",
+    a: "En personne ou à distance. Les rencontres se font en personne sur la Rive-Nord de Montréal, à Laval et à Montréal, ou par visioconférence partout au Québec. La présentation de la proposition se fait de préférence en personne.",
+  },
+  {
+    q: "Comment FournIA respecte-t-elle la Loi 25 dans un projet d'IA ?",
+    a: "Chaque projet qui touche des renseignements personnels passe par une vérification Loi 25 avant la construction, avec une attention particulière au transfert de données hors Québec quand un modèle d'IA est utilisé. Vous recevez un document de conformité écrit.",
+  },
+];
+---
+<ServicePage
+  path="/accompagnement-intelligence-artificielle"
+  title="Accompagnement en intelligence artificielle pour PME | FournIA"
+  description="Accompagnement en intelligence artificielle pour les PME du Québec : diagnostic, implantation d'agents IA, formation de l'équipe et suivi. Vérification Loi 25 à chaque projet."
+  h1="Accompagnement en intelligence artificielle pour les PME"
+  lead="FournIA accompagne les PME québécoises dans l'intégration concrète de l'IA, du diagnostic jusqu'à l'équipe formée. On trouve où l'IA vous fait gagner du temps, on construit et on installe les systèmes, et on reste disponible après la livraison."
+  serviceName="Accompagnement en intelligence artificielle"
+  serviceType="Accompagnement et intégration de l'intelligence artificielle en entreprise"
+  areaServed={['Québec', 'Rive-Nord de Montréal', 'Laval', 'Montréal']}
+  faq={faq}
+  updated="2026-10-17"
+>
+  <h2>À qui s'adresse l'accompagnement</h2>
+  <p>Aux PME qui sentent que l'IA pourrait les aider, mais qui ne savent pas par où commencer ni à qui faire confiance. Les freins les plus courants sont le temps de s'y mettre, la peur de mal faire et la crainte pour les données des clients. L'accompagnement prend en charge la construction, forme l'équipe et passe chaque projet au crible de la Loi 25.</p>
+  <p>L'accompagnement n'est pas fait pour les travailleurs autonomes qui veulent un outil gratuit, ni pour les entreprises pour qui l'IA reste un luxe plutôt qu'un besoin. Il donne ses meilleurs résultats là où un processus manuel coûte de vraies heures chaque semaine.</p>
+
+  <h2>Ce que comprend l'accompagnement</h2>
+  <table>
+    <thead><tr><th>Étape</th><th>Ce que vous obtenez</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Diagnostic (audit)</strong></td><td>La carte de vos processus, le temps qu'ils prennent, et les 1 à 3 projets qui rapportent le plus. Un plan clair, en mots simples.</td></tr>
+      <tr><td><strong>Implantation</strong></td><td>Les automatisations et les agents IA construits, testés et installés dans vos logiciels actuels.</td></tr>
+      <tr><td><strong>Formation</strong></td><td>Votre équipe apprend à utiliser les systèmes et l'IA au quotidien, dans son vrai contexte de travail, en personne ou par visio.</td></tr>
+      <tr><td><strong>Suivi</strong></td><td>Ajustements, nouveaux besoins et soutien après la livraison, pour que les systèmes continuent de servir.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Comment FournIA choisit le premier projet IA</h2>
+  <p>FournIA part du processus : on dessine le chemin complet d'un processus, de la demande du client jusqu'à la livraison, on classe chaque étape (utile, nécessaire, perdue) et on chiffre le temps qu'elle prend par mois. Le diagnostic repose sur ce chiffrage.</p>
+  <p>Pour approfondir : <a href="/blog/par-ou-commencer-ia-pme-quebec-2026">par où commencer avec l'IA quand on est une PME</a>, <a href="/blog/choisir-consultant-ia-pme-quebec-2026">comment choisir un consultant en IA</a> et <a href="/blog/loi-25-ia-entreprise-quebec-conformite-2026">comment respecter la Loi 25 avec l'IA</a>.</p>
+
+  <h2>Le financement</h2>
+  <p>L'<a href="https://www.canada.ca/fr/developpement-economique-regions-quebec/financement-services/initiative-regionale-en-matiere-dintelligence-artificielle.html" target="_blank" rel="noopener">Initiative régionale en matière d'intelligence artificielle (IRIA)</a> de Développement économique Canada peut financer une partie d'un projet d'adoption de l'IA. Pour une PME, c'est une <strong>contribution remboursable</strong> pouvant aller jusqu'à 50 % des coûts autorisés. Les coûts ne sont admissibles qu'à partir de la date de dépôt de la demande : la demande se dépose donc avant la signature. FournIA aide à préparer la description technique et le devis du projet. DEC confirme l'admissibilité et le montant.</p>
+</ServicePage>

@@ -1,18 +1,21 @@
 # FournIA
 
-> Consultation en IA pour PME québécoises (Rive-Nord de Montréal). FournIA construit et implante des
-> automatisations N8N, des agents Claude API et des applications, et forme les équipes. Fondée par
-> Simon Fournier. Conforme à la Loi 25.
+> Automatisation d'entreprise et accompagnement en intelligence artificielle pour les PME du Québec.
+> Basé à Blainville, sur la Rive-Nord de Montréal (Laval, Mirabel, Terrebonne, Saint-Jérôme, Montréal).
+> FournIA construit et implante des automatisations et des agents IA branchés sur les logiciels
+> existants de l'entreprise, et forme les équipes. Fondée en avril 2026 par Simon Fournier.
+> Chaque projet touchant des renseignements personnels passe une vérification Loi 25.
 
 ## Services
-- Audits IA (diagnostic du potentiel d'automatisation)
-- Formation IA pour équipes
-- Implantation d'agents et d'automatisations (N8N, Claude API)
-- Maintenance mensuelle
+- [Automatisation d'entreprise](https://fournia.net/automatisation-entreprise) : relances clients, soumissions, commandes et données entre logiciels, automatisées avec l'IA.
+- [Accompagnement en intelligence artificielle](https://fournia.net/accompagnement-intelligence-artificielle) : diagnostic (audit), implantation, formation de l'équipe et suivi.
+- [Consultant en IA sur la Rive-Nord](https://fournia.net/consultant-ia-rive-nord) : rencontres en personne à Blainville, Laval, Mirabel, Terrebonne, Saint-Jérôme et Montréal.
+- Formation IA pour les équipes.
 
 ## Pages clés
 - Accueil: https://fournia.net/
 - Blog: https://fournia.net/blog
+- Contact: s.fournier@fournia.net, 514 863 2973
 
 ## Articles
 - [Combien coûte l'automatisation IA pour une PME au Québec en 2026 ?](https://fournia.net/blog/cout-automatisation-ia-pme-quebec-2026) : décomposition des coûts (build, outils, maintenance), ROI typique et subvention DEC-IRIA.

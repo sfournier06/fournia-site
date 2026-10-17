@@ -1,0 +1,70 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+
+const faq = [
+  {
+    q: "C'est quoi l'automatisation d'entreprise ?",
+    a: "C'est confier à un système les tâches répétitives qu'une personne fait à la main tous les jours : relancer un client, transférer une commande d'un logiciel à l'autre, préparer une soumission, trier des courriels. Avec l'intelligence artificielle, le système peut aussi lire un document, comprendre une demande écrite et rédiger un brouillon, sous la validation d'un humain.",
+  },
+  {
+    q: "Quelles tâches automatiser en premier dans une PME ?",
+    a: "Celles qui reviennent souvent, qui suivent des règles claires et qui coûtent des heures chaque semaine : les relances clients, le tri des demandes entrantes, l'extraction de données de documents (factures, bons de commande) et la préparation de soumissions. On commence par une seule tâche, on mesure le temps gagné, puis on élargit.",
+  },
+  {
+    q: "Faut-il changer de logiciels pour automatiser ?",
+    a: "Rarement. FournIA branche l'automatisation sur les outils que l'équipe utilise déjà (CRM, boutique en ligne, calendrier, courriel, comptabilité). Un nouvel outil n'est proposé que si l'actuel ne permet pas l'intégration, et la raison est expliquée à l'audit.",
+  },
+  {
+    q: "Combien de temps prend une automatisation ?",
+    a: "Une automatisation ciblée se livre généralement en quelques semaines. Le délai dépend surtout de la rapidité à obtenir les accès aux logiciels et les documents de référence, plus que de la construction elle-même. Le calendrier exact est fixé après l'audit.",
+  },
+  {
+    q: "Mes données restent-elles conformes à la Loi 25 ?",
+    a: "Chaque projet de FournIA qui touche des renseignements personnels passe par une vérification Loi 25 avant la construction : minimisation des données, consentement, transfert hors Québec, validation humaine et conservation. Vous recevez un document de conformité écrit pour votre dossier.",
+  },
+  {
+    q: "Existe-t-il une subvention pour automatiser avec l'IA ?",
+    a: "L'Initiative régionale en matière d'intelligence artificielle (IRIA) de Développement économique Canada peut financer une partie d'un projet d'adoption de l'IA. Pour une PME, l'aide prend la forme d'une contribution remboursable pouvant aller jusqu'à 50 % des coûts autorisés. Les coûts ne sont admissibles qu'à partir de la date de dépôt de la demande : on dépose avant de signer. DEC confirme l'admissibilité et le montant.",
+  },
+];
+---
+<ServicePage
+  path="/automatisation-entreprise"
+  title="Automatisation d'entreprise au Québec | FournIA"
+  description="Automatisation d'entreprise pour les PME du Québec : relances, soumissions et commandes automatisées avec l'IA, branchées sur vos outils actuels."
+  h1="Automatisation d'entreprise pour les PME du Québec"
+  lead="FournIA automatise les tâches répétitives de votre entreprise avec l'intelligence artificielle : relances clients, soumissions, commandes, transfert de données entre logiciels. On construit le système, on l'installe dans vos outils actuels et on forme votre équipe."
+  serviceName="Automatisation d'entreprise"
+  serviceType="Automatisation des processus d'affaires par l'intelligence artificielle"
+  areaServed={['Québec', 'Rive-Nord de Montréal', 'Laval', 'Montréal']}
+  faq={faq}
+  updated="2026-10-17"
+>
+  <h2>Ce que l'automatisation d'entreprise règle concrètement</h2>
+  <p>Dans une PME, une bonne partie de la semaine part dans du travail de transfert : recopier une commande, relancer un client qui n'a pas répondu, reformater un document pour un autre logiciel. Ce travail ne crée pas de valeur, mais il doit être fait, et il est fait à la main. L'automatisation d'entreprise le confie à un système qui ne l'oublie pas.</p>
+  <p>Des exemples de systèmes que FournIA construit :</p>
+  <ul>
+    <li><strong>Relances clients par texto</strong> : chaque client reçoit son suivi au bon moment, et les réponses sont classées automatiquement (rendez-vous, report, désabonnement).</li>
+    <li><strong>Documents de production à partir des commandes</strong> : le système lit les commandes de la boutique en ligne et produit les documents de travail du jour.</li>
+    <li><strong>Générateur de soumissions</strong> : l'IA compose l'offre à partir de la demande, le code calcule les prix selon la grille de l'entreprise, et l'offre attend la validation d'une personne avant l'envoi.</li>
+    <li><strong>Dépenses classées automatiquement</strong> : les relevés de carte de crédit sont lus et classés dans un fichier Excel.</li>
+  </ul>
+
+  <h2>Comment se déroule un mandat</h2>
+  <ol>
+    <li><strong>Appel découverte (gratuit, 20 minutes).</strong> On regarde si l'IA règle une vraie douleur chez vous, ou non.</li>
+    <li><strong>Audit.</strong> On cartographie le processus visé, étape par étape, avec le temps qu'il prend chaque mois. C'est ce chiffre qui décide de ce qu'on automatise en premier.</li>
+    <li><strong>Construction.</strong> FournIA construit le système avec vos documents et vos accès. Quand le projet s'y prête, les automatisations sont écrites en code TypeScript (sur Trigger.dev), testées et versionnées, ce qui les rend faciles à corriger et à faire évoluer.</li>
+    <li><strong>Livraison et formation.</strong> Démo, tests avec votre équipe, installation, puis formation. L'implantation et la formation vont toujours ensemble : un système que personne ne sait utiliser ne sert à rien.</li>
+  </ol>
+
+  <h2>Pourquoi l'IA change l'automatisation</h2>
+  <p>L'automatisation classique suit des règles fixes : si telle case est cochée, envoie tel courriel. Elle casse dès qu'une demande arrive dans un format imprévu. L'intelligence artificielle ajoute la capacité de <strong>lire et comprendre</strong> : un courriel rédigé librement, une facture PDF, une demande de soumission incomplète. Le système extrait l'information, prépare la suite et laisse la décision à un humain quand il le faut.</p>
+  <p>Selon l'<a href="https://statistique.quebec.ca/fr/document/situation-attentes-entreprises-quebec/publication/adoption-et-utilisation-intelligence-artificielle-entreprises-au-quebec-2024-2025" target="_blank" rel="noopener">Institut de la statistique du Québec</a>, 12,7 % des entreprises québécoises ont utilisé l'IA à des fins de production au cours des 12 mois précédant le deuxième trimestre de 2025.</p>
+
+  <h2>Le financement</h2>
+  <p>L'<a href="https://www.canada.ca/fr/developpement-economique-regions-quebec/financement-services/initiative-regionale-en-matiere-dintelligence-artificielle.html" target="_blank" rel="noopener">Initiative régionale en matière d'intelligence artificielle (IRIA)</a> de Développement économique Canada peut financer une partie d'un projet d'adoption de l'IA. Pour une PME, c'est une <strong>contribution remboursable</strong> pouvant aller jusqu'à 50 % des coûts autorisés. Les coûts ne sont admissibles qu'à partir de la date de dépôt de la demande : la demande se dépose donc avant la signature. FournIA aide à préparer la description technique et le devis du projet. DEC confirme l'admissibilité et le montant.</p>
+
+  <h2>Ce que FournIA ne fait pas</h2>
+  <p>Si l'automatisation ne règle pas une douleur qui vous coûte réellement du temps ou de l'argent, on vous le dit à l'appel découverte. Pour voir les chiffres en détail, lisez <a href="/blog/cout-automatisation-ia-pme-quebec-2026">combien coûte l'automatisation IA pour une PME</a> et <a href="/blog/taches-automatiser-premier-ia-pme-quebec-2026">quelles tâches automatiser en premier</a>.</p>
+</ServicePage>
