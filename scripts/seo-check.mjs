@@ -13,7 +13,7 @@ const pages = [];
   for (const f of readdirSync(d)) {
     const p = join(d, f);
     if (statSync(p).isDirectory()) walk(p);
-    else if (f.endsWith('.html') && !IGNORE.includes(f)) pages.push(p);
+    else if (f.endsWith('.html') && !IGNORE.includes(f) && !/^google[0-9a-f]+\.html$/.test(f)) pages.push(p);
   }
 })(DIST);
 
