@@ -1,0 +1,64 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import { ZONES } from '../data/entite.mjs';
+
+const faq = [
+  {
+    q: "Où est situé FournIA ?",
+    a: "FournIA est basée à Blainville, sur la Rive-Nord de Montréal. Les rencontres se font en personne sur la Rive-Nord, à Laval et à Montréal, ou par visioconférence partout au Québec.",
+  },
+  {
+    q: "Quelles villes de la Rive-Nord sont desservies ?",
+    a: "Blainville, Sainte-Thérèse, Boisbriand, Rosemère, Mirabel, Terrebonne, Saint-Jérôme et Laval, ainsi que Montréal. Pour une entreprise ailleurs au Québec, l'accompagnement se fait à distance.",
+  },
+  {
+    q: "Pourquoi choisir un consultant en IA local ?",
+    a: "Parce que l'intégration de l'IA repose sur la confiance et sur une bonne compréhension de vos opérations. Rencontrer votre équipe en personne, voir vos processus sur place et former vos employés dans vos locaux réduit les allers-retours. FournIA applique la Loi 25 à chaque projet et aide à repérer les programmes d'aide québécois et fédéraux qui peuvent s'appliquer.",
+  },
+  {
+    q: "Qui est derrière FournIA ?",
+    a: "Simon Fournier, fondateur de FournIA. Il conçoit les systèmes (automatisations, agents IA, applications sur mesure), en dirige l'implantation et forme lui-même les équipes. FournIA a été lancée en avril 2026.",
+  },
+  {
+    q: "Comment commencer ?",
+    a: "Par un appel découverte gratuit de 20 minutes. On regarde ensemble si l'IA règle une vraie douleur dans votre entreprise. Si oui, la prochaine étape est un audit de vos processus.",
+  },
+];
+---
+<ServicePage
+  path="/consultant-ia-rive-nord"
+  title="Consultant en IA sur la Rive-Nord et à Laval | FournIA"
+  description="Consultant en IA à Blainville, Rive-Nord de Montréal. Automatisation et accompagnement IA pour les PME de Laval, Mirabel, Terrebonne et Saint-Jérôme."
+  h1="Consultant en IA sur la Rive-Nord de Montréal"
+  lead="FournIA est une firme de consultation en intelligence artificielle basée à Blainville. On aide les PME de la Rive-Nord, de Laval et de Montréal à automatiser leurs tâches répétitives et à intégrer l'IA, en personne dans leurs locaux ou par visioconférence."
+  serviceName="Consultant IA Rive-Nord"
+  serviceType="Consultation en intelligence artificielle"
+  areaServed={ZONES}
+  faq={faq}
+  updated="2026-10-17"
+>
+  <h2>Un consultant en IA près de chez vous</h2>
+  <p>FournIA est basée à Blainville, sur la Rive-Nord. On peut venir voir comment votre équipe travaille, rencontrer les personnes qui feront les tâches, et former tout le monde sur place le jour de la livraison.</p>
+
+  <h2>Les villes desservies</h2>
+  <ul>
+    {ZONES.map((v) => <li>{v}</li>)}
+  </ul>
+  <p>Ailleurs au Québec, l'accompagnement se fait par visioconférence, avec les mêmes étapes.</p>
+
+  <h2>Ce que FournIA fait pour les entreprises de la région</h2>
+  <ul>
+    <li><strong><a href="/automatisation-entreprise">Automatisation d'entreprise</a></strong> : relances clients, soumissions, commandes et données entre logiciels, automatisées avec l'IA.</li>
+    <li><strong><a href="/accompagnement-intelligence-artificielle">Accompagnement en intelligence artificielle</a></strong> : diagnostic, implantation, formation de l'équipe et suivi.</li>
+    <li><strong>Formation IA</strong> pour les équipes : utiliser l'IA au quotidien, éviter les pièges, protéger les données des clients.</li>
+  </ul>
+
+  <h2>Comment ça fonctionne</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 20 minutes, au téléphone ou en visio.</li>
+    <li><strong>Audit de vos processus</strong>, de préférence en personne dans vos locaux.</li>
+    <li><strong>Construction</strong> des systèmes à partir de vos documents et de vos accès.</li>
+    <li><strong>Livraison et formation</strong> sur place ou par visio, selon la taille de l'équipe.</li>
+  </ol>
+  <p>Chaque projet qui touche des renseignements personnels passe par une vérification <a href="/blog/loi-25-ia-entreprise-quebec-conformite-2026">Loi 25</a> avant la construction.</p>
+</ServicePage>

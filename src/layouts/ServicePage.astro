@@ -1,0 +1,129 @@
+---
+// Gabarit des pages de service (pages commerciales qui ciblent une requête précise).
+// Émet au build : WebPage + Service + FAQPage + BreadcrumbList, reliés à l'entité FournIA (#fournia).
+import Base from './Base.astro';
+import { SITE, CTA, SERVICES } from '../data/entite.mjs';
+
+const { path, title, description, h1, lead, serviceName, serviceType, areaServed, faq = [], updated } = Astro.props;
+const canonical = `${SITE}${path}`;
+
+const webPageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'fr-CA',
+  isPartOf: { '@type': 'WebSite', '@id': `${SITE}/#site`, url: `${SITE}/`, name: 'FournIA' },
+  about: { '@id': `${SITE}/#fournia` },
+  ...(updated ? { dateModified: updated } : {}),
+};
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: serviceName,
+  serviceType,
+  description,
+  url: canonical,
+  provider: { '@id': `${SITE}/#fournia` },
+  areaServed: (areaServed ?? ['Québec']).map((name) => ({ '@type': 'Place', name })),
+  inLanguage: 'fr-CA',
+};
+const faqLd = faq.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    }
+  : null;
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: serviceName, item: canonical },
+  ],
+};
+const autres = SERVICES.filter((s) => s.href !== path);
+---
+<Base title={title} description={description} canonical={canonical}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceLd)} />
+  {faqLd && <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqLd)} />}
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbLd)} />
+
+  <main>
+    <article class="svc">
+      <div class="wrap-narrow">
+        <div class="crumbs reveal"><a href="/">Accueil</a> <span>/</span> {serviceName}</div>
+        <h1 class="reveal" data-d="1">{h1}</h1>
+        <p class="lead reveal" data-d="2">{lead}</p>
+        <a class="btn btn-primary reveal" data-d="2" href={CTA} target="_blank" rel="noopener">Réserver un appel découverte gratuit <span class="arrow">→</span></a>
+
+        <div class="prose reveal" data-d="3"><slot /></div>
+
+        {faq.length > 0 && (
+          <section class="faq">
+            <h2>Questions fréquentes</h2>
+            {faq.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </section>
+        )}
+
+        <div class="post-cta">
+          <h3>Un processus manuel vous coûte du temps ?</h3>
+          <p>Un appel découverte gratuit de 20 minutes pour voir si l'IA peut vous aider. Sans engagement.</p>
+          <a class="btn btn-primary" href={CTA} target="_blank" rel="noopener">Réserver un appel <span class="arrow">→</span></a>
+        </div>
+
+        <div class="autres">
+          <span>Voir aussi :</span>
+          {autres.map((s) => <a href={s.href}>{s.label}</a>)}
+          <a href="/blog">Le blog</a>
+        </div>
+      </div>
+    </article>
+  </main>
+</Base>
+
+<style>
+  main { position: relative; z-index: 1; }
+  .svc { padding: 8.5rem 0 4rem; }
+  .wrap-narrow { width: min(760px, 92vw); margin: 0 auto; }
+  .crumbs { font-size: .85rem; color: var(--mute-d); margin-bottom: 1.4rem; }
+  .crumbs a:hover { color: var(--lime); }
+  .crumbs span { margin: 0 .4rem; }
+  .svc h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.08; letter-spacing: -.02em; font-weight: 700; margin-bottom: 1.2rem; }
+  .lead { color: var(--mute); font-size: 1.15rem; line-height: 1.7; margin-bottom: 1.8rem; }
+
+  .prose { color: var(--mute); font-size: 1.06rem; line-height: 1.75; margin-top: 3rem; }
+  .prose :global(h2) { font-family: 'Space Grotesk', sans-serif; color: var(--white); font-size: 1.7rem; line-height: 1.2; letter-spacing: -.01em; margin: 2.6rem 0 1rem; }
+  .prose :global(h3) { font-family: 'Space Grotesk', sans-serif; color: var(--white); font-size: 1.3rem; margin: 2rem 0 .8rem; }
+  .prose :global(p) { margin-bottom: 1.2rem; }
+  .prose :global(ul), .prose :global(ol) { margin: 0 0 1.2rem 1.3rem; }
+  .prose :global(li) { margin-bottom: .5rem; }
+  .prose :global(a) { color: var(--lime); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(183,217,76,.4); }
+  .prose :global(strong) { color: var(--white); font-weight: 600; }
+  .prose :global(table) { width: 100%; border-collapse: collapse; margin: 1.6rem 0; font-size: .95rem; }
+  .prose :global(th), .prose :global(td) { border: 1px solid var(--line); padding: .7rem .9rem; text-align: left; vertical-align: top; }
+  .prose :global(th) { color: var(--white); background: var(--glass); }
+
+  .faq { margin-top: 3rem; }
+  .faq h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.7rem; margin-bottom: 1.2rem; }
+  .faq details { border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.2rem; margin-bottom: .8rem; background: var(--glass); }
+  .faq summary { cursor: pointer; color: var(--white); font-weight: 500; }
+  .faq details p { color: var(--mute); margin-top: .8rem; line-height: 1.7; }
+
+  .post-cta { margin-top: 3.5rem; padding: 2.2rem; border-radius: 22px;
+    background: linear-gradient(160deg, rgba(183,217,76,.10), rgba(20,20,20,.55)); border: 1px solid var(--glass-b); }
+  .post-cta h3 { font-size: 1.4rem; margin-bottom: .6rem; color: var(--white); }
+  .post-cta p { color: var(--mute); margin-bottom: 1.4rem; }
+
+  .autres { margin-top: 2.4rem; display: flex; flex-wrap: wrap; gap: .6rem 1.2rem; font-size: .92rem; color: var(--mute-d); }
+  .autres a { color: var(--lime); }
+</style>

@@ -1,9 +1,9 @@
 ---
 title: "Combien coûte un consultant en IA au Québec en 2026 ?"
-description: "Vraies fourchettes 2026 pour un consultant IA au Québec : audit, implantation, retainer, plus la subvention DEC-IRIA qui couvre jusqu'à 50 %."
+description: "Vraies fourchettes 2026 pour un consultant IA au Québec : audit, implantation, retainer, plus le financement DEC-IRIA jusqu'à 50 % (remboursable pour une PME)."
 slug: "cout-consultant-ia-quebec-2026"
 pubDate: 2026-06-18
-updatedDate: 2026-06-18
+updatedDate: 2026-10-17
 author: "Simon Fournier"
 publisher: "FournIA"
 heroImage: "./hero.png"
@@ -19,7 +19,7 @@ faq:
   - q: "Un projet d'implantation IA pour une PME, ça prend combien de temps et ça coûte combien ?"
     a: "Un projet typique pour une PME québécoise prend entre 2 et 12 semaines et coûte de 500 $ à 15 000 $ selon le nombre de processus automatisés, les intégrations et la formation requise."
   - q: "Est-ce qu'on peut obtenir une subvention pour payer un consultant IA au Québec ?"
-    a: "Oui. Le programme DEC-IRIA (Initiative régionale en intelligence artificielle) couvre jusqu'à 50 % des coûts admissibles d'un projet IA pour une PME québécoise et reste ouvert jusqu'au 31 mars 2029."
+    a: "Oui. Le programme IRIA (Initiative régionale en matière d'intelligence artificielle) de Développement économique Canada peut financer jusqu'à 50 % des coûts autorisés d'un projet IA. Pour une PME, c'est une contribution remboursable, et les coûts ne sont admissibles qu'à partir du dépôt de la demande."
   - q: "C'est quoi un retainer mensuel en consultation IA et pour qui c'est utile ?"
     a: "Un retainer est un abonnement mensuel (300 $ à 1 500 $ pour une PME, plus selon le niveau) qui couvre la maintenance des automatisations, les ajustements et un nombre d'heures de support. Il est utile dès qu'une PME a 2-3 systèmes IA en production."
   - q: "Comment savoir si le prix demandé est justifié et non gonflé ?"
@@ -28,7 +28,7 @@ faq:
     a: "Pas toujours. Certains consultants facturent la formation à part (100 $ à 200 $/h). Chez FournIA, la formation de l'équipe est toujours incluse dans le mandat d'implantation, car un système non adopté ne livre aucun ROI."
 ---
 
-Un consultant en intelligence artificielle au Québec en 2026 coûte entre 75 $ et 250 $ de l'heure en mode indépendant, ou un forfait de 100 $ à 15 000 $ par mandat selon la profondeur du travail. Trois formats dominent le marché : l'audit (100 $ à 2 000 $), l'implantation d'une automatisation IA (500 $ à 15 000 $) et le retainer mensuel de maintenance (300 $ à 1 500 $/mois pour une PME). À titre de comparaison, un analyste IA salarié à Montréal coûte entre 31,73 $ et 96 $ de l'heure selon [Guichet-Emplois](https://www.guichetemplois.gc.ca/rapportmarche/salaire-profession/24508/22446), ce qui situe les tarifs consultant dans une logique de spécialisation et de risque assumé. La subvention provinciale DEC-IRIA, administrée par Développement économique Canada (DEC), peut couvrir jusqu'à 50 % du mandat pour une PME admissible, ce qui change radicalement le calcul.
+Un consultant en intelligence artificielle au Québec en 2026 coûte entre 75 $ et 250 $ de l'heure en mode indépendant, ou un forfait de 100 $ à 15 000 $ par mandat selon la profondeur du travail. Trois formats dominent le marché : l'audit (100 $ à 2 000 $), l'implantation d'une automatisation IA (500 $ à 15 000 $) et le retainer mensuel de maintenance (300 $ à 1 500 $/mois pour une PME). À titre de comparaison, un analyste IA salarié à Montréal coûte entre 31,73 $ et 96 $ de l'heure selon [Guichet-Emplois](https://www.guichetemplois.gc.ca/rapportmarche/salaire-profession/24508/22446), ce qui situe les tarifs consultant dans une logique de spécialisation et de risque assumé. Le programme fédéral IRIA, administré par Développement économique Canada (DEC), peut financer jusqu'à 50 % des coûts autorisés pour une PME admissible, sous forme de contribution remboursable, ce qui étale le coût du projet.
 
 ## Pourquoi les prix varient autant d'un consultant IA à l'autre ?
 
@@ -92,7 +92,7 @@ Cas où l'embauche devient plus rentable :
 
 ## La subvention DEC-IRIA change-t-elle vraiment le calcul ?
 
-La subvention DEC-IRIA peut rembourser jusqu'à 50 % du coût admissible d'un projet IA pour une PME québécoise, jusqu'au 31 mars 2029. Le programme est administré par Développement économique Canada (DEC), sous le nom officiel d'Initiative régionale en intelligence artificielle.
+Le programme IRIA peut financer jusqu'à 50 % des coûts autorisés d'un projet IA pour une PME québécoise. Pour une PME, c'est une **contribution remboursable** (elle est généralement non remboursable seulement pour un OBNL), et les coûts ne sont admissibles qu'à partir de la date de dépôt de la demande. Le programme est administré par Développement économique Canada (DEC), sous le nom officiel d'[Initiative régionale en matière d'intelligence artificielle](https://www.canada.ca/fr/developpement-economique-regions-quebec/financement-services/initiative-regionale-en-matiere-dintelligence-artificielle.html).
 
 Concrètement, un mandat d'implantation de 8 000 $ peut tomber à environ 4 000 $ net pour la PME. Cela change deux choses :
 1. Le calcul de ROI se fait sur la moitié du coût, donc le seuil de rentabilité tombe rapidement.
@@ -133,7 +133,7 @@ Les consultants qui n'affichent pas leurs prix veulent ajuster selon le budget p
 Un projet typique pour une PME québécoise prend entre 2 et 12 semaines et coûte de 500 $ à 15 000 $ selon le nombre de processus automatisés, les intégrations et la formation requise.
 
 **Est-ce qu'on peut obtenir une subvention pour payer un consultant IA au Québec ?**
-Oui. Le programme DEC-IRIA (Initiative régionale en intelligence artificielle) couvre jusqu'à 50 % des coûts admissibles d'un projet IA pour une PME québécoise et reste ouvert jusqu'au 31 mars 2029.
+Oui. Le programme IRIA (Initiative régionale en matière d'intelligence artificielle) de Développement économique Canada peut financer jusqu'à 50 % des coûts autorisés d'un projet IA. Pour une PME, c'est une contribution remboursable, et les coûts ne sont admissibles qu'à partir du dépôt de la demande.
 
 **C'est quoi un retainer mensuel en consultation IA et pour qui c'est utile ?**
 Un retainer est un abonnement mensuel (300 $ à 1 500 $ pour une PME, plus selon le niveau) qui couvre la maintenance des automatisations, les ajustements et un nombre d'heures de support. Il est utile dès qu'une PME a 2-3 systèmes IA en production.

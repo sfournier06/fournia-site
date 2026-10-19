@@ -2,6 +2,7 @@
 // Shell partagé du site (nav + fond + footer + design system).
 // Utilisé par les pages qui doivent matcher l'accueil (blog, articles).
 import '../styles/global.css';
+import { GOOGLE_VERIFICATION, BING_VERIFICATION, SERVICES } from '../data/entite.mjs';
 
 const { title, description, canonical, ogType = 'website' } = Astro.props;
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
@@ -33,6 +34,10 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   {description && <meta property="og:description" content={description} />}
   {canonical && <meta property="og:url" content={canonical} />}
   <meta property="og:locale" content="fr_CA" />
+  <meta property="og:site_name" content="FournIA" />
+  <meta property="og:image" content="https://fournia.net/brand/fournia-lockup-horizontal-dark.png" />
+  {GOOGLE_VERIFICATION && <meta name="google-site-verification" content={GOOGLE_VERIFICATION} />}
+  {BING_VERIFICATION && <meta name="msvalidate.01" content={BING_VERIFICATION} />}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -50,7 +55,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
       <a href="/" class="logo"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
       <ul class="nav-links">
         <li><a href="/#apropos">À propos</a></li>
-        <li><a href="/#services">Services</a></li>
+        <li><a href="/automatisation-entreprise">Services</a></li>
         <li><a href="/#processus">Processus</a></li>
         <li><a href="/blog">Blog</a></li>
         <li><a href="/#contact">Contact</a></li>
@@ -67,7 +72,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
       <div class="foot-grid">
         <div>
           <a href="/" class="logo" style="font-size:1.5rem"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
-          <p style="color:var(--mute-d); margin-top:1rem; max-width:280px; font-size:.92rem;">Des systèmes concrets, clé en main, pour les PME québécoises.</p>
+          <p style="color:var(--mute-d); margin-top:1rem; max-width:280px; font-size:.92rem;">Automatisation d'entreprise et accompagnement en IA pour les PME du Québec. Basé à Blainville, Rive-Nord de Montréal.</p>
         </div>
         <div class="foot-contact">
           <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>
@@ -76,7 +81,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
         </div>
         <div class="foot-contact">
           <a href="/#apropos">À propos</a>
-          <a href="/#services">Services</a>
+          {SERVICES.map((sv) => <a href={sv.href}>{sv.label}</a>)}
           <a href="/#processus">Processus</a>
           <a href="/blog">Blog</a>
           <a href={cta} target="_blank" rel="noopener">Réserver un appel</a>

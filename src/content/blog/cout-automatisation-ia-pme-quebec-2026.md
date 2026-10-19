@@ -3,7 +3,7 @@ title: "Combien coûte l'automatisation IA pour une PME au Québec en 2026 ?"
 description: "Automatiser un processus avec l'IA coûte 500$ à 15 000$ CAD pour le projet, plus les outils et la maintenance. ROI en 2 à 6 mois, jusqu'à 50% subventionné."
 slug: "cout-automatisation-ia-pme-quebec-2026"
 pubDate: 2026-06-09
-updatedDate: 2026-06-10
+updatedDate: 2026-10-17
 author: "Simon Fournier"
 publisher: "FournIA"
 heroAlt: "Tableau des coûts d'automatisation IA pour une PME au Québec en 2026"
@@ -28,14 +28,14 @@ faq:
   - q: "Quel ROI attendre d'une automatisation IA ?"
     a: "Le ROI typique est de 200% à 500% la première année, avec un retour sur investissement en 2 à 6 mois. Exemple: un agent de service client qui traite 70% des demandes peut générer environ 7 250$ par mois d'économies nettes contre un abonnement de 1 500$ par mois."
   - q: "Quelles subventions IA existent au Québec en 2026 ?"
-    a: "Le programme DEC-IRIA (fédéral) couvre jusqu'à 50% des coûts pour une PME (90% pour un OBNL), jusqu'au 31 mars 2029, avec une enveloppe de 38,2 M$ au Québec. Le PARI du CNRC offre aussi des contributions non remboursables pour le prototypage et l'intégration."
+    a: "Le programme DEC-IRIA (fédéral) peut financer jusqu'à 50% des coûts autorisés pour une PME, sous forme de contribution remboursable (jusqu'à 90%, généralement non remboursable, pour un OBNL). Le PARI du CNRC offre aussi des contributions non remboursables pour le prototypage et l'intégration."
   - q: "Quelle est la différence de prix entre un projet simple et un projet avancé ?"
     a: "Un projet simple (automatiser un processus défini) coûte de 3 000$ à 10 000$ CAD. Un projet avancé (agent vocal, multicanal, plusieurs systèmes) coûte de 15 000$ à 50 000$ CAD."
 ---
 
 ## Combien coûte l'automatisation IA pour une PME au Québec en 2026 ?
 
-Au Québec en 2026, automatiser un processus avec l'IA coûte généralement de 500$ à 15 000$ CAD pour le projet (selon la complexité), plus environ 0$ à 300$ par mois pour la plateforme d'automatisation (N8N, Make ou Zapier, en dollars US, selon l'outil et le volume) et 300$ à 1 500$ CAD par mois de maintenance si elle est déléguée. Un projet simple de PME tombe souvent entre 3 000$ et 10 000$ CAD tout inclus, avec un retour sur investissement typique en 2 à 6 mois. Plusieurs de ces coûts sont admissibles à une subvention pouvant atteindre 50% (DEC-IRIA fédéral, jusqu'au 31 mars 2029).
+Au Québec en 2026, automatiser un processus avec l'IA coûte généralement de 500$ à 15 000$ CAD pour le projet (selon la complexité), plus environ 0$ à 300$ par mois pour la plateforme d'automatisation (N8N, Make ou Zapier, en dollars US, selon l'outil et le volume) et 300$ à 1 500$ CAD par mois de maintenance si elle est déléguée. Un projet simple de PME tombe souvent entre 3 000$ et 10 000$ CAD tout inclus, avec un retour sur investissement typique en 2 à 6 mois. Plusieurs de ces coûts peuvent être financés jusqu'à 50% par le programme fédéral DEC-IRIA (contribution remboursable pour une PME).
 
 Le prix se décompose en trois enveloppes distinctes: le build (une fois), les abonnements aux outils (par mois) et la maintenance (par mois). Il faut ajouter 30% à 50% de coûts cachés. La vraie question n'est pas le prix affiché: c'est le ROI et la part payée par l'État.
 
@@ -91,9 +91,9 @@ C'est là que le vrai risque se déplace. Quand un projet bien cadré se rembour
 
 ## Quelles subventions IA existent pour une PME au Québec en 2026 ?
 
-Le programme DEC-IRIA (fédéral) couvre jusqu'à 50% des coûts admissibles pour une PME (90% pour un OBNL), jusqu'au 31 mars 2029, avec une enveloppe de 38,2 M$ au Québec ([hellodarwin.com](https://hellodarwin.com/fr/aide-aux-entreprises/programmes/dec-initiative-regionale-intelligence-artificielle), [canada.ca](https://www.canada.ca/en/economic-development-quebec-regions/financing-services/regional-artificial-intelligence-initiative.html)).
+Le [programme DEC-IRIA](https://www.canada.ca/fr/developpement-economique-regions-quebec/financement-services/initiative-regionale-en-matiere-dintelligence-artificielle.html) (fédéral) peut financer jusqu'à 50% des coûts autorisés pour une PME, sous forme de contribution remboursable (jusqu'à 90%, généralement non remboursable, pour un OBNL). Les coûts ne sont admissibles qu'à partir de la date de dépôt de la demande (voir aussi [hellodarwin.com](https://hellodarwin.com/fr/aide-aux-entreprises/programmes/dec-initiative-regionale-intelligence-artificielle), [canada.ca](https://www.canada.ca/en/economic-development-quebec-regions/financing-services/regional-artificial-intelligence-initiative.html)).
 
-Le PARI du CNRC offre aussi des contributions non remboursables pour le prototypage et l'intégration de solutions ([hellodarwin.com](https://hellodarwin.com/fr/aide-aux-entreprises/subventions-et-financement/intelligence-artificielle/quebec)). Combiné à un projet bien cadré, ce financement change le calcul: vous payez la moitié, l'État paie l'autre, et l'automatisation se rembourse ensuite par les heures sauvées.
+Le PARI du CNRC offre aussi des contributions non remboursables pour le prototypage et l'intégration de solutions ([hellodarwin.com](https://hellodarwin.com/fr/aide-aux-entreprises/subventions-et-financement/intelligence-artificielle/quebec)). Combiné à un projet bien cadré, ce financement étale le coût du projet: la contribution IRIA se rembourse avec le temps, pendant que l'automatisation produit ses gains en heures sauvées dès sa mise en service.
 
 Important: déposer la demande de subvention avant de signer le contrat de projet, sinon les coûts risquent de ne plus être admissibles.
 
@@ -143,7 +143,7 @@ Si déléguée, la maintenance va de 300$ à 1 500$ CAD par mois selon la comple
 Le ROI typique est de 200% à 500% la première année, avec un retour sur investissement en 2 à 6 mois. Exemple: un agent de service client qui traite 70% des demandes peut générer environ 7 250$ par mois d'économies nettes contre un abonnement de 1 500$ par mois.
 
 ### Quelles subventions IA existent au Québec en 2026 ?
-Le programme DEC-IRIA (fédéral) couvre jusqu'à 50% des coûts pour une PME (90% pour un OBNL), jusqu'au 31 mars 2029, avec une enveloppe de 38,2 M$ au Québec. Le PARI du CNRC offre aussi des contributions non remboursables pour le prototypage et l'intégration.
+Le programme DEC-IRIA (fédéral) peut financer jusqu'à 50% des coûts autorisés pour une PME, sous forme de contribution remboursable (jusqu'à 90%, généralement non remboursable, pour un OBNL). Le PARI du CNRC offre aussi des contributions non remboursables pour le prototypage et l'intégration.
 
 ### Quelle est la différence de prix entre un projet simple et un projet avancé ?
 Un projet simple (automatiser un processus défini) coûte de 3 000$ à 10 000$ CAD. Un projet avancé (agent vocal, multicanal, plusieurs systèmes) coûte de 15 000$ à 50 000$ CAD.
