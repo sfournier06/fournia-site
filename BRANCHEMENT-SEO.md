@@ -5,7 +5,7 @@ les gestes qui exigent tes comptes. Suis l'ordre, chaque étape débloque la sui
 
 ---
 
-## Étape 1 : mettre la branche en ligne (5 min, avec Claude)
+## Étape 1 : mettre la branche en ligne (5 min, avec Claude) : FAIT le 2026-10-19
 Dis à Claude « merge la branche SEO ». Il :
 1. relance `npm run build && npm run seo:check` (0 erreur exigée) ;
 2. merge `seo-octobre-2026` dans `main` et pousse (Netlify déploie seul) ;
@@ -17,6 +17,10 @@ Pages qui arrivent :
 - https://fournia.net/consultant-ia-rive-nord
 
 ## Étape 2 : Google Search Console (10 min)
+
+> **FAIT le 2026-10-19 (méthode fichier HTML)** : `public/google0bcb299dea7c9fbe.html` est en ligne.
+> Ne jamais supprimer ce fichier, sinon la propriété perd sa vérification. Les étapes 1, 3 et 4 de
+> cette section (balise) ne servent plus.
 1. https://search.google.com/search-console, connecté avec `s.fournier@fournia.net`.
 2. Ajouter une propriété, type **Préfixe d'URL** : `https://fournia.net`.
 3. Méthode **Balise HTML**. Copier seulement la valeur de `content="..."`.
