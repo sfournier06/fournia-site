@@ -5,7 +5,7 @@ import Base from './Base.astro';
 import { SITE, CTA, SERVICES } from '../data/entite.mjs';
 
 const { path, title, description, h1, lead, serviceName, serviceType, areaServed, faq = [], updated } = Astro.props;
-const canonical = `${SITE}${path}`;
+const canonical = `${SITE}${path}/`;
 
 const webPageLd = {
   '@context': 'https://schema.org',

@@ -37,6 +37,8 @@ for (const file of pages) {
   if (!desc) err(rel, 'meta description manquante');
   else if (desc.length < 70 || desc.length > 170) warn(rel, `description ${desc.length} car. (cible 70-170)`);
   if (!/<link rel="canonical"/.test(html)) err(rel, 'canonical manquant');
+  const can = html.match(/<link rel="canonical" href="([^"]*)"/)?.[1];
+  if (can && !can.endsWith('/')) err(rel, `canonical sans / final (Netlify redirige) : ${can}`);
   if (!/<html lang="fr-CA"/.test(html)) err(rel, 'lang fr-CA manquant');
   const h1 = (html.match(/<h1[\s>]/g) ?? []).length;
   if (h1 !== 1) err(rel, `${h1} balises h1 (attendu 1)`);

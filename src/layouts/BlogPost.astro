@@ -7,7 +7,7 @@ import { publisherLd } from '../data/entite.mjs';
 const { id, title, description, pubDate, updatedDate, author, publisher, heroImage, heroAlt, tags, faq } = Astro.props;
 
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
-const canonical = `${siteUrl}/blog/${id}`;
+const canonical = `${siteUrl}/blog/${id}/`;
 const published = (pubDate instanceof Date ? pubDate : new Date(pubDate)).toISOString();
 const modified = (updatedDate ? (updatedDate instanceof Date ? updatedDate : new Date(updatedDate)) : (pubDate instanceof Date ? pubDate : new Date(pubDate))).toISOString();
 const heroSrc = heroImage ? heroImage.replace('./', `/blog/${id}/`) : null;
@@ -44,7 +44,7 @@ const breadcrumbLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${siteUrl}/` },
-    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blog` },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blog/` },
     { '@type': 'ListItem', position: 3, name: title, item: canonical },
   ],
 };
