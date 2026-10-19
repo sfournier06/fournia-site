@@ -45,7 +45,7 @@ const breadcrumbLd = {
     { '@type': 'ListItem', position: 2, name: serviceName, item: canonical },
   ],
 };
-const autres = SERVICES.filter((s) => s.href !== path);
+const autres = SERVICES.filter((s) => s.href.replace(/\/$/, '') !== path);
 ---
 <Base title={title} description={description} canonical={canonical}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageLd)} />

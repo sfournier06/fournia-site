@@ -1,0 +1,68 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+
+const faq = [
+  {
+    q: "Comment une petite entreprise de Montréal peut-elle commencer avec l'IA ?",
+    a: "Par une seule tâche qui coûte du temps chaque semaine et qui suit des règles claires : relancer des clients, répondre aux demandes entrantes, préparer des soumissions, classer des documents. On chiffre le temps qu'elle prend, on l'automatise, on forme l'équipe, puis on passe à la suivante.",
+  },
+  {
+    q: "Quelle est la différence entre accompagnement, formation et implantation en IA ?",
+    a: "La formation apprend à l'équipe à utiliser l'IA. L'implantation livre un système qui fait la tâche, sous la supervision de l'équipe (une automatisation ou un agent IA branché sur ses logiciels). L'accompagnement couvre les deux, du diagnostic jusqu'au suivi après la livraison. Chez FournIA, une implantation se livre toujours avec une formation.",
+  },
+  {
+    q: "L'IA est-elle accessible pour une entreprise de moins de 20 employés ?",
+    a: "Oui, à condition de viser juste. Une petite entreprise gagne à commencer par une ou deux tâches qui lui coûtent des heures chaque semaine, confiées à un système fiable. Le gain se mesure vite parce que la tâche est déjà chiffrée.",
+  },
+  {
+    q: "FournIA se déplace-t-elle à Montréal ?",
+    a: "Oui. FournIA est basée à Blainville et rencontre les entreprises de Montréal en personne, dans leurs locaux, pour l'audit, la livraison et la formation. Le reste du travail peut se faire par visioconférence.",
+  },
+  {
+    q: "Et la Loi 25 pour une petite entreprise ?",
+    a: "La Loi 25 encadre les renseignements personnels détenus par les entreprises privées du Québec. Chez FournIA, un projet qui touche des renseignements personnels passe une vérification Loi 25 documentée par écrit avant la construction.",
+  },
+];
+---
+<ServicePage
+  path="/ia-petite-entreprise-montreal"
+  title="IA pour petite entreprise à Montréal | FournIA"
+  description="Accompagnement, formation et implantation de l'intelligence artificielle pour les petites entreprises de Montréal. Une tâche à la fois, votre équipe formée, Loi 25 vérifiée."
+  h1="Intelligence artificielle pour les petites entreprises de Montréal"
+  lead="FournIA accompagne les petites entreprises de Montréal de A à Z avec l'IA : on trouve la tâche qui vous coûte le plus de temps, on implante le système qui fait cette tâche sous votre supervision, et on forme votre équipe à s'en servir. En personne dans vos locaux, ou par visioconférence."
+  serviceName="IA pour petite entreprise à Montréal"
+  serviceType="Accompagnement, formation et implantation en intelligence artificielle"
+  areaServed={['Montréal', 'Laval', 'Rive-Nord de Montréal']}
+  faq={faq}
+  updated="2026-10-19"
+>
+  <h2>Trois services, un seul fil</h2>
+  <table>
+    <thead><tr><th>Service</th><th>Ce que vous obtenez</th></tr></thead>
+    <tbody>
+      <tr><td><strong><a href="/accompagnement-intelligence-artificielle/">Accompagnement</a></strong></td><td>Le diagnostic de vos processus, chiffré en heures par mois, et le plan des 1 à 3 projets qui rapportent le plus.</td></tr>
+      <tr><td><strong><a href="/automatisation-entreprise/">Implantation</a></strong></td><td>Les automatisations et les agents IA construits, testés et installés dans les logiciels que vous utilisez déjà.</td></tr>
+      <tr><td><strong><a href="/formation-ia-entreprise/">Formation</a></strong></td><td>Votre équipe apprend à utiliser l'IA sur ses vraies tâches, et repart avec une politique d'usage d'une page.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Pensé pour la petite entreprise</h2>
+  <p>La plupart des entreprises de 5 à 50 employés n'ont pas de département informatique ni le temps d'apprendre une nouvelle plateforme. Elle a quelques tâches qui reviennent chaque jour et qui mangent des heures : les relances, les soumissions, les demandes qui arrivent par courriel ou par texto, la saisie de commandes. FournIA commence par la plus coûteuse, l'automatise, puis passe à la suivante. FournIA avance un projet mesurable à la fois.</p>
+
+  <h2>Ce que ça donne concrètement</h2>
+  <ul>
+    <li><strong>Relances clients automatiques</strong>, par texto ou par courriel, avec les réponses classées pour vous.</li>
+    <li><strong>Soumissions préparées par l'IA</strong> à partir de la demande, avec vos prix calculés selon votre grille, validées par une personne avant l'envoi.</li>
+    <li><strong>Commandes transformées en documents de travail</strong>, sans recopier d'un logiciel à l'autre.</li>
+    <li><strong>Une équipe qui utilise l'IA correctement</strong>, avec des règles communes pour protéger les données des clients.</li>
+  </ul>
+
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 20 minutes, pour voir si l'IA règle une vraie douleur chez vous.</li>
+    <li><strong>Audit payant</strong> dans vos locaux à Montréal ou par visio : le processus visé, étape par étape, avec son coût en temps.</li>
+    <li><strong>Implantation</strong> du système, avec vos documents et vos accès, et vérification <a href="/blog/loi-25-ia-entreprise-quebec-conformite-2026/">Loi 25</a>.</li>
+    <li><strong>Livraison et formation</strong> sur place, puis suivi.</li>
+  </ol>
+  <p>Pour aller plus loin : <a href="/blog/par-ou-commencer-ia-pme-quebec-2026/">par où commencer avec l'IA</a>, <a href="/blog/taches-automatiser-premier-ia-pme-quebec-2026/">quelles tâches automatiser en premier</a> et <a href="/blog/cout-automatisation-ia-pme-quebec-2026/">combien coûte l'automatisation IA</a>.</p>
+</ServicePage>

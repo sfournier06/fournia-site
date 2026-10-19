@@ -69,11 +69,14 @@ export const organisationLd = {
     'Agents IA',
     'Automatisation des processus',
     'Loi 25',
+    'Formation en intelligence artificielle',
   ],
   makesOffer: [
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: "Automatisation d'entreprise", url: `${SITE}/automatisation-entreprise` } },
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Accompagnement en intelligence artificielle', url: `${SITE}/accompagnement-intelligence-artificielle` } },
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Consultant en IA sur la Rive-Nord', url: `${SITE}/consultant-ia-rive-nord` } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: "Automatisation d'entreprise", url: `${SITE}/automatisation-entreprise/` } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Accompagnement en intelligence artificielle', url: `${SITE}/accompagnement-intelligence-artificielle/` } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Consultant en IA sur la Rive-Nord', url: `${SITE}/consultant-ia-rive-nord/` } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Formation IA en entreprise', url: `${SITE}/formation-ia-entreprise/` } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'IA pour petite entreprise à Montréal', url: `${SITE}/ia-petite-entreprise-montreal/` } },
   ],
   ...(SAME_AS.length ? { sameAs: SAME_AS } : {}),
 };
@@ -89,7 +92,9 @@ export const publisherLd = {
 };
 
 export const SERVICES = [
-  { href: '/automatisation-entreprise', label: "Automatisation d'entreprise" },
-  { href: '/accompagnement-intelligence-artificielle', label: 'Accompagnement en IA' },
-  { href: '/consultant-ia-rive-nord', label: 'Consultant IA Rive-Nord' },
+  { href: '/ia-petite-entreprise-montreal/', label: 'IA pour petite entreprise à Montréal' },
+  { href: '/accompagnement-intelligence-artificielle/', label: 'Accompagnement en IA' },
+  { href: '/formation-ia-entreprise/', label: 'Formation IA en entreprise' },
+  { href: '/automatisation-entreprise/', label: "Automatisation d'entreprise" },
+  { href: '/consultant-ia-rive-nord/', label: 'Consultant IA Rive-Nord' },
 ];
