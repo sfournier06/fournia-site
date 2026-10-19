@@ -1,0 +1,74 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+
+const MFOR = 'https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/emploi-solidarite-sociale/gmse/02Guide_MFOR_volet_entreprises.pdf';
+
+const faq = [
+  {
+    q: "Qu'est-ce qu'une formation IA en entreprise ?",
+    a: "Une formation IA en entreprise est une formation donnée à une équipe, sur ses propres tâches, pour qu'elle sache utiliser l'intelligence artificielle au travail : quels outils prendre, comment formuler une demande, où l'IA aide, où elle se trompe, et comment protéger les renseignements des clients. Elle se termine avec du matériel que l'équipe garde.",
+  },
+  {
+    q: "Combien de temps dure une formation IA pour une petite entreprise ?",
+    a: "Le format de base de FournIA est un bloc de 3 h 30 à 5 h, en personne ou par visioconférence. La durée s'ajuste au nombre de participants et aux tâches couvertes.",
+  },
+  {
+    q: "Faut-il connaître l'IA avant la formation ?",
+    a: "Non. La formation part de zéro, sans jargon, avec des démonstrations sur les tâches réelles de l'équipe. Les participants qui utilisent déjà ChatGPT ou Copilot apprennent à s'en servir de façon plus fiable et plus sûre.",
+  },
+  {
+    q: "Qu'est-ce que l'équipe garde après la formation ?",
+    a: "Après une formation FournIA, l'équipe garde des usages précis pour chaque participant, un aide-mémoire de demandes prêtes à l'emploi écrit pour ses tâches, une politique d'usage de l'IA d'une page rédigée en groupe, prête à adopter, un guide des outils et de leurs réglages de confidentialité, et les tutoriels des démonstrations.",
+  },
+  {
+    q: "Une formation IA peut-elle être financée au Québec ?",
+    a: "Possiblement. La Mesure de formation de la main-d'œuvre (MFOR) de Services Québec peut financer jusqu'à 40 % des dépenses admissibles de formation, et jusqu'à 65 % quand la formation est rendue nécessaire par l'introduction d'une nouvelle technologie visant à accroître la productivité, selon son guide officiel. L'admissibilité se valide avec le bureau de Services Québec de votre territoire, avant la formation.",
+  },
+  {
+    q: "La formation se donne-t-elle à Montréal ?",
+    a: "Oui. FournIA donne ses formations en personne à Montréal, à Laval et sur la Rive-Nord, dans les locaux de l'entreprise, ou par visioconférence partout au Québec.",
+  },
+];
+---
+<ServicePage
+  path="/formation-ia-entreprise"
+  title="Formation IA en entreprise à Montréal | FournIA"
+  description="Formation en IA pour les petites entreprises de Montréal : sur les tâches réelles de l'équipe, en personne ou en visio, avec une politique d'usage à garder."
+  h1="Formation en intelligence artificielle pour votre équipe"
+  lead="FournIA forme les équipes de petites entreprises à utiliser l'IA au travail, sur leurs propres tâches. En un bloc de quelques heures, en personne à Montréal, à Laval et sur la Rive-Nord, ou par visioconférence, votre équipe apprend quoi utiliser, comment, et ce qu'il ne faut jamais confier à l'IA."
+  serviceName="Formation IA en entreprise"
+  serviceType="Formation en intelligence artificielle pour les équipes"
+  areaServed={['Montréal', 'Laval', 'Rive-Nord de Montréal', 'Québec']}
+  faq={faq}
+  updated="2026-10-19"
+>
+  <h2>À qui s'adresse la formation</h2>
+  <p>Aux petites entreprises et aux organismes dont les employés ont commencé à utiliser l'IA chacun de leur côté, sans règle commune, ou qui ne l'utilisent pas du tout parce qu'ils ne savent pas par où commencer. Le but est le même dans les deux cas : que toute l'équipe sache s'en servir pour gagner du temps, sans mettre en danger les données des clients.</p>
+
+  <h2>Ce que couvre la formation</h2>
+  <ul>
+    <li><strong>Les bons outils pour vos tâches</strong> : ChatGPT, Copilot, Claude ou Gemini, choisis selon ce que l'équipe fait vraiment, avec les réglages de confidentialité à activer.</li>
+    <li><strong>Écrire une demande qui donne un bon résultat</strong>, démontré sur des exemples tirés de vos tâches, sans renseignements personnels.</li>
+    <li><strong>Où l'IA se trompe</strong> : vérifier une réponse, repérer une information inventée, savoir quand ne pas l'utiliser.</li>
+    <li><strong>La Loi 25 au quotidien</strong> : ce qu'on peut donner à un outil d'IA, ce qu'on ne lui donne jamais, et pourquoi le transfert de données hors Québec compte.</li>
+    <li><strong>Une politique d'usage d'une page</strong>, rédigée en groupe à la fin de la formation, prête à adopter.</li>
+  </ul>
+
+  <h2>Ce que l'équipe garde</h2>
+  <table>
+    <thead><tr><th>Livrable</th><th>À quoi il sert</th></tr></thead>
+    <tbody>
+      <tr><td>Usages personnels</td><td>Trois façons concrètes pour chaque participant d'utiliser l'IA dans son poste, notées avec le texte exact à réutiliser.</td></tr>
+      <tr><td>Aide-mémoire de demandes</td><td>Des demandes prêtes à l'emploi, écrites pour les tâches de l'équipe.</td></tr>
+      <tr><td>Politique d'usage</td><td>Une page de règles claires sur ce qui est permis, rédigée en groupe, prête à adopter.</td></tr>
+      <tr><td>Guide des outils</td><td>Quels outils, pour quoi, et les réglages de confidentialité à activer.</td></tr>
+      <tr><td>Tutoriels</td><td>Les démonstrations de la formation, pour refaire chaque geste seul.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Formation seule ou avec une implantation</h2>
+  <p>La formation se donne seule. Quand FournIA construit une automatisation ou un agent IA pour l'entreprise, la formation fait toujours partie de la livraison : un système que l'équipe ne sait pas utiliser ne rapporte pas ce qu'il devrait. Voir l'<a href="/accompagnement-intelligence-artificielle/">accompagnement en intelligence artificielle</a> et l'<a href="/automatisation-entreprise/">automatisation d'entreprise</a>.</p>
+
+  <h2>Le financement</h2>
+  <p>Selon le <a href={MFOR} target="_blank" rel="noopener">guide officiel de la Mesure de formation de la main-d'œuvre</a> (MFOR, volet Entreprises, Services Québec, version mise à jour le 2023-06-28), l'aide peut atteindre 40 % des dépenses de formation admissibles. Elle est bonifiée à 65 % pour une formation rendue nécessaire par l'introduction d'une nouvelle technologie visant à accroître la productivité. L'admissibilité se confirme avec le bureau de Services Québec de votre territoire, avant la formation.</p>
+</ServicePage>
