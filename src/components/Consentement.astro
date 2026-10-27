@@ -1,0 +1,47 @@
+---
+// Bandeau de consentement aux témoins (Loi 25, art. 8.1) : les outils de mesure et de publicité
+// (script de suivi du CRM, pixel Meta) restent désactivés tant que le visiteur n'a pas accepté.
+// La bulle de clavardage n'en dépend pas : c'est un service que le visiteur choisit d'utiliser.
+// Rouvrir le bandeau : window.fourniaTemoins() (lien « Gérer les témoins » du pied de page).
+---
+<div id="consentement" class="consentement" role="dialog" aria-live="polite" aria-label="Témoins" hidden>
+  <p>On utilise des témoins pour mesurer les visites du site et l'efficacité de nos publicités. Rien n'est activé sans votre accord. <a href="/confidentialite">En savoir plus</a></p>
+  <div class="consentement-btns">
+    <button type="button" data-choix="non">Refuser</button>
+    <button type="button" data-choix="oui" class="ok">Accepter</button>
+  </div>
+</div>
+<style is:inline>
+  .consentement{position:fixed;left:16px;bottom:16px;z-index:2147483000;max-width:420px;background:#121212;color:#E8E8E6;border:1px solid #232422;border-radius:14px;padding:16px 18px;font:400 14px/1.5 Inter,system-ui,sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.45)}
+  .consentement[hidden]{display:none}
+  .consentement p{margin:0 0 12px}
+  .consentement a{color:#B7D94C}
+  .consentement-btns{display:flex;gap:8px;justify-content:flex-end}
+  .consentement button{font:600 14px Inter,system-ui,sans-serif;border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid #3a3b38;background:transparent;color:#E8E8E6}
+  .consentement button.ok{background:#B7D94C;border-color:#B7D94C;color:#0B0B0C}
+  @media (max-width:520px){.consentement{left:12px;right:12px;bottom:12px;max-width:none}}
+</style>
+<script is:inline>
+(function(){
+  var CLE='fournia-consentement';
+  function lire(){try{return localStorage.getItem(CLE)}catch(e){return null}}
+  function ecrire(v){try{localStorage.setItem(CLE,v)}catch(e){}}
+  function activer(){
+    if(window.__fourniaMesure)return; window.__fourniaMesure=1;
+    var s=document.createElement('script');
+    s.src='https://link.saas-ai-system.com/js/external-tracking.js';
+    s.setAttribute('data-tracking-id','tk_22f62d4d14b34cf3a115c0f48d8dad14');
+    document.body.appendChild(s);
+    if(typeof window.__fourniaPixel==='function')window.__fourniaPixel();
+  }
+  var boite=document.getElementById('consentement');
+  var choix=lire();
+  if(choix==='oui')activer(); else if(choix!=='non')boite.hidden=false;
+  boite.addEventListener('click',function(e){
+    var b=e.target.closest('[data-choix]'); if(!b)return;
+    ecrire(b.getAttribute('data-choix')); boite.hidden=true;
+    if(b.getAttribute('data-choix')==='oui')activer();
+  });
+  window.fourniaTemoins=function(){boite.hidden=false};
+})();
+</script>

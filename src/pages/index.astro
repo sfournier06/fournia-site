@@ -1,4 +1,5 @@
 ---
+import Consentement from '../components/Consentement.astro';
 // Page d'accueil FournIA (design réel porté depuis fournia.net).
 // CSS et JS inline conservés tels quels (is:global / is:inline).
 import { organisationLd, GOOGLE_VERIFICATION, BING_VERIFICATION } from '../data/entite.mjs';
@@ -622,7 +623,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
         <a href="https://calendly.com/s-fournier-fournia/discovery-call-fournia" target="_blank" rel="noopener">Réserver un appel</a>
       </div>
     </div>
-    <div class="foot-bottom">© 2026 FournIA. Tous droits réservés.</div>
+    <div class="foot-bottom">© 2026 FournIA. Tous droits réservés. · <a href="#" onclick="window.fourniaTemoins&&fourniaTemoins();return false">Gérer les témoins</a></div>
   </div>
 </footer>
 
@@ -699,7 +700,8 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
   document.addEventListener('click', (e) => { if (!nav.contains(e.target)) nav.classList.remove('open'); });
 </script>
-  <!-- Suivi SaaS AI System (CRM FournIA) : pages vues et formulaires. Declare dans /confidentialite. -->
-  <script is:inline src="https://link.saas-ai-system.com/js/external-tracking.js" data-tracking-id="tk_22f62d4d14b34cf3a115c0f48d8dad14"></script>
+  <!-- Bulle de clavardage SaaS AI System : les messages arrivent dans la boite unifiee du CRM. -->
+  <script is:inline src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6ae0f49deebfe8c5f0ac2ca9" data-source="WEB_USER"></script>
+  <Consentement />
 </body>
 </html>
