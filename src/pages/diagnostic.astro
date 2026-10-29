@@ -8,7 +8,7 @@ import '../styles/global.css';
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 
 // Lien de booking (qualifies seulement).
-// TODO Simon : remplacer par l'event "Diagnostic IA gratuit - 20 min" une fois cree.
+// Événement Calendly « Diagnostic gratuit de 30 minutes - FournIA » (30 min depuis le 2026-10-29).
 const calendly = 'https://calendly.com/s-fournier-fournia/discovery-call-fournia';
 
 // Pixel Meta : inactif tant que vide. Pre-requis : /confidentialite en ligne + artefact Loi 25.
@@ -33,10 +33,10 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diagnostic IA gratuit pour PME québécoises | FournIA</title>
-<meta name="description" content="Répondez à 3 questions. Si l'IA peut vraiment vous faire gagner du temps, on réserve un diagnostic gratuit de 20 minutes.">
+<meta name="description" content="Répondez à 3 questions. Si l'IA peut vraiment vous faire gagner du temps, on réserve un diagnostic gratuit de 30 minutes.">
 <link rel="canonical" href={`${siteUrl}/diagnostic/`} />
 <meta property="og:title" content="Diagnostic IA gratuit pour PME québécoises | FournIA">
-<meta property="og:description" content="3 questions pour voir si c'est un fit. Si oui, on réserve un diagnostic gratuit de 20 minutes.">
+<meta property="og:description" content="3 questions pour voir si c'est un fit. Si oui, on réserve un diagnostic gratuit de 30 minutes.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_CA">
 <meta property="og:image" content={`${siteUrl}/brand/fournia-lockup-horizontal-dark.png`}>
@@ -184,7 +184,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
     <div id="step-qualified" class="result hidden">
       <div class="result-icon ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h2>C'est un fit. Réservez votre appel.</h2>
-      <p>20 minutes, sans engagement.</p>
+      <p>30 minutes, sans engagement.</p>
       <a id="book-link" class="btn btn-primary book-btn" href={calendly} target="_blank" rel="noopener">Réserver mon appel <span class="arrow">&#8594;</span></a>
       <div id="cal" class="calendly-inline-widget" data-cal-url={calendly}></div>
     </div>
