@@ -1,0 +1,58 @@
+---
+import ServicePage from '../../layouts/ServicePage.astro';
+import { ZONES } from '../../data/entite.mjs';
+
+const faq = [
+  {
+    q: "Quelles tâches un entrepreneur en rénovation peut-il automatiser ?",
+    a: "La réponse aux demandes de soumission, le rappel des appels manqués, la prise de rendez-vous pour les visites, la relance des soumissions et les mises à jour aux clients pendant le chantier.",
+  },
+  {
+    q: "L'IA peut-elle faire mes soumissions ?",
+    a: "Elle peut préparer la structure et les sections répétitives, mais le prix reste votre décision, après la visite. Le système prépare, vous approuvez.",
+  },
+  {
+    q: "Ça marche avec mon logiciel de gestion ?",
+    a: "Souvent, oui. On vérifie d'abord ce que votre logiciel permet de lire ou d'écrire, puis on bâtit autour.",
+  },
+];
+---
+<ServicePage
+  path="/secteurs/renovation-construction"
+  title="Automatisation pour entrepreneurs en rénovation et construction | FournIA"
+  description="Demandes de soumission traitées vite, visites bookées, soumissions relancées, clients tenus au courant : automatisation IA pour entrepreneurs en rénovation du Québec."
+  h1="Automatisation pour les entrepreneurs en rénovation et construction"
+  lead="Entre les chantiers, les soumissions et les appels des clients, le bureau déborde. FournIA automatise la réponse aux demandes, la prise de rendez-vous pour les visites, les relances de soumission et les suivis de chantier, pour les entrepreneurs de Laval, de la Rive-Nord et de Montréal."
+  serviceName="Rénovation et construction"
+  serviceType="Automatisation des processus pour PME"
+  areaServed={ZONES}
+  faq={faq}
+  updated="2026-11-04"
+>
+  <h2>Ce qui coûte du temps</h2>
+  <ul>
+    <li>Des appels manqués pendant que tout le monde est sur le chantier.</li>
+    <li>Des demandes de soumission qui attendent plusieurs jours.</li>
+    <li>Des soumissions envoyées et jamais relancées.</li>
+    <li>Des clients qui appellent pour savoir où en est leur projet.</li>
+  </ul>
+
+  <h2>Ce que FournIA peut automatiser</h2>
+  <ul>
+    <li>Une réponse immédiate aux demandes du site, du courriel et des réseaux, avec les questions qui qualifient le projet.</li>
+    <li>Un texto après chaque appel manqué.</li>
+    <li>La prise de rendez-vous pour la visite d'estimation, avec rappel la veille.</li>
+    <li>Des relances de soumission arrêtées dès que le client répond.</li>
+    <li>Des mises à jour automatiques au client aux grandes étapes du chantier.</li>
+  </ul>
+  <p>Vous gardez la main sur les décisions. Le système prépare, vous approuvez.</p>
+
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 30 minutes.</li>
+    <li><strong>Diagnostic</strong> de votre processus, de la demande jusqu'à la livraison.</li>
+    <li><strong>Construction</strong> sur vos outils, une automatisation à la fois.</li>
+    <li><strong>Formation</strong> de votre équipe et suivi.</li>
+  </ol>
+  <p>Chaque projet qui touche des renseignements personnels passe par une vérification <a href="/blog/loi-25-ia-entreprise-quebec-conformite-2026">Loi 25</a>. Voir aussi les <a href="/secteurs/">autres secteurs</a>.</p>
+</ServicePage>

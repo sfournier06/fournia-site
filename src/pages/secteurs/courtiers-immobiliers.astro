@@ -1,0 +1,58 @@
+---
+import ServicePage from '../../layouts/ServicePage.astro';
+import { ZONES } from '../../data/entite.mjs';
+
+const faq = [
+  {
+    q: "Quelles tâches un courtier immobilier peut-il automatiser ?",
+    a: "La première réponse aux prospects, la prise de rendez-vous de visite, les suivis après visite, la relance des prospects et le contact régulier avec les anciens clients.",
+  },
+  {
+    q: "Les messages restent-ils à mon nom ?",
+    a: "Oui. Les messages partent de vos comptes, à votre nom, et s'arrêtent dès que la personne répond. Vous reprenez la conversation.",
+  },
+  {
+    q: "Et les règles du courtage et de la vie privée ?",
+    a: "Les messages respectent la Loi 25 et la Loi canadienne anti-pourriel. Le contenu des annonces et les conseils restent votre responsabilité professionnelle.",
+  },
+];
+---
+<ServicePage
+  path="/secteurs/courtiers-immobiliers"
+  title="Automatisation pour courtiers immobiliers | FournIA"
+  description="Réponse rapide aux prospects, visites planifiées, suivis après visite et clients relancés au bon moment : automatisation IA pour courtiers immobiliers au Québec."
+  h1="Automatisation pour les courtiers immobiliers"
+  lead="Un prospect qui écrit au sujet d'une propriété contacte souvent plusieurs courtiers. FournIA automatise la première réponse, la prise de rendez-vous et les suivis, pour que vous passiez votre temps en visite et en négociation."
+  serviceName="Courtiers immobiliers"
+  serviceType="Automatisation des processus pour PME"
+  areaServed={ZONES}
+  faq={faq}
+  updated="2026-11-04"
+>
+  <h2>Ce qui coûte du temps</h2>
+  <ul>
+    <li>Des demandes reçues le soir et la fin de semaine, traitées le lendemain.</li>
+    <li>Des allers-retours pour fixer une visite.</li>
+    <li>Des acheteurs et vendeurs potentiels jamais relancés.</li>
+    <li>Des anciens clients oubliés, alors qu'ils sont la meilleure source de références.</li>
+  </ul>
+
+  <h2>Ce que FournIA peut automatiser</h2>
+  <ul>
+    <li>Une première réponse en quelques minutes, à toute heure.</li>
+    <li>La prise de rendez-vous de visite dans votre calendrier.</li>
+    <li>Un suivi automatique après chaque visite.</li>
+    <li>Des relances des prospects selon leur échéancier.</li>
+    <li>Un message aux anciens clients aux dates qui comptent.</li>
+  </ul>
+  <p>Vous gardez la main sur les décisions. Le système prépare, vous approuvez.</p>
+
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 30 minutes.</li>
+    <li><strong>Diagnostic</strong> de votre processus, de la demande jusqu'à la livraison.</li>
+    <li><strong>Construction</strong> sur vos outils, une automatisation à la fois.</li>
+    <li><strong>Formation</strong> de votre équipe et suivi.</li>
+  </ol>
+  <p>Chaque projet qui touche des renseignements personnels passe par une vérification <a href="/blog/loi-25-ia-entreprise-quebec-conformite-2026">Loi 25</a>. Voir aussi les <a href="/secteurs/">autres secteurs</a>.</p>
+</ServicePage>

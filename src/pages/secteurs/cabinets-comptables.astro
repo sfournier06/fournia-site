@@ -1,0 +1,58 @@
+---
+import ServicePage from '../../layouts/ServicePage.astro';
+import { ZONES } from '../../data/entite.mjs';
+
+const faq = [
+  {
+    q: "Quelles tâches un cabinet comptable peut-il automatiser ?",
+    a: "La collecte et la relance des documents, la prise de rendez-vous, les réponses aux questions fréquentes et une partie de la saisie de données.",
+  },
+  {
+    q: "Les données financières des clients sont-elles protégées ?",
+    a: "Chaque projet passe par une vérification Loi 25. On limite ce qui transite par un outil d'IA et on documente où les données sont hébergées.",
+  },
+  {
+    q: "L'IA remplace-t-elle la révision du comptable ?",
+    a: "Non. Elle prépare et classe ; votre équipe vérifie et signe.",
+  },
+];
+---
+<ServicePage
+  path="/secteurs/cabinets-comptables"
+  title="Automatisation pour cabinets comptables | FournIA"
+  description="Collecte de documents relancée automatiquement, rendez-vous planifiés, questions fréquentes répondues : automatisation IA pour cabinets comptables au Québec."
+  h1="Automatisation pour les cabinets comptables"
+  lead="En période d'impôts, le temps part dans la collecte des documents et les relances aux clients. FournIA automatise ces relances, les rendez-vous et les réponses aux questions qui reviennent, pour que votre équipe se concentre sur les dossiers."
+  serviceName="Cabinets comptables"
+  serviceType="Automatisation des processus pour PME"
+  areaServed={ZONES}
+  faq={faq}
+  updated="2026-11-04"
+>
+  <h2>Ce qui coûte du temps</h2>
+  <ul>
+    <li>Des clients qui envoient leurs documents en retard, ou incomplets.</li>
+    <li>Des relances faites une par une, à la main.</li>
+    <li>Les mêmes questions sur les échéances et les documents à fournir.</li>
+    <li>Des données recopiées d'un document à un logiciel.</li>
+  </ul>
+
+  <h2>Ce que FournIA peut automatiser</h2>
+  <ul>
+    <li>Une liste de documents personnalisée envoyée à chaque client.</li>
+    <li>Des relances automatiques jusqu'à ce que le dossier soit complet.</li>
+    <li>La prise de rendez-vous en ligne.</li>
+    <li>Des réponses aux questions fréquentes.</li>
+    <li>L'extraction de données de documents, vérifiée par votre équipe.</li>
+  </ul>
+  <p>Vous gardez la main sur les décisions. Le système prépare, vous approuvez.</p>
+
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 30 minutes.</li>
+    <li><strong>Diagnostic</strong> de votre processus, de la demande jusqu'à la livraison.</li>
+    <li><strong>Construction</strong> sur vos outils, une automatisation à la fois.</li>
+    <li><strong>Formation</strong> de votre équipe et suivi.</li>
+  </ol>
+  <p>Chaque projet qui touche des renseignements personnels passe par une vérification <a href="/blog/loi-25-ia-entreprise-quebec-conformite-2026">Loi 25</a>. Voir aussi les <a href="/secteurs/">autres secteurs</a>.</p>
+</ServicePage>

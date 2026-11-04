@@ -1,0 +1,57 @@
+---
+import ServicePage from '../../layouts/ServicePage.astro';
+import { ZONES } from '../../data/entite.mjs';
+
+const faq = [
+  {
+    q: "Quelles tâches une clinique esthétique peut-elle automatiser ?",
+    a: "La réponse aux questions fréquentes, la prise de rendez-vous, les rappels, la relance pour le prochain soin et la demande d'avis après la visite.",
+  },
+  {
+    q: "Les renseignements de santé sont-ils protégés ?",
+    a: "Les renseignements de santé sont sensibles au sens de la Loi 25. On automatise la logistique (rendez-vous, rappels) et on garde les informations cliniques hors des outils d'IA, sauf nécessité documentée.",
+  },
+  {
+    q: "Ça fonctionne avec mon logiciel de réservation ?",
+    a: "Souvent, oui. On vérifie d'abord l'accès à votre logiciel avant de promettre quoi que ce soit.",
+  },
+];
+---
+<ServicePage
+  path="/secteurs/cliniques-esthetique"
+  title="Automatisation pour cliniques esthétiques et soins | FournIA"
+  description="Réservations, rappels de rendez-vous, absences réduites et clientes relancées pour leur prochain soin : automatisation IA pour cliniques esthétiques au Québec."
+  h1="Automatisation pour les cliniques esthétiques et de soins"
+  lead="Les rendez-vous manqués et les clientes qui ne reviennent pas coûtent cher à une clinique. FournIA automatise les réponses aux demandes, les rappels de rendez-vous et les relances pour le prochain soin, en protégeant les renseignements de vos clientes."
+  serviceName="Cliniques esthétiques"
+  serviceType="Automatisation des processus pour PME"
+  areaServed={ZONES}
+  faq={faq}
+  updated="2026-11-04"
+>
+  <h2>Ce qui coûte du temps</h2>
+  <ul>
+    <li>Des questions répétées sur les prix et les soins, par message et au téléphone.</li>
+    <li>Des rendez-vous manqués sans avertissement.</li>
+    <li>Des clientes qui ne reprennent jamais rendez-vous pour le soin suivant.</li>
+    <li>Peu d'avis Google, malgré des clientes satisfaites.</li>
+  </ul>
+
+  <h2>Ce que FournIA peut automatiser</h2>
+  <ul>
+    <li>Des réponses aux questions fréquentes, avec prise de rendez-vous.</li>
+    <li>Des rappels de rendez-vous par texto ou courriel.</li>
+    <li>Une relance au bon moment pour le soin suivant.</li>
+    <li>Une demande d'avis après la visite, d'abord auprès des clientes satisfaites.</li>
+  </ul>
+  <p>Vous gardez la main sur les décisions. Le système prépare, vous approuvez.</p>
+
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 30 minutes.</li>
+    <li><strong>Diagnostic</strong> de votre processus, de la demande jusqu'à la livraison.</li>
+    <li><strong>Construction</strong> sur vos outils, une automatisation à la fois.</li>
+    <li><strong>Formation</strong> de votre équipe et suivi.</li>
+  </ol>
+  <p>Chaque projet qui touche des renseignements personnels passe par une vérification <a href="/blog/loi-25-ia-entreprise-quebec-conformite-2026">Loi 25</a>. Voir aussi les <a href="/secteurs/">autres secteurs</a>.</p>
+</ServicePage>

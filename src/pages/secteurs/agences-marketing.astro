@@ -1,0 +1,57 @@
+---
+import ServicePage from '../../layouts/ServicePage.astro';
+import { ZONES } from '../../data/entite.mjs';
+
+const faq = [
+  {
+    q: "Comment fonctionne la marque blanche ?",
+    a: "Vous vendez à votre client sous votre marque, FournIA construit et implante derrière vous, à prix fixe par mandat. Vous gardez la relation et fixez votre marge.",
+  },
+  {
+    q: "FournIA a-t-elle déjà travaillé avec des agences ?",
+    a: "Oui. FournIA a livré un mandat en sous-traitance pour une agence d'automatisation, sous la marque de l'agence.",
+  },
+  {
+    q: "Et la confidentialité des clients de l'agence ?",
+    a: "Chaque mandat passe par une vérification Loi 25, et FournIA ne sollicite jamais les clients d'une agence partenaire.",
+  },
+];
+---
+<ServicePage
+  path="/secteurs/agences-marketing"
+  title="Automatisation et IA en marque blanche pour agences marketing | FournIA"
+  description="Ajoutez l'automatisation et les agents IA à votre offre sans embaucher : FournIA construit en marque blanche pour les agences marketing du Québec."
+  h1="Automatisation et IA pour les agences marketing"
+  lead="Vos clients vous demandent de l'IA et des automatisations, mais ce n'est pas votre métier de base. FournIA construit en marque blanche, derrière votre agence, et automatise aussi vos propres opérations."
+  serviceName="Agences marketing"
+  serviceType="Automatisation des processus pour PME"
+  areaServed={ZONES}
+  faq={faq}
+  updated="2026-11-04"
+>
+  <h2>Ce qui coûte du temps</h2>
+  <ul>
+    <li>Des clients qui génèrent des leads avec vos campagnes, puis les laissent sans réponse.</li>
+    <li>Des demandes d'IA que l'équipe ne peut pas livrer.</li>
+    <li>Des rapports de résultats montés à la main chaque mois.</li>
+    <li>Des transferts d'information entre outils qui se perdent.</li>
+  </ul>
+
+  <h2>Ce que FournIA peut automatiser</h2>
+  <ul>
+    <li>La réponse et la relance des leads générés par vos campagnes, chez vos clients.</li>
+    <li>Des agents IA livrés sous votre marque.</li>
+    <li>Des rapports clients générés automatiquement.</li>
+    <li>Les passations entre votre équipe et vos outils.</li>
+  </ul>
+  <p>Vous gardez la main sur les décisions. Le système prépare, vous approuvez.</p>
+
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 30 minutes.</li>
+    <li><strong>Diagnostic</strong> de votre processus, de la demande jusqu'à la livraison.</li>
+    <li><strong>Construction</strong> sur vos outils, une automatisation à la fois.</li>
+    <li><strong>Formation</strong> de votre équipe et suivi.</li>
+  </ol>
+  <p>Chaque projet qui touche des renseignements personnels passe par une vérification <a href="/blog/loi-25-ia-entreprise-quebec-conformite-2026">Loi 25</a>. Voir aussi les <a href="/secteurs/">autres secteurs</a>.</p>
+</ServicePage>

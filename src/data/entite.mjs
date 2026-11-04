@@ -112,4 +112,10 @@ export const SECTEURS = [
   { href: '/secteurs/traiteurs/', label: 'Traiteurs', resume: "offres de service, plans de production et vérification des factures fournisseurs." },
   { href: '/secteurs/conseillers-financiers/', label: 'Conseillers financiers et en assurance', resume: "suivis clients aux 6 mois, relance des prospects et appels manqués." },
   { href: '/secteurs/centres-de-tutorat/', label: 'Centres de tutorat', resume: "réponse rapide aux parents, plages proposées et rappels de séance." },
+  { href: '/secteurs/renovation-construction/', label: "Rénovation et construction", resume: "demandes de soumission, visites bookées, relances et suivis de chantier." },
+  { href: '/secteurs/courtiers-immobiliers/', label: "Courtiers immobiliers", resume: "réponse rapide aux prospects, visites planifiées et suivis après visite." },
+  { href: '/secteurs/cliniques-esthetique/', label: "Cliniques et soins esthétiques", resume: "réservations, rappels, absences réduites et relances pour le prochain soin." },
+  { href: '/secteurs/cabinets-comptables/', label: "Cabinets comptables", resume: "collecte de documents, relances aux clients et rendez-vous planifiés." },
+  { href: '/secteurs/agences-marketing/', label: "Agences marketing", resume: "automatisations en marque blanche pour vos clients et pour vos propres opérations." },
+  { href: '/secteurs/formation-employes/', label: "Formation des employés", resume: "manuels transformés en modules, quiz et assistant IA sur vos documents." },
 ];

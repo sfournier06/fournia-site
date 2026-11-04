@@ -1,0 +1,57 @@
+---
+import ServicePage from '../../layouts/ServicePage.astro';
+import { ZONES } from '../../data/entite.mjs';
+
+const faq = [
+  {
+    q: "Qui valide le contenu de la formation ?",
+    a: "Votre expert interne. FournIA structure et génère ; votre responsable valide chaque module avant la mise en ligne.",
+  },
+  {
+    q: "L'assistant peut-il inventer des réponses ?",
+    a: "Il est limité à vos documents et doit le dire quand la réponse n'y est pas. On le teste sur de vraies questions avant le lancement.",
+  },
+  {
+    q: "Des subventions existent-elles pour la formation ?",
+    a: "Des programmes québécois peuvent couvrir une partie du développement de contenu de formation. FournIA vous oriente, votre comptable confirme l'admissibilité.",
+  },
+];
+---
+<ServicePage
+  path="/secteurs/formation-employes"
+  title="Plateformes de formation des employés avec IA | FournIA"
+  description="Transformez vos manuels et procédures en formation interactive, avec quiz et assistant IA qui répond aux questions de vos employés : FournIA pour les PME du Québec."
+  h1="Formation des employés : du manuel à la plateforme interactive"
+  lead="Beaucoup d'entreprises ont un manuel de formation que personne ne lit au complet. FournIA transforme vos manuels et procédures en modules courts, avec quiz et assistant IA qui répond aux questions à partir de vos propres documents."
+  serviceName="Formation des employés"
+  serviceType="Automatisation des processus pour PME"
+  areaServed={ZONES}
+  faq={faq}
+  updated="2026-11-04"
+>
+  <h2>Ce qui coûte du temps</h2>
+  <ul>
+    <li>Un manuel de centaines de pages, difficile à suivre pour un nouvel employé.</li>
+    <li>Les mêmes questions posées aux employés d'expérience.</li>
+    <li>Aucune façon de savoir ce que chaque employé a vraiment compris.</li>
+    <li>Une intégration des nouveaux employés qui dépend de qui est disponible.</li>
+  </ul>
+
+  <h2>Ce que FournIA peut automatiser</h2>
+  <ul>
+    <li>Des modules courts tirés de vos documents, validés par votre expert.</li>
+    <li>Des quiz pour vérifier la compréhension.</li>
+    <li>Un assistant IA qui répond à partir de vos manuels seulement.</li>
+    <li>Un suivi de progression par employé.</li>
+  </ul>
+  <p>Vous gardez la main sur les décisions. Le système prépare, vous approuvez.</p>
+
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 30 minutes.</li>
+    <li><strong>Diagnostic</strong> de votre processus, de la demande jusqu'à la livraison.</li>
+    <li><strong>Construction</strong> sur vos outils, une automatisation à la fois.</li>
+    <li><strong>Formation</strong> de votre équipe et suivi.</li>
+  </ol>
+  <p>Chaque projet qui touche des renseignements personnels passe par une vérification <a href="/blog/loi-25-ia-entreprise-quebec-conformite-2026">Loi 25</a>. Voir aussi les <a href="/secteurs/">autres secteurs</a>.</p>
+</ServicePage>
