@@ -22,7 +22,7 @@ export const FOUNDER_SAME_AS = [
 ];
 
 export const SITE = 'https://fournia.net';
-export const CTA = 'https://link.saas-ai-system.com/widget/booking/2Q3gAQkopvF9qtynB4Ct';
+export const CTA = 'https://liens.fournia.net/widget/booking/2Q3gAQkopvF9qtynB4Ct';
 
 // Zone de service : Blainville comme ancrage, sans adresse civique (bureau à domicile, jamais publiée).
 export const ZONES = [
