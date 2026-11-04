@@ -59,7 +59,7 @@ const autres = SERVICES.filter((s) => s.href.replace(/\/$/, '') !== path);
         <div class="crumbs reveal"><a href="/">Accueil</a> <span>/</span> {serviceName}</div>
         <h1 class="reveal" data-d="1">{h1}</h1>
         <p class="lead reveal" data-d="2">{lead}</p>
-        <a class="btn btn-primary reveal" data-d="2" href={CTA} target="_blank" rel="noopener">Réserver un appel découverte gratuit <span class="arrow">→</span></a>
+        <a class="btn btn-primary reveal" data-d="2" href={CTA}>Réserver un appel découverte gratuit <span class="arrow">→</span></a>
 
         <div class="prose reveal" data-d="3"><slot /></div>
 
@@ -78,7 +78,7 @@ const autres = SERVICES.filter((s) => s.href.replace(/\/$/, '') !== path);
         <div class="post-cta">
           <h3>Un processus manuel vous coûte du temps ?</h3>
           <p>Un appel découverte gratuit de 30 minutes pour voir si l'IA peut vous aider. Sans engagement.</p>
-          <a class="btn btn-primary" href={CTA} target="_blank" rel="noopener">Réserver un appel <span class="arrow">→</span></a>
+          <a class="btn btn-primary" href={CTA}>Réserver un appel <span class="arrow">→</span></a>
         </div>
 
         <div class="autres">
