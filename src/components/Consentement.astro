@@ -1,8 +1,10 @@
 ---
 // Bandeau de consentement aux témoins (Loi 25, art. 8.1) : les outils de mesure et de publicité
 // (script de suivi du CRM, pixel Meta, Google Analytics G-HFPYMCE8Y9) restent désactivés tant que le
-// visiteur n'a pas accepté. Événements GA4 envoyés seulement après le « oui » : clic_reserver (lien
-// Calendly), rdv_calendly (réservation confirmée dans Calendly intégré), diagnostic_envoye (formulaire).
+// visiteur n'a pas accepté. Événements GA4 (seulement après le « oui », jamais de nom ni de courriel) :
+// clic_reserver, rdv_calendly, diagnostic_commence, diagnostic_envoye, clic_telephone, clic_courriel,
+// clic_cta, chat_ouvert, faq_ouverte, defilement, lecture_article, temps_engage, section_vue,
+// consentement_accepte. Le reste (pages vues, sources, liens sortants, recherche) = mesure améliorée GA4.
 // La bulle de clavardage n'en dépend pas : c'est un service que le visiteur choisit d'utiliser.
 // Rouvrir le bandeau : window.fourniaTemoins() (lien « Gérer les témoins » du pied de page).
 ---
@@ -44,20 +46,60 @@
   }
   // Envoie un événement GA4 seulement si le visiteur a accepté (gtag n'existe qu'après le « oui »).
   window.fourniaEvent=function(nom,params){ if(typeof window.gtag==='function')window.gtag('event',nom,params||{}); };
+  // ---- Mesure détaillée (envoyée seulement après le « oui ») ----
+  var P=function(){return location.pathname};
+  function txt(el){return (el.innerText||el.textContent||'').replace(/\s+/g,' ').trim().slice(0,80)}
   document.addEventListener('click',function(e){
-    var a=e.target.closest && e.target.closest('a[href*="calendly.com"]');
-    if(a)window.fourniaEvent('clic_reserver',{page:location.pathname});
+    if(!e.target.closest)return;
+    var a=e.target.closest('a,button'); if(!a)return;
+    var href=a.getAttribute('href')||'';
+    if(href.indexOf('calendly.com')>-1)window.fourniaEvent('clic_reserver',{page:P(),texte:txt(a)});
+    else if(href.indexOf('tel:')===0)window.fourniaEvent('clic_telephone',{page:P()});
+    else if(href.indexOf('mailto:')===0)window.fourniaEvent('clic_courriel',{page:P()});
+    if(a.classList && a.classList.contains('btn'))window.fourniaEvent('clic_cta',{page:P(),texte:txt(a)});
   });
   window.addEventListener('message',function(e){
-    if(e.data && e.data.event==='calendly.event_scheduled')window.fourniaEvent('rdv_calendly',{page:location.pathname});
+    if(e.data && e.data.event==='calendly.event_scheduled')window.fourniaEvent('rdv_calendly',{page:P()});
   });
+  // Formulaire du diagnostic : début de saisie (une fois).
+  var commence=false;
+  document.addEventListener('focusin',function(e){
+    if(!commence && e.target.closest && e.target.closest('#qualForm')){commence=true;window.fourniaEvent('diagnostic_commence',{page:P()});}
+  });
+  // FAQ ouvertes (<details>).
+  document.addEventListener('toggle',function(e){
+    var d=e.target; if(d.tagName==='DETAILS' && d.open){var sm=d.querySelector('summary');window.fourniaEvent('faq_ouverte',{page:P(),question:sm?txt(sm):''});}
+  },true);
+  // Défilement 25/50/75/100 % et temps engagé 30 s / 60 s / 3 min (onglet visible seulement).
+  var paliers={25:0,50:0,75:0,100:0};
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement, max=h.scrollHeight-h.clientHeight; if(max<=0)return;
+    var pct=Math.round((h.scrollTop||document.body.scrollTop)/max*100);
+    [25,50,75,100].forEach(function(p){if(pct>=p && !paliers[p]){paliers[p]=1;window.fourniaEvent('defilement',{page:P(),pourcentage:p});
+      if(p===75 && P().indexOf('/blog/')===0 && P()!=='/blog/')window.fourniaEvent('lecture_article',{article:P()});}});
+  },{passive:true});
+  var secondes=0;
+  setInterval(function(){ if(document.visibilityState!=='visible')return; secondes+=5;
+    if(secondes===30||secondes===60||secondes===180)window.fourniaEvent('temps_engage',{page:P(),secondes:secondes}); },5000);
+  // Sections vues (éléments <section> avec un id), une fois chacune.
+  if('IntersectionObserver' in window){
+    var vu={}; var io=new IntersectionObserver(function(es){es.forEach(function(en){
+      if(en.isIntersecting && !vu[en.target.id]){vu[en.target.id]=1;window.fourniaEvent('section_vue',{page:P(),section:en.target.id});}});},{threshold:0.2});
+    document.querySelectorAll('section[id]').forEach(function(s){io.observe(s)});
+  }
+  // Bulle de clavardage (bouton dans le shadow DOM du widget de la plateforme).
+  var essais=0, t=setInterval(function(){
+    var w=document.querySelector('chat-widget'); var b=w && w.shadowRoot && w.shadowRoot.querySelector('#lc_text-widget--btn');
+    if(b){clearInterval(t); b.addEventListener('click',function(){ if(!b.classList.contains('active'))window.fourniaEvent('chat_ouvert',{page:P()}); });}
+    else if(++essais>40)clearInterval(t);
+  },500);
   var boite=document.getElementById('consentement');
   var choix=lire();
   if(choix==='oui')activer(); else if(choix!=='non')boite.hidden=false;
   boite.addEventListener('click',function(e){
     var b=e.target.closest('[data-choix]'); if(!b)return;
     ecrire(b.getAttribute('data-choix')); boite.hidden=true;
-    if(b.getAttribute('data-choix')==='oui')activer();
+    if(b.getAttribute('data-choix')==='oui'){activer();window.fourniaEvent('consentement_accepte',{page:P()});}
   });
   window.fourniaTemoins=function(){boite.hidden=false};
 })();
