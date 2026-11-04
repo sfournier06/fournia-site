@@ -1,0 +1,60 @@
+---
+import ServicePage from '../../layouts/ServicePage.astro';
+import { ZONES } from '../../data/entite.mjs';
+
+const faq = [
+  {
+    q: "Quelles tâches un centre de tutorat peut-il automatiser ?",
+    a: "La réponse immédiate aux parents qui font une demande, la proposition de plages horaires disponibles, les rappels de séance et les relances des familles qui n'ont pas encore confirmé.",
+  },
+  {
+    q: "Pourquoi la vitesse de réponse compte autant ?",
+    a: "Un parent qui cherche un tuteur contacte souvent plusieurs centres en même temps. Celui qui répond en premier avec une plage concrète a une longueur d'avance.",
+  },
+  {
+    q: "FournIA a-t-elle déjà travaillé avec un centre de tutorat ?",
+    a: "Oui. FournIA a bâti pour un centre d'aide académique un système qui répond aux nouvelles demandes en quelques minutes et propose des plages selon les disponibilités réelles.",
+  },
+  {
+    q: "Les données des élèves sont-elles protégées ?",
+    a: "Chaque projet passe par une vérification Loi 25. On recueille le minimum d'information et les renseignements sur les élèves mineurs reçoivent une attention particulière.",
+  },
+];
+---
+<ServicePage
+  path="/secteurs/centres-de-tutorat"
+  title="Automatisation pour centres de tutorat et d'aide aux devoirs | FournIA"
+  description="Réponse aux parents en quelques minutes, plages proposées automatiquement, rappels de séance : automatisation IA pour les centres de tutorat du Québec."
+  h1="Automatisation pour les centres de tutorat"
+  lead="Un parent qui cherche de l'aide pour son enfant veut une réponse rapide. FournIA automatise la réponse aux demandes, la proposition d'horaires et les rappels de séance, pour que votre équipe passe son temps avec les élèves."
+  serviceName="Centres de tutorat"
+  serviceType="Automatisation des processus pour centres de tutorat"
+  areaServed={ZONES}
+  faq={faq}
+  updated="2026-11-04"
+>
+  <h2>Ce qui coûte du temps dans un centre de tutorat</h2>
+  <ul>
+    <li><strong>Des demandes de parents qui attendent</strong> plusieurs heures avant une réponse.</li>
+    <li><strong>Des allers-retours</strong> pour trouver une plage qui convient à l'élève et au tuteur.</li>
+    <li><strong>Des séances oubliées</strong> faute de rappel.</li>
+    <li><strong>Des familles intéressées</strong> qui ne confirment jamais.</li>
+  </ul>
+
+  <h2>Ce que FournIA peut automatiser</h2>
+  <ul>
+    <li><strong>Une réponse en quelques minutes</strong> à chaque nouvelle demande.</li>
+    <li><strong>Des plages proposées</strong> selon les disponibilités réelles des tuteurs.</li>
+    <li><strong>Des rappels de séance</strong> aux parents.</li>
+    <li><strong>Des relances</strong> des familles qui n'ont pas confirmé.</li>
+  </ul>
+
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 30 minutes.</li>
+    <li><strong>Diagnostic</strong> du chemin de la demande jusqu'à la première séance.</li>
+    <li><strong>Construction</strong> sur votre calendrier et vos outils.</li>
+    <li><strong>Formation</strong> de l'équipe et suivi.</li>
+  </ol>
+  <p>Voir aussi : <a href="/automatisation-entreprise/">automatisation d'entreprise</a> et les <a href="/secteurs/">autres secteurs</a>.</p>
+</ServicePage>

@@ -102,4 +102,14 @@ export const SERVICES = [
   { href: '/formation-ia-entreprise/', label: 'Formation IA en entreprise' },
   { href: '/automatisation-entreprise/', label: "Automatisation d'entreprise" },
   { href: '/consultant-ia-rive-nord/', label: 'Consultant IA Rive-Nord' },
+  { href: '/secteurs/', label: 'Automatisation par secteur' },
+];
+
+// Pages par secteur (src/pages/secteurs/). Listées sur /secteurs/.
+export const SECTEURS = [
+  { href: '/secteurs/thermopompes-climatisation/', label: 'Thermopompes et climatisation', resume: "réponse aux demandes, appels manqués, relances de soumission et rappels d'entretien." },
+  { href: '/secteurs/evenementiel/', label: 'Événementiel et location', resume: "demandes centralisées, estimations rapides, dépôts suivis et avis Google après l'événement." },
+  { href: '/secteurs/traiteurs/', label: 'Traiteurs', resume: "offres de service, plans de production et vérification des factures fournisseurs." },
+  { href: '/secteurs/conseillers-financiers/', label: 'Conseillers financiers et en assurance', resume: "suivis clients aux 6 mois, relance des prospects et appels manqués." },
+  { href: '/secteurs/centres-de-tutorat/', label: 'Centres de tutorat', resume: "réponse rapide aux parents, plages proposées et rappels de séance." },
 ];

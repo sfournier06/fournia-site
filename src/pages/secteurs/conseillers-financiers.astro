@@ -1,0 +1,60 @@
+---
+import ServicePage from '../../layouts/ServicePage.astro';
+import { ZONES } from '../../data/entite.mjs';
+
+const faq = [
+  {
+    q: "Quelles tâches un conseiller financier peut-il automatiser ?",
+    a: "Le suivi des clients aux 6 ou 12 mois, la relance des prospects qui n'ont jamais signé, la réponse aux appels manqués, la prise de rendez-vous et les rappels la veille.",
+  },
+  {
+    q: "Les messages restent-ils personnels ?",
+    a: "Oui. Chaque message porte le prénom du client et votre nom, part de votre numéro d'affaires et s'arrête dès que la personne répond. Vous reprenez la conversation vous-même.",
+  },
+  {
+    q: "Et la confidentialité des données clients ?",
+    a: "Chaque projet passe par une vérification Loi 25 : données minimales, consentement, hébergement documenté et aucune information financière envoyée à un outil d'IA sans nécessité.",
+  },
+  {
+    q: "FournIA a-t-elle déjà travaillé avec des conseillers ?",
+    a: "Oui. FournIA a mis en place des suivis automatiques par texto pour une conseillère en sécurité financière du Québec, avec réponses gérées et prise de rendez-vous.",
+  },
+];
+---
+<ServicePage
+  path="/secteurs/conseillers-financiers"
+  title="Automatisation pour conseillers financiers et en assurance | FournIA"
+  description="Suivis clients aux 6 mois, prospects relancés, appels manqués rappelés : automatisation IA pour les conseillers financiers et en assurance du Québec, conforme à la Loi 25."
+  h1="Automatisation pour les conseillers financiers et en assurance"
+  lead="Un conseiller vit de ses relations, mais les suivis aux 6 mois et les prospects à relancer passent souvent après le reste. FournIA automatise ces suivis pour que chaque client et chaque prospect reçoive le bon message au bon moment, de votre numéro et à votre nom."
+  serviceName="Conseillers financiers"
+  serviceType="Automatisation du suivi client pour conseillers financiers"
+  areaServed={ZONES}
+  faq={faq}
+  updated="2026-11-04"
+>
+  <h2>Ce qui coûte du temps à un conseiller</h2>
+  <ul>
+    <li><strong>Des clients sans nouvelles depuis un an</strong>, alors que le suivi régulier est la source des références.</li>
+    <li><strong>Des dizaines de prospects jamais relancés</strong> après une première rencontre.</li>
+    <li><strong>Des appels manqués</strong> pendant un rendez-vous, jamais rappelés.</li>
+    <li><strong>Un CRM rempli à moitié</strong>, qui ne dit plus qui contacter.</li>
+  </ul>
+
+  <h2>Ce que FournIA peut automatiser</h2>
+  <ul>
+    <li><strong>Un suivi automatique aux 6 ou 12 mois</strong> pour chaque client, avec prise de rendez-vous.</li>
+    <li><strong>Une relance des prospects</strong> qui s'arrête dès qu'ils répondent.</li>
+    <li><strong>Un texto après un appel manqué</strong>.</li>
+    <li><strong>Un CRM organisé</strong> à partir de votre calendrier et de vos contacts.</li>
+  </ul>
+
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 30 minutes.</li>
+    <li><strong>Vérification Loi 25</strong> avant de toucher à vos données.</li>
+    <li><strong>Construction</strong> et enregistrement de votre numéro d'envoi.</li>
+    <li><strong>Formation</strong> et ajustement des messages avec vous.</li>
+  </ol>
+  <p>Voir aussi : <a href="/automatisation-entreprise/">automatisation d'entreprise</a> et les <a href="/secteurs/">autres secteurs</a>.</p>
+</ServicePage>

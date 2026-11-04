@@ -1,0 +1,61 @@
+---
+import ServicePage from '../../layouts/ServicePage.astro';
+import { ZONES } from '../../data/entite.mjs';
+
+const faq = [
+  {
+    q: "Quelles tâches une entreprise événementielle peut-elle automatiser ?",
+    a: "La réception des demandes venues de partout (courriel, Messenger, Instagram, site web), les estimations standards à partir de votre grille de prix, la prise de rendez-vous, le suivi des dépôts et le courriel de remerciement après l'événement avec la demande d'avis.",
+  },
+  {
+    q: "Un agent IA peut-il répondre à mes clients à ma place ?",
+    a: "Oui, selon vos règles. Il peut répondre seul aux questions simples et préparer un brouillon pour le reste. Les prix spéciaux, les rabais, les plaintes et les gros événements vous reviennent toujours.",
+  },
+  {
+    q: "FournIA a-t-elle déjà travaillé dans l'événementiel ?",
+    a: "Oui. FournIA a bâti pour une entreprise de location de sonorisation de Montréal la réception de ses demandes multicanales et le suivi automatique après chaque événement, avec sondage de satisfaction et demande d'avis Google.",
+  },
+  {
+    q: "Comment obtenir plus d'avis Google après un événement ?",
+    a: "En demandant au bon moment, de façon systématique. Un courriel part après l'événement avec un court sondage : les clients satisfaits sont dirigés vers votre fiche Google, les autres vers vous, pour régler le problème avant qu'il devienne public.",
+  },
+];
+---
+<ServicePage
+  path="/secteurs/evenementiel"
+  title="Automatisation pour entreprises événementielles et de location | FournIA"
+  description="Demandes centralisées, estimations rapides, dépôts suivis et avis Google après chaque événement : automatisation IA pour l'événementiel et la location d'équipement au Québec."
+  h1="Automatisation pour les entreprises événementielles"
+  lead="Les demandes arrivent par courriel, Messenger, Instagram et le site web, souvent le soir et la fin de semaine. FournIA centralise ces demandes, accélère les estimations et automatise le suivi avant et après chaque événement, pour les entreprises de location, de sonorisation et d'organisation d'événements."
+  serviceName="Événementiel et location"
+  serviceType="Automatisation des processus pour entreprises événementielles"
+  areaServed={ZONES}
+  faq={faq}
+  updated="2026-11-04"
+>
+  <h2>Ce qui coûte du temps dans l'événementiel</h2>
+  <ul>
+    <li><strong>Des demandes éparpillées</strong> entre cinq boîtes de réception, dont certaines restent sans réponse.</li>
+    <li><strong>Des estimations refaites à la main</strong> pour chaque demande, alors que la plupart suivent la même grille.</li>
+    <li><strong>Des dépôts à suivre</strong> avant chaque date, sans oublier personne.</li>
+    <li><strong>Un après-événement oublié</strong> : pas de remerciement, pas de demande d'avis, pas de relance pour la prochaine fois.</li>
+  </ul>
+
+  <h2>Ce que FournIA peut automatiser</h2>
+  <ul>
+    <li><strong>Une réception unique</strong> pour toutes vos demandes, avec une première réponse en quelques minutes.</li>
+    <li><strong>Des estimations standards</strong> tirées de votre grille de prix, envoyées après votre approbation.</li>
+    <li><strong>La prise de rendez-vous</strong> dans votre vrai calendrier pour l'appel de confirmation.</li>
+    <li><strong>Le suivi des dépôts et des factures</strong>, sans relancer un client qui a déjà payé.</li>
+    <li><strong>Le courriel d'après-événement</strong> avec sondage de satisfaction et lien vers vos avis Google.</li>
+  </ul>
+
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 30 minutes.</li>
+    <li><strong>Diagnostic</strong> du chemin complet, de la demande jusqu'à l'avis du client.</li>
+    <li><strong>Construction</strong> canal par canal, en commençant par celui qui perd le plus de demandes.</li>
+    <li><strong>Formation</strong> et suivi régulier.</li>
+  </ol>
+  <p>Voir aussi : <a href="/automatisation-entreprise/">automatisation d'entreprise</a> et les <a href="/secteurs/">autres secteurs</a>.</p>
+</ServicePage>

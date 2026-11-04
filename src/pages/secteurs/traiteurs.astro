@@ -1,0 +1,60 @@
+---
+import ServicePage from '../../layouts/ServicePage.astro';
+import { ZONES } from '../../data/entite.mjs';
+
+const faq = [
+  {
+    q: "Quelles tâches un traiteur peut-il automatiser ?",
+    a: "La préparation des offres de service à partir des menus et des prix, les plans de production tirés des commandes, la comparaison des factures fournisseurs avec les prix convenus et les relances de soumission.",
+  },
+  {
+    q: "L'IA peut-elle calculer mes prix ?",
+    a: "Les calculs restent dans du code qui applique vos règles exactes (prix par personne, frais de service, taxes). L'IA sert à comprendre la demande et à rédiger. Cette séparation évite les erreurs de prix inventés.",
+  },
+  {
+    q: "FournIA a-t-elle déjà travaillé avec un traiteur ?",
+    a: "Oui. FournIA a bâti pour un traiteur corporatif de Montréal un générateur d'offres de service à sa charte, un outil de plans de production et une analyse des prix fournisseurs.",
+  },
+  {
+    q: "Ça s'intègre avec Shopify ou mon logiciel de gestion ?",
+    a: "Souvent, oui. On vérifie d'abord ce que votre logiciel permet de lire ou d'écrire, puis on bâtit autour. Rien n'est promis avant d'avoir confirmé l'accès.",
+  },
+];
+---
+<ServicePage
+  path="/secteurs/traiteurs"
+  title="Automatisation pour traiteurs et services alimentaires | FournIA"
+  description="Offres de service en minutes, plans de production automatiques, factures fournisseurs vérifiées : automatisation IA pour les traiteurs du Québec."
+  h1="Automatisation pour les traiteurs"
+  lead="Entre les soumissions, les plans de production et les factures fournisseurs, un traiteur passe des heures sur des tâches qui se répètent. FournIA automatise ces tâches à partir de vos menus, de vos prix et de vos outils, pour les traiteurs corporatifs et événementiels du Québec."
+  serviceName="Traiteurs"
+  serviceType="Automatisation des processus pour traiteurs"
+  areaServed={ZONES}
+  faq={faq}
+  updated="2026-11-04"
+>
+  <h2>Ce qui coûte du temps chez un traiteur</h2>
+  <ul>
+    <li><strong>Des offres de service montées à la main</strong>, ligne par ligne, avec le risque d'une erreur de prix.</li>
+    <li><strong>Des plans de production recopiés</strong> à partir des commandes, chaque jour.</li>
+    <li><strong>Des factures fournisseurs jamais comparées</strong> aux prix négociés.</li>
+    <li><strong>Des soumissions envoyées sans relance.</strong></li>
+  </ul>
+
+  <h2>Ce que FournIA peut automatiser</h2>
+  <ul>
+    <li><strong>Un générateur d'offres de service</strong> qui part de la demande du client et sort un document à votre charte, avec vos vrais prix.</li>
+    <li><strong>Des plans de production</strong> générés à partir des commandes, prêts pour la cuisine.</li>
+    <li><strong>Une vérification des factures fournisseurs</strong> contre vos listes de prix, avec les écarts en évidence.</li>
+    <li><strong>Des relances de soumission</strong> automatiques jusqu'à la réponse du client.</li>
+  </ul>
+
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 30 minutes.</li>
+    <li><strong>Diagnostic</strong> à partir de vrais exemples : offres, commandes, factures.</li>
+    <li><strong>Construction</strong> et calibrage sur vos documents.</li>
+    <li><strong>Formation</strong> de l'équipe et pilote sur de vraies demandes.</li>
+  </ol>
+  <p>Voir aussi : <a href="/automatisation-entreprise/">automatisation d'entreprise</a> et les <a href="/secteurs/">autres secteurs</a>.</p>
+</ServicePage>

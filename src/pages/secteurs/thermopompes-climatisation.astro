@@ -1,0 +1,63 @@
+---
+import ServicePage from '../../layouts/ServicePage.astro';
+import { ZONES } from '../../data/entite.mjs';
+
+const faq = [
+  {
+    q: "Quelles tâches un entrepreneur en thermopompes peut-il automatiser ?",
+    a: "Les plus rentables sont la réponse aux demandes de soumission, le rappel des appels manqués, la relance des soumissions sans réponse, la prise de rendez-vous pour les visites et les rappels d'entretien annuel. Ce sont des tâches répétitives qui débordent en pleine saison.",
+  },
+  {
+    q: "Est-ce que l'IA remplace mon estimateur ?",
+    a: "Non. Le prix d'une installation dépend d'une visite et de votre jugement. L'automatisation prend en charge ce qui se passe avant et après : accuser réception, poser les bonnes questions, booker la visite, envoyer la soumission que vous avez approuvée et relancer.",
+  },
+  {
+    q: "Ça fonctionne avec mon logiciel actuel ?",
+    a: "Dans la plupart des cas, oui. On part de vos outils (courriel, calendrier, logiciel de facturation ou CRM) et on les relie. On vérifie l'accès à votre logiciel avant de promettre quoi que ce soit.",
+  },
+  {
+    q: "Et les textos aux clients, c'est légal ?",
+    a: "Oui, avec les bonnes règles : consentement du client, identification de l'entreprise et option de désabonnement (Loi canadienne anti-pourriel), plus l'enregistrement du numéro d'envoi. FournIA s'en occupe et applique la Loi 25 aux données de vos clients.",
+  },
+];
+---
+<ServicePage
+  path="/secteurs/thermopompes-climatisation"
+  title="Automatisation pour entrepreneurs en thermopompes et climatisation | FournIA"
+  description="Soumissions plus rapides, appels manqués rappelés, entretiens annuels relancés : automatisation IA pour les entrepreneurs en thermopompes et CVC de Laval et de la Rive-Nord."
+  h1="Automatisation pour les entrepreneurs en thermopompes et climatisation"
+  lead="En pleine saison, les demandes arrivent plus vite qu'on peut y répondre. Celui qui rappelle en premier décroche souvent le contrat. FournIA automatise la réponse aux demandes, les relances de soumission et les rappels d'entretien pour les entrepreneurs en CVC de Laval, de la Rive-Nord et de Montréal."
+  serviceName="Thermopompes et climatisation"
+  serviceType="Automatisation des processus pour entrepreneurs en CVC"
+  areaServed={ZONES}
+  faq={faq}
+  updated="2026-11-04"
+>
+  <h2>Ce qui coûte du temps dans une entreprise de thermopompes</h2>
+  <ul>
+    <li><strong>Les appels manqués pendant que l'équipe est sur un chantier.</strong> Le client appelle le concurrent suivant.</li>
+    <li><strong>Les demandes de soumission qui attendent un ou deux jours</strong> avant qu'on y réponde.</li>
+    <li><strong>Les soumissions envoyées et jamais relancées.</strong> Une partie de ces clients étaient prêts à signer.</li>
+    <li><strong>Les rappels d'entretien annuel faits à la main</strong>, ou pas faits du tout, alors que c'est un revenu récurrent.</li>
+    <li><strong>Les mêmes questions</strong> sur les subventions, les délais et les modèles, répétées à chaque client.</li>
+  </ul>
+
+  <h2>Ce que FournIA peut automatiser</h2>
+  <ul>
+    <li><strong>Réponse immédiate aux demandes</strong> du site web, du courriel et des réseaux, avec les questions de qualification (type de résidence, système actuel, échéancier).</li>
+    <li><strong>Texto automatique après un appel manqué</strong>, qui propose un moment pour rappeler ou booker la visite.</li>
+    <li><strong>Prise de rendez-vous</strong> directement dans votre calendrier, avec rappel la veille.</li>
+    <li><strong>Relances de soumission</strong> à intervalles fixes, arrêtées dès que le client répond.</li>
+    <li><strong>Rappels d'entretien annuel</strong> envoyés à la bonne date, client par client.</li>
+  </ul>
+  <p>Vous gardez la main sur les prix et les décisions. Le système prépare, vous approuvez.</p>
+
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 30 minutes pour repérer où vous perdez des contrats.</li>
+    <li><strong>Diagnostic</strong> de votre chemin complet, de l'appel du client jusqu'à l'installation.</li>
+    <li><strong>Construction</strong> sur vos outils, une automatisation à la fois.</li>
+    <li><strong>Formation</strong> de votre équipe et suivi après la mise en marche.</li>
+  </ol>
+  <p>Voir aussi : <a href="/automatisation-entreprise/">automatisation d'entreprise</a> et les <a href="/secteurs/">autres secteurs</a>.</p>
+</ServicePage>
