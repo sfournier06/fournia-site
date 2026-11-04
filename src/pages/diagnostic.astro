@@ -249,6 +249,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 
     // Pixel : signal d'intention quand la personne est qualifiee.
     if (ok && window.fbq) fbq('track', 'Lead');
+    if (window.fourniaEvent) window.fourniaEvent('diagnostic_envoye', { qualifie: ok ? 'oui' : 'non' });
 
     stepForm.classList.add('hidden');
     (ok ? stepOk : stepNo).classList.remove('hidden');

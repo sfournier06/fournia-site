@@ -1,6 +1,8 @@
 ---
 // Bandeau de consentement aux témoins (Loi 25, art. 8.1) : les outils de mesure et de publicité
-// (script de suivi du CRM, pixel Meta) restent désactivés tant que le visiteur n'a pas accepté.
+// (script de suivi du CRM, pixel Meta, Google Analytics G-HFPYMCE8Y9) restent désactivés tant que le
+// visiteur n'a pas accepté. Événements GA4 envoyés seulement après le « oui » : clic_reserver (lien
+// Calendly), rdv_calendly (réservation confirmée dans Calendly intégré), diagnostic_envoye (formulaire).
 // La bulle de clavardage n'en dépend pas : c'est un service que le visiteur choisit d'utiliser.
 // Rouvrir le bandeau : window.fourniaTemoins() (lien « Gérer les témoins » du pied de page).
 ---
@@ -23,7 +25,7 @@
 </style>
 <script is:inline>
 (function(){
-  var CLE='fournia-consentement';
+  var CLE='fournia-consentement', GA='G-HFPYMCE8Y9';
   function lire(){try{return localStorage.getItem(CLE)}catch(e){return null}}
   function ecrire(v){try{localStorage.setItem(CLE,v)}catch(e){}}
   function activer(){
@@ -33,7 +35,22 @@
     s.setAttribute('data-tracking-id','tk_22f62d4d14b34cf3a115c0f48d8dad14');
     document.body.appendChild(s);
     if(typeof window.__fourniaPixel==='function')window.__fourniaPixel();
+    var g=document.createElement('script'); g.async=true;
+    g.src='https://www.googletagmanager.com/gtag/js?id='+GA;
+    document.head.appendChild(g);
+    window.dataLayer=window.dataLayer||[];
+    window.gtag=function(){window.dataLayer.push(arguments)};
+    gtag('js',new Date()); gtag('config',GA);
   }
+  // Envoie un événement GA4 seulement si le visiteur a accepté (gtag n'existe qu'après le « oui »).
+  window.fourniaEvent=function(nom,params){ if(typeof window.gtag==='function')window.gtag('event',nom,params||{}); };
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('a[href*="calendly.com"]');
+    if(a)window.fourniaEvent('clic_reserver',{page:location.pathname});
+  });
+  window.addEventListener('message',function(e){
+    if(e.data && e.data.event==='calendly.event_scheduled')window.fourniaEvent('rdv_calendly',{page:location.pathname});
+  });
   var boite=document.getElementById('consentement');
   var choix=lire();
   if(choix==='oui')activer(); else if(choix!=='non')boite.hidden=false;
