@@ -1,15 +1,15 @@
 ---
 import Consentement from '../components/Consentement.astro';
 // Landing diagnostic : formulaire de qualification simple.
-// Qualifie -> revele le booking Calendly. Non qualifie -> message courtois.
+// Qualifie -> revele le booking de la plateforme (SaaS AI System). Non qualifie -> message courtois.
 // Volontairement simple et pro : une seule carte centree, pas d'effets lourds.
 import '../styles/global.css';
 
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 
 // Lien de booking (qualifies seulement).
-// Événement Calendly « Diagnostic gratuit de 30 minutes - FournIA » (30 min depuis le 2026-10-29).
-const calendly = 'https://calendly.com/s-fournier-fournia/discovery-call-fournia';
+// Calendrier « Diagnostic gratuit de 30 minutes » de la plateforme (remplace Calendly le 2026-11-04).
+const booking = 'https://link.saas-ai-system.com/widget/booking/2Q3gAQkopvF9qtynB4Ct';
 
 // Pixel Meta : inactif tant que vide. Pre-requis : /confidentialite en ligne + artefact Loi 25.
 const FB_PIXEL_ID = '2092349601673992';
@@ -102,7 +102,8 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   .result h2 { font-family: 'Space Grotesk'; font-size: 1.5rem; line-height: 1.15; margin-bottom: .7rem; }
   .result p { color: var(--mute); margin-bottom: 1.2rem; }
   .book-btn { display: inline-flex; margin-bottom: 1.4rem; }
-  .calendly-inline-widget { min-width: 280px; height: 660px; border-radius: 14px; overflow: hidden; }
+  .booking-inline { min-width: 280px; height: 720px; border-radius: 14px; overflow: hidden; }
+  .booking-inline iframe { width: 100%; height: 100%; border: 0; }
   .alt-link { display: inline-block; margin-top: .4rem; color: var(--lime); font-size: .92rem; }
 
   .foot { position: relative; z-index: 1; margin-top: 2rem; text-align: center; color: var(--mute-d); font-size: .82rem; }
@@ -185,8 +186,8 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
       <div class="result-icon ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h2>C'est un fit. Réservez votre appel.</h2>
       <p>30 minutes, sans engagement.</p>
-      <a id="book-link" class="btn btn-primary book-btn" href={calendly} target="_blank" rel="noopener">Réserver mon appel <span class="arrow">&#8594;</span></a>
-      <div id="cal" class="calendly-inline-widget" data-cal-url={calendly}></div>
+      <a id="book-link" class="btn btn-primary book-btn" href={booking} target="_blank" rel="noopener">Réserver mon appel <span class="arrow">&#8594;</span></a>
+      <div id="cal" class="booking-inline" data-cal-url={booking}></div>
     </div>
 
     <!-- ETAPE 2B : non qualifie -->
@@ -209,23 +210,15 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   const stepOk = document.getElementById('step-qualified');
   const stepNo = document.getElementById('step-rejected');
 
-  // Calendly chargé seulement à la qualification (sinon il plombe le chargement de la page).
-  function loadCalendly() {
+  // Calendrier chargé seulement à la qualification (sinon il plombe le chargement de la page).
+  function loadBooking() {
     const el = document.getElementById('cal');
     if (!el || el.querySelector('iframe')) return;
-    const url = el.dataset.calUrl;
-    if (!document.getElementById('cal-css')) {
-      const l = document.createElement('link');
-      l.id = 'cal-css'; l.rel = 'stylesheet';
-      l.href = 'https://assets.calendly.com/assets/external/widget.css';
-      document.head.appendChild(l);
-    }
-    const init = () => window.Calendly && window.Calendly.initInlineWidget({ url, parentElement: el });
-    if (window.Calendly) { init(); return; }
-    const s = document.createElement('script');
-    s.src = 'https://assets.calendly.com/assets/external/widget.js';
-    s.async = true; s.onload = init;
-    document.head.appendChild(s);
+    const f = document.createElement('iframe');
+    f.src = el.dataset.calUrl;
+    f.title = 'Réserver le diagnostic';
+    f.scrolling = 'no';
+    el.appendChild(f);
   }
 
   function isQualified(d) {
@@ -253,19 +246,11 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 
     stepForm.classList.add('hidden');
     (ok ? stepOk : stepNo).classList.remove('hidden');
-    if (ok) loadCalendly();
+    if (ok) loadBooking();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // Vraie conversion : RDV pris dans Calendly -> event Schedule pour Meta.
-  // Calendly emet ce message postMessage quand le booking est confirme.
-  window.addEventListener('message', (e) => {
-    if (e.data && e.data.event === 'calendly.event_scheduled' && window.fbq) {
-      fbq('track', 'Schedule');
-    }
-  });
-
-  // Clic sur "Reserver mon appel" (ouvre Calendly en nouvel onglet) : signal
+  // Clic sur "Reserver mon appel" (ouvre le calendrier en nouvel onglet) : signal
   // d'intention de booking, capte le geste meme si le postMessage Schedule ne revient pas.
   const bookLink = document.getElementById('book-link');
   if (bookLink) bookLink.addEventListener('click', () => {

@@ -53,7 +53,7 @@
     if(!e.target.closest)return;
     var a=e.target.closest('a,button'); if(!a)return;
     var href=a.getAttribute('href')||'';
-    if(href.indexOf('calendly.com')>-1)window.fourniaEvent('clic_reserver',{page:P(),texte:txt(a)});
+    if(href.indexOf('calendly.com')>-1||href.indexOf('/widget/booking/')>-1)window.fourniaEvent('clic_reserver',{page:P(),texte:txt(a)});
     else if(href.indexOf('tel:')===0)window.fourniaEvent('clic_telephone',{page:P()});
     else if(href.indexOf('mailto:')===0)window.fourniaEvent('clic_courriel',{page:P()});
     if(a.classList && a.classList.contains('btn'))window.fourniaEvent('clic_cta',{page:P(),texte:txt(a)});
