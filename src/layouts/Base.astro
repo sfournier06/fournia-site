@@ -7,7 +7,7 @@ import { GOOGLE_VERIFICATION, BING_VERIFICATION, SERVICES } from '../data/entite
 
 const { title, description, canonical, ogType = 'website' } = Astro.props;
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
-const cta = 'https://liens.fournia.net/widget/booking/2Q3gAQkopvF9qtynB4Ct';
+const cta = '/diagnostic/';
 // Symbole de marque (hexagone-reseau original) recolore lime (même mark que l'accueil).
 const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs><filter id="fglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
@@ -61,7 +61,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
         <li><a href="/blog">Blog</a></li>
         <li><a href="/#contact">Contact</a></li>
       </ul>
-      <a href={cta} target="_blank" rel="noopener" class="btn btn-primary cta-nav">Réserver un appel <span class="arrow">→</span></a>
+      <a href={cta} class="btn btn-primary cta-nav">Réserver un appel <span class="arrow">→</span></a>
       <div class="hamburger" id="burger"><span></span><span></span><span></span></div>
     </div>
   </nav>
@@ -85,7 +85,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
           {SERVICES.map((sv) => <a href={sv.href}>{sv.label}</a>)}
           <a href="/#processus">Processus</a>
           <a href="/blog">Blog</a>
-          <a href={cta} target="_blank" rel="noopener">Réserver un appel</a>
+          <a href={cta}>Réserver un appel</a>
         </div>
       </div>
       <div class="foot-bottom">© 2026 FournIA. Tous droits réservés. · <a href="#" onclick="window.fourniaTemoins&&fourniaTemoins();return false">Gérer les témoins</a></div>

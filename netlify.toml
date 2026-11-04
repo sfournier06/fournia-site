@@ -8,3 +8,15 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# Liens courts à partager (2026-11-04). /appel = appel de vente (questionnaire puis calendrier),
+# /parler = « On se parle », sans questions. Les paramètres utm permettent de suivre chaque lien.
+[[redirects]]
+  from = "/appel"
+  to = "/diagnostic/?utm_source=lien-appel&utm_medium=lien-direct"
+  status = 302
+
+[[redirects]]
+  from = "/parler"
+  to = "https://liens.fournia.net/widget/booking/CTmXPv8vw5s18tRTKwFT?lang=fr&utm_source=lien-parler&utm_medium=lien-direct"
+  status = 302
