@@ -1,0 +1,60 @@
+---
+import ServicePage from '../../layouts/ServicePage.astro';
+import { ZONES } from '../../data/entite.mjs';
+
+const faq = [
+  {
+    q: "Quelles entreprises de services en ligne peuvent automatiser leurs opérations ?",
+    a: "Les coachs, consultants, formateurs et créateurs de cours en ligne, les agences et tous ceux qui vendent leur expertise à distance. Le point commun : des demandes qui arrivent par plusieurs canaux et un appel à booker avant de vendre.",
+  },
+  {
+    q: "Quelles tâches automatiser en premier ?",
+    a: "La réponse aux nouvelles demandes (formulaire, courriel, messages Instagram et Facebook), la prise de rendez-vous, les rappels avant l'appel et la relance des personnes qui ne se présentent pas.",
+  },
+  {
+    q: "Et après la vente ?",
+    a: "L'accueil du nouveau client : contrat, paiement, formulaire d'information et accès envoyés automatiquement, puis des rappels de suivi aux bons moments.",
+  },
+  {
+    q: "Les données de mes clients sont-elles protégées ?",
+    a: "Chaque projet passe par une vérification Loi 25. On recueille le minimum d'information et on documente où elle est hébergée.",
+  },
+];
+---
+<ServicePage
+  path="/secteurs/services-en-ligne"
+  title="Automatisation pour coachs, consultants et services en ligne | FournIA"
+  description="Demandes centralisées, appels bookés, rappels et accueil des nouveaux clients : automatisation IA pour les entreprises de services en ligne au Québec."
+  h1="Automatisation pour les services en ligne"
+  lead="Quand vous vendez votre expertise à distance, chaque demande passe par un appel. FournIA automatise la réponse, la prise de rendez-vous, les rappels et l'accueil des nouveaux clients, pour que vous passiez votre temps sur les appels et le travail."
+  serviceName="Services en ligne"
+  serviceType="Automatisation des processus pour entreprises de services en ligne"
+  areaServed={ZONES}
+  faq={faq}
+  updated="2026-11-06"
+>
+  <h2>Ce qui coûte du temps</h2>
+  <ul>
+    <li><strong>Des demandes éparpillées</strong> entre le formulaire, les courriels et les messages privés.</li>
+    <li><strong>Des allers-retours</strong> pour trouver une heure d'appel.</li>
+    <li><strong>Des rendez-vous manqués</strong> sans relance.</li>
+    <li><strong>Un accueil manuel</strong> de chaque nouveau client : contrat, paiement, accès.</li>
+  </ul>
+
+  <h2>Ce que FournIA peut automatiser</h2>
+  <ul>
+    <li><strong>Une seule boîte</strong> pour toutes les demandes, avec une réponse en quelques minutes.</li>
+    <li><strong>Un lien de réservation</strong> branché sur votre vrai calendrier.</li>
+    <li><strong>Des rappels avant l'appel</strong> et une relance après une absence.</li>
+    <li><strong>L'accueil du nouveau client</strong> : contrat, paiement et accès envoyés d'eux-mêmes.</li>
+  </ul>
+
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>Appel découverte gratuit</strong> de 30 minutes.</li>
+    <li><strong>Diagnostic</strong> du chemin de la demande jusqu'au client actif.</li>
+    <li><strong>Construction</strong> sur vos outils.</li>
+    <li><strong>Formation</strong> et suivi.</li>
+  </ol>
+  <p>Voir aussi : <a href="/automatisation-entreprise/">automatisation d'entreprise</a> et les <a href="/secteurs/">autres secteurs</a>.</p>
+</ServicePage>
