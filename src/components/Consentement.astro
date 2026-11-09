@@ -7,6 +7,12 @@
 // consentement_accepte. Le reste (pages vues, sources, liens sortants, recherche) = mesure améliorée GA4.
 // La bulle de clavardage n'en dépend pas : c'est un service que le visiteur choisit d'utiliser.
 // Rouvrir le bandeau : window.fourniaTemoins() (lien « Gérer les témoins » du pied de page).
+// Pixel Meta, défini pour TOUTES les pages (accueil, services, blog, secteurs, diagnostic). Il ne se
+// charge qu'après le « oui » : activer() appelle window.__fourniaPixel. Si une page le définit déjà
+// (diagnostic), on garde le sien. Artefact Loi 25 : marketing/campagnes/2026-07-meta-test-controle/
+// loi-25-artefact.md (données de navigation seulement, aucune identité).
+const FB_PIXEL_ID = '2092349601673992';
+const pixelInit = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${FB_PIXEL_ID}');fbq('track','PageView');`;
 ---
 <div id="consentement" class="consentement" role="dialog" aria-live="polite" aria-label="Témoins" hidden>
   <p>On utilise des témoins pour mesurer les visites du site et l'efficacité de nos publicités. Rien n'est activé sans votre accord. <a href="/confidentialite">En savoir plus</a></p>
@@ -25,6 +31,7 @@
   .consentement button.ok{background:#B7D94C;border-color:#B7D94C;color:#0B0B0C}
   @media (max-width:520px){.consentement{left:12px;right:12px;bottom:12px;max-width:none}}
 </style>
+<script is:inline set:html={`if(typeof window.__fourniaPixel!=="function"){window.__fourniaPixel=function(){${pixelInit}};}`} />
 <script is:inline>
 (function(){
   var CLE='fournia-consentement', GA='G-HFPYMCE8Y9';
