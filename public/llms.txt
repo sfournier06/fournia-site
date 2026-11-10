@@ -14,6 +14,7 @@
 - [IA pour petite entreprise à Montréal](https://fournia.net/ia-petite-entreprise-montreal/) : accompagnement, formation et implantation pour les entreprises de 5 à 50 employés.
 
 ## Pages clés
+- À propos (FournIA et son fondateur Simon Fournier): https://fournia.net/a-propos/
 - Accueil: https://fournia.net/
 - Blog: https://fournia.net/blog
 - Contact: s.fournier@fournia.net, 514 863 2973

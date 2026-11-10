@@ -1,0 +1,95 @@
+---
+// Page « À propos » : définit l'entité FournIA et son fondateur pour Google et les moteurs IA (GEO).
+// Ne contient que des faits établis (voir fournia-aios/context/work.md). Aucun client nommé.
+import Base from '../layouts/Base.astro';
+import { SITE, CTA, ZONES, organisationLd } from '../data/entite.mjs';
+
+const canonical = `${SITE}/a-propos/`;
+const title = "À propos de FournIA et de Simon Fournier | FournIA";
+const description = "FournIA est une firme d'automatisation et d'accompagnement en IA fondée en 2026 par Simon Fournier à Blainville, sur la Rive-Nord de Montréal.";
+const aboutLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'fr-CA',
+  about: { '@id': `${SITE}/#fournia` },
+  mainEntity: { '@id': `${SITE}/#simon-fournier` },
+};
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: 'À propos', item: canonical },
+  ],
+};
+---
+<Base title={title} description={description} canonical={canonical}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(aboutLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(organisationLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbLd)} />
+  <main>
+    <article class="svc">
+      <div class="wrap-narrow">
+        <div class="crumbs reveal"><a href="/">Accueil</a> <span>/</span> À propos</div>
+        <h1 class="reveal" data-d="1">À propos de FournIA</h1>
+        <p class="lead reveal" data-d="2">FournIA est une firme d'automatisation d'entreprise et d'accompagnement en intelligence artificielle, fondée en avril 2026 par Simon Fournier à Blainville, sur la Rive-Nord de Montréal. Elle aide les PME du Québec à confier à l'IA les tâches répétitives qui leur coûtent des heures chaque semaine.</p>
+
+        <div class="prose reveal" data-d="3">
+          <h2>Ce que fait FournIA</h2>
+          <ul>
+            <li><strong><a href="/automatisation-entreprise/">Automatisation d'entreprise</a></strong> : relances clients, soumissions, demandes entrantes et saisie de commandes, branchées sur les logiciels que l'entreprise utilise déjà.</li>
+            <li><strong><a href="/accompagnement-intelligence-artificielle/">Accompagnement IA</a></strong> : du diagnostic des processus jusqu'au suivi après la livraison.</li>
+            <li><strong><a href="/formation-ia-entreprise/">Formation IA en entreprise</a></strong> : l'équipe apprend à utiliser l'IA sur ses vraies tâches.</li>
+          </ul>
+
+          <h2>Simon Fournier, fondateur</h2>
+          <p>Simon Fournier a fondé FournIA en 2026. Il conçoit les systèmes que FournIA livre (automatisations, agents IA et applications sur mesure), en dirige l'implantation et forme lui-même les équipes, en personne dans leurs locaux ou par visioconférence.</p>
+
+          <h2>Comment FournIA travaille</h2>
+          <ul>
+            <li><strong>Le diagnostic d'abord.</strong> Le processus visé est cartographié étape par étape, avec le temps qu'il prend chaque mois. Ce chiffre décide de ce qu'on automatise en premier.</li>
+            <li><strong>L'implantation et la formation vont ensemble.</strong> Un système livré s'accompagne de la formation de l'équipe qui l'utilise.</li>
+            <li><strong>La Loi 25 à chaque projet.</strong> Un projet qui touche des renseignements personnels passe une vérification Loi 25 documentée par écrit avant la construction.</li>
+          </ul>
+
+          <h2>Où FournIA intervient</h2>
+          <p>FournIA est basée à Blainville et se déplace chez ses clients à {ZONES.join(', ')}. Ailleurs au Québec, l'accompagnement se fait par visioconférence.</p>
+
+          <h2>Pour joindre FournIA</h2>
+          <p>Courriel : <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a> · Téléphone : <a href="tel:+15148632973">514 863 2973</a> · <a href="https://www.linkedin.com/in/simon-fournier-432a95419/" target="_blank" rel="noopener">Simon Fournier sur LinkedIn</a></p>
+        </div>
+
+        <div class="post-cta">
+          <h3>Un processus manuel vous coûte du temps ?</h3>
+          <p>Commencez par un diagnostic gratuit de 30 minutes.</p>
+          <a class="btn btn-primary" href={CTA}>Réserver le diagnostic <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </article>
+  </main>
+</Base>
+
+<style>
+  main { position: relative; z-index: 1; }
+  .svc { padding: 8.5rem 0 4rem; }
+  .wrap-narrow { width: min(760px, 92vw); margin: 0 auto; }
+  .crumbs { font-size: .85rem; color: var(--mute-d); margin-bottom: 1.4rem; }
+  .crumbs a:hover { color: var(--lime); }
+  .crumbs span { margin: 0 .4rem; }
+  .svc h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.08; letter-spacing: -.02em; font-weight: 700; margin-bottom: 1.2rem; }
+  .lead { color: var(--mute); font-size: 1.15rem; line-height: 1.7; margin-bottom: 1.8rem; }
+  .prose { color: var(--mute); font-size: 1.06rem; line-height: 1.75; margin-top: 2rem; }
+  .prose :global(h2) { font-family: 'Space Grotesk', sans-serif; color: var(--white); font-size: 1.7rem; line-height: 1.2; margin: 2.6rem 0 1rem; }
+  .prose :global(p) { margin-bottom: 1.2rem; }
+  .prose :global(ul) { margin: 0 0 1.2rem 1.3rem; }
+  .prose :global(li) { margin-bottom: .5rem; }
+  .prose :global(a) { color: var(--lime); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(183,217,76,.4); }
+  .prose :global(strong) { color: var(--white); font-weight: 600; }
+  .post-cta { margin-top: 3.5rem; padding: 2.2rem; border-radius: 22px; background: linear-gradient(160deg, rgba(183,217,76,.10), rgba(20,20,20,.55)); border: 1px solid var(--glass-b); }
+  .post-cta h3 { font-size: 1.4rem; margin-bottom: .6rem; color: var(--white); }
+  .post-cta p { color: var(--mute); margin-bottom: 1.4rem; }
+</style>
