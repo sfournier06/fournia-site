@@ -8,22 +8,15 @@ import { GOOGLE_VERIFICATION, BING_VERIFICATION, SERVICES } from '../data/entite
 const { title, description, canonical, ogType = 'website' } = Astro.props;
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 const cta = '/diagnostic/';
-// Symbole de marque (hexagone-reseau original) recolore lime (même mark que l'accueil).
-const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <defs><filter id="fglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-  <g fill="none" stroke="#b7d94c" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M50 16 L79 33 L79 67 L50 84 L21 67 L21 33 Z" stroke-width="3"/>
-    <path d="M50 50 L50 16 M50 50 L79 67 M50 50 L21 67" stroke-width="2.2" opacity="0.9"/>
-  </g>
-  <g fill="#b7d94c"><circle cx="50" cy="16" r="4.6"/><circle cx="79" cy="33" r="4.6"/><circle cx="79" cy="67" r="4.6"/><circle cx="50" cy="84" r="4.6"/><circle cx="21" cy="67" r="4.6"/><circle cx="21" cy="33" r="4.6"/></g>
-  <circle cx="50" cy="50" r="7" fill="#c9e86b" filter="url(#fglow)"/>
-</svg>`;
+// Monogramme officiel (references/brand/assets/fournia-monogram.svg, copié dans public/brand/).
+const markSvg = '<img src="/brand/fournia-monogram.svg" alt="" width="40" height="40" />';
 ---
 <!doctype html>
 <html lang="fr-CA">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script is:inline>document.documentElement.classList.add('js');</script>
   <link rel="icon" type="image/svg+xml" href="/brand/fournia-favicon.svg" />
   <link rel="icon" type="image/png" href="/brand/fournia-icon-512.png" />
   <link rel="apple-touch-icon" href="/brand/fournia-icon-512.png" />
@@ -55,16 +48,16 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 
   <nav id="nav">
     <div class="nav-inner">
-      <a href="/" class="logo"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
+      <a href="/" class="logo" aria-label="FournIA, accueil"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
       <ul class="nav-links">
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#exemples">Exemples</a></li>
         <li><a href="/a-propos/">À propos</a></li>
-        <li><a href="/ia-petite-entreprise-montreal/">Services</a></li>
-        <li><a href="/#processus">Processus</a></li>
-        <li><a href="/blog">Blog</a></li>
+        <li><a href="/blog">Blogue</a></li>
         <li><a href="/#contact">Contact</a></li>
       </ul>
       <a href={cta} class="btn btn-primary cta-nav">Réserver un appel <span class="arrow">→</span></a>
-      <div class="hamburger" id="burger"><span></span><span></span><span></span></div>
+      <button type="button" class="hamburger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -75,7 +68,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
       <div class="foot-grid">
         <div>
           <a href="/" class="logo" style="font-size:1.5rem"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
-          <p style="color:var(--mute-d); margin-top:1rem; max-width:280px; font-size:.92rem;">Automatisation d'entreprise et accompagnement en IA pour les PME du Québec. Basé à Blainville, Rive-Nord de Montréal.</p>
+          <p style="color:var(--mute); margin-top:1rem; max-width:280px; font-size:.92rem;">On automatise les tâches répétitives des PME du Québec. Basé à Blainville, Rive-Nord de Montréal.</p>
         </div>
         <div class="foot-contact">
           <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>
@@ -86,7 +79,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
           <a href="/a-propos/">À propos</a>
           {SERVICES.map((sv) => <a href={sv.href}>{sv.label}</a>)}
           <a href="/#processus">Processus</a>
-          <a href="/blog">Blog</a>
+          <a href="/blog">Blogue</a>
           <a href={cta}>Réserver un appel</a>
         </div>
       </div>
@@ -103,7 +96,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     addEventListener('load', () => document.querySelectorAll('main .reveal').forEach(el => el.classList.add('in')));
     const burger = document.getElementById('burger');
-    if (burger) burger.addEventListener('click', (e) => { e.stopPropagation(); nav.classList.toggle('open'); });
+    if (burger) burger.addEventListener('click', (e) => { e.stopPropagation(); const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
     document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
     document.addEventListener('click', (e) => { if (!nav.contains(e.target)) nav.classList.remove('open'); });
   </script>

@@ -7,6 +7,8 @@
 //   - SAME_AS : les URL de profils officiels (LinkedIn, Instagram, fiche Google, hellodarwin).
 // Tant qu'une valeur est vide, rien n'est émis : aucune balise vide ne part en production.
 
+import { PHOTO_SIMON } from './fondateur.mjs';
+
 export const GOOGLE_VERIFICATION = '';
 export const BING_VERIFICATION = '';
 
@@ -40,6 +42,8 @@ const founder = {
   jobTitle: 'Fondateur',
   worksFor: { '@id': `${SITE}/#fournia` },
   sameAs: FOUNDER_SAME_AS,
+  // La photo s'ajoute au balisage seulement quand elle existe (src/data/fondateur.mjs).
+  ...(PHOTO_SIMON ? { image: `${SITE}${PHOTO_SIMON}` } : {}),
 };
 
 // ProfessionalService (sous-type de LocalBusiness) : c'est ce type qui fait exister FournIA

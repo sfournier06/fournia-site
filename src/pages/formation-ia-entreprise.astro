@@ -39,60 +39,51 @@ const faq = [
   title="Formation IA en entreprise à Montréal | FournIA"
   description="Formation en IA pour les entreprises de Montréal, Laval et Rive-Nord, sans jargon : en groupe, en un pour un, ou pour former votre experte IA à l'interne."
   h1="Formation en intelligence artificielle pour les entreprises"
-  lead="FournIA explique l'IA en mots simples, à des gens qui n'y connaissent rien. Comment ça fonctionne, ce que ça fait bien, où ça se trompe, et comment s'en servir dans votre travail de tous les jours. En groupe, en un pour un, ou pour former la personne qui deviendra l'experte de l'IA dans votre entreprise. En personne à Montréal, à Laval et sur la Rive-Nord, ou par visioconférence."
+  lead="On explique l'IA en mots simples, à des gens qui n'y connaissent rien, puis on la met au travail sur vos vraies tâches. En personne à Montréal, à Laval et sur la Rive-Nord, ou par visioconférence."
   serviceName="Formation IA en entreprise"
   serviceType="Formation en intelligence artificielle pour les équipes"
   areaServed={['Montréal', 'Laval', 'Rive-Nord de Montréal', 'Québec']}
   faq={faq}
   updated="2026-11-13"
+  essentiel={[
+    { t: 'Pour qui', d: 'Les équipes qui débutent avec l\'IA, ou qui l\'utilisent sans règle commune.' },
+    { t: 'Format', d: 'En groupe, en un pour un, ou pour former votre experte.' },
+    { t: 'Durée', d: 'Un bloc de 3 h 30 à 5 h pour le groupe.' },
+  ]}
 >
-  <h2>L'IA expliquée simplement</h2>
-  <p>Beaucoup de contenu sur l'IA est fait par des développeurs, pour des développeurs. Nous, on part de zéro. On explique les grands concepts avec des exemples de votre quotidien : ce qu'est un modèle de langage, pourquoi il invente parfois des réponses, ce qu'on peut lui confier et ce qu'on ne lui confie jamais. Une fois que les gens comprennent comment ça marche, ils arrêtent d'en avoir peur et commencent à s'en servir.</p>
-
   <h2>Trois formats</h2>
-  <table>
-    <thead><tr><th>Format</th><th>Pour qui</th></tr></thead>
-    <tbody>
-      <tr><td><strong>En groupe</strong></td><td>Toute l'équipe en même temps, dans vos locaux ou en visio. Un bloc de 3 h 30 à 5 h, sur vos tâches réelles.</td></tr>
-      <tr><td><strong>En un pour un</strong></td><td>Un dirigeant ou un employé qui veut avancer à son rythme, sur ses propres dossiers.</td></tr>
-      <tr><td><strong>Former votre experte IA à l'interne</strong></td><td>Une personne de votre équipe apprend à fond : les outils, les bonnes pratiques, la Loi 25, et comment bâtir de petites automatisations. Elle devient la référence de l'entreprise et forme les autres.</td></tr>
-    </tbody>
-  </table>
-
-  <h2>À qui s'adresse la formation</h2>
-  <p>Aux petites entreprises et aux organismes dont les employés ont commencé à utiliser l'IA chacun de leur côté, sans règle commune, ou qui ne l'utilisent pas du tout parce qu'ils ne savent pas par où commencer. Le but est le même dans les deux cas : que toute l'équipe sache s'en servir pour gagner du temps, sans mettre en danger les données des clients.</p>
-
-  <h2>Ce que couvre la formation</h2>
-  <ul>
-    <li><strong>Les bons outils pour vos tâches</strong> : ChatGPT, Copilot, Claude ou Gemini, choisis selon ce que l'équipe fait vraiment, avec les réglages de confidentialité à activer.</li>
-    <li><strong>Écrire une demande qui donne un bon résultat</strong>, démontré sur des exemples tirés de vos tâches, sans renseignements personnels.</li>
-    <li><strong>Où l'IA se trompe</strong> : vérifier une réponse, repérer une information inventée, savoir quand ne pas l'utiliser.</li>
-    <li><strong>La Loi 25 au quotidien</strong> : ce qu'on peut donner à un outil d'IA, ce qu'on ne lui donne jamais, et pourquoi le transfert de données hors Québec compte.</li>
-    <li><strong>Une politique d'usage d'une page</strong>, rédigée en groupe à la fin de la formation, prête à adopter.</li>
+  <ul class="blocs">
+    <li><strong>En groupe</strong><p>Toute l'équipe en même temps, dans vos locaux ou en visio, sur vos tâches réelles.</p></li>
+    <li><strong>En un pour un</strong><p>Un dirigeant ou un employé qui avance à son rythme, sur ses propres dossiers.</p></li>
+    <li><strong>Former votre experte IA à l'interne</strong><p>Une personne de votre équipe apprend à fond : les outils, les bonnes pratiques, la Loi 25 et de petites automatisations. Elle devient la référence et forme les autres.</p></li>
   </ul>
 
-  <h2>Déroulement de la formation</h2>
-  <ol>
-    <li><strong>Rencontre de préparation</strong> avec la direction : on choisit les tâches de l'équipe qui serviront d'exemples et les outils à couvrir.</li>
-    <li><strong>Le bloc de formation</strong>, en personne ou en visio : démonstrations sur vos tâches, pratique guidée, puis rédaction en groupe de la politique d'usage.</li>
-    <li><strong>Les livrables</strong> remis à l'équipe à la fin, pour refaire chaque geste seul.</li>
+  <h2>Ce que la formation couvre</h2>
+  <ul>
+    <li><strong>Comment l'IA fonctionne</strong>, avec des exemples de votre quotidien, et pourquoi elle invente parfois des réponses.</li>
+    <li><strong>Les bons outils</strong> : ChatGPT, Copilot, Claude ou Gemini, selon vos tâches, avec les réglages de confidentialité à activer.</li>
+    <li><strong>Écrire une demande qui donne un bon résultat</strong>, démontré sur vos tâches, sans renseignements personnels.</li>
+    <li><strong>Vérifier une réponse</strong> et savoir quand ne pas utiliser l'IA.</li>
+    <li><strong>La Loi 25 au quotidien</strong> : ce qu'on donne à un outil d'IA, ce qu'on ne lui donne jamais.</li>
+  </ul>
+
+  <h2>Comment ça se passe</h2>
+  <ol class="etapes">
+    <li><strong>Rencontre de préparation</strong> avec la direction : on choisit les tâches et les outils à couvrir.</li>
+    <li><strong>La formation</strong> : démonstrations sur vos tâches, pratique guidée, puis une politique d'usage rédigée en groupe.</li>
+    <li><strong>Les livrables</strong>, remis à l'équipe pour refaire chaque geste seule.</li>
   </ol>
 
   <h2>Ce que l'équipe garde</h2>
-  <table>
-    <thead><tr><th>Livrable</th><th>À quoi il sert</th></tr></thead>
-    <tbody>
-      <tr><td>Usages personnels</td><td>Trois façons concrètes pour chaque participant d'utiliser l'IA dans son poste, notées avec le texte exact à réutiliser.</td></tr>
-      <tr><td>Aide-mémoire de demandes</td><td>Des demandes prêtes à l'emploi, écrites pour les tâches de l'équipe.</td></tr>
-      <tr><td>Politique d'usage</td><td>Une page de règles claires sur ce qui est permis, rédigée en groupe, prête à adopter.</td></tr>
-      <tr><td>Guide des outils</td><td>Quels outils, pour quoi, et les réglages de confidentialité à activer.</td></tr>
-      <tr><td>Tutoriels</td><td>Les démonstrations de la formation, pour refaire chaque geste seul.</td></tr>
-    </tbody>
-  </table>
-
-  <h2>Formation seule ou avec une implantation</h2>
-  <p>La formation se donne seule. Quand FournIA construit une automatisation ou un agent IA pour l'entreprise, la formation fait toujours partie de la livraison : un système que l'équipe ne sait pas utiliser ne rapporte pas ce qu'il devrait. Voir l'<a href="/accompagnement-intelligence-artificielle/">accompagnement en intelligence artificielle</a> et l'<a href="/automatisation-entreprise/">automatisation d'entreprise</a>.</p>
+  <ul>
+    <li><strong>Trois usages par participant</strong>, avec le texte exact à réutiliser.</li>
+    <li><strong>Un aide-mémoire de demandes</strong> prêtes à l'emploi, écrites pour vos tâches.</li>
+    <li><strong>Une politique d'usage d'une page</strong>, prête à adopter.</li>
+    <li><strong>Un guide des outils</strong> et de leurs réglages de confidentialité.</li>
+    <li><strong>Les tutoriels</strong> des démonstrations.</li>
+  </ul>
 
   <h2>Le financement</h2>
-  <p>Selon le <a href={MFOR} target="_blank" rel="noopener">guide officiel de la Mesure de formation de la main-d'œuvre</a> (MFOR, volet Entreprises, Services Québec, version mise à jour le 2023-06-28), l'aide peut atteindre 40 % des dépenses de formation admissibles. Elle est bonifiée à 65 % pour une formation rendue nécessaire par l'introduction d'une nouvelle technologie visant à accroître la productivité. L'admissibilité se confirme avec le bureau de Services Québec de votre territoire, avant la formation.</p>
+  <p>Selon le <a href={MFOR} target="_blank" rel="noopener">guide officiel de la Mesure de formation de la main-d'œuvre</a> (MFOR, volet Entreprises, Services Québec, mis à jour le 2023-06-28), l'aide peut atteindre 40 % des dépenses de formation admissibles, et 65 % quand la formation est rendue nécessaire par une nouvelle technologie visant à accroître la productivité. L'admissibilité se confirme avec le bureau de Services Québec de votre territoire, avant la formation.</p>
+  <p>Quand FournIA construit un système pour vous, la formation fait toujours partie de la livraison. Voir l'<a href="/accompagnement-intelligence-artificielle/">accompagnement complet</a> et les <a href="/automatisation-entreprise/">systèmes à la carte</a>.</p>
 </ServicePage>

@@ -1,5 +1,6 @@
 ---
 import ServicePage from '../layouts/ServicePage.astro';
+import Realisations from '../components/Realisations.astro';
 
 const faq = [
   {
@@ -28,42 +29,34 @@ const faq = [
   path="/automatisation-entreprise"
   title="Systèmes à la carte : automatisation IA pour PME au Québec | FournIA"
   description="Un problème précis, un système livré une fois : relances, soumissions, demandes entrantes ou documents automatisés avec l'IA, branchés sur vos outils, équipe formée."
-  h1="Systèmes à la carte : l'automatisation d'entreprise, un problème à la fois"
-  lead="Vous avez une tâche précise qui vous coûte des heures chaque semaine ? FournIA construit le système qui la règle, l'installe dans vos outils actuels et forme votre équipe à s'en servir. Un système, un prix fixe, livré une fois."
+  h1="Systèmes à la carte : l'automatisation d'entreprise, un problème à la fois"
+  lead="Une tâche vous coûte des heures chaque semaine ? On construit le système qui la règle, on l'installe dans vos outils et on forme votre équipe. Un système, un prix fixe."
   serviceName="Systèmes d'automatisation à la carte"
   serviceType="Automatisation des processus d'affaires par l'intelligence artificielle"
   areaServed={['Québec', 'Rive-Nord de Montréal', 'Laval', 'Montréal']}
   faq={faq}
   updated="2026-11-13"
+  essentiel={[
+    { t: 'Pour qui', d: 'Les PME qui savent déjà quelle tâche les ralentit.' },
+    { t: 'Ce que vous obtenez', d: 'Un système installé dans vos outils, et votre équipe formée.' },
+    { t: 'Prix', d: 'Fixe, connu avant de commencer. Livré une fois.' },
+  ]}
 >
-  <h2>Pour qui</h2>
-  <p>Pour les PME qui savent déjà ce qui les ralentit : les soumissions qui traînent, les clients qu'on oublie de relancer, les appels manqués, les commandes recopiées d'un logiciel à l'autre. Vous ne voulez pas revoir toute l'entreprise. Vous voulez que ce problème-là disparaisse.</p>
-  <p>Si vous voulez qu'on regarde toute l'entreprise et qu'on vous suive sur plusieurs mois, c'est l'<a href="/accompagnement-intelligence-artificielle/">accompagnement complet</a>.</p>
-
-  <h2>Ce que l'automatisation règle concrètement</h2>
-  <p>Dans une PME, une bonne partie de la semaine part dans du travail de transfert : recopier une commande, relancer un client qui n'a pas répondu, reformater un document pour un autre logiciel. Ce travail ne crée pas de valeur, mais il doit être fait, et il est fait à la main. Un système le fait à votre place, sans l'oublier.</p>
-  <p>Des exemples de systèmes que FournIA construit :</p>
-  <ul>
-    <li><strong>Relances clients par texto</strong> : chaque client reçoit son suivi au bon moment, et les réponses sont classées automatiquement (rendez-vous, report, désabonnement).</li>
-    <li><strong>Documents de production à partir des commandes</strong> : le système lit les commandes de la boutique en ligne et produit les documents de travail du jour.</li>
-    <li><strong>Générateur de soumissions</strong> : l'IA compose l'offre à partir de la demande, le code calcule les prix selon la grille de l'entreprise, et l'offre attend la validation d'une personne avant l'envoi.</li>
-    <li><strong>Dépenses classées automatiquement</strong> : les relevés de carte de crédit sont lus et classés dans un fichier Excel.</li>
-  </ul>
+  <h2>Des systèmes déjà livrés</h2>
+  <p>Relances par texto, soumissions, demandes entrantes, documents de production : quelques systèmes que FournIA a construits.</p>
+  <Realisations />
 
   <h2>Comment ça se passe</h2>
-  <ol>
-    <li><strong>Diagnostic gratuit (30 minutes).</strong> On regarde si un système règle vraiment votre problème, ou non. Si la réponse est non, on vous le dit.</li>
-    <li><strong>On mesure le processus.</strong> On suit la tâche étape par étape et on chiffre le temps qu'elle prend chaque mois. Vous recevez un prix fixe pour le système.</li>
-    <li><strong>On construit.</strong> FournIA construit le système avec vos documents et vos accès, puis le teste. Quand le projet s'y prête, il est écrit en code, testé et versionné, ce qui le rend facile à corriger et à faire évoluer.</li>
-    <li><strong>On livre et on forme.</strong> Démo, tests avec votre équipe, installation, puis formation. Un système livré vient toujours avec sa formation : un outil que personne ne sait utiliser ne sert à rien.</li>
+  <ol class="etapes">
+    <li><strong>Diagnostic gratuit de 30 minutes.</strong> On vérifie qu'un système règle vraiment votre problème. Sinon, on vous le dit.</li>
+    <li><strong>On mesure la tâche.</strong> On la suit étape par étape et on chiffre le temps qu'elle prend. Vous recevez un prix fixe.</li>
+    <li><strong>On construit et on teste.</strong> Avec vos documents et vos accès, dans vos logiciels actuels.</li>
+    <li><strong>On livre et on forme.</strong> Démo, tests avec votre équipe, installation, formation. Un suivi mensuel peut ensuite garder le système à jour.</li>
   </ol>
-  <p>Après la livraison, un suivi mensuel garde le système à jour et l'ajuste quand vos besoins changent.</p>
 
   <h2>Pourquoi l'IA change l'automatisation</h2>
-  <p>L'automatisation classique suit des règles fixes : si telle case est cochée, envoie tel courriel. Elle casse dès qu'une demande arrive dans un format imprévu. L'intelligence artificielle ajoute la capacité de <strong>lire et comprendre</strong> : un courriel rédigé librement, une facture PDF, une demande de soumission incomplète. Le système extrait l'information, prépare la suite et laisse la décision à un humain quand il le faut.</p>
+  <p>L'automatisation classique suit des règles fixes et casse dès qu'une demande arrive dans un format imprévu. Avec l'IA, le système <strong>lit et comprend</strong> un courriel rédigé librement, une facture PDF ou une demande incomplète, prépare la suite et laisse la décision à un humain.</p>
   <p>Selon l'<a href="https://statistique.quebec.ca/fr/document/situation-attentes-entreprises-quebec/publication/adoption-et-utilisation-intelligence-artificielle-entreprises-au-quebec-2024-2025" target="_blank" rel="noopener">Institut de la statistique du Québec</a>, 12,7 % des entreprises québécoises ont utilisé l'IA à des fins de production au cours des 12 mois précédant le deuxième trimestre de 2025.</p>
-
-
-  <h2>Ce que FournIA ne fait pas</h2>
-  <p>Si l'automatisation ne règle pas une douleur qui vous coûte réellement du temps ou de l'argent, on vous le dit à l'appel découverte. Pour voir les chiffres en détail, lisez <a href="/blog/cout-automatisation-ia-pme-quebec-2026">combien coûte l'automatisation IA pour une PME</a> et <a href="/blog/taches-automatiser-premier-ia-pme-quebec-2026">quelles tâches automatiser en premier</a>.</p>
+  <p>Vous voulez revoir toute l'entreprise sur plusieurs mois ? C'est l'<a href="/accompagnement-intelligence-artificielle/">accompagnement complet</a>.</p>
+  <p class="note">Pour voir les chiffres : <a href="/blog/cout-automatisation-ia-pme-quebec-2026">combien coûte l'automatisation IA</a> et <a href="/blog/taches-automatiser-premier-ia-pme-quebec-2026">quelles tâches automatiser en premier</a>.</p>
 </ServicePage>

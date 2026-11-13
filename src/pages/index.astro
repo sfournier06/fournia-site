@@ -1,31 +1,28 @@
 ---
 import Consentement from '../components/Consentement.astro';
-// Page d'accueil FournIA (design réel porté depuis fournia.net).
-// CSS et JS inline conservés tels quels (is:global / is:inline).
+import Realisations from '../components/Realisations.astro';
+import Temoignages from '../components/Temoignages.astro';
+import Portrait from '../components/Portrait.astro';
+// Page d'accueil FournIA. CSS et JS inline (is:global / is:inline).
+// Le haut de page n'utilise PAS la classe `reveal` : le h1 doit s'afficher dès le premier rendu (LCP).
 import { organisationLd, GOOGLE_VERIFICATION, BING_VERIFICATION } from '../data/entite.mjs';
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 const orgLd = organisationLd;
-// Symbole de marque (hexagone-reseau original) recolore lime, a gauche du wordmark (nav + footer).
-const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <defs><filter id="fglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-  <g fill="none" stroke="#b7d94c" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M50 16 L79 33 L79 67 L50 84 L21 67 L21 33 Z" stroke-width="3"/>
-    <path d="M50 50 L50 16 M50 50 L79 67 M50 50 L21 67" stroke-width="2.2" opacity="0.9"/>
-  </g>
-  <g fill="#b7d94c"><circle cx="50" cy="16" r="4.6"/><circle cx="79" cy="33" r="4.6"/><circle cx="79" cy="67" r="4.6"/><circle cx="50" cy="84" r="4.6"/><circle cx="21" cy="67" r="4.6"/><circle cx="21" cy="33" r="4.6"/></g>
-  <circle cx="50" cy="50" r="7" fill="#c9e86b" filter="url(#fglow)"/>
-</svg>`;
+// Monogramme officiel (references/brand/assets/fournia-monogram.svg, copié dans public/brand/).
+const mark = '<img src="/brand/fournia-monogram.svg" alt="" width="40" height="40" />';
+const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
 ---
 <!DOCTYPE html>
 <html lang="fr-CA">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script is:inline>document.documentElement.classList.add('js');</script>
 <link rel="icon" type="image/svg+xml" href="/brand/fournia-favicon.svg">
 <link rel="icon" type="image/png" href="/brand/fournia-icon-512.png">
 <link rel="apple-touch-icon" href="/brand/fournia-icon-512.png">
 <title>Automatisation et IA pour PME, Rive-Nord et Montréal | FournIA</title>
-<meta name="description" content="FournIA aide les PME du Québec avec l'IA, en mots simples : accompagnement complet, systèmes à la carte et formation. Basé à Blainville. Diagnostic gratuit.">
+<meta name="description" content="FournIA automatise les tâches répétitives des PME du Québec avec l'IA : systèmes à la carte, accompagnement complet et formation. Basé à Blainville. Diagnostic gratuit.">
 <link rel="canonical" href={`${siteUrl}/`} />
 <meta property="og:title" content="Automatisation et IA pour PME, Rive-Nord et Montréal | FournIA">
 <meta property="og:url" content="https://fournia.net/">
@@ -34,7 +31,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 <meta property="og:image" content="https://fournia.net/brand/fournia-lockup-horizontal-dark.png">
 {GOOGLE_VERIFICATION && <meta name="google-site-verification" content={GOOGLE_VERIFICATION} />}
 {BING_VERIFICATION && <meta name="msvalidate.01" content={BING_VERIFICATION} />}
-<meta property="og:description" content="L'IA expliquée simplement et mise au travail dans votre PME : accompagnement complet, systèmes à la carte et formation.">
+<meta property="og:description" content="On automatise les tâches répétitives de votre PME : relances, soumissions, demandes de clients, documents. Système installé dans vos outils, équipe formée.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,6 +40,12 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" /></noscript>
 <script type="application/ld+json" set:html={JSON.stringify(orgLd)} />
 <style is:global>
+/* Polices de repli calibrées sur la largeur des vraies polices (mesuré le 2026-11-13) :
+     le texte ne change pas de ligne quand Space Grotesk et Inter arrivent, donc rien ne saute (CLS). */
+  @font-face { font-family: 'Space Grotesk Repli'; src: local('Arial'), local('ArialMT'); font-weight: 300 500; size-adjust: 107.8%; }
+  @font-face { font-family: 'Space Grotesk Repli'; src: local('Arial Bold'), local('Arial-BoldMT'); font-weight: 600 800; size-adjust: 100.7%; }
+  @font-face { font-family: 'Inter Repli'; src: local('Arial'), local('ArialMT'); font-weight: 300 500; size-adjust: 105.7%; }
+  @font-face { font-family: 'Inter Repli'; src: local('Arial Bold'), local('Arial-BoldMT'); font-weight: 600 800; size-adjust: 101%; }
   :root {
     --ink-950: #0b0b0c;
     --ink-900: #121212;
@@ -64,9 +67,10 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   ::selection { background: var(--lime); color: var(--ink-950); }
+  :focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; border-radius: 6px; }
 
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Inter Repli', sans-serif;
     background: var(--ink-950);
     color: var(--white);
     overflow-x: hidden;
@@ -79,44 +83,34 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   ::-webkit-scrollbar-thumb { background: var(--ink-700); border-radius: 10px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--lime-d); }
 
-  h1, h2, h3, .display { font-family: 'Space Grotesk', sans-serif; }
+  h1, h2, h3, .display { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; }
+  h1, h2 { text-wrap: balance; }
 
   a { color: inherit; text-decoration: none; }
 
   .wrap { width: min(1200px, 92vw); margin: 0 auto; }
 
-  /* ── ambient background (animé / techno) ──────── */
-  .bg-fx {
-    position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-  }
-  /* réseau de points connectés dessiné sur canvas */
-  .net { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .45; }
-  .glow {
-    position: absolute; border-radius: 50%; filter: blur(100px); opacity: .45;
-    will-change: transform; /* promu en couche GPU : la dérive ne repeint rien */
-  }
+  /* ── fond (constellation de points + un glow lime) ── */
+  .bg-fx { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .net { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .4; }
+  .glow { position: absolute; border-radius: 50%; filter: blur(100px); opacity: .45; will-change: transform; }
   .glow-1 { width: 48vw; height: 48vw; top: -14vw; right: -10vw;
     background: radial-gradient(circle, rgba(183,217,76,.18), transparent 68%);
     animation: drift 26s ease-in-out infinite; }
-  .glow-2 { display: block; width: 40vw; height: 40vw; bottom: -12vw; left: -10vw;
-    background: radial-gradient(circle, rgba(120,180,140,.12), transparent 66%);
-    animation: drift 32s ease-in-out infinite reverse; }
   .grid-lines {
     position: absolute; inset: 0;
     background-image: linear-gradient(var(--line) 1px, transparent 1px),
                       linear-gradient(90deg, var(--line) 1px, transparent 1px);
     background-size: 72px 72px;
     mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 22%, transparent 72%);
-    opacity: .35; /* grille statique : aucun repaint au scroll */
+    opacity: .35;
   }
   @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(3vw,4vw) scale(1.12); } }
   .grain {
     position: absolute; inset: 0; pointer-events: none; opacity: .03;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
-  @media (prefers-reduced-motion: reduce) {
-    .glow-1, .glow-2 { animation: none; }
-  }
+  @media (prefers-reduced-motion: reduce) { .glow-1 { animation: none; } }
 
   /* ── NAV ─────────────────────────────────────── */
   nav {
@@ -135,15 +129,10 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
     backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     transition: background .3s, box-shadow .3s, border-color .3s;
   }
-  nav.scrolled .nav-inner {
-    background: rgba(14,14,14,.85);
-    box-shadow: 0 12px 40px rgba(0,0,0,.45);
-    border-color: var(--glass-b);
-  }
+  nav.scrolled .nav-inner { background: rgba(14,14,14,.85); box-shadow: 0 12px 40px rgba(0,0,0,.45); border-color: var(--glass-b); }
   .logo { display: flex; align-items: center; gap: .6rem; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: -.03em; }
-  .logo .dot { width: 10px; height: 10px; border-radius: 2px; background: var(--lime); box-shadow: 0 0 14px var(--lime-glow); }
   .logo .mark { width: 1.8em; height: 1.8em; flex: none; display: inline-flex; align-items: center; }
-  .logo .mark svg { width: 100%; height: 100%; display: block; }
+  .logo .mark img { width: 100%; height: 100%; display: block; }
   .logo .ia { color: var(--lime); }
 
   .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
@@ -152,152 +141,94 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 
   .btn {
     display: inline-flex; align-items: center; gap: .55rem;
-    font-family: 'Space Grotesk'; font-weight: 600; font-size: .92rem;
-    padding: .8rem 1.5rem; border-radius: 100px; cursor: pointer; border: none;
-    transition: transform .25s cubic-bezier(.2,.8,.3,1), box-shadow .25s, background .25s;
+    font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-weight: 600; font-size: .95rem;
+    padding: .85rem 1.55rem; border-radius: 100px; cursor: pointer; border: none;
+    transition: transform .25s cubic-bezier(.2,.8,.3,1), box-shadow .25s, background .25s, border-color .25s;
   }
-  .btn-primary {
-    background: var(--lime); color: var(--ink-950);
-    box-shadow: 0 6px 22px rgba(183,217,76,.22);
-  }
+  .btn-primary { background: var(--lime); color: var(--ink-950); box-shadow: 0 6px 22px rgba(183,217,76,.22); }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(183,217,76,.38); background: var(--lime-l); }
   .btn-primary .arrow { transition: transform .25s; }
   .btn-primary:hover .arrow { transform: translateX(4px); }
-  /* CTA du nav : modèle desktop (confortable, plus mince que le logo) */
   .nav-inner > .cta-nav { padding: .5rem 1.15rem; font-size: .84rem; font-weight: 600; }
-  .btn-ghost {
-    background: var(--glass); color: var(--white);
-    border: 1px solid var(--glass-b);
-    backdrop-filter: blur(8px);
-  }
-  .btn-ghost:hover { transform: translateY(-2px); background: rgba(255,255,255,.06); }
+  .btn-ghost { background: transparent; color: var(--white); border: 1px solid var(--glass-b); }
+  .btn-ghost:hover { transform: translateY(-2px); border-color: rgba(183,217,76,.45); }
 
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: .6rem 1rem; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: .6rem 1rem; background: none; border: none; }
   .hamburger span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: .3s; }
 
   /* ── HERO ────────────────────────────────────── */
-  header { position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: center; padding: 9rem 0 5rem; }
-  .hero { position: relative; text-align: center; }
-  /* Le contenu du hero passe toujours au-dessus des bulles flottantes */
-  .hero .eyebrow, .hero h1.hero-title, .hero .hero-sub, .hero .hero-cta { position: relative; z-index: 2; }
-
-  .eyebrow {
-    display: inline-flex; align-items: center; gap: .5rem;
-    font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--lime); padding: .45rem 1rem; border-radius: 100px;
-    border: 1px solid rgba(183,217,76,.3); background: rgba(183,217,76,.05);
-    margin-bottom: 2rem;
-  }
-  .eyebrow .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 0 var(--lime-glow); animation: pulse 2s infinite; }
-  @keyframes pulse { 0%{box-shadow:0 0 0 0 var(--lime-glow);} 70%{box-shadow:0 0 0 9px rgba(183,217,76,0);} 100%{box-shadow:0 0 0 0 rgba(183,217,76,0);} }
-
+  header { position: relative; z-index: 1; padding: 9.5rem 0 3rem; }
+  .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 4rem; align-items: center; }
   h1.hero-title {
-    font-size: clamp(2.8rem, 8vw, 6.2rem); font-weight: 700;
-    line-height: .98; letter-spacing: -.03em; margin-bottom: 1.8rem;
+    font-size: clamp(2.3rem, 5.2vw, 4.4rem); font-weight: 700;
+    line-height: 1.02; letter-spacing: -.035em; margin-bottom: 1.5rem;
   }
   h1.hero-title .accent { color: var(--lime); }
-  .hero-sub {
-    max-width: 600px; margin: 0 auto 2.6rem; color: var(--mute); font-size: 1.15rem;
-  }
-  .hero-cta { display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; }
-  .scroll-hint { font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; color: var(--mute-d); display: flex; align-items: center; gap: .6rem; }
-  .scroll-hint .line { width: 34px; height: 1px; background: var(--mute-d); position: relative; overflow: hidden; }
-  .scroll-hint .line::after { content:''; position:absolute; inset:0; width:50%; background: var(--lime); animation: sweep 2s infinite; }
-  @keyframes sweep { 0%{transform:translateX(-100%);} 100%{transform:translateX(200%);} }
+  .hero-sub { max-width: 34rem; color: var(--mute); font-size: 1.15rem; line-height: 1.6; margin-bottom: 2.2rem; }
+  .hero-sub strong { color: var(--white); font-weight: 500; }
+  .hero-cta { display: flex; gap: .8rem; flex-wrap: wrap; align-items: center; }
+  .hero-note { margin-top: 1.4rem; color: var(--mute); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; }
+  .hero-note span { display: inline-flex; align-items: center; gap: .45rem; }
+  .hero-note svg { width: 15px; height: 15px; color: var(--lime); flex: none; }
 
-  /* floating nodes (discrets, 2 max) */
-  .node {
-    position: absolute; z-index: 0; display: flex; align-items: center; gap: .6rem;
-    padding: .55rem .85rem; border-radius: 100px;
-    background: rgba(255,255,255,.03); border: 1px solid var(--line);
-    backdrop-filter: blur(8px); font-size: .82rem; opacity: .85;
-    animation: float 7s ease-in-out infinite;
+  /* panneau d'exemple : ce qu'un système fait */
+  .demo {
+    border-radius: 22px; border: 1px solid var(--glass-b);
+    background: linear-gradient(170deg, rgba(26,27,25,.92), rgba(14,14,14,.92));
+    box-shadow: 0 30px 70px rgba(0,0,0,.5);
+    padding: 1.4rem;
   }
-  .node .ico { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: rgba(183,217,76,.12); color: var(--lime); }
-  .node .ico svg { width: 16px; height: 16px; }
-  .node b { font-family: 'Space Grotesk'; display: block; line-height: 1.1; }
-  .node small { color: var(--mute-d); font-size: .72rem; }
-  .node-1 { top: 17%; left: 1.5%; animation-delay: 0s; }
-  .node-2 { top: 17%; right: 1.5%; animation-delay: 1.2s; }
-  .node-3 { bottom: 19%; left: 1.5%; animation-delay: .6s; }
-  .node-4 { bottom: 19%; right: 1.5%; animation-delay: 1.8s; }
-  @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+  .demo-tete { display: flex; justify-content: space-between; align-items: center; padding: 0 .3rem 1rem; border-bottom: 1px solid var(--line); margin-bottom: .4rem; }
+  .demo-tete strong { font-family: 'Space Grotesk'; font-size: .98rem; font-weight: 600; }
+  .demo-tete span { font-size: .78rem; color: var(--mute); border: 1px solid var(--glass-b); border-radius: 100px; padding: .2rem .65rem; }
+  .demo ol { list-style: none; }
+  .demo li { display: grid; grid-template-columns: auto 1fr; gap: .9rem; align-items: start; padding: .95rem .3rem; border-bottom: 1px solid var(--line); }
+  .demo li:last-child { border-bottom: none; padding-bottom: .3rem; }
+  .demo .pastille { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: rgba(183,217,76,.1); color: var(--lime); }
+  .demo .pastille svg { width: 16px; height: 16px; }
+  .demo .quoi { color: var(--white); font-size: .95rem; line-height: 1.35; }
+  .demo .fait { display: inline-flex; align-items: center; gap: .4rem; margin-top: .3rem; color: var(--lime); font-size: .86rem; }
+  .demo .fait svg { width: 13px; height: 13px; }
+  .js .demo li { animation: entree .6s cubic-bezier(.16,1,.3,1) both; }
+  .js .demo li:nth-child(2) { animation-delay: .12s; } .js .demo li:nth-child(3) { animation-delay: .24s; } .js .demo li:nth-child(4) { animation-delay: .36s; }
+  @keyframes entree { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
-  /* ── SECTION shells ──────────────────────────── */
-  section { position: relative; z-index: 1; padding: 6rem 0; }
-  .sec-label {
-    display: inline-flex; align-items:center; gap:.6rem;
-    font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; color: var(--lime);
-    margin-bottom: 1.2rem;
-  }
-  .sec-label::before { content:''; width: 26px; height:1px; background: var(--lime); }
-  h2.sec-title { font-size: clamp(2rem, 4.5vw, 3.3rem); line-height: 1.05; letter-spacing: -.02em; font-weight: 700; margin-bottom: 1.2rem; }
+  /* ── SECTIONS ────────────────────────────────── */
+  section { position: relative; z-index: 1; padding: 4.5rem 0; }
+  h2.sec-title { font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.06; letter-spacing: -.025em; font-weight: 700; margin-bottom: 1rem; max-width: 22ch; }
   h2.sec-title .accent { color: var(--lime); }
-  .sec-intro { color: var(--mute); max-width: 580px; font-size: 1.08rem; }
+  .sec-intro { color: var(--mute); max-width: 36rem; font-size: 1.08rem; margin-bottom: 2.6rem; }
+  .suite { margin-top: 1.8rem; }
+  .lien-fleche { color: var(--lime); font-weight: 500; font-size: .95rem; white-space: nowrap; }
+  .lien-fleche:hover { color: var(--lime-l); }
 
-  /* ── STATS ───────────────────────────────────── */
-  .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-  .stat {
-    padding: 2.4rem 2rem; border-radius: 18px;
-    background: var(--glass); border: 1px solid var(--line);
-    transition: transform .35s, border-color .35s, background .35s;
-  }
-  .stat:hover { transform: translateY(-6px); border-color: rgba(183,217,76,.35); background: rgba(183,217,76,.03); }
-  .stat .num { font-family: 'Space Grotesk'; font-size: 3rem; font-weight: 700; color: var(--lime); line-height: 1; letter-spacing: -.02em; }
-  .stat .desc { color: var(--mute); margin-top: .8rem; font-size: .98rem; }
+  /* ── OFFRES : un seul panneau, trois colonnes ── */
+  .offres { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--glass-b); border-radius: 22px; overflow: hidden; background: rgba(18,18,18,.6); }
+  .offre { padding: 2.2rem 2rem; display: flex; flex-direction: column; gap: .9rem; transition: background .3s; }
+  .offre + .offre { border-left: 1px solid var(--line); }
+  .offre:hover { background: rgba(183,217,76,.035); }
+  .offre h3 { font-size: 1.45rem; letter-spacing: -.015em; line-height: 1.15; }
+  .offre p { color: var(--mute); font-size: .98rem; }
+  .offre .pour { color: var(--white); font-size: .95rem; padding-top: .9rem; border-top: 1px solid var(--line); margin-top: auto; }
+  .offre .pour b { color: var(--lime); font-weight: 500; }
+  .offre a { color: var(--lime); font-weight: 500; font-size: .95rem; }
+  .offre a:hover { color: var(--lime-l); }
 
-  /* ── ABOUT ───────────────────────────────────── */
-  .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 4rem; align-items: center; }
-  .chips { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
-  .chip { padding: .55rem 1.1rem; border-radius: 100px; border: 1px solid var(--glass-b); background: var(--glass); font-size: .88rem; color: var(--white); display: flex; align-items: center; gap: .5rem; }
-  .chip::before { content:'✓'; color: var(--lime); font-weight: 700; }
-  .about-card {
-    padding: 2.4rem; border-radius: 22px;
-    background: linear-gradient(160deg, rgba(183,217,76,.08), rgba(255,255,255,.015));
-    border: 1px solid var(--glass-b);
-  }
-  .about-card p { color: var(--mute); margin-bottom: 1.1rem; }
-  .about-card p:last-child { margin-bottom: 0; }
-  .badges { display: flex; gap: 1.5rem; margin-bottom: 2rem; }
-  .badge .big { font-family: 'Space Grotesk'; font-size: 1.9rem; font-weight: 700; color: var(--lime); }
-  .badge small { display: block; color: var(--mute-d); font-size: .8rem; }
+  /* ── ÉTAPES ──────────────────────────────────── */
+  .etapes { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  .etapes li { padding-top: 1.4rem; border-top: 1px solid var(--glass-b); position: relative; }
+  .etapes li::before { content: ''; position: absolute; top: -1px; left: 0; width: 2.2rem; height: 2px; background: var(--lime); }
+  .etapes .n { font-family: 'Space Grotesk'; color: var(--lime); font-weight: 600; font-size: .95rem; margin-bottom: .5rem; display: block; }
+  .etapes h3 { font-size: 1.3rem; margin-bottom: .5rem; letter-spacing: -.01em; }
+  .etapes p { color: var(--mute); font-size: .98rem; }
 
-  /* ── SERVICES ────────────────────────────────── */
-  .cards-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
-  .card {
-    position: relative; padding: 2.4rem; border-radius: 18px;
-    background: var(--glass); border: 1px solid var(--line);
-    overflow: hidden;
-    transition: transform .35s, border-color .35s;
-  }
-  .card::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:2px;
-    background: linear-gradient(90deg, var(--lime), transparent);
-    transform: scaleX(0); transform-origin: left; transition: transform .4s;
-  }
-  .card:hover { transform: translateY(-8px); border-color: var(--glass-b); }
-  .card:hover::before { transform: scaleX(1); }
-  .card .ico-box {
-    width: 54px; height: 54px; border-radius: 14px; display: grid; place-items: center;
-    background: rgba(183,217,76,.1); margin-bottom: 1.4rem; color: var(--lime);
-  }
-  .card .ico-box svg { width: 26px; height: 26px; }
-  .card h3 { font-size: 1.35rem; margin-bottom: .8rem; letter-spacing: -.01em; }
-  .card p { color: var(--mute); font-size: .96rem; }
-
-  /* ── PROCESS ─────────────────────────────────── */
-  .steps { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 3rem; }
-  .step {
-    display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start;
-    padding: 2.2rem; border-radius: 16px;
-    background: var(--glass); border: 1px solid var(--line);
-    transition: transform .3s, border-color .3s, background .3s;
-  }
-  .step:hover { transform: translateX(8px); border-color: rgba(183,217,76,.3); background: rgba(183,217,76,.025); }
-  .step .no { font-family: 'Space Grotesk'; font-size: 2.6rem; font-weight: 700; color: rgba(183,217,76,.4); line-height: 1; min-width: 70px; }
-  .step .tag { display: inline-block; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--lime); background: rgba(183,217,76,.1); padding: .3rem .8rem; border-radius: 100px; margin-bottom: .8rem; }
-  .step h3 { font-size: 1.5rem; margin-bottom: .6rem; }
-  .step p { color: var(--mute); max-width: 640px; }
+  /* ── QUI EST DERRIÈRE ────────────────────────── */
+  .fondateur { display: grid; grid-template-columns: 300px 1fr; gap: 4rem; align-items: center; }
+  .fondateur .portrait { max-width: 300px; width: 100%; }
+  .fondateur p { color: var(--mute); font-size: 1.06rem; max-width: 40rem; margin-bottom: 1rem; }
+  .garanties { list-style: none; display: grid; gap: .7rem; margin: 1.6rem 0 1.8rem; }
+  .garanties li { display: flex; gap: .7rem; align-items: start; color: var(--white); font-size: .98rem; }
+  .garanties svg { width: 18px; height: 18px; color: var(--lime); flex: none; margin-top: .2rem; }
 
   /* ── FORM / CTA ──────────────────────────────── */
   .cta-shell {
@@ -307,26 +238,25 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
     display: grid; grid-template-columns: .85fr 1.15fr;
   }
   .cta-left { padding: 3.5rem 3rem; border-right: 1px solid var(--line); }
-  .cta-left h2 { font-size: clamp(1.9rem,3.2vw,2.6rem); line-height: 1.08; margin-bottom: 1.4rem; }
+  .cta-left h2 { font-size: clamp(1.9rem,3.2vw,2.6rem); line-height: 1.08; margin-bottom: 1.2rem; letter-spacing: -.02em; }
   .cta-left h2 .accent { color: var(--lime); }
   .cta-left p { color: var(--mute); margin-bottom: 1rem; }
-  .cta-perks { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: .9rem; }
+  .cta-perks { list-style: none; margin-top: 1.8rem; display: flex; flex-direction: column; gap: .9rem; }
   .cta-perks li { display: flex; align-items: center; gap: .7rem; color: var(--white); font-size: .95rem; }
-  .cta-perks li span { width: 22px; height: 22px; border-radius: 50%; background: rgba(183,217,76,.14); color: var(--lime); display: grid; place-items: center; font-size: .75rem; }
+  .cta-perks li span { width: 22px; height: 22px; border-radius: 50%; background: rgba(183,217,76,.14); color: var(--lime); display: grid; place-items: center; flex: none; }
+  .cta-perks li span svg { width: 12px; height: 12px; }
 
   form { padding: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
   .field { display: flex; flex-direction: column; gap: .5rem; }
   .field.full { grid-column: 1 / -1; }
-  .field label { font-size: .82rem; color: var(--mute); font-weight: 500; }
+  .field label { font-size: .85rem; color: var(--mute); font-weight: 500; }
   .field input, .field select, .field textarea {
     background: rgba(255,255,255,.035); border: 1px solid var(--glass-b);
     border-radius: 12px; padding: .85rem 1rem; color: var(--white);
     font-family: inherit; font-size: .95rem; transition: border-color .2s, background .2s;
   }
   .field input::placeholder, .field textarea::placeholder { color: var(--mute-d); }
-  .field input:focus, .field select:focus, .field textarea:focus {
-    outline: none; border-color: var(--lime); background: rgba(183,217,76,.04);
-  }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--lime); background: rgba(183,217,76,.04); }
   .field select { appearance: none; cursor: pointer;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239a9c95' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
     background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.4rem; }
@@ -334,31 +264,38 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   .field textarea { resize: vertical; min-height: 80px; }
   form .submit-row { grid-column: 1 / -1; }
   form .btn-primary { width: 100%; justify-content: center; }
-  .form-note { grid-column: 1/-1; font-size: .8rem; color: var(--mute-d); text-align: center; }
+  .form-note { grid-column: 1/-1; font-size: .82rem; color: var(--mute); text-align: center; }
 
   /* ── FOOTER ──────────────────────────────────── */
   footer { position: relative; z-index: 1; border-top: 1px solid var(--line); padding: 4rem 0 2.5rem; margin-top: 4rem; }
   .foot-grid { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; }
+  .foot-desc { color: var(--mute); margin-top: 1rem; max-width: 280px; font-size: .92rem; }
   .foot-contact { display: flex; flex-direction: column; gap: .5rem; color: var(--mute); }
   .foot-contact a:hover { color: var(--lime); }
-  .card-link { display: inline-block; margin-top: 1rem; color: var(--lime); font-size: .92rem; font-weight: 500; }
-  .card-link:hover { color: var(--lime-l); }
-  .foot-bottom { margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid var(--line); text-align: center; color: var(--mute-d); font-size: .85rem; }
+  .foot-bottom { margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid var(--line); text-align: center; color: var(--mute); font-size: .85rem; }
 
-  /* ── reveal animation ────────────────────────── */
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
-  .reveal.in { opacity: 1; transform: none; }
-  .reveal[data-d="1"]{transition-delay:.1s;} .reveal[data-d="2"]{transition-delay:.2s;} .reveal[data-d="3"]{transition-delay:.3s;}
+  /* ── apparition au défilement (sous la ligne de flottaison seulement) ── */
+  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+  .js .reveal.in { opacity: 1; transform: none; }
+  .reveal[data-d="1"]{transition-delay:.08s;} .reveal[data-d="2"]{transition-delay:.16s;}
+  @media (prefers-reduced-motion: reduce) {
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .js .demo li { animation: none; }
+  }
 
   /* ── responsive ──────────────────────────────── */
-  /* bulles flottantes : seulement quand il y a de la place hors du texte centré */
-  @media (max-width: 1150px) { .node { display: none; } }
+  @media (max-width: 960px) {
+    .hero { grid-template-columns: 1fr; gap: 2.8rem; }
+    .offres { grid-template-columns: 1fr; }
+    .offre + .offre { border-left: none; border-top: 1px solid var(--line); }
+    .etapes { grid-template-columns: 1fr; gap: 1.8rem; }
+    .fondateur { grid-template-columns: 1fr; gap: 2rem; }
+    .fondateur .portrait { max-width: 180px; }
+  }
   @media (max-width: 900px) {
     .hamburger { display: flex; }
-    /* CTA du nav : modèle mobile (label complet mais plus compact que desktop) */
     .nav-inner { padding-left: .95rem; gap: .7rem; }
-    .logo { flex: 0 1 auto; min-width: 0; }
-    .logo { font-size: 1.12rem; }
+    .logo { flex: 0 1 auto; min-width: 0; font-size: 1.12rem; }
     .logo .mark { width: 1.4em; height: 1.4em; }
     .nav-inner > .cta-nav { padding: .38rem .68rem; font-size: .68rem; letter-spacing: -.01em; gap: 0; }
     .cta-nav .arrow { display: none; }
@@ -371,19 +308,26 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
       opacity: 0; transform: translateY(-10px); pointer-events: none;
       transition: opacity .25s, transform .25s;
     }
-    .nav-links a { padding: .8rem 1rem; border-radius: 12px; font-size: 1rem; color: var(--white); }
+    .nav-links a { padding: .8rem 1rem; border-radius: 12px; font-size: 1rem; color: var(--white); display: block; }
     .nav-links a:hover { background: rgba(183,217,76,.1); color: var(--lime); }
     nav.open .nav-links { opacity: 1; transform: none; pointer-events: auto; }
     nav.open .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     nav.open .hamburger span:nth-child(2) { opacity: 0; }
     nav.open .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    .about-grid, .cta-shell { grid-template-columns: 1fr; }
-    .cta-left { border-right: none; border-bottom: 1px solid var(--line); }
-    .stats, .cards-3 { grid-template-columns: 1fr; }
-    .node { display: none; }
+    .cta-shell { grid-template-columns: 1fr; }
+    .cta-left { border-right: none; border-bottom: 1px solid var(--line); padding: 2.4rem; }
     form { grid-template-columns: 1fr; padding: 2rem; }
-    .step { grid-template-columns: 1fr; gap: 1rem; }
-    .cta-left { padding: 2.4rem; }
+  }
+  @media (max-width: 560px) {
+    header { padding: 7.5rem 0 3rem; }
+    .hero-sub { font-size: 1.05rem; margin-bottom: 1.8rem; }
+    .hero-cta .btn { width: 100%; justify-content: center; }
+    section { padding: 4rem 0; }
+    .sec-intro { margin-bottom: 2rem; }
+    .offre { padding: 1.8rem 1.5rem; }
+    .demo { padding: 1.1rem; }
+    .cta-left { padding: 2rem 1.5rem; }
+    form { padding: 1.5rem; }
   }
 </style>
 </head>
@@ -393,137 +337,128 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   <canvas id="net" class="net"></canvas>
   <div class="grid-lines"></div>
   <div class="glow glow-1"></div>
-  <div class="glow glow-2"></div>
   <div class="grain"></div>
 </div>
 
 <!-- NAV -->
-<nav id="nav">
+<nav id="nav" aria-label="Navigation principale">
   <div class="nav-inner">
-    <a href="#top" class="logo"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
+    <a href="#top" class="logo" aria-label="FournIA, accueil"><span class="mark" set:html={mark}></span><span>Fourn<span class="ia">IA</span></span></a>
     <ul class="nav-links">
-      <li><a href="#apropos">À propos</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="#processus">Processus</a></li>
-      <li><a href="/blog">Blog</a></li>
+      <li><a href="#exemples">Exemples</a></li>
+      <li><a href="/a-propos/">À propos</a></li>
+      <li><a href="/blog">Blogue</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="/diagnostic/" class="btn btn-primary cta-nav">Réserver un appel <span class="arrow">→</span></a>
-    <div class="hamburger" id="burger"><span></span><span></span><span></span></div>
+    <button type="button" class="hamburger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
 <!-- HERO -->
 <header id="top">
   <div class="wrap hero">
-    <div class="node node-1"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div><b>5 à 20 h</b><small>économisées / sem.</small></div></div>
-    <div class="node node-2"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div><div><b>Audit</b><small>à fort impact</small></div></div>
-    <div class="node node-3"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M12 4v4M9 14h.01M15 14h.01"/></svg></div><div><b>Systèmes</b><small>clé en main</small></div></div>
-    <div class="node node-4"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-7"/><path d="M17 8h4v4"/></svg></div><div><b>Résultats</b><small>mesurables</small></div></div>
-
-    <h1 class="hero-title reveal" data-d="1">Gagnez 5 à 20 heures<br>par semaine.<br><span class="accent">Sans embaucher.</span></h1>
-    <p class="hero-sub reveal" data-d="2">FournIA conçoit et implante des systèmes sur mesure qui éliminent vos tâches répétitives. On s'occupe de tout, vous gardez le temps.</p>
-    <div class="hero-cta reveal" data-d="3">
-      <a href="/diagnostic/" class="btn btn-primary">Réserver un appel découverte <span class="arrow">→</span></a>
-      <div class="scroll-hint"><span class="line"></span>Défiler pour en savoir plus</div>
+    <div>
+      <h1 class="hero-title">On automatise les <span class="accent">tâches répétitives</span> de votre PME.</h1>
+      <p class="hero-sub">Relances, soumissions, demandes de clients, documents : on construit le système avec l'IA, on l'installe dans vos outils et on <strong>forme votre équipe</strong>.</p>
+      <div class="hero-cta">
+        <a href="/diagnostic/" class="btn btn-primary">Réserver mon diagnostic gratuit <span class="arrow">→</span></a>
+        <a href="#exemples" class="btn btn-ghost">Voir des exemples</a>
+      </div>
+      <p class="hero-note">
+        <span set:html={check + '30 minutes, sans engagement'}></span>
+        <span set:html={check + 'Basé à Blainville, Rive-Nord'}></span>
+      </p>
     </div>
+
+    <figure class="demo" aria-label="Exemple de ce qu'un système fait pour une PME">
+      <div class="demo-tete"><strong>Un système au travail</strong><span>Exemple</span></div>
+      <ol>
+        <li>
+          <span class="pastille"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
+          <div><div class="quoi">Une demande de soumission arrive</div><div class="fait" set:html={check + 'Brouillon prêt, vous validez'}></div></div>
+        </li>
+        <li>
+          <span class="pastille"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+          <div><div class="quoi">Un client ne répond plus depuis 5 jours</div><div class="fait" set:html={check + 'Relance envoyée par texto'}></div></div>
+        </li>
+        <li>
+          <span class="pastille"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+          <div><div class="quoi">Un appel est manqué</div><div class="fait" set:html={check + 'Texto de suivi envoyé'}></div></div>
+        </li>
+        <li>
+          <span class="pastille"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span>
+          <div><div class="quoi">Une commande entre en ligne</div><div class="fait" set:html={check + 'Document de production créé'}></div></div>
+        </li>
+      </ol>
+    </figure>
   </div>
 </header>
 
-<!-- STATS -->
-<section>
-  <div class="wrap stats">
-    <div class="stat reveal"><div class="num">5 à 20 h</div><div class="desc">économisées par semaine</div></div>
-    <div class="stat reveal" data-d="1"><div class="num">1 sem.</div><div class="desc">délai moyen pour voir les premiers résultats</div></div>
-    <div class="stat reveal" data-d="2"><div class="num">100%</div><div class="desc">formation incluse dans chaque implantation</div></div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="apropos">
-  <div class="wrap about-grid">
-    <div>
-      <div class="sec-label reveal">À propos</div>
-      <h2 class="sec-title reveal" data-d="1">Un accompagnement<br><span class="accent">clé en main.</span></h2>
-      <p class="sec-intro reveal" data-d="2">Vous repartez avec des outils concrets que vous savez utiliser.</p>
-      <div class="chips reveal" data-d="3">
-        <div class="chip">Personnalisé à votre réalité</div>
-        <div class="chip">Formation toujours incluse</div>
-        <div class="chip">Résultats mesurables</div>
-        <div class="chip">Zéro jargon technique</div>
-      </div>
-    </div>
-    <div class="about-card reveal" data-d="2">
-      <div class="badges">
-        <div class="badge"><div class="big">100%</div><small>Personnalisé à votre réalité</small></div>
-        <div class="badge"><div class="big">A à Z</div><small>On gère tout le processus</small></div>
-      </div>
-      <p>La plupart des PME savent qu'elles pourraient gagner du temps, mais ne savent pas par où commencer, quoi choisir, ou comment l'implanter sans tout compliquer.</p>
-      <p>C'est exactement là qu'intervient FournIA. On analyse vos opérations, on identifie les meilleures opportunités, on construit la solution adaptée à votre réalité, et on forme votre équipe.</p>
-      <p>Chaque solution est entièrement personnalisée. Notre rôle est de rendre cette transition aussi simple et fluide que possible, tout en assurant un retour sur investissement concret.</p>
-    </div>
+<!-- EXEMPLES -->
+<section id="exemples">
+  <div class="wrap">
+    <h2 class="sec-title reveal">Des systèmes qu'on a <span class="accent">déjà livrés</span></h2>
+    <div class="reveal"><Realisations court={true} /></div>
+    <p class="suite reveal"><a class="lien-fleche" href="/secteurs/">Voir tous les secteurs →</a></p>
   </div>
 </section>
 
 <!-- SERVICES -->
 <section id="services">
   <div class="wrap">
-    <div class="sec-label reveal">Services</div>
-    <h2 class="sec-title reveal" data-d="1">Trois façons de <span class="accent">travailler ensemble</span></h2>
-    <p class="sec-intro reveal" data-d="2">Toutes commencent par un diagnostic gratuit de 30 minutes. On vous dit honnêtement laquelle vous convient.</p>
-    <div class="cards-3">
-      <div class="card reveal">
-        <div class="ico-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
-        <h3>Accompagnement complet</h3>
-        <p>On prend toute l'entreprise de A à Z, sur 6 mois à 1 an : analyse de vos processus, automatisation un chantier à la fois, formation de l'équipe à chaque étape. On est là pendant toute votre transition.</p>
-        <a class="card-link" href="/accompagnement-intelligence-artificielle/">Voir l'accompagnement complet →</a>
-      </div>
-      <div class="card reveal" data-d="1">
-        <div class="ico-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 16h0M16 16h0"/></svg></div>
+    <h2 class="sec-title reveal">Trois façons de <span class="accent">travailler ensemble</span></h2>
+    <p class="sec-intro reveal">Le diagnostic gratuit vous dit laquelle vous convient.</p>
+    <div class="offres reveal">
+      <article class="offre">
         <h3>Systèmes à la carte</h3>
-        <p>Un problème précis, un système qui le règle : relances, soumissions, demandes entrantes, documents. Construit, installé dans vos outils, équipe formée. Livré une fois, à prix fixe.</p>
-        <a class="card-link" href="/automatisation-entreprise/">Voir les systèmes à la carte →</a>
-      </div>
-      <div class="card reveal" data-d="2">
-        <div class="ico-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M2 8v6M6 10.5V15c0 1.5 3 3 6 3s6-1.5 6-3v-4.5"/></svg></div>
+        <p>Un problème précis, un système qui le règle. Installé dans vos outils, livré une fois, à prix fixe.</p>
+        <p class="pour"><b>Pour vous si</b> une tâche précise vous coûte des heures chaque semaine.</p>
+        <a href="/automatisation-entreprise/">Voir les systèmes à la carte →</a>
+      </article>
+      <article class="offre">
+        <h3>Accompagnement complet</h3>
+        <p>Toute l'entreprise, de A à Z, sur 6 à 12 mois. Un plan, puis un chantier à la fois.</p>
+        <p class="pour"><b>Pour vous si</b> vous voulez un partenaire pour toute la transition.</p>
+        <a href="/accompagnement-intelligence-artificielle/">Voir l'accompagnement →</a>
+      </article>
+      <article class="offre">
         <h3>Formation</h3>
-        <p>L'IA expliquée en mots simples, pour les gens qui n'y connaissent rien. En groupe, en un pour un, ou pour former la personne qui deviendra l'experte de l'IA dans votre entreprise.</p>
-        <a class="card-link" href="/formation-ia-entreprise/">Voir les formations →</a>
-      </div>
+        <p>L'IA expliquée en mots simples. En groupe, en un pour un, ou pour former votre experte à l'interne.</p>
+        <p class="pour"><b>Pour vous si</b> votre équipe doit d'abord comprendre l'IA.</p>
+        <a href="/formation-ia-entreprise/">Voir les formations →</a>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- PROCESS -->
+<!-- PROCESSUS -->
 <section id="processus">
   <div class="wrap">
-    <div class="sec-label reveal">Processus</div>
-    <h2 class="sec-title reveal" data-d="1">Comment ça <span class="accent">fonctionne</span></h2>
-    <div class="steps">
-      <div class="step reveal">
-        <div class="no">01</div>
-        <div>
-          <span class="tag">Gratuit · 30 min</span>
-          <h3>Diagnostic gratuit</h3>
-          <p>30 minutes pour comprendre votre réalité et voir où l'IA peut vraiment vous aider. Si elle ne peut pas, on vous le dit. Sans engagement, sans pression.</p>
-        </div>
-      </div>
-      <div class="step reveal" data-d="1">
-        <div class="no">02</div>
-        <div>
-          <span class="tag">Choix</span>
-          <h3>La bonne formule pour vous</h3>
-          <p>Accompagnement complet, système à la carte ou formation : on vous recommande la formule qui colle à votre besoin, avec un plan clair et un prix présenté en personne.</p>
-        </div>
-      </div>
-      <div class="step reveal" data-d="2">
-        <div class="no">03</div>
-        <div>
-          <span class="tag">Exécution</span>
-          <h3>On construit, on forme, on suit</h3>
-          <p>On livre ce qui a été convenu et on forme votre équipe. Vous repartez avec des systèmes qui fonctionnent, une équipe qui comprend l'IA, et la mesure du temps gagné.</p>
-        </div>
-      </div>
+    <h2 class="sec-title reveal">Comment ça <span class="accent">marche</span></h2>
+    <ol class="etapes reveal">
+      <li><span class="n">Étape 1</span><h3>Diagnostic gratuit</h3><p>30 minutes. Si l'IA ne peut pas vous aider, on vous le dit.</p></li>
+      <li><span class="n">Étape 2</span><h3>Un plan et un prix</h3><p>La bonne formule, avec un prix présenté en personne.</p></li>
+      <li><span class="n">Étape 3</span><h3>On construit et on forme</h3><p>On livre, on forme votre équipe et on reste là.</p></li>
+    </ol>
+  </div>
+</section>
+
+<Temoignages />
+
+<!-- QUI EST DERRIÈRE -->
+<section id="apropos">
+  <div class="wrap fondateur">
+    <Portrait classe="reveal" />
+    <div class="reveal" data-d="1">
+      <h2 class="sec-title">Vous parlez à la personne qui <span class="accent">construit vos systèmes</span></h2>
+      <p>Simon Fournier a fondé FournIA à Blainville en 2026. Il conçoit chaque système, l'installe et forme lui-même votre équipe.</p>
+      <ul class="garanties">
+        <li set:html={check + '<span>Vérification Loi 25 écrite avant tout projet qui touche des renseignements personnels.</span>'}></li>
+        <li set:html={check + '<span>Les outils et les comptes restent à votre nom.</span>'}></li>
+      </ul>
+      <a class="lien-fleche" href="/a-propos/">En savoir plus sur FournIA →</a>
     </div>
   </div>
 </section>
@@ -533,14 +468,12 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   <div class="wrap">
     <div class="cta-shell reveal">
       <div class="cta-left">
-        <div class="sec-label">Appel découverte</div>
-        <h2>Réservez votre appel découverte <span class="accent">gratuit</span></h2>
-        <p>30 minutes pour identifier où on peut créer de la valeur pour votre entreprise. Sans engagement.</p>
-        <p>Aucune complexité inutile. Aucun projet superflu. Juste ce qui fait vraiment avancer votre business.</p>
+        <h2>Réservez votre diagnostic <span class="accent">gratuit</span></h2>
+        <p>30 minutes pour voir quelle tâche un système peut prendre en charge chez vous.</p>
         <ul class="cta-perks">
-          <li><span>✓</span> Sans engagement, sans pression</li>
-          <li><span>✓</span> Recommandations adaptées à votre réalité</li>
-          <li><span>✓</span> Réponse rapide</li>
+          <li><span set:html={check}></span> Sans engagement</li>
+          <li><span set:html={check}></span> Des recommandations pour votre réalité</li>
+          <li><span set:html={check}></span> En personne ou par visioconférence</li>
         </ul>
       </div>
 
@@ -549,12 +482,12 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
         <p style="display:none"><label>Ne pas remplir : <input name="bot-field"></label></p>
 
         <div class="field full">
-          <label>Dans quel secteur évolue votre entreprise ?</label>
-          <input type="text" name="secteur" placeholder="Ex: Clinique dentaire, Garage, Golf...">
+          <label for="f-secteur">Dans quel secteur évolue votre entreprise ?</label>
+          <input id="f-secteur" type="text" name="secteur" placeholder="Ex. : clinique dentaire, garage, traiteur">
         </div>
         <div class="field">
-          <label>Combien d'employés avez-vous ?</label>
-          <select name="employes">
+          <label for="f-employes">Combien d'employés avez-vous ?</label>
+          <select id="f-employes" name="employes">
             <option value="">Sélectionner</option>
             <option>1 à 5</option>
             <option>6 à 20</option>
@@ -564,8 +497,8 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
           </select>
         </div>
         <div class="field">
-          <label>Outils d'automatisation déjà utilisés ?</label>
-          <select name="experience_ia">
+          <label for="f-experience">Outils d'automatisation déjà utilisés ?</label>
+          <select id="f-experience" name="experience_ia">
             <option value="">Sélectionner</option>
             <option>Jamais</option>
             <option>Un peu</option>
@@ -573,12 +506,12 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
           </select>
         </div>
         <div class="field full">
-          <label>Quelle est votre plus grande perte de temps au quotidien ?</label>
-          <textarea name="perte_temps" placeholder="Décrivez brièvement..."></textarea>
+          <label for="f-perte">Quelle tâche vous fait perdre le plus de temps ?</label>
+          <textarea id="f-perte" name="perte_temps" placeholder="Décrivez-la en quelques mots"></textarea>
         </div>
         <div class="field full">
-          <label>Votre objectif principal ?</label>
-          <select name="objectif">
+          <label for="f-objectif">Votre objectif principal ?</label>
+          <select id="f-objectif" name="objectif">
             <option value="">Sélectionner</option>
             <option>Gagner du temps</option>
             <option>Réduire les coûts</option>
@@ -587,12 +520,12 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
             <option>Explorer les possibilités</option>
           </select>
         </div>
-        <div class="field"><label>Prénom</label><input type="text" name="prenom" placeholder="Prénom"></div>
-        <div class="field"><label>Nom</label><input type="text" name="nom" placeholder="Nom"></div>
-        <div class="field"><label>Email</label><input type="email" name="email" placeholder="vous@entreprise.com"></div>
+        <div class="field"><label for="f-prenom">Prénom</label><input id="f-prenom" type="text" name="prenom" placeholder="Prénom" autocomplete="given-name"></div>
+        <div class="field"><label for="f-nom">Nom</label><input id="f-nom" type="text" name="nom" placeholder="Nom" autocomplete="family-name"></div>
+        <div class="field full"><label for="f-courriel">Courriel</label><input id="f-courriel" type="email" name="email" placeholder="vous@entreprise.com" autocomplete="email"></div>
 
         <div class="submit-row">
-          <button type="submit" class="btn btn-primary">Réserver un appel découverte <span class="arrow">→</span></button>
+          <button type="submit" class="btn btn-primary">Demander mon diagnostic gratuit <span class="arrow">→</span></button>
         </div>
         <p class="form-note">En soumettant ce formulaire, vous acceptez d'être contacté par FournIA.</p>
       </form>
@@ -605,8 +538,8 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a href="#top" class="logo" style="font-size:1.5rem"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
-        <p style="color:var(--mute-d); margin-top:1rem; max-width:280px; font-size:.92rem;">Des systèmes concrets, clé en main, pour les PME québécoises.</p>
+        <a href="#top" class="logo" style="font-size:1.5rem" aria-label="FournIA, accueil"><span class="mark" set:html={mark}></span><span>Fourn<span class="ia">IA</span></span></a>
+        <p class="foot-desc">On automatise les tâches répétitives des PME du Québec. Basé à Blainville, Rive-Nord de Montréal.</p>
       </div>
       <div class="foot-contact">
         <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>
@@ -614,15 +547,14 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
         <a href="https://fournia.net" target="_blank" rel="noopener">fournia.net</a>
       </div>
       <div class="foot-contact">
-        <a href="#apropos">À propos</a>
+        <a href="/a-propos/">À propos</a>
         <a href="/ia-petite-entreprise-montreal/">IA pour petite entreprise à Montréal</a>
         <a href="/accompagnement-intelligence-artificielle/">Accompagnement en IA</a>
         <a href="/formation-ia-entreprise/">Formation IA en entreprise</a>
         <a href="/automatisation-entreprise/">Automatisation d'entreprise</a>
         <a href="/consultant-ia-rive-nord/">Consultant IA Rive-Nord</a>
         <a href="/secteurs/">Automatisation par secteur</a>
-        <a href="#processus">Processus</a>
-        <a href="/blog">Blog</a>
+        <a href="/blog">Blogue</a>
         <a href="/diagnostic/">Réserver un appel</a>
       </div>
     </div>
@@ -631,7 +563,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 </footer>
 
 <script is:inline>
-  // ── background réseau animé (constellation de points) ──
+  // ── fond : constellation de points (démarre après le chargement pour ne pas retarder l'affichage) ──
   (function () {
     const cv = document.getElementById('net');
     if (!cv) return;
@@ -639,7 +571,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
     const ctx = cv.getContext('2d', { alpha: true });
     const dpr = Math.min(devicePixelRatio || 1, 1.5);
     let w, h, pts, raf, running = false;
-    const count = () => (innerWidth < 700 ? 22 : innerWidth < 1100 ? 36 : 50);
+    const count = () => (innerWidth < 700 ? 18 : innerWidth < 1100 ? 32 : 46);
     function resize() { w = cv.width = innerWidth * dpr; h = cv.height = innerHeight * dpr; }
     function init() {
       pts = Array.from({ length: count() }, () => ({
@@ -672,14 +604,13 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
     }
     function start() { if (!running && !reduce) { running = true; raf = requestAnimationFrame(frame); } }
     function stop() { running = false; cancelAnimationFrame(raf); }
-    resize(); init();
-    if (reduce) frame(); else start();
-    // pause quand l'onglet n'est pas visible (économie CPU)
-    document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+    function go() { resize(); init(); if (reduce) frame(); else start(); }
+    if (document.readyState === 'complete') go(); else addEventListener('load', go, { once: true });
+    document.addEventListener('visibilitychange', () => document.hidden ? stop() : (pts && start()));
     let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { resize(); init(); }, 150); });
   })();
 
-  // nav scroll state (passif + rAF pour un scroll fluide)
+  // nav : état au défilement
   const nav = document.getElementById('nav');
   let ticking = false;
   addEventListener('scroll', () => {
@@ -688,18 +619,15 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
     requestAnimationFrame(() => { nav.classList.toggle('scrolled', scrollY > 30); ticking = false; });
   }, { passive: true });
 
-  // reveal on scroll
+  // apparition au défilement (sections sous la ligne de flottaison)
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: .15 });
+  }, { threshold: .12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // trigger hero reveals immediately
-  addEventListener('load', () => document.querySelectorAll('header .reveal').forEach(el => el.classList.add('in')));
-
-  // mobile burger -> toggle dropdown menu (mêmes sections que desktop)
+  // menu mobile
   const burger = document.getElementById('burger');
-  burger.addEventListener('click', (e) => { e.stopPropagation(); nav.classList.toggle('open'); });
+  burger.addEventListener('click', (e) => { e.stopPropagation(); const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
   document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
   document.addEventListener('click', (e) => { if (!nav.contains(e.target)) nav.classList.remove('open'); });
 </script>

@@ -1,0 +1,37 @@
+---
+// Exemples de systèmes livrés (src/data/realisations.mjs). Secteur seulement, aucun nom de client.
+// Le nom du client et le résultat ne s'affichent que si l'entrée porte un consentement écrit daté.
+import { REALISATIONS } from '../data/realisations.mjs';
+
+const { limite, court = false } = Astro.props;
+const liste = typeof limite === 'number' ? REALISATIONS.slice(0, limite) : REALISATIONS;
+const autorise = (r) => Boolean(r.consentement && r.consentement.date);
+---
+<ul class="realisations">
+  {liste.map((r) => (
+    <li>
+      <p class="secteur">{autorise(r) && r.client ? `${r.client}, ${r.secteur.charAt(0).toLowerCase()}${r.secteur.slice(1)}` : r.secteur}</p>
+      <h3>{r.titre}</h3>
+      <p class="systeme">{court && r.court ? r.court : r.systeme}</p>
+      {autorise(r) && r.resultat && <p class="resultat">{r.resultat}</p>}
+      {r.lien && <a class="lien" href={r.lien}>Voir le secteur <span aria-hidden="true">→</span></a>}
+    </li>
+  ))}
+</ul>
+
+<style>
+  ul.realisations.realisations { list-style: none; margin: 0 0 1.4rem; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--line); }
+  .realisations li { margin: 0; padding: 1.8rem 2rem 1.8rem 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; }
+  .realisations li:nth-child(2n) { padding: 1.8rem 0 1.8rem 2rem; border-left: 1px solid var(--line); }
+  .realisations .secteur { color: var(--lime); font-size: .9rem; font-weight: 500; margin: 0 0 .5rem; }
+  .realisations h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; line-height: 1.25; letter-spacing: -.01em; color: var(--white); margin: 0 0 .6rem; }
+  .realisations .systeme { color: var(--mute); font-size: 1rem; line-height: 1.6; margin: 0 0 1rem; max-width: 52ch; }
+  .realisations .resultat { color: var(--white); font-weight: 500; margin: 0 0 1rem; }
+  .realisations .lien { margin-top: auto; color: var(--mute); font-size: .9rem; text-decoration: none; transition: color .2s; }
+  .realisations .lien:hover { color: var(--lime); }
+  @media (max-width: 760px) {
+    ul.realisations { grid-template-columns: 1fr; }
+    .realisations li, .realisations li:nth-child(2n) { padding: 1.5rem 0; border-left: none; }
+  }
+</style>

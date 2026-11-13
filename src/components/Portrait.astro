@@ -1,0 +1,37 @@
+---
+// Portrait de Simon Fournier. La photo se branche dans src/data/fondateur.mjs (PHOTO_SIMON).
+// Sans photo : bloc au monogramme FournIA (vrai fichier de marque), même format, rien ne saute.
+import { PHOTO_SIMON, PHOTO_SIMON_ALT, PHOTO_SIMON_LARGEUR, PHOTO_SIMON_HAUTEUR } from '../data/fondateur.mjs';
+
+const { prioritaire = false, classe = '' } = Astro.props;
+---
+<figure class:list={['portrait', classe]} data-photo={PHOTO_SIMON ? 'oui' : 'manquante'}>
+  {PHOTO_SIMON ? (
+    <img
+      src={PHOTO_SIMON}
+      alt={PHOTO_SIMON_ALT}
+      width={PHOTO_SIMON_LARGEUR}
+      height={PHOTO_SIMON_HAUTEUR}
+      loading={prioritaire ? 'eager' : 'lazy'}
+      decoding="async"
+      fetchpriority={prioritaire ? 'high' : 'auto'}
+    />
+  ) : (
+    <div class="monogramme" role="img" aria-label="FournIA">
+      <img src="/brand/fournia-monogram.svg" alt="" width="120" height="120" />
+    </div>
+  )}
+</figure>
+
+<style>
+  .portrait { position: relative; margin: 0; aspect-ratio: 4 / 5; border-radius: 22px; overflow: hidden;
+    border: 1px solid var(--glass-b); background: var(--ink-900); }
+  .portrait > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .monogramme { position: absolute; inset: 0; display: grid; place-items: center;
+    background:
+      radial-gradient(circle at 50% 45%, rgba(183,217,76,.14), transparent 60%),
+      linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 36px 36px,
+      linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 36px 36px,
+      var(--ink-900); }
+  .monogramme img { width: 38%; height: auto; }
+</style>
