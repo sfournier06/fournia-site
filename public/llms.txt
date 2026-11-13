@@ -7,11 +7,11 @@
 > Chaque projet touchant des renseignements personnels passe une vérification Loi 25.
 
 ## Services
-- [Automatisation d'entreprise](https://fournia.net/automatisation-entreprise) : relances clients, soumissions, commandes et données entre logiciels, automatisées avec l'IA.
-- [Accompagnement en intelligence artificielle](https://fournia.net/accompagnement-intelligence-artificielle) : diagnostic (audit), implantation, formation de l'équipe et suivi.
+- [Systèmes à la carte](https://fournia.net/automatisation-entreprise) : un problème précis, un système livré une fois (relances, soumissions, demandes entrantes, documents), équipe formée.
+- [Accompagnement complet en IA](https://fournia.net/accompagnement-intelligence-artificielle) : projet de A à Z sur 6 mois à 1 an, analyse de tous les processus, automatisation un chantier à la fois, formation continue de l'équipe, en trois paliers.
 - [Consultant en IA sur la Rive-Nord](https://fournia.net/consultant-ia-rive-nord) : rencontres en personne à Blainville, Laval, Mirabel, Terrebonne, Saint-Jérôme et Montréal.
-- [Formation IA en entreprise](https://fournia.net/formation-ia-entreprise/) : formation sur les tâches réelles de l'équipe, en personne à Montréal, Laval et Rive-Nord ou en visio, avec politique d'usage de l'IA d'une page.
-- [IA pour petite entreprise à Montréal](https://fournia.net/ia-petite-entreprise-montreal/) : accompagnement, formation et implantation pour les entreprises de 5 à 50 employés.
+- [Formation IA en entreprise](https://fournia.net/formation-ia-entreprise/) : l'IA expliquée sans jargon, en groupe, en un pour un, ou pour former l'experte IA à l'interne ; en personne à Montréal, Laval et Rive-Nord ou en visio.
+- [IA pour petite entreprise à Montréal](https://fournia.net/ia-petite-entreprise-montreal/) : accompagnement complet, systèmes à la carte et formation pour les entreprises de 5 à 50 employés.
 
 ## Pages clés
 - À propos (FournIA et son fondateur Simon Fournier): https://fournia.net/a-propos/

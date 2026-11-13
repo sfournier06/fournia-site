@@ -31,7 +31,7 @@ export const ZONES = [
 ];
 
 export const DESCRIPTION =
-  "Automatisation d'entreprise et accompagnement en intelligence artificielle pour les PME du Québec : audit, implantation d'automatisations et d'agents IA, formation des équipes. Basée à Blainville, sur la Rive-Nord de Montréal. Vérification Loi 25 à chaque projet.";
+  "Automatisation d'entreprise et accompagnement en intelligence artificielle pour les PME du Québec, expliquée en mots simples : accompagnement complet de A à Z, systèmes d'automatisation à la carte et formation des équipes. Basée à Blainville, sur la Rive-Nord de Montréal. Vérification Loi 25 à chaque projet.";
 
 const founder = {
   '@type': 'Person',
@@ -98,9 +98,9 @@ export const publisherLd = {
 
 export const SERVICES = [
   { href: '/ia-petite-entreprise-montreal/', label: 'IA pour petite entreprise à Montréal' },
-  { href: '/accompagnement-intelligence-artificielle/', label: 'Accompagnement en IA' },
+  { href: '/accompagnement-intelligence-artificielle/', label: 'Accompagnement complet en IA' },
   { href: '/formation-ia-entreprise/', label: 'Formation IA en entreprise' },
-  { href: '/automatisation-entreprise/', label: "Automatisation d'entreprise" },
+  { href: '/automatisation-entreprise/', label: "Systèmes d'automatisation à la carte" },
   { href: '/consultant-ia-rive-nord/', label: 'Consultant IA Rive-Nord' },
   { href: '/secteurs/', label: 'Automatisation par secteur' },
 ];

@@ -3,28 +3,28 @@ import ServicePage from '../layouts/ServicePage.astro';
 
 const faq = [
   {
-    q: "Offrez-vous un accompagnement IA mensuel ?",
-    a: "Oui. Après un premier projet, l'accompagnement IA peut continuer au mois : un chantier d'automatisation à la fois, des rencontres de suivi régulières et des ajustements selon vos besoins. Les outils et les comptes restent à votre nom.",
+    q: "C'est quoi un accompagnement complet en intelligence artificielle ?",
+    a: "C'est un projet mené de A à Z avec l'entreprise, sur 6 mois à 1 an. FournIA analyse tous les processus, trace un plan, automatise l'entreprise un morceau à la fois, forme les employés à chaque étape et reste présente pendant toute la transition. L'entreprise n'a pas besoin d'expertise technique à l'interne.",
   },
   {
-    q: "C'est quoi un accompagnement en intelligence artificielle ?",
-    a: "C'est un accompagnement de bout en bout pour intégrer l'IA dans une entreprise : diagnostic des processus, choix des bons outils, construction et installation des systèmes, formation de l'équipe, puis suivi après la livraison. L'entreprise n'a pas besoin d'expertise technique à l'interne.",
+    q: "Quelle est la différence entre l'accompagnement complet et un système à la carte ?",
+    a: "Un système à la carte règle un problème précis : on le construit, on le livre, on forme l'équipe. L'accompagnement complet regarde toute l'entreprise : on automatise un processus après l'autre selon un plan, on forme l'équipe en continu et on ajuste en cours de route.",
   },
   {
     q: "Mon équipe ne connaît rien à l'IA. Est-ce un problème ?",
-    a: "Non. Aucune connaissance de l'IA n'est requise au départ. La formation se fait dans le contexte de travail réel de l'équipe, sans jargon, sur les outils qu'elle va vraiment utiliser.",
+    a: "Non. C'est justement pour ça que l'accompagnement existe. On explique en mots simples comment l'IA fonctionne, ce qu'elle fait bien et ce qu'elle fait mal, avant de toucher à vos outils. Personne n'a besoin de connaissances techniques au départ.",
   },
   {
-    q: "Quelle est la différence entre une formation IA et un accompagnement ?",
-    a: "Une formation enseigne à utiliser des outils. Un accompagnement livre aussi les systèmes : FournIA construit et installe les automatisations ou les agents IA dans vos opérations, puis forme l'équipe à s'en servir. Les deux peuvent se faire séparément, mais une implantation ne se livre jamais sans formation.",
+    q: "Peut-on former une personne de notre équipe pour qu'elle devienne l'experte à l'interne ?",
+    a: "Oui. Une partie de l'accompagnement peut servir à former une personne de votre équipe pour qu'elle prenne le relais : comprendre les systèmes, les ajuster et en bâtir d'autres. FournIA peut aussi tout construire elle-même. Les deux façons se combinent.",
   },
   {
-    q: "Comment savoir par où commencer avec l'IA ?",
-    a: "Par une seule tâche qui coûte du temps chaque semaine et qui suit des règles claires. L'audit sert à la trouver : on chiffre le temps que prend chaque étape du processus, et c'est ce chiffre qui décide du premier projet.",
+    q: "Combien de temps dure un accompagnement complet ?",
+    a: "Généralement de 6 mois à 1 an, selon la taille de l'entreprise et le nombre de processus à revoir. Le plan du début fixe l'ordre des chantiers et le rythme des rencontres.",
   },
   {
     q: "L'accompagnement se fait-il en personne ?",
-    a: "En personne ou à distance. Les rencontres se font en personne sur la Rive-Nord de Montréal, à Laval et à Montréal, ou par visioconférence partout au Québec. La présentation de la proposition se fait de préférence en personne.",
+    a: "En personne ou à distance. Les rencontres se font en personne sur la Rive-Nord de Montréal, à Laval et à Montréal, ou par visioconférence partout au Québec.",
   },
   {
     q: "Comment FournIA respecte-t-elle la Loi 25 dans un projet d'IA ?",
@@ -34,36 +34,46 @@ const faq = [
 ---
 <ServicePage
   path="/accompagnement-intelligence-artificielle"
-  title="Accompagnement IA pour PME au Québec | FournIA"
-  description="Accompagnement en intelligence artificielle pour les PME du Québec : diagnostic, implantation d'agents IA, formation de l'équipe et suivi. Vérification Loi 25 à chaque projet."
-  h1="Accompagnement IA pour les PME du Québec"
-  lead="FournIA offre un accompagnement IA aux PME québécoises, de l'intégration concrète de l'IA du diagnostic jusqu'à l'équipe formée. On trouve où l'IA vous fait gagner du temps, on construit et on installe les systèmes, et on reste disponible après la livraison."
-  serviceName="Accompagnement en intelligence artificielle"
+  title="Accompagnement IA complet pour PME au Québec | FournIA"
+  description="Accompagnement complet en IA pour les PME du Québec, de A à Z sur 6 mois à 1 an : analyse des processus, automatisation, formation de l'équipe et suivi. Loi 25 incluse."
+  h1="Accompagnement complet : votre transition vers l'IA, de A à Z"
+  lead="Avec l'accompagnement complet, FournIA vous accompagne pendant 6 mois à 1 an. On analyse tous vos processus, on automatise ce qui vous coûte du temps, un morceau à la fois, et on forme votre équipe à chaque étape. Vous n'avez pas besoin de comprendre la technique : on vous l'explique au fur et à mesure."
+  serviceName="Accompagnement complet en intelligence artificielle"
   serviceType="Accompagnement et intégration de l'intelligence artificielle en entreprise"
   areaServed={['Québec', 'Rive-Nord de Montréal', 'Laval', 'Montréal']}
   faq={faq}
-  updated="2026-10-17"
+  updated="2026-11-13"
 >
-  <h2>À qui s'adresse l'accompagnement</h2>
-  <p>Aux PME qui sentent que l'IA pourrait les aider, mais qui ne savent pas par où commencer ni à qui faire confiance. Les freins les plus courants sont le temps de s'y mettre, la peur de mal faire et la crainte pour les données des clients. L'accompagnement prend en charge la construction, forme l'équipe et passe chaque projet au crible de la Loi 25.</p>
-  <p>L'accompagnement n'est pas fait pour les travailleurs autonomes qui veulent un outil gratuit, ni pour les entreprises pour qui l'IA reste un luxe plutôt qu'un besoin. Il donne ses meilleurs résultats là où un processus manuel coûte de vraies heures chaque semaine.</p>
+  <h2>Pour qui</h2>
+  <p>Pour les PME qui savent que l'IA peut les aider, mais qui ne savent pas par où commencer ni à qui faire confiance. Vous voulez un partenaire qui regarde toute l'entreprise, pas seulement un outil de plus. Vous voulez aussi que votre équipe comprenne ce qui se passe, au lieu de subir un système qu'elle ne maîtrise pas.</p>
+  <p>Si vous avez un seul problème précis à régler, un <a href="/automatisation-entreprise/">système à la carte</a> est souvent plus simple. Si vous voulez d'abord que votre équipe apprenne, commencez par une <a href="/formation-ia-entreprise/">formation</a>.</p>
 
-  <h2>Ce que comprend l'accompagnement</h2>
+  <h2>Comment ça se passe</h2>
+  <ol>
+    <li><strong>On vient chez vous et on regarde tout.</strong> On rencontre l'équipe, on suit le chemin de chaque processus (de la demande du client jusqu'à la livraison) et on mesure le temps que chaque étape prend.</li>
+    <li><strong>On vous remet un plan clair.</strong> Les processus à automatiser, dans quel ordre, et ce que chacun vous fait gagner. En mots simples, sans jargon.</li>
+    <li><strong>On automatise, un chantier à la fois.</strong> Chaque système est construit, testé avec votre équipe et installé dans vos logiciels actuels. On passe au suivant une fois le précédent bien utilisé.</li>
+    <li><strong>On forme l'équipe à chaque étape.</strong> Chaque livraison vient avec sa formation. Si vous le voulez, on forme aussi une personne à l'interne pour qu'elle devienne votre experte de l'IA.</li>
+    <li><strong>On reste là pendant toute la transition.</strong> Rencontres de suivi régulières, ajustements quand vos besoins changent, et un bilan de ce qui a été gagné.</li>
+  </ol>
+
+  <h2>Trois paliers, selon jusqu'où vous voulez aller</h2>
   <table>
-    <thead><tr><th>Étape</th><th>Ce que vous obtenez</th></tr></thead>
+    <thead><tr><th>Palier</th><th>Ce qui est inclus</th></tr></thead>
     <tbody>
-      <tr><td><strong>Diagnostic (audit)</strong></td><td>La carte de vos processus, le temps qu'ils prennent, et les 1 à 3 projets qui rapportent le plus. Un plan clair, en mots simples.</td></tr>
-      <tr><td><strong>Implantation</strong></td><td>Les automatisations et les agents IA construits, testés et installés dans vos logiciels actuels.</td></tr>
-      <tr><td><strong>Formation</strong></td><td>Votre équipe apprend à utiliser les systèmes et l'IA au quotidien, dans son vrai contexte de travail, en personne ou par visio.</td></tr>
-      <tr><td><strong>Suivi</strong></td><td>Ajustements, nouveaux besoins et soutien après la livraison, pour que les systèmes continuent de servir.</td></tr>
+      <tr><td><strong>1. Le plan</strong></td><td>L'analyse de vos processus, la carte de vos données et un plan priorisé. Vous repartez en sachant exactement quoi faire, et vous choisissez qui le fait.</td></tr>
+      <tr><td><strong>2. Le plan et la construction</strong></td><td>Tout le palier 1, plus la construction, les tests et l'installation des systèmes prévus au plan. Le coût de l'analyse est crédité sur la construction.</td></tr>
+      <tr><td><strong>3. La transformation complète</strong></td><td>Tout le palier 2, plus la formation continue de l'équipe, le suivi mensuel et les améliorations en cours de route. C'est l'accompagnement de 6 mois à 1 an.</td></tr>
     </tbody>
   </table>
+  <p>Le prix dépend de la taille de l'entreprise et du nombre de processus. On vous le présente après l'analyse, en personne. Les outils et les comptes restent à votre nom : vous gardez tout ce qui a été bâti.</p>
 
-  <h2>L'accompagnement IA mensuel</h2>
-  <p>Après le premier projet, l'accompagnement peut continuer au mois. Un chantier d'automatisation à la fois, des rencontres de suivi régulières, et des ajustements quand vos besoins changent. Les outils et les comptes restent à votre nom : vous gardez tout ce qui a été bâti.</p>
-
-  <h2>Comment FournIA choisit le premier projet IA</h2>
-  <p>FournIA part du processus : on dessine le chemin complet d'un processus, de la demande du client jusqu'à la livraison, on classe chaque étape (utile, nécessaire, perdue) et on chiffre le temps qu'elle prend par mois. Le diagnostic repose sur ce chiffrage.</p>
+  <h2>Ce qui nous distingue</h2>
+  <ul>
+    <li><strong>On explique avant d'installer.</strong> Votre équipe comprend comment l'IA fonctionne, ce qu'elle fait bien et ce qu'elle fait mal. C'est ce qui fait qu'elle l'utilise vraiment.</li>
+    <li><strong>On part du processus, pas de l'outil.</strong> Le chiffrage du temps perdu décide de ce qu'on automatise, pas la mode du moment.</li>
+    <li><strong>Un humain valide toujours.</strong> Les systèmes préparent, relancent et trient ; les décisions importantes restent entre vos mains.</li>
+    <li><strong>La Loi 25 avant la construction.</strong> Chaque projet qui touche des renseignements personnels a son document de conformité écrit.</li>
+  </ul>
   <p>Pour approfondir : <a href="/blog/par-ou-commencer-ia-pme-quebec-2026">par où commencer avec l'IA quand on est une PME</a>, <a href="/blog/choisir-consultant-ia-pme-quebec-2026">comment choisir un consultant en IA</a> et <a href="/blog/loi-25-ia-entreprise-quebec-conformite-2026">comment respecter la Loi 25 avec l'IA</a>.</p>
-
 </ServicePage>
