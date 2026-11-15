@@ -3,10 +3,12 @@
 // Nom, logo, photo, résultat, témoignage et vidéo du client ne s'affichent que si l'entrée porte un
 // consentement écrit daté. Sans lui : carte anonyme (secteur + système).
 import { REALISATIONS } from '../data/realisations.mjs';
+import { APERCU } from '../data/apercu.mjs';
 
 const { limite, court = false } = Astro.props;
 const liste = typeof limite === 'number' ? REALISATIONS.slice(0, limite) : REALISATIONS;
-const autorise = (r) => Boolean(r.consentement && r.consentement.date);
+// En aperçu interne (APERCU=1), on affiche tout pour voir le rendu final. Jamais en production.
+const autorise = (r) => APERCU || Boolean(r.consentement && r.consentement.date);
 const initiale = (s) => s.trim().charAt(0).toUpperCase();
 const id = `car-${Math.random().toString(36).slice(2, 8)}`;
 ---
@@ -17,10 +19,11 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
       return (
         <li class="carte">
           {ok && r.photo && <img class="photo" src={r.photo} alt="" loading="lazy" decoding="async" width="800" height="600" />}
+          {ok && r.logo && (
+            <div class="bandeau-logo"><img src={r.logo} alt={r.client ?? ''} loading="lazy" decoding="async" /></div>
+          )}
           <div class="tete">
-            {ok && r.logo
-              ? <img class="logo" src={r.logo} alt={r.client ?? ''} loading="lazy" decoding="async" />
-              : <span class="monogramme" aria-hidden="true">{initiale(r.secteur)}</span>}
+            {!(ok && r.logo) && <span class="monogramme" aria-hidden="true">{initiale(ok && r.client ? r.client : r.secteur)}</span>}
             <div>
               <p class="secteur">{ok && r.client ? r.client : r.secteur}</p>
               {ok && r.client && <p class="sous-secteur">{r.secteur}</p>}
@@ -30,6 +33,9 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
           <h3>{r.titre}</h3>
           <p class="systeme">{court && r.court ? r.court : r.systeme}</p>
           {ok && r.resultat && <p class="resultat">{r.resultat}</p>}
+          {APERCU && !r.temoignage && r.client && (
+            <p class="emplacement">Emplacement : témoignage écrit ou vidéo de {r.client}</p>
+          )}
           {ok && r.temoignage && (
             <blockquote class="temoignage">
               <p>« {r.temoignage.texte} »</p>
@@ -76,7 +82,10 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
   .tete { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
   .monogramme { flex: none; width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center;
     background: rgba(200,255,0,.08); color: var(--lime); font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.15rem; }
-  .logo { flex: none; width: 44px; height: 44px; object-fit: contain; border-radius: 10px; background: #fff; padding: 4px; }
+  .bandeau-logo { margin: -1.5rem -1.5rem 1.2rem; height: 110px; border-radius: 14px 14px 0 0; background: #fff;
+    display: grid; place-items: center; padding: 14px 24px; }
+  .bandeau-logo img { max-width: 100%; max-height: 82px; object-fit: contain; }
+  .emplacement { margin: 0 0 1rem; padding: .7rem .8rem; border: 1px dashed var(--line); border-radius: 10px; color: var(--mute); font-size: .85rem; }
   .secteur { color: var(--lime); font-size: .9rem; font-weight: 500; margin: 0; }
   .sous-secteur { color: var(--mute); font-size: .82rem; margin: .1rem 0 0; }
   .statut { margin-left: auto; font-size: .75rem; color: var(--mute); border: 1px solid var(--line); border-radius: 99px; padding: .15rem .6rem; }

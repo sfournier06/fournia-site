@@ -5,7 +5,7 @@
 //   2. Écrire son chemin ici, par exemple '/images/simon-fournier.webp'.
 // Tant que la valeur est vide, le site affiche un bloc au monogramme FournIA à la place
 // (composant src/components/Portrait.astro). Aucune photo de banque, aucun visage généré.
-export const PHOTO_SIMON = '';
+export const PHOTO_SIMON = '/images/simon-fournier.webp';
 
 // Dimensions réelles du fichier déposé (évite le saut de mise en page).
 export const PHOTO_SIMON_LARGEUR = 800;

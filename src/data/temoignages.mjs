@@ -11,6 +11,8 @@
 //   nom: 'Prénom Nom',
 //   role: 'Titre',                       // optionnel
 //   entreprise: "Nom de l'entreprise",   // optionnel
+//   video: 'https://www.instagram.com/reel/...',   // optionnel : témoignage vidéo
+//   logo: '/clients/nom.webp',            // optionnel
 //   consentement: { date: '2026-12-01', preuve: 'Courriel du 1er décembre 2026, archivé' },
 // }
 // Une entrée sans consentement.date n'est jamais affichée.

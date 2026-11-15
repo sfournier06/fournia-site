@@ -19,6 +19,8 @@
 
 const vide = { client: null, logo: null, photo: null, resultat: null, temoignage: null, video: null, consentement: null };
 
+// Accord écrit à obtenir pour chaque client nommé ci-dessous avant la mise en ligne de son nom et logo.
+
 export const REALISATIONS = [
   {
     secteur: 'Traiteur corporatif',
@@ -29,6 +31,8 @@ export const REALISATIONS = [
     lien: '/secteurs/traiteurs/',
     statut: 'livre',
     ...vide,
+    client: 'AvecPlaisirs',
+    logo: '/clients/avecplaisirs.webp',
   },
   {
     secteur: 'Location de sonorisation',
@@ -39,6 +43,8 @@ export const REALISATIONS = [
     lien: '/secteurs/evenementiel/',
     statut: 'livre',
     ...vide,
+    client: "Location Son'OR",
+    logo: '/clients/sonor.webp',
   },
   {
     secteur: 'Location de chalets',
@@ -51,7 +57,7 @@ export const REALISATIONS = [
     ...vide,
   },
   {
-    secteur: 'PME de services',
+    secteur: "Fabricant de kiosques d'exposition",
     titre: 'Les relevés de cartes de crédit, classés dans Excel',
     systeme:
       "Les relevés de cartes corporatives sont lus, chaque dépense est classée, et une personne révise le tableau avant que tout s'écrive dans le classeur comptable.",
@@ -59,6 +65,8 @@ export const REALISATIONS = [
     lien: null,
     statut: 'livre',
     ...vide,
+    client: 'Pubsphere',
+    logo: '/clients/pubsphere.webp',
   },
   {
     secteur: 'Conseillère en sécurité financière',
@@ -69,6 +77,19 @@ export const REALISATIONS = [
     lien: '/secteurs/conseillers-financiers/',
     statut: 'livre',
     ...vide,
+    client: 'Karyann Turcotte',
+  },
+  {
+    secteur: 'Conseillère en sécurité financière',
+    titre: 'Les anciens prospects relancés, les clients suivis',
+    systeme:
+      "Le CRM est monté à partir de son calendrier, les anciens prospects sont relancés par texto et chaque client reçoit son suivi. Elle reprend la conversation quand quelqu'un répond.",
+    court: 'Anciens prospects relancés, clients suivis, elle reprend la conversation.',
+    lien: '/secteurs/conseillers-financiers/',
+    statut: 'en-cours',
+    ...vide,
+    client: 'Ana Stirbu',
+    logo: '/clients/ana-stirbu.webp',
   },
   {
     secteur: "Centre d'aide académique",
@@ -79,6 +100,8 @@ export const REALISATIONS = [
     lien: '/secteurs/centres-de-tutorat/',
     statut: 'livre',
     ...vide,
+    client: 'Arbour Aide Académique',
+    logo: '/clients/arbour.webp',
   },
   {
     secteur: 'Formation numérique pour aînés',
@@ -89,5 +112,7 @@ export const REALISATIONS = [
     lien: null,
     statut: 'en-cours',
     ...vide,
+    client: 'SeniorTech',
+    logo: '/clients/seniortech.webp',
   },
 ];

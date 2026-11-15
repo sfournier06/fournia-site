@@ -1,0 +1,151 @@
+---
+// Page Témoignages : avis Google, témoignages écrits et vidéo, puis les systèmes livrés.
+// Tout est lu depuis src/data/ (avis.mjs, temoignages.mjs, realisations.mjs) et filtré par consentement.
+// Tant qu'aucune preuve n'existe, la page reste en noindex et montre seulement les systèmes livrés.
+// En aperçu interne (APERCU=1), des emplacements montrent où chaque élément ira.
+import Base from '../layouts/Base.astro';
+import Realisations from '../components/Realisations.astro';
+import { SITE, CTA } from '../data/entite.mjs';
+import { AVIS, LIEN_FICHE_GOOGLE } from '../data/avis.mjs';
+import { TEMOIGNAGES } from '../data/temoignages.mjs';
+import { REALISATIONS } from '../data/realisations.mjs';
+import { APERCU } from '../data/apercu.mjs';
+
+const canonical = `${SITE}/temoignages/`;
+const title = 'Témoignages et avis clients | FournIA';
+const description = "Ce que disent les PME du Québec qui ont confié l'automatisation et l'IA à FournIA : avis Google, témoignages et systèmes livrés.";
+
+const ok = (x) => Boolean(x && x.consentement && x.consentement.date);
+const avis = AVIS.filter((a) => a && a.texte && a.auteur);
+const ecrits = TEMOIGNAGES.filter((t) => t && t.citation && t.nom && ok(t));
+const videos = [
+  ...TEMOIGNAGES.filter((t) => ok(t) && t.video).map((t) => ({ nom: t.entreprise || t.nom, lien: t.video })),
+  ...REALISATIONS.filter((r) => ok(r) && r.video).map((r) => ({ nom: r.client, lien: r.video })),
+];
+const vide = avis.length === 0 && ecrits.length === 0 && videos.length === 0;
+const nommes = REALISATIONS.filter((r) => r.client);
+const etoiles = (n) => '★'.repeat(n) + '☆'.repeat(5 - n);
+---
+<Base title={title} description={description} canonical={canonical}>
+  {vide && !APERCU && <meta slot="head" name="robots" content="noindex, follow" />}
+  <main>
+    <article class="svc">
+      <div class="wrap-a">
+        <div class="crumbs"><a href="/">Accueil</a> <span>/</span> Témoignages</div>
+        <h1>Ce que nos clients en disent</h1>
+        <p class="lead">Des PME du Québec qui ont confié leurs tâches répétitives à FournIA. Leurs mots, pas les nôtres.</p>
+        {APERCU && <p class="apercu">Aperçu interne : les cadres pointillés sont des emplacements. Ils se remplissent avec les vrais avis et témoignages, une fois l'accord écrit reçu. Rien de tout ça n'est en ligne.</p>}
+
+        {(avis.length > 0 || APERCU) && (
+          <section aria-labelledby="t-avis">
+            <div class="entete">
+              <h2 id="t-avis">Avis Google</h2>
+              {LIEN_FICHE_GOOGLE && <a class="lien" href={LIEN_FICHE_GOOGLE} target="_blank" rel="noopener">Voir tous les avis sur Google →</a>}
+            </div>
+            <div class="grille">
+              {avis.length > 0
+                ? avis.map((a) => (
+                    <figure class="carte">
+                      <p class="etoiles" aria-label={`${a.note} sur 5`}>{etoiles(a.note)}</p>
+                      <blockquote>{a.texte}</blockquote>
+                      <figcaption><strong>{a.auteur}</strong>{a.lien && <a href={a.lien} target="_blank" rel="noopener">Avis Google</a>}</figcaption>
+                    </figure>
+                  ))
+                : [1, 2, 3].map(() => (
+                    <figure class="carte emplacement">
+                      <p class="etoiles" aria-hidden="true">★★★★★</p>
+                      <p>Emplacement : un avis Google copié mot pour mot, avec son lien.</p>
+                    </figure>
+                  ))}
+            </div>
+          </section>
+        )}
+
+        {(ecrits.length > 0 || APERCU) && (
+          <section aria-labelledby="t-ecrits">
+            <h2 id="t-ecrits">Témoignages</h2>
+            <div class="grille">
+              {ecrits.length > 0
+                ? ecrits.map((t) => (
+                    <figure class="carte">
+                      {t.logo && <div class="logo"><img src={t.logo} alt={t.entreprise ?? ''} loading="lazy" /></div>}
+                      <blockquote>« {t.citation} »</blockquote>
+                      <figcaption><strong>{t.nom}</strong><span>{[t.role, t.entreprise].filter(Boolean).join(', ')}</span></figcaption>
+                    </figure>
+                  ))
+                : nommes.map((r) => (
+                    <figure class="carte emplacement">
+                      {r.logo ? <div class="logo"><img src={r.logo} alt={r.client} loading="lazy" /></div> : <p class="nom">{r.client}</p>}
+                      <p>Emplacement : le témoignage de {r.client}, dans ses mots, approuvé par écrit.</p>
+                    </figure>
+                  ))}
+            </div>
+          </section>
+        )}
+
+        {(videos.length > 0 || APERCU) && (
+          <section aria-labelledby="t-videos">
+            <h2 id="t-videos">Témoignages vidéo</h2>
+            <div class="grille videos">
+              {videos.length > 0
+                ? videos.map((v) => (
+                    <a class="carte video" href={v.lien} target="_blank" rel="noopener">
+                      <span class="play" aria-hidden="true">▶</span>
+                      <strong>{v.nom}</strong>
+                      <span>Voir la vidéo</span>
+                    </a>
+                  ))
+                : [1, 2, 3].map(() => (
+                    <div class="carte video emplacement">
+                      <span class="play" aria-hidden="true">▶</span>
+                      <span>Emplacement : vidéo de 30 à 60 secondes, publiée sur ton compte</span>
+                    </div>
+                  ))}
+            </div>
+          </section>
+        )}
+
+        <section aria-labelledby="t-systemes">
+          <h2 id="t-systemes">Les systèmes qu'on a livrés</h2>
+          <Realisations />
+        </section>
+
+        <div class="fin">
+          <p>Votre entreprise pourrait être la prochaine.</p>
+          <a class="btn btn-primary" href={CTA}>Réserver mon diagnostic gratuit <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </article>
+  </main>
+</Base>
+
+<style>
+  .svc { padding: 8.5rem 0 4rem; position: relative; z-index: 1; }
+  .wrap-a { width: min(1100px, 92vw); margin: 0 auto; }
+  .crumbs { font-size: .85rem; color: var(--mute); margin-bottom: 1.4rem; }
+  .crumbs a:hover { color: var(--lime); }
+  .crumbs span { margin: 0 .4rem; }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -.03em; font-weight: 700; margin-bottom: 1.2rem; }
+  .lead { color: var(--mute); font-size: 1.15rem; line-height: 1.6; max-width: 40rem; margin-bottom: 2rem; }
+  .apercu { border: 1px solid var(--lime); color: var(--lime); border-radius: 12px; padding: .9rem 1.1rem; font-size: .92rem; margin-bottom: 1rem; }
+  section { margin-top: 3.5rem; }
+  h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); letter-spacing: -.02em; margin-bottom: 1.4rem; }
+  .entete { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+  .lien { color: var(--lime); font-size: .92rem; }
+  .grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+  .carte { margin: 0; padding: 1.5rem; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.02);
+    display: flex; flex-direction: column; gap: .8rem; }
+  .carte.emplacement { border-style: dashed; color: var(--mute); font-size: .92rem; }
+  .etoiles { color: #f5c518; letter-spacing: .15em; margin: 0; }
+  blockquote { color: var(--white); line-height: 1.6; margin: 0; }
+  figcaption { display: flex; flex-direction: column; gap: .15rem; font-size: .9rem; color: var(--mute); }
+  figcaption strong { color: var(--white); font-family: 'Space Grotesk', sans-serif; }
+  .logo { background: #fff; border-radius: 10px; height: 84px; display: grid; place-items: center; padding: 10px 18px; }
+  .logo img { max-width: 100%; max-height: 62px; object-fit: contain; }
+  .nom { color: var(--white); font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; margin: 0; }
+  .videos .video { aspect-ratio: 9 / 12; justify-content: center; align-items: center; text-align: center; text-decoration: none; color: var(--mute); }
+  .play { width: 56px; height: 56px; border-radius: 99px; display: grid; place-items: center; background: var(--lime); color: #0a0a0a; font-size: 1.2rem; }
+  a.video:hover { border-color: var(--lime); }
+  .fin { margin-top: 4rem; padding: 2.4rem; border: 1px solid var(--line); border-radius: 18px; text-align: center; }
+  .fin p { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; margin-bottom: 1.2rem; }
+</style>
