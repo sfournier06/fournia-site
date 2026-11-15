@@ -1,37 +1,98 @@
 ---
-// Exemples de systèmes livrés (src/data/realisations.mjs). Secteur seulement, aucun nom de client.
-// Le nom du client et le résultat ne s'affichent que si l'entrée porte un consentement écrit daté.
+// Carrousel des systèmes livrés (src/data/realisations.mjs), une carte par secteur.
+// Nom, logo, photo, résultat, témoignage et vidéo du client ne s'affichent que si l'entrée porte un
+// consentement écrit daté. Sans lui : carte anonyme (secteur + système).
 import { REALISATIONS } from '../data/realisations.mjs';
 
 const { limite, court = false } = Astro.props;
 const liste = typeof limite === 'number' ? REALISATIONS.slice(0, limite) : REALISATIONS;
 const autorise = (r) => Boolean(r.consentement && r.consentement.date);
+const initiale = (s) => s.trim().charAt(0).toUpperCase();
+const id = `car-${Math.random().toString(36).slice(2, 8)}`;
 ---
-<ul class="realisations">
-  {liste.map((r) => (
-    <li>
-      <p class="secteur">{autorise(r) && r.client ? `${r.client}, ${r.secteur.charAt(0).toLowerCase()}${r.secteur.slice(1)}` : r.secteur}</p>
-      <h3>{r.titre}</h3>
-      <p class="systeme">{court && r.court ? r.court : r.systeme}</p>
-      {autorise(r) && r.resultat && <p class="resultat">{r.resultat}</p>}
-      {r.lien && <a class="lien" href={r.lien}>Voir le secteur <span aria-hidden="true">→</span></a>}
-    </li>
-  ))}
-</ul>
+<div class="carrousel" data-carrousel>
+  <ul class="piste" id={id} tabindex="0" aria-label="Systèmes livrés par secteur">
+    {liste.map((r) => {
+      const ok = autorise(r);
+      return (
+        <li class="carte">
+          {ok && r.photo && <img class="photo" src={r.photo} alt="" loading="lazy" decoding="async" width="800" height="600" />}
+          <div class="tete">
+            {ok && r.logo
+              ? <img class="logo" src={r.logo} alt={r.client ?? ''} loading="lazy" decoding="async" />
+              : <span class="monogramme" aria-hidden="true">{initiale(r.secteur)}</span>}
+            <div>
+              <p class="secteur">{ok && r.client ? r.client : r.secteur}</p>
+              {ok && r.client && <p class="sous-secteur">{r.secteur}</p>}
+            </div>
+            {r.statut === 'en-cours' && <span class="statut">En cours</span>}
+          </div>
+          <h3>{r.titre}</h3>
+          <p class="systeme">{court && r.court ? r.court : r.systeme}</p>
+          {ok && r.resultat && <p class="resultat">{r.resultat}</p>}
+          {ok && r.temoignage && (
+            <blockquote class="temoignage">
+              <p>« {r.temoignage.texte} »</p>
+              <footer>{r.temoignage.auteur}{r.temoignage.role && `, ${r.temoignage.role}`}</footer>
+            </blockquote>
+          )}
+          <div class="liens">
+            {ok && r.video && <a class="lien" href={r.video} target="_blank" rel="noopener">Voir le témoignage vidéo <span aria-hidden="true">→</span></a>}
+            {r.lien && <a class="lien" href={r.lien}>Voir le secteur <span aria-hidden="true">→</span></a>}
+          </div>
+        </li>
+      );
+    })}
+  </ul>
+  <div class="controles">
+    <button type="button" class="fleche" data-dir="-1" aria-controls={id} aria-label="Exemple précédent">←</button>
+    <button type="button" class="fleche" data-dir="1" aria-controls={id} aria-label="Exemple suivant">→</button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('[data-carrousel]').forEach((c) => {
+    const piste = c.querySelector('.piste');
+    c.querySelectorAll('.fleche').forEach((b) => {
+      b.addEventListener('click', () => {
+        const carte = piste.querySelector('.carte');
+        const pas = carte ? carte.getBoundingClientRect().width + 20 : piste.clientWidth;
+        piste.scrollBy({ left: pas * Number(b.dataset.dir), behavior: 'smooth' });
+      });
+    });
+  });
+</script>
 
 <style>
-  ul.realisations.realisations { list-style: none; margin: 0 0 1.4rem; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-top: 1px solid var(--line); }
-  .realisations li { margin: 0; padding: 1.8rem 2rem 1.8rem 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; }
-  .realisations li:nth-child(2n) { padding: 1.8rem 0 1.8rem 2rem; border-left: 1px solid var(--line); }
-  .realisations .secteur { color: var(--lime); font-size: .9rem; font-weight: 500; margin: 0 0 .5rem; }
-  .realisations h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; line-height: 1.25; letter-spacing: -.01em; color: var(--white); margin: 0 0 .6rem; }
-  .realisations .systeme { color: var(--mute); font-size: 1rem; line-height: 1.6; margin: 0 0 1rem; max-width: 52ch; }
-  .realisations .resultat { color: var(--white); font-weight: 500; margin: 0 0 1rem; }
-  .realisations .lien { margin-top: auto; color: var(--mute); font-size: .9rem; text-decoration: none; transition: color .2s; }
-  .realisations .lien:hover { color: var(--lime); }
-  @media (max-width: 760px) {
-    ul.realisations { grid-template-columns: 1fr; }
-    .realisations li, .realisations li:nth-child(2n) { padding: 1.5rem 0; border-left: none; }
-  }
+  .carrousel { margin: 0 0 1.4rem; }
+  ul.piste.piste { list-style: none; margin: 0; padding: 0 0 1rem; display: grid; grid-auto-flow: column;
+    grid-auto-columns: minmax(280px, calc((100% - 40px) / 3)); gap: 20px; overflow-x: auto;
+    scroll-snap-type: x mandatory; scrollbar-width: thin; overscroll-behavior-x: contain; }
+  .piste:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
+  .carte { scroll-snap-align: start; margin: 0; padding: 1.5rem; border: 1px solid var(--line); border-radius: 14px;
+    display: flex; flex-direction: column; background: rgba(255,255,255,.02); }
+  .photo { width: calc(100% + 3rem); margin: -1.5rem -1.5rem 1.2rem; height: auto; aspect-ratio: 4 / 3; object-fit: cover;
+    border-radius: 14px 14px 0 0; }
+  .tete { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+  .monogramme { flex: none; width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center;
+    background: rgba(200,255,0,.08); color: var(--lime); font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.15rem; }
+  .logo { flex: none; width: 44px; height: 44px; object-fit: contain; border-radius: 10px; background: #fff; padding: 4px; }
+  .secteur { color: var(--lime); font-size: .9rem; font-weight: 500; margin: 0; }
+  .sous-secteur { color: var(--mute); font-size: .82rem; margin: .1rem 0 0; }
+  .statut { margin-left: auto; font-size: .75rem; color: var(--mute); border: 1px solid var(--line); border-radius: 99px; padding: .15rem .6rem; }
+  .carte h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; line-height: 1.25; letter-spacing: -.01em; color: var(--white); margin: 0 0 .6rem; }
+  .systeme { color: var(--mute); font-size: .98rem; line-height: 1.6; margin: 0 0 1rem; }
+  .resultat { color: var(--white); font-weight: 500; margin: 0 0 1rem; }
+  .temoignage { margin: 0 0 1rem; padding: 0 0 0 .9rem; border-left: 2px solid var(--lime); }
+  .temoignage p { color: var(--white); font-size: .98rem; line-height: 1.55; margin: 0 0 .4rem; }
+  .temoignage footer { color: var(--mute); font-size: .85rem; }
+  .liens { margin-top: auto; display: flex; flex-direction: column; gap: .35rem; }
+  .lien { color: var(--mute); font-size: .9rem; text-decoration: none; transition: color .2s; }
+  .lien:hover { color: var(--lime); }
+  .controles { display: flex; gap: .5rem; justify-content: flex-end; }
+  .fleche { width: 44px; height: 44px; border-radius: 99px; border: 1px solid var(--line); background: transparent;
+    color: var(--white); font-size: 1.1rem; cursor: pointer; transition: border-color .2s, color .2s; }
+  .fleche:hover, .fleche:focus-visible { border-color: var(--lime); color: var(--lime); }
+  @media (max-width: 900px) { ul.piste { grid-auto-columns: minmax(260px, 78%); } }
+  @media (prefers-reduced-motion: reduce) { ul.piste { scroll-behavior: auto; } }
 </style>
