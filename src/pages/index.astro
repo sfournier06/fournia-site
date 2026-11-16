@@ -119,8 +119,8 @@ const SCENARIOS = [
     avant: "Les clients sont contents, mais personne ne leur demande d'avis. La fiche Google reste à quelques avis.",
     etapes: [
       { quand: 'Le lendemain', quoi: 'Un courriel de remerciement part avec un court sondage.' },
-      { quand: 'Note de 8 à 10', quoi: "Le client est invité à laisser un avis Google, en un clic." },
-      { quand: 'Note plus basse', quoi: 'Vous êtes alerté pour rappeler le client avant qu\'il parte fâché.' },
+      { quand: 'Après le sondage', quoi: 'Chaque client reçoit le lien pour laisser un avis Google, en un clic.' },
+      { quand: 'Note plus basse', quoi: 'Vous êtes aussi alerté pour rappeler le client et régler le problème.' },
     ],
     sans: [
       { who: 'sys', t: 'Samedi', txt: 'Service livré. Client satisfait.' },
@@ -134,7 +134,7 @@ const SCENARIOS = [
       { who: 'out', t: 'Dimanche, 11 h', txt: 'Merci ! Si vous avez 30 secondes, un avis Google nous aiderait beaucoup.', step: 1 },
       { who: 'sys', t: 'Dimanche, 11 h', txt: 'Nouvel avis Google ★★★★★', step: 2 },
     ],
-    resultat: 'Les avis montent après chaque service, et les clients déçus sont rattrapés à temps.' },
+    resultat: 'Les avis montent après chaque service, et un client déçu est rappelé à temps.' },
   { id: 'reactivation', titre: 'Les anciens clients', pour: 'Réactiver votre liste', contact: 'Ancienne cliente', canal: 'Texto',
     avant: "Des centaines d'anciens clients dorment dans un fichier. Personne n'a le temps de leur écrire un par un.",
     etapes: [
