@@ -57,12 +57,12 @@ const SCENARIOS = [
       { who: 'out', t: '19 h 50', txt: 'Bonjour ! Voici votre soumission pour le 12 décembre. Au plaisir.' },
     ],
     resultat: 'Vous relisez, vous ajustez au besoin, vous envoyez.' },
-  { id: 'appels', titre: 'Les appels manqués', pour: 'Quand vous êtes occupé', contact: '514 555-0142', canal: 'Appel',
+  { id: 'appels', titre: 'Les appels manqués', pour: 'Un agent répond à votre place', contact: 'Appel entrant', canal: 'Agent vocal', voix: true,
     avant: "Vous êtes avec un client, l'appel tombe dans la boîte vocale et la personne appelle le suivant sur sa liste.",
     etapes: [
-      { quand: '14 h 12', quoi: 'Appel manqué.' },
-      { quand: '14 h 13', quoi: 'Un texto part tout seul pour prendre le relais.' },
-      { quand: '14 h 20', quoi: 'La personne explique son besoin. Tout est au dossier.' },
+      { quand: '14 h 12', quoi: 'Un appel entre pendant que vous êtes occupé.' },
+      { quand: 'Aussitôt', quoi: 'Un agent vocal répond à votre nom, comprend le besoin et pose les bonnes questions.' },
+      { quand: "Fin de l'appel", quoi: 'Le rappel est fixé à votre agenda et un résumé écrit vous attend.' },
     ],
     sans: [
       { who: 'sys', t: '14 h 12', txt: 'Appel manqué' },
@@ -70,12 +70,14 @@ const SCENARIOS = [
       { who: 'perte', t: '', txt: 'La personne a appelé le suivant sur sa liste.' },
     ],
     avec: [
-      { who: 'sys', t: '14 h 12', txt: 'Appel manqué', step: 0 },
-      { who: 'out', t: '14 h 13', txt: "Désolé d'avoir manqué votre appel. Comment puis-je vous aider ?", step: 1 },
-      { who: 'in', t: '14 h 20', txt: "Bonjour, c'est pour une estimation de rénovation de cuisine.", step: 2 },
-      { who: 'sys', t: '14 h 20', txt: 'Ajouté au dossier · À rappeler aujourd\'hui' },
+      { who: 'sys', t: '14 h 12', txt: 'Appel entrant · Vous êtes avec un client', step: 0 },
+      { who: 'out', lbl: 'Agent', t: '14 h 12', txt: "Bonjour, vous êtes bien chez Rénovations Gagnon. Je peux prendre votre demande. Qu'est-ce qu'on peut faire pour vous ?", step: 1 },
+      { who: 'in', lbl: 'Client', t: '14 h 12', txt: 'Je voudrais une estimation pour refaire ma cuisine.' },
+      { who: 'out', lbl: 'Agent', t: '14 h 13', txt: "Parfait. Un conseiller peut vous rappeler jeudi à 10 h ou vendredi à 14 h. Qu'est-ce qui vous convient ?" },
+      { who: 'in', lbl: 'Client', t: '14 h 13', txt: 'Jeudi 10 h, parfait.' },
+      { who: 'sys', t: "Fin de l'appel", txt: 'Rappel jeudi 10 h à votre agenda · Résumé au dossier', step: 2 },
     ],
-    resultat: 'Vous rappelez en sachant déjà de quoi il est question.' },
+    resultat: "Aucun appel perdu, et vous rappelez en sachant déjà de quoi il est question." },
   { id: 'documents', titre: 'Les documents', pour: 'Commandes et production', contact: 'Boutique en ligne', canal: 'Commande',
     avant: 'Les commandes sont retapées à la main dans les fichiers de production. Une erreur de quantité coûte cher.',
     etapes: [
@@ -94,6 +96,64 @@ const SCENARIOS = [
       { who: 'sys', t: '8 h 06', txt: 'Fiche de production créée · PDF prêt à imprimer', step: 2 },
     ],
     resultat: 'Votre équipe produit sans rien retaper.' },
+  { id: 'rendezvous', titre: 'Les rendez-vous', pour: 'Demandes reçues le soir', contact: 'Formulaire du site', canal: 'Demande',
+    avant: "Une demande arrive à 21 h. Vous répondez le lendemain midi, après trois courriels pour trouver une plage qui marche.",
+    etapes: [
+      { quand: '21 h 04', quoi: 'La demande arrive pendant que vous êtes chez vous.' },
+      { quand: '21 h 05', quoi: 'Le système propose des plages selon vos vraies disponibilités.' },
+      { quand: '21 h 09', quoi: 'Le rendez-vous est au calendrier, avec un rappel la veille.' },
+    ],
+    sans: [
+      { who: 'in', t: '21 h 04', txt: "Bonjour, j'aimerais rencontrer quelqu'un cette semaine pour mon fils." },
+      { who: 'sys', t: 'Le lendemain midi', txt: 'Vous répondez. Trois courriels pour trouver une plage.' },
+      { who: 'perte', t: '', txt: 'Entre-temps, le parent a réservé ailleurs.' },
+    ],
+    avec: [
+      { who: 'in', t: '21 h 04', txt: "Bonjour, j'aimerais rencontrer quelqu'un cette semaine pour mon fils.", step: 0 },
+      { who: 'out', t: '21 h 05', txt: 'Bonjour ! Voici trois plages possibles : mardi 16 h, mercredi 17 h ou jeudi 16 h 30. Laquelle vous convient ?', step: 1 },
+      { who: 'in', t: '21 h 08', txt: 'Mercredi 17 h.' },
+      { who: 'sys', t: '21 h 09', txt: 'Rendez-vous au calendrier · Rappel automatique la veille', step: 2 },
+    ],
+    resultat: 'Le rendez-vous est pris le soir même, sans que vous leviez le petit doigt.' },
+  { id: 'avis', titre: 'Les avis Google', pour: 'Après chaque service', contact: 'Client satisfait', canal: 'Courriel',
+    avant: "Les clients sont contents, mais personne ne leur demande d'avis. La fiche Google reste à quelques avis.",
+    etapes: [
+      { quand: 'Le lendemain', quoi: 'Un courriel de remerciement part avec un court sondage.' },
+      { quand: 'Note de 8 à 10', quoi: "Le client est invité à laisser un avis Google, en un clic." },
+      { quand: 'Note plus basse', quoi: 'Vous êtes alerté pour rappeler le client avant qu\'il parte fâché.' },
+    ],
+    sans: [
+      { who: 'sys', t: 'Samedi', txt: 'Service livré. Client satisfait.' },
+      { who: 'sys', t: 'Ensuite', txt: "Personne ne pense à demander un avis." },
+      { who: 'perte', t: '', txt: 'Le prochain client choisit le concurrent qui a plus d\'avis.' },
+    ],
+    avec: [
+      { who: 'sys', t: 'Samedi', txt: 'Service livré' },
+      { who: 'out', t: 'Dimanche, 10 h', txt: 'Merci de nous avoir fait confiance ! Sur 10, comment s\'est passée votre expérience ?', step: 0 },
+      { who: 'in', t: 'Dimanche, 11 h', txt: '10 ! Tout était parfait.' },
+      { who: 'out', t: 'Dimanche, 11 h', txt: 'Merci ! Si vous avez 30 secondes, un avis Google nous aiderait beaucoup.', step: 1 },
+      { who: 'sys', t: 'Dimanche, 11 h', txt: 'Nouvel avis Google ★★★★★', step: 2 },
+    ],
+    resultat: 'Les avis montent après chaque service, et les clients déçus sont rattrapés à temps.' },
+  { id: 'reactivation', titre: 'Les anciens clients', pour: 'Réactiver votre liste', contact: 'Ancienne cliente', canal: 'Texto',
+    avant: "Des centaines d'anciens clients dorment dans un fichier. Personne n'a le temps de leur écrire un par un.",
+    etapes: [
+      { quand: 'Le système trie', quoi: 'Votre liste est nettoyée : doublons retirés, consentements vérifiés.' },
+      { quand: 'Un à la fois', quoi: 'Chaque ancien client reçoit un message personnalisé, à votre nom.' },
+      { quand: 'Quand ça répond', quoi: 'La conversation vous est remise, avec tout le contexte.' },
+    ],
+    sans: [
+      { who: 'sys', t: 'Fichier Excel', txt: 'Plus de 300 anciens clients' },
+      { who: 'sys', t: 'Depuis 2 ans', txt: 'Aucun contact.' },
+      { who: 'perte', t: '', txt: 'Ils ne pensent plus à vous quand vient le temps de réserver.' },
+    ],
+    avec: [
+      { who: 'sys', t: 'Lundi', txt: 'Liste triée · seulement les clients joignables', step: 0 },
+      { who: 'out', t: 'Lundi, 10 h', txt: "Bonjour Julie ! Ça fait un bout depuis votre fête l'an dernier. Vous avez un événement qui s'en vient ?", step: 1 },
+      { who: 'in', t: 'Lundi, 13 h', txt: 'Oui ! Le party de bureau en décembre, vous êtes disponibles ?' },
+      { who: 'sys', t: 'Lundi, 13 h', txt: 'Conversation remise à votre équipe · Dossier au CRM', step: 2 },
+    ],
+    resultat: 'Votre ancienne clientèle redevient une source de ventes.' },
 ];
 // FAQ : reprend les réponses déjà publiées sur les pages d'offres.
 const FAQ = [
@@ -439,6 +499,9 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .tel-progres span { display: block; height: 100%; width: 0; background: var(--lime); transition: width .4s ease; }
   [data-mode=sans] .tel-progres span { background: #e5484d; }
   .bulle { max-width: 82%; padding: .6rem .85rem; border-radius: 18px; font-size: .88rem; line-height: 1.4; animation: pop .35s cubic-bezier(.2,.8,.3,1) both; }
+  .bulle .qui { display: block; font-size: .68rem; font-weight: 600; letter-spacing: .02em; opacity: .7; margin-bottom: .15rem; }
+  .tel.appel .tel-tete span:not(.avatar) { color: var(--lime); }
+  .tel.appel .tel-tete span:not(.avatar)::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--lime); margin-right: .4rem; animation: point 1.2s infinite; }
   .bulle .h { display: block; font-size: .68rem; opacity: .6; margin-top: .25rem; }
   .bulle.out { align-self: flex-end; background: var(--lime); color: #0b0b0c; border-bottom-right-radius: 6px; }
   .bulle.in { align-self: flex-start; background: #262725; color: var(--white); border-bottom-left-radius: 6px; }
@@ -717,7 +780,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       <h2 class="sec-title reveal">Trois étapes, et vous savez toujours où on en est</h2>
       <ol class="etapes-v reveal">
         <li><span class="n">1</span><div><h3>Diagnostic gratuit</h3><p>30 minutes. On regarde la tâche qui vous coûte le plus. Si l'IA ne peut pas vous aider, on vous le dit.</p></div></li>
-        <li><span class="n">2</span><div><h3>Un plan et un prix</h3><p>La bonne formule pour votre réalité, avec un prix fixe présenté en personne.</p></div></li>
+        <li><span class="n">2</span><div><h3>Un plan de match détaillé</h3><p>Quoi automatiser, dans quel ordre, avec quels outils, et ce que ça change pour votre équipe. Présenté en personne.</p></div></li>
         <li><span class="n">3</span><div><h3>On construit et on forme</h3><p>Le système est branché sur vos outils, testé avec votre équipe, et on reste là après la livraison.</p></div></li>
       </ol>
     </div>
@@ -931,6 +994,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       demo.querySelectorAll('.bascule button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.mode === mode));
       demo.querySelector('[data-contact]').textContent = sc.contact;
       demo.querySelector('[data-canal]').textContent = sc.canal;
+      demo.querySelector('.tel').classList.toggle('appel', Boolean(sc.voix) && mode === 'avec');
       demo.querySelector('[data-initiale]').textContent = sc.contact.replace(/[^A-Za-zÀ-ÿ0-9]/g, '').charAt(0);
       const pan = document.getElementById('pan-' + sc.id);
       pan.querySelectorAll('li').forEach((li) => li.classList.remove('on'));
@@ -946,7 +1010,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
         }
         later(() => {
           fil.querySelector('[data-tmp]')?.remove();
-          if (e.who === 'in' || e.who === 'out') add(`<p class="bulle ${e.who}">${esc(e.txt)}<span class="h">${esc(e.t)}</span></p>`);
+          if (e.who === 'in' || e.who === 'out') add(`<p class="bulle ${e.who}">${e.lbl ? `<span class="qui">${esc(e.lbl)}</span>` : ''}${esc(e.txt)}<span class="h">${esc(e.t)}</span></p>`);
           else if (e.who === 'perte') add(`<p class="puce perte">${esc(e.txt)}</p>`);
           else add(`<p class="puce">${e.t ? `<b>${esc(e.t)}</b> · ` : ''}${esc(e.txt)}</p>`);
           if (e.step !== undefined) pan.querySelector(`li[data-step="${e.step}"]`)?.classList.add('on');
