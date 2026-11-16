@@ -7,8 +7,7 @@ import Temoignages from '../components/Temoignages.astro';
 import { SITE, CTA, ZONES, organisationLd } from '../data/entite.mjs';
 
 const canonical = `${SITE}/a-propos/`;
-// Chiffres tirés de src/data/realisations.mjs (re-mesurés à chaque build).
-const nbSystemes = REALISATIONS.length;
+// « 100+ automatisations » : chiffre donné par Simon le 2026-11-16. Secteurs : tirés de src/data/realisations.mjs.
 const nbSecteurs = new Set(REALISATIONS.map((r) => r.secteur)).size;
 const title = "À propos de FournIA et de Simon Fournier | FournIA";
 const description = "FournIA rend l'IA simple et utile pour les PME du Québec. Fondée en 2026 à Blainville par Simon Fournier : la vision, l'équipe et la façon de travailler.";
@@ -55,10 +54,19 @@ const breadcrumbLd = {
         </div>
 
         <ul class="chiffres">
-          <li><strong>{nbSystemes}</strong><span>systèmes livrés ou en cours</span></li>
+          <li><strong>100+</strong><span>automatisations construites</span></li>
           <li><strong>{nbSecteurs}</strong><span>secteurs d'activité</span></li>
           <li><strong>Incluse</strong><span>la formation de votre équipe, à chaque livraison</span></li>
         </ul>
+
+        <section class="bloc histoire">
+          <p class="etiquette">Notre histoire</p>
+          <h2>Tout a commencé par un traiteur qui retapait ses commandes à la main.</h2>
+          <div class="deux">
+            <p>En avril 2026, Simon Fournier lance FournIA à Blainville. Le premier mandat : un traiteur corporatif de Montréal dont l'équipe passait des heures à retaper les commandes et à monter les offres de service. Une fois le premier système en place, le même client en a demandé un deuxième, puis un troisième.</p>
+            <p>Le constat est vite devenu clair : les PME ne manquent pas d'idées pour l'IA, elles manquent de quelqu'un qui l'installe pour vrai, dans leurs outils, et qui forme leur monde. Depuis, l'équipe a construit plus de 100 automatisations dans {nbSecteurs} secteurs, du traiteur à la location d'équipement en passant par les conseillers financiers.</p>
+          </div>
+        </section>
 
         <section class="bloc vision">
           <p class="etiquette">Notre vision</p>
