@@ -1,0 +1,117 @@
+---
+// Preuves sociales de l'accueil : témoignages vidéo + avis Google.
+// Production : seulement les vrais éléments (avis copiés mot pour mot dans src/data/avis.mjs,
+// vidéos de clients avec consentement écrit dans src/data/temoignages.mjs). Rien de réel = rien d'affiché.
+// Aperçu interne (APERCU=1) : des cartes MAQUETTES marquées « Exemple » montrent la mise en page.
+// Leur texte est fictif et ne doit JAMAIS être publié (Loi sur la concurrence, faux témoignages).
+import { AVIS, LIEN_FICHE_GOOGLE } from '../data/avis.mjs';
+import { TEMOIGNAGES } from '../data/temoignages.mjs';
+import { APERCU } from '../data/apercu.mjs';
+
+const ok = (x) => Boolean(x && x.consentement && x.consentement.date);
+const avis = AVIS.filter((a) => a && a.texte && a.auteur);
+const videos = TEMOIGNAGES.filter((t) => ok(t) && t.video);
+
+const MAQUETTE_VIDEOS = [
+  { nom: 'Propriétaire, traiteur', sujet: 'Les offres de service en 10 minutes', logo: '/clients/mono/avecplaisirs.webp' },
+  { nom: 'Directeur, centre de tutorat', sujet: 'Les nouvelles demandes, répondues tout de suite', logo: '/clients/mono/arbour.webp' },
+  { nom: 'Fondateur, formation numérique', sujet: 'Un CRM enfin à jour', logo: '/clients/mono/seniortech.webp' },
+];
+const MAQUETTE_AVIS = [
+  { auteur: 'Prénom N.', texte: "Texte d'exemple : Simon a pris le temps de comprendre comment on travaille avant de proposer quoi que ce soit. Le système roule depuis et l'équipe l'utilise tous les jours." },
+  { auteur: 'Prénom N.', texte: "Texte d'exemple : Explications claires, sans jargon. On savait toujours où en était le projet." },
+  { auteur: 'Prénom N.', texte: "Texte d'exemple : Livré rapidement, formation incluse, et il répond quand on a une question." },
+];
+
+const montrerVideos = videos.length > 0 || APERCU;
+const montrerAvis = avis.length > 0 || APERCU;
+const etoiles = '★★★★★';
+---
+{(montrerVideos || montrerAvis) && (
+  <section id="preuves" class="preuves" aria-labelledby="preuves-titre">
+    <div class="wrap">
+      <p class="etiquette">Témoignages</p>
+      <h2 id="preuves-titre" class="sec-title">Ce que les clients en disent</h2>
+      {APERCU && <p class="maquette">Aperçu interne : les cartes « Exemple » sont des maquettes de mise en page. Elles sont remplacées par les vrais témoignages et avis, avec accord écrit. Rien de fictif n'est publié.</p>}
+
+      {montrerVideos && (
+        <div class="videos">
+          {videos.length > 0
+            ? videos.map((v) => (
+                <a class="video" href={v.video} target="_blank" rel="noopener">
+                  {v.logo && <img class="logo" src={v.logo} alt="" loading="lazy" />}
+                  <span class="play" aria-hidden="true"></span>
+                  <span class="legende"><strong>{v.nom}</strong>{v.entreprise && <span>{v.entreprise}</span>}</span>
+                </a>
+              ))
+            : MAQUETTE_VIDEOS.map((v) => (
+                <div class="video exemple">
+                  <span class="badge">Exemple</span>
+                  <img class="logo" src={v.logo} alt="" loading="lazy" />
+                  <span class="play" aria-hidden="true"></span>
+                  <span class="legende"><strong>« {v.sujet} »</strong><span>{v.nom}</span></span>
+                </div>
+              ))}
+        </div>
+      )}
+
+      {montrerAvis && (
+        <div class="avis">
+          <div class="note-globale">
+            <span class="g" aria-hidden="true">G</span>
+            <div><strong>Avis Google</strong><span class="etoiles">{etoiles}</span></div>
+            {LIEN_FICHE_GOOGLE && <a href={LIEN_FICHE_GOOGLE} target="_blank" rel="noopener">Voir tous les avis →</a>}
+          </div>
+          {(avis.length > 0 ? avis : MAQUETTE_AVIS).map((a) => (
+            <figure class:list={['carte-avis', { exemple: avis.length === 0 }]}>
+              {avis.length === 0 && <span class="badge">Exemple</span>}
+              <p class="etoiles" aria-label="5 sur 5">{etoiles}</p>
+              <blockquote>{a.texte}</blockquote>
+              <figcaption>{a.auteur}</figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+)}
+
+<style>
+  .preuves { position: relative; z-index: 1; padding: 7rem 0; }
+  .maquette { color: var(--mute); font-size: .88rem; border-left: 2px solid var(--lime); padding-left: .9rem; margin: -0.4rem 0 2.4rem; max-width: 46rem; }
+  .videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-bottom: 1.4rem; }
+  .video { position: relative; aspect-ratio: 4 / 5; border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 1.5rem; text-decoration: none; color: var(--white); border: 1px solid var(--line);
+    background: radial-gradient(120% 80% at 50% 20%, #23251f, #111211 70%); transition: border-color .3s, transform .4s cubic-bezier(.2,.8,.3,1); }
+  a.video:hover, .video:hover { border-color: rgba(183,217,76,.4); transform: translateY(-4px); }
+  .video .logo { position: absolute; top: 1.5rem; left: 1.5rem; height: 26px; width: auto; max-width: 45%; opacity: .7; }
+  .play { position: absolute; top: 50%; left: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%;
+    background: var(--lime); box-shadow: 0 0 0 10px rgba(183,217,76,.12); transition: box-shadow .3s; }
+  .play::after { content: ''; position: absolute; left: 26px; top: 21px; border-left: 16px solid #0b0b0c; border-top: 11px solid transparent; border-bottom: 11px solid transparent; }
+  .video:hover .play { box-shadow: 0 0 0 16px rgba(183,217,76,.1); }
+  .legende { display: flex; flex-direction: column; gap: .3rem; position: relative; }
+  .legende strong { font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 1.05rem; line-height: 1.3; }
+  .legende span { color: var(--mute); font-size: .86rem; }
+  .badge { position: absolute; top: 1.2rem; right: 1.2rem; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: #0b0b0c;
+    background: #e9c46a; border-radius: 6px; padding: .2rem .5rem; font-weight: 600; z-index: 2; }
+  .avis { display: grid; grid-template-columns: .8fr 1fr 1fr 1fr; gap: 1.4rem; align-items: stretch; }
+  .note-globale { display: flex; flex-direction: column; justify-content: center; gap: .8rem; padding: 1.5rem 0; }
+  .note-globale .g { width: 40px; height: 40px; border-radius: 50%; background: #fff; color: #4285f4; display: grid; place-items: center;
+    font-family: Arial, sans-serif; font-weight: 700; font-size: 1.2rem; }
+  .note-globale strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; }
+  .note-globale a { color: var(--lime); font-size: .9rem; }
+  .etoiles { color: #f5c518; letter-spacing: .12em; font-size: .95rem; }
+  .carte-avis { position: relative; margin: 0; padding: 1.6rem; border-radius: 16px; border: 1px solid var(--line); background: rgba(255,255,255,.02);
+    display: flex; flex-direction: column; gap: .9rem; }
+  .carte-avis blockquote { color: var(--white); font-size: .96rem; line-height: 1.6; margin: 0; flex: 1; }
+  .carte-avis figcaption { color: var(--mute); font-size: .88rem; }
+  @media (max-width: 960px) {
+    .videos { grid-template-columns: 1fr 1fr; }
+    .avis { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .preuves { padding: 4.5rem 0; }
+    .videos { grid-template-columns: 1fr; }
+    .video { aspect-ratio: 16 / 11; }
+  }
+</style>
