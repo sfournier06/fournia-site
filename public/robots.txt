@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+# Maquettes internes (personnes fictives) : jamais indexées
+Disallow: /apercu/
 
 # Bots de retrieval (citation IA en temps reel) explicitement permis
 User-agent: OAI-SearchBot

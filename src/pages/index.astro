@@ -12,38 +12,86 @@ import { APERCU } from '../data/apercu.mjs';
 import { organisationLd, GOOGLE_VERIFICATION, BING_VERIFICATION } from '../data/entite.mjs';
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 const orgLd = organisationLd;
-// Démonstration interactive : 4 tâches, avant / avec le système. Exemples génériques, aucun client nommé.
+// Démonstration interactive : 4 tâches. Exemples génériques, noms fictifs, aucun client réel.
+// sans = ce qui se passe sans système ; avec = la scène jouée par le téléphone.
+// who : 'out' (message envoyé à votre nom), 'in' (le client), 'sys' (action du système), 'perte' (issue négative).
+// step : index de l'étape du journal qui s'allume.
 const SCENARIOS = [
-  { id: 'relances', titre: 'Les relances', pour: 'Soumissions et clients silencieux',
+  { id: 'relances', titre: 'Les relances', pour: 'Soumissions et clients silencieux', contact: 'M. Tremblay', canal: 'Texto',
     avant: "Une soumission est partie il y a cinq jours. Personne n'a fait de suivi, et le client signe ailleurs.",
     etapes: [
       { quand: 'Jour 3', quoi: 'Le système lui écrit un texto poli, à votre nom.' },
-      { quand: 'Jour 3, 16 h', quoi: 'Il répond : « On en reparle mardi. »' },
+      { quand: 'Jour 3, 16 h', quoi: 'Il répond : « On en reparle mardi ? »' },
       { quand: 'Aussitôt', quoi: 'La réponse est notée au dossier et un rappel est mis à votre agenda.' },
     ],
+    sans: [
+      { who: 'out', t: 'Lundi', txt: 'Bonjour M. Tremblay, voici votre soumission pour les travaux.' },
+      { who: 'sys', t: '5 jours plus tard', txt: 'Aucune réponse. Personne ne l\'a relancé.' },
+      { who: 'perte', t: '', txt: 'Le client a signé ailleurs.' },
+    ],
+    avec: [
+      { who: 'out', t: 'Lundi', txt: 'Bonjour M. Tremblay, voici votre soumission pour les travaux.' },
+      { who: 'sys', t: 'Jour 3, 9 h', txt: 'Pas de réponse : relance automatique', step: 0 },
+      { who: 'out', t: 'Jour 3, 9 h', txt: 'Bonjour M. Tremblay, avez-vous eu le temps de regarder la soumission ? Je peux répondre à vos questions.' },
+      { who: 'in', t: 'Jour 3, 16 h', txt: 'Oui ! On en reparle mardi ?', step: 1 },
+      { who: 'sys', t: 'Aussitôt', txt: 'Noté au dossier · Rappel mardi 9 h à votre agenda', step: 2 },
+    ],
     resultat: 'Vous reprenez la conversation au bon moment, sans rien avoir à retenir.' },
-  { id: 'soumissions', titre: 'Les soumissions', pour: 'Demandes à chiffrer',
-    avant: "Chaque demande prend une heure à chiffrer et à mettre en page, souvent le soir.",
+  { id: 'soumissions', titre: 'Les soumissions', pour: 'Demandes à chiffrer', contact: 'Formulaire du site', canal: 'Demande',
+    avant: 'Chaque demande prend une heure à chiffrer et à mettre en page, souvent le soir.',
     etapes: [
-      { quand: 'La demande arrive', quoi: 'Par courriel ou par le formulaire de votre site.' },
-      { quand: '1 minute après', quoi: 'Le système lit la demande et calcule le prix selon votre grille.' },
-      { quand: 'Ensuite', quoi: 'Un brouillon à votre image vous attend.' },
+      { quand: 'La demande arrive', quoi: 'Le système lit la demande : date, nombre de personnes, options.' },
+      { quand: '1 minute après', quoi: 'Il calcule le prix selon votre grille.' },
+      { quand: 'Ensuite', quoi: 'Un brouillon à votre image vous attend. Vous validez.' },
+    ],
+    sans: [
+      { who: 'in', t: '19 h 40', txt: "Bonjour, j'aurais besoin d'un prix pour 120 personnes le 12 décembre." },
+      { who: 'sys', t: 'Le soir même', txt: 'Vous chiffrez et mettez en page à la main.' },
+      { who: 'perte', t: '', txt: 'Une soirée de plus sur la paperasse.' },
+    ],
+    avec: [
+      { who: 'in', t: '19 h 40', txt: "Bonjour, j'aurais besoin d'un prix pour 120 personnes le 12 décembre." },
+      { who: 'sys', t: '19 h 41', txt: 'Demande lue · 120 personnes · 12 décembre', step: 0 },
+      { who: 'sys', t: '19 h 41', txt: 'Prix calculé selon votre grille', step: 1 },
+      { who: 'sys', t: '19 h 42', txt: 'Brouillon prêt · En attente de votre validation', step: 2 },
+      { who: 'out', t: '19 h 50', txt: 'Bonjour ! Voici votre soumission pour le 12 décembre. Au plaisir.' },
     ],
     resultat: 'Vous relisez, vous ajustez au besoin, vous envoyez.' },
-  { id: 'appels', titre: 'Les appels manqués', pour: 'Quand vous êtes occupé',
+  { id: 'appels', titre: 'Les appels manqués', pour: 'Quand vous êtes occupé', contact: '514 555-0142', canal: 'Appel',
     avant: "Vous êtes avec un client, l'appel tombe dans la boîte vocale et la personne appelle le suivant sur sa liste.",
     etapes: [
       { quand: '14 h 12', quoi: 'Appel manqué.' },
-      { quand: '14 h 13', quoi: '« Désolé d\'avoir manqué votre appel. Comment puis-je vous aider ? »' },
-      { quand: '14 h 20', quoi: 'La personne explique son besoin par texto.' },
+      { quand: '14 h 13', quoi: 'Un texto part tout seul pour prendre le relais.' },
+      { quand: '14 h 20', quoi: 'La personne explique son besoin. Tout est au dossier.' },
+    ],
+    sans: [
+      { who: 'sys', t: '14 h 12', txt: 'Appel manqué' },
+      { who: 'sys', t: '14 h 12', txt: 'Boîte vocale. Aucun message laissé.' },
+      { who: 'perte', t: '', txt: 'La personne a appelé le suivant sur sa liste.' },
+    ],
+    avec: [
+      { who: 'sys', t: '14 h 12', txt: 'Appel manqué', step: 0 },
+      { who: 'out', t: '14 h 13', txt: "Désolé d'avoir manqué votre appel. Comment puis-je vous aider ?", step: 1 },
+      { who: 'in', t: '14 h 20', txt: "Bonjour, c'est pour une estimation de rénovation de cuisine.", step: 2 },
+      { who: 'sys', t: '14 h 20', txt: 'Ajouté au dossier · À rappeler aujourd\'hui' },
     ],
     resultat: 'Vous rappelez en sachant déjà de quoi il est question.' },
-  { id: 'documents', titre: 'Les documents', pour: 'Commandes et production',
-    avant: "Les commandes sont retapées à la main dans les fichiers de production. Une erreur de quantité coûte cher.",
+  { id: 'documents', titre: 'Les documents', pour: 'Commandes et production', contact: 'Boutique en ligne', canal: 'Commande',
+    avant: 'Les commandes sont retapées à la main dans les fichiers de production. Une erreur de quantité coûte cher.',
     etapes: [
       { quand: 'Commande reçue', quoi: 'En ligne ou par courriel.' },
       { quand: 'Aussitôt', quoi: 'Le système extrait les quantités, les options et les dates.' },
       { quand: 'Ensuite', quoi: 'Le document de production est créé, prêt à imprimer.' },
+    ],
+    sans: [
+      { who: 'in', t: '8 h 05', txt: 'Commande no 1048 : 3 plateaux, 40 boîtes à lunch, livraison jeudi 11 h' },
+      { who: 'sys', t: 'Plus tard', txt: 'Retapée à la main dans le fichier de production.' },
+      { who: 'perte', t: '', txt: '40 devient 4. La cuisine prépare la mauvaise quantité.' },
+    ],
+    avec: [
+      { who: 'in', t: '8 h 05', txt: 'Commande no 1048 : 3 plateaux, 40 boîtes à lunch, livraison jeudi 11 h', step: 0 },
+      { who: 'sys', t: '8 h 05', txt: 'Extrait : 3 plateaux · 40 boîtes · jeudi 11 h', step: 1 },
+      { who: 'sys', t: '8 h 06', txt: 'Fiche de production créée · PDF prêt à imprimer', step: 2 },
     ],
     resultat: 'Votre équipe produit sans rien retaper.' },
 ];
@@ -351,38 +399,75 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .tete-section.ligne { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; flex-wrap: wrap; }
   h2.sec-title { max-width: 24ch; }
 
-  /* ── démonstration interactive ── */
-  .demo-i { display: grid; grid-template-columns: 330px 1fr; border: 1px solid var(--glass-b); border-radius: 24px; overflow: hidden; background: rgba(16,16,16,.75); min-height: 430px; }
+  /* ── démonstration interactive : téléphone qui joue la scène ── */
+  .demo-i { display: grid; grid-template-columns: 290px 1fr; border: 1px solid var(--glass-b); border-radius: 26px; overflow: hidden;
+    background: linear-gradient(170deg, rgba(22,23,21,.9), rgba(12,12,12,.9)); }
   .onglets { display: flex; flex-direction: column; border-right: 1px solid var(--line); }
-  .onglets button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 2.4rem 1fr; grid-template-rows: auto auto; column-gap: .4rem;
-    padding: 1.45rem 1.6rem; border-bottom: 1px solid var(--line); transition: background .25s; position: relative; }
-  .onglets button:last-child { border-bottom: none; }
-  .onglets button:hover { background: rgba(255,255,255,.025); }
-  .onglets button[aria-selected=true] { background: rgba(183,217,76,.06); }
-  .onglets button[aria-selected=true]::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--lime); }
+  .onglets button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 2.2rem 1fr; column-gap: .3rem;
+    padding: 1.5rem 1.5rem; border-bottom: 1px solid var(--line); transition: background .25s; position: relative; }
+  .onglets button:hover { background: rgba(255,255,255,.03); }
+  .onglets button[aria-selected=true] { background: rgba(183,217,76,.07); }
+  .onglets button[aria-selected=true]::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--lime); }
+  .onglets button[aria-selected=true]::after { content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: var(--avance, 0%); background: rgba(183,217,76,.6); transition: width .3s linear; }
   .onglets button:focus-visible { outline: 2px solid var(--lime); outline-offset: -2px; }
   .onglets .num { grid-row: 1 / 3; color: var(--mute-d); font-family: 'Space Grotesk', sans-serif; font-size: .9rem; padding-top: .15rem; }
   .onglets [aria-selected=true] .num { color: var(--lime); }
-  .onglets .nom { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: 1.12rem; font-weight: 500; color: var(--white); }
-  .onglets .pour { color: var(--mute); font-size: .86rem; }
-  .panneau { padding: 2.4rem 2.6rem; display: grid; grid-template-columns: 1fr 1.25fr; gap: 2.4rem; align-items: start; }
+  .onglets .nom { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: 1.1rem; font-weight: 500; color: var(--white); }
+  .onglets .pour { color: var(--mute); font-size: .85rem; }
+
+  .scene { padding: 1.6rem 2rem 2rem; }
+  .scene-barre { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.6rem; flex-wrap: wrap; }
+  .bascule { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 100px; background: rgba(255,255,255,.05); border: 1px solid var(--glass-b); }
+  .bascule button { all: unset; cursor: pointer; position: relative; z-index: 1; padding: .55rem 1.1rem; font-size: .9rem; font-weight: 500; text-align: center; color: var(--mute); transition: color .3s; border-radius: 100px; }
+  .bascule button[aria-pressed=true] { color: #0b0b0c; }
+  .bascule button:focus-visible { outline: 2px solid var(--lime); }
+  .curseur { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: 100px; background: var(--lime); transition: transform .45s cubic-bezier(.2,.8,.3,1), background .3s; }
+  [data-mode=avec] .curseur { transform: translateX(100%); }
+  [data-mode=sans] .curseur { background: #e9e9e4; }
+  .rejouer { all: unset; cursor: pointer; color: var(--mute); font-size: .9rem; padding: .5rem .9rem; border-radius: 100px; border: 1px solid var(--glass-b); transition: color .2s, border-color .2s; }
+  .rejouer:hover, .rejouer:focus-visible { color: var(--lime); border-color: rgba(183,217,76,.5); }
+
+  .scene-corps { display: grid; grid-template-columns: 340px 1fr; gap: 2.6rem; align-items: start; }
+  .tel { border-radius: 34px; padding: 10px; background: #050505; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 30px 70px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.03); }
+  .tel-tete { display: flex; align-items: center; gap: .7rem; padding: .9rem 1rem; border-radius: 26px 26px 0 0; background: #141414; border-bottom: 1px solid var(--line); }
+  .tel-tete .avatar { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: #2a2b28; color: var(--white); font-family: 'Space Grotesk', sans-serif; font-size: .9rem; }
+  .tel-tete strong { display: block; font-size: .95rem; font-weight: 600; }
+  .tel-tete span { color: var(--mute); font-size: .78rem; }
+  .tel-fil { height: 390px; overflow-y: auto; padding: 1rem .9rem; background: #0d0d0e; display: flex; flex-direction: column; gap: .55rem; scroll-behavior: smooth; scrollbar-width: none; }
+  .tel-fil::-webkit-scrollbar { display: none; }
+  .tel-progres { height: 3px; background: #141414; border-radius: 0 0 26px 26px; overflow: hidden; }
+  .tel-progres span { display: block; height: 100%; width: 0; background: var(--lime); transition: width .4s ease; }
+  [data-mode=sans] .tel-progres span { background: #e5484d; }
+  .bulle { max-width: 82%; padding: .6rem .85rem; border-radius: 18px; font-size: .88rem; line-height: 1.4; animation: pop .35s cubic-bezier(.2,.8,.3,1) both; }
+  .bulle .h { display: block; font-size: .68rem; opacity: .6; margin-top: .25rem; }
+  .bulle.out { align-self: flex-end; background: var(--lime); color: #0b0b0c; border-bottom-right-radius: 6px; }
+  .bulle.in { align-self: flex-start; background: #262725; color: var(--white); border-bottom-left-radius: 6px; }
+  .puce { align-self: center; text-align: center; font-size: .76rem; color: var(--mute); padding: .4rem .8rem; border-radius: 100px; border: 1px solid var(--glass-b); background: rgba(255,255,255,.03); animation: pop .35s ease both; max-width: 92%; }
+  .puce b { color: var(--lime); font-weight: 500; }
+  .puce.perte { color: #ffb4b0; border-color: rgba(229,72,77,.45); background: rgba(229,72,77,.1); font-size: .84rem; padding: .6rem .9rem; border-radius: 14px; }
+  .ecrit { align-self: flex-start; display: inline-flex; gap: 4px; padding: .7rem .85rem; border-radius: 18px; background: #262725; }
+  .ecrit.out { align-self: flex-end; background: rgba(183,217,76,.35); }
+  .ecrit i { width: 6px; height: 6px; border-radius: 50%; background: var(--white); opacity: .5; animation: point 1s infinite; }
+  .ecrit i:nth-child(2) { animation-delay: .15s; } .ecrit i:nth-child(3) { animation-delay: .3s; }
+  @keyframes point { 0%, 60%, 100% { transform: translateY(0); opacity: .35; } 30% { transform: translateY(-3px); opacity: 1; } }
+  @keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
+
   .panneau[hidden] { display: none; }
-  .lbl { font-size: .82rem; color: var(--mute); margin-bottom: .9rem; font-weight: 500; }
-  .avant { padding: 1.5rem; border-radius: 16px; background: rgba(255,255,255,.025); border: 1px dashed rgba(255,255,255,.12); }
-  .avant p:not(.lbl) { color: #c9cbc4; font-size: 1.02rem; line-height: 1.65; }
-  .apres ol { list-style: none; position: relative; margin-bottom: 1.4rem; }
-  .apres ol::before { content: ''; position: absolute; left: 5px; top: .6rem; bottom: .6rem; width: 1px; background: rgba(183,217,76,.3); }
-  .apres li { position: relative; padding: 0 0 1.3rem 1.8rem; display: flex; flex-direction: column; gap: .15rem; }
-  .apres li::before { content: ''; position: absolute; left: 0; top: .45rem; width: 11px; height: 11px; border-radius: 50%; background: var(--ink-950); border: 2px solid var(--lime); }
-  .apres .quand { color: var(--lime); font-size: .84rem; font-family: 'Space Grotesk', sans-serif; }
-  .apres .quoi { color: var(--white); font-size: 1.02rem; line-height: 1.5; }
-  .resultat { display: flex; gap: .7rem; align-items: start; padding: 1.1rem 1.2rem; border-radius: 14px; background: rgba(183,217,76,.08); color: var(--white); font-weight: 500; }
+  .lbl { font-size: .82rem; color: var(--mute); margin-bottom: 1rem; font-weight: 500; }
+  [data-mode=avec] .j-sans, [data-mode=sans] .j-avec { display: none; }
+  .avant-txt { color: #d6d8d1; font-size: 1.15rem; line-height: 1.65; padding: 1.4rem; border-radius: 16px; border: 1px dashed rgba(229,72,77,.35); background: rgba(229,72,77,.05); }
+  .j-avec ol { list-style: none; position: relative; margin-bottom: 1.4rem; }
+  .j-avec ol::before { content: ''; position: absolute; left: 6px; top: .6rem; bottom: 1.6rem; width: 1px; background: rgba(255,255,255,.12); }
+  .j-avec li { position: relative; padding: 0 0 1.4rem 2rem; display: flex; flex-direction: column; gap: .2rem; opacity: .35; transition: opacity .4s; }
+  .j-avec li::before { content: ''; position: absolute; left: 0; top: .4rem; width: 13px; height: 13px; border-radius: 50%; background: var(--ink-950); border: 2px solid rgba(255,255,255,.3); transition: all .4s; }
+  .j-avec li.on { opacity: 1; }
+  .j-avec li.on::before { background: var(--lime); border-color: var(--lime); box-shadow: 0 0 0 5px rgba(183,217,76,.15); }
+  .j-avec .quand { color: var(--lime); font-size: .84rem; font-family: 'Space Grotesk', sans-serif; }
+  .j-avec .quoi { color: var(--white); font-size: 1.04rem; line-height: 1.5; }
+  .resultat { display: flex; gap: .7rem; align-items: start; padding: 1.1rem 1.2rem; border-radius: 14px; background: rgba(183,217,76,.1); color: var(--white); font-weight: 500;
+    opacity: 0; transform: translateY(8px); transition: opacity .5s, transform .5s; }
+  .resultat.vu { opacity: 1; transform: none; }
   .resultat svg { width: 18px; height: 18px; color: var(--lime); flex: none; margin-top: .2rem; }
-  .js .panneau:not([hidden]) .apres li, .js .panneau:not([hidden]) .resultat { animation: entree .55s cubic-bezier(.16,1,.3,1) both; }
-  .js .panneau:not([hidden]) .apres li:nth-child(2) { animation-delay: .25s; }
-  .js .panneau:not([hidden]) .apres li:nth-child(3) { animation-delay: .5s; }
-  .js .panneau:not([hidden]) .resultat { animation-delay: .8s; }
-  @keyframes entree { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
   /* ── processus avec photo ── */
   .processus { display: grid; grid-template-columns: .9fr 1.1fr; gap: 5rem; align-items: center; }
@@ -415,8 +500,11 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     .onglets button { flex: none; display: block; padding: 1rem 1.2rem; border-bottom: none; border-right: 1px solid var(--line); white-space: nowrap; }
     .onglets .num, .onglets .pour { display: none; }
     .onglets .nom { font-size: 1rem; }
-    .onglets button[aria-selected=true]::before { top: auto; width: auto; right: 0; height: 2px; }
-    .panneau { grid-template-columns: 1fr; padding: 1.8rem 1.4rem; gap: 1.6rem; }
+    .onglets button[aria-selected=true]::before { top: auto; width: auto; right: 0; height: 3px; }
+    .scene { padding: 1.2rem; }
+    .scene-corps { grid-template-columns: 1fr; gap: 1.6rem; }
+    .tel { max-width: 380px; width: 100%; margin: 0 auto; }
+    .tel-fil { height: 340px; }
     .processus, .faq { grid-template-columns: 1fr; gap: 2.4rem; }
     .photo-atelier { aspect-ratio: 4 / 3; }
   }
@@ -524,7 +612,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       <Portrait prioritaire={true} />
       <div class="plaque">
         <strong>Simon Fournier</strong>
-        <span>Fondateur de FournIA. Il dirige chaque projet, du diagnostic à la formation.</span>
+        <span>Fondateur de FournIA</span>
       </div>
     </div>
   </div>
@@ -547,7 +635,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       <h2 class="sec-title reveal">Choisissez une tâche. Voyez ce que le système fait à votre place.</h2>
     </div>
 
-    <div class="demo-i reveal" data-demo>
+    <div class="demo-i reveal" data-demo data-mode="avec">
       <div class="onglets" role="tablist" aria-label="Exemples de tâches automatisées">
         {SCENARIOS.map((sc, i) => (
           <button type="button" role="tab" id={`tab-${sc.id}`} aria-controls={`pan-${sc.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>
@@ -558,23 +646,48 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
         ))}
       </div>
 
-      {SCENARIOS.map((sc, i) => (
-        <div class="panneau" role="tabpanel" id={`pan-${sc.id}`} aria-labelledby={`tab-${sc.id}`} hidden={i !== 0}>
-          <div class="avant">
-            <p class="lbl">Aujourd'hui, sans système</p>
-            <p>{sc.avant}</p>
+      <div class="scene">
+        <div class="scene-barre">
+          <div class="bascule" role="group" aria-label="Comparer">
+            <button type="button" data-mode="sans" aria-pressed="false">Sans système</button>
+            <button type="button" data-mode="avec" aria-pressed="true">Avec le système</button>
+            <span class="curseur" aria-hidden="true"></span>
           </div>
-          <div class="apres">
-            <p class="lbl">Avec le système</p>
-            <ol>
-              {sc.etapes.map((e) => (
-                <li><span class="quand">{e.quand}</span><span class="quoi">{e.quoi}</span></li>
-              ))}
-            </ol>
-            <p class="resultat" set:html={check + `<span>${sc.resultat}</span>`}></p>
+          <button type="button" class="rejouer" data-rejouer><span aria-hidden="true">↻</span> Rejouer</button>
+        </div>
+
+        <div class="scene-corps">
+          <div class="tel">
+            <div class="tel-tete">
+              <span class="avatar" aria-hidden="true" data-initiale></span>
+              <div><strong data-contact>{SCENARIOS[0].contact}</strong><span data-canal>{SCENARIOS[0].canal}</span></div>
+            </div>
+            <div class="tel-fil" data-fil aria-live="polite"></div>
+            <div class="tel-progres" aria-hidden="true"><span data-progres></span></div>
+          </div>
+
+          <div class="journal">
+            {SCENARIOS.map((sc, i) => (
+              <div class="panneau" role="tabpanel" id={`pan-${sc.id}`} aria-labelledby={`tab-${sc.id}`} hidden={i !== 0}>
+                <div class="j-sans">
+                  <p class="lbl">Aujourd'hui, sans système</p>
+                  <p class="avant-txt">{sc.avant}</p>
+                </div>
+                <div class="j-avec">
+                  <p class="lbl">Ce que le système fait</p>
+                  <ol>
+                    {sc.etapes.map((e, k) => (
+                      <li data-step={k}><span class="quand">{e.quand}</span><span class="quoi">{e.quoi}</span></li>
+                    ))}
+                  </ol>
+                  <p class="resultat" set:html={check + `<span>${sc.resultat}</span>`}></p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
+      </div>
+      <script type="application/json" id="demo-data" set:html={JSON.stringify(SCENARIOS)} />
     </div>
   </div>
 </section>
@@ -650,10 +763,10 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   <div class="wrap fondateur">
     <div class="reveal">
       <p class="etiquette">Qui on est</p>
-      <h2 class="sec-title">Une équipe qui livre. Un fondateur qui répond.</h2>
+      <h2 class="sec-title">Une équipe qui livre, de la première rencontre au suivi</h2>
     </div>
     <div class="reveal" data-d="1">
-      <p>FournIA est née à Blainville en 2026. Simon Fournier dirige chaque projet, du diagnostic à la formation, avec une équipe de développeurs partenaires qui construit à ses côtés. Vous avez un seul interlocuteur, du premier appel au suivi.</p>
+      <p>FournIA est née à Blainville en 2026, fondée par Simon Fournier. L'équipe réunit des spécialistes de l'automatisation et des développeurs qui conçoivent, construisent et forment. Chaque projet a un responsable attitré, que vous connaissez dès le premier jour.</p>
       <p class="vision">Notre objectif : devenir la référence en IA pour les PME du Québec, une entreprise à la fois.</p>
       <ul class="garanties">
         <li set:html={check + '<span>Vérification Loi 25 écrite avant tout projet qui touche des renseignements personnels.</span>'}></li>
@@ -798,20 +911,77 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   }, { threshold: .12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // démonstration interactive : onglets accessibles (clic + flèches)
+  // démonstration interactive : le téléphone joue la scène (sans / avec le système), onglets, rejouer, lecture auto
   document.querySelectorAll('[data-demo]').forEach((demo) => {
+    const DATA = JSON.parse(demo.querySelector('#demo-data').textContent);
     const tabs = [...demo.querySelectorAll('[role=tab]')];
-    const show = (t) => {
-      tabs.forEach((x) => { const on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1;
-        document.getElementById(x.getAttribute('aria-controls')).hidden = !on; });
-    };
+    const fil = demo.querySelector('[data-fil]');
+    const prog = demo.querySelector('[data-progres]');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let idx = 0, mode = 'avec', timers = [], auto = true, vu = false;
+    const clear = () => { timers.forEach(clearTimeout); timers = []; };
+    const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+    const esc = (t) => t.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+    const add = (html) => { fil.insertAdjacentHTML('beforeend', html); fil.scrollTop = fil.scrollHeight; };
+
+    function play() {
+      clear();
+      const sc = DATA[idx]; const evs = sc[mode];
+      demo.dataset.mode = mode;
+      demo.querySelectorAll('.bascule button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.mode === mode));
+      demo.querySelector('[data-contact]').textContent = sc.contact;
+      demo.querySelector('[data-canal]').textContent = sc.canal;
+      demo.querySelector('[data-initiale]').textContent = sc.contact.replace(/[^A-Za-zÀ-ÿ0-9]/g, '').charAt(0);
+      const pan = document.getElementById('pan-' + sc.id);
+      pan.querySelectorAll('li').forEach((li) => li.classList.remove('on'));
+      const res = pan.querySelector('.resultat'); res.classList.remove('vu');
+      fil.innerHTML = ''; prog.style.width = '0%';
+      const tab = tabs[idx]; tab.style.setProperty('--avance', '0%');
+      let t = 300;
+      evs.forEach((e, k) => {
+        const typing = (e.who === 'in' || e.who === 'out') && !reduce;
+        if (typing) {
+          later(() => add(`<span class="ecrit ${e.who}" data-tmp><i></i><i></i><i></i></span>`), t);
+          t += 900;
+        }
+        later(() => {
+          fil.querySelector('[data-tmp]')?.remove();
+          if (e.who === 'in' || e.who === 'out') add(`<p class="bulle ${e.who}">${esc(e.txt)}<span class="h">${esc(e.t)}</span></p>`);
+          else if (e.who === 'perte') add(`<p class="puce perte">${esc(e.txt)}</p>`);
+          else add(`<p class="puce">${e.t ? `<b>${esc(e.t)}</b> · ` : ''}${esc(e.txt)}</p>`);
+          if (e.step !== undefined) pan.querySelector(`li[data-step="${e.step}"]`)?.classList.add('on');
+          const pct = Math.round(((k + 1) / evs.length) * 100) + '%';
+          prog.style.width = pct; tab.style.setProperty('--avance', pct);
+        }, t);
+        t += reduce ? 0 : 1100;
+      });
+      later(() => {
+        if (mode === 'avec') { res.classList.add('vu'); pan.querySelectorAll('li').forEach((li) => li.classList.add('on')); }
+        if (auto) later(() => { if (mode === 'sans') { mode = 'avec'; play(); } else { select((idx + 1) % tabs.length); } }, 2600);
+      }, t);
+    }
+    function select(i) {
+      idx = i;
+      tabs.forEach((x, j) => { const on = j === i; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1;
+        document.getElementById(x.getAttribute('aria-controls')).hidden = !on; x.style.setProperty('--avance', '0%'); });
+      mode = auto ? 'sans' : mode;
+      play();
+    }
+    const stopAuto = () => { auto = false; };
     tabs.forEach((t, i) => {
-      t.addEventListener('click', () => show(t));
+      t.addEventListener('click', () => { stopAuto(); mode = 'avec'; select(i); });
       t.addEventListener('keydown', (e) => {
         const d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
-        if (!d) return; e.preventDefault(); const n = tabs[(i + d + tabs.length) % tabs.length]; n.focus(); show(n);
+        if (!d) return; e.preventDefault(); stopAuto(); const n = (i + d + tabs.length) % tabs.length; tabs[n].focus(); mode = 'avec'; select(n);
       });
     });
+    demo.querySelectorAll('.bascule button').forEach((b) => b.addEventListener('click', () => { stopAuto(); mode = b.dataset.mode; play(); }));
+    demo.querySelector('[data-rejouer]').addEventListener('click', () => { stopAuto(); play(); });
+    // démarre quand la section devient visible ; pause quand elle sort
+    new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting && !vu) { vu = true; mode = reduce ? 'avec' : 'sans'; if (reduce) auto = false; select(0); }
+      else if (!e.isIntersecting && vu) { stopAuto(); }
+    }), { threshold: .35 }).observe(demo);
   });
 
   // menu mobile

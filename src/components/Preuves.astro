@@ -12,10 +12,11 @@ const ok = (x) => Boolean(x && x.consentement && x.consentement.date);
 const avis = AVIS.filter((a) => a && a.texte && a.auteur);
 const videos = TEMOIGNAGES.filter((t) => ok(t) && t.video);
 
+// Miniatures de personnes FICTIVES générées par IA (public/apercu/), pour tester la mise en page seulement.
 const MAQUETTE_VIDEOS = [
-  { nom: 'Propriétaire, traiteur', sujet: 'Les offres de service en 10 minutes', logo: '/clients/mono/avecplaisirs.webp' },
-  { nom: 'Directeur, centre de tutorat', sujet: 'Les nouvelles demandes, répondues tout de suite', logo: '/clients/mono/arbour.webp' },
-  { nom: 'Fondateur, formation numérique', sujet: 'Un CRM enfin à jour', logo: '/clients/mono/seniortech.webp' },
+  { nom: 'Propriétaire, traiteur', sujet: 'Nos offres de service sortent en quelques minutes', image: '/apercu/t1.webp' },
+  { nom: 'Directeur, centre de tutorat', sujet: 'Les nouvelles demandes sont répondues tout de suite', image: '/apercu/t2.webp' },
+  { nom: 'Propriétaire, location audio', sujet: 'Plus aucune demande ne passe entre deux craques', image: '/apercu/t3.webp' },
 ];
 const MAQUETTE_AVIS = [
   { auteur: 'Prénom N.', texte: "Texte d'exemple : Simon a pris le temps de comprendre comment on travaille avant de proposer quoi que ce soit. Le système roule depuis et l'équipe l'utilise tous les jours." },
@@ -47,7 +48,7 @@ const etoiles = '★★★★★';
             : MAQUETTE_VIDEOS.map((v) => (
                 <div class="video exemple">
                   <span class="badge">Exemple</span>
-                  <img class="logo" src={v.logo} alt="" loading="lazy" />
+                  <img class="fond" src={v.image} alt="" loading="lazy" />
                   <span class="play" aria-hidden="true"></span>
                   <span class="legende"><strong>« {v.sujet} »</strong><span>{v.nom}</span></span>
                 </div>
@@ -80,10 +81,13 @@ const etoiles = '★★★★★';
   .preuves { position: relative; z-index: 1; padding: 7rem 0; }
   .maquette { color: var(--mute); font-size: .88rem; border-left: 2px solid var(--lime); padding-left: .9rem; margin: -0.4rem 0 2.4rem; max-width: 46rem; }
   .videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-bottom: 1.4rem; }
-  .video { position: relative; aspect-ratio: 4 / 5; border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end;
+  .video { position: relative; aspect-ratio: 4 / 5; isolation: isolate; border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end;
     padding: 1.5rem; text-decoration: none; color: var(--white); border: 1px solid var(--line);
     background: radial-gradient(120% 80% at 50% 20%, #23251f, #111211 70%); transition: border-color .3s, transform .4s cubic-bezier(.2,.8,.3,1); }
   a.video:hover, .video:hover { border-color: rgba(183,217,76,.4); transform: translateY(-4px); }
+  .video .fond { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .video::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.05) 40%, rgba(0,0,0,.85)); }
+  .video .play, .video .legende, .video .badge { z-index: 2; }
   .video .logo { position: absolute; top: 1.5rem; left: 1.5rem; height: 26px; width: auto; max-width: 45%; opacity: .7; }
   .play { position: absolute; top: 50%; left: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%;
     background: var(--lime); box-shadow: 0 0 0 10px rgba(183,217,76,.12); transition: box-shadow .3s; }

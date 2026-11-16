@@ -10,6 +10,8 @@
 // - logo : chemin dans public/clients/ (SVG ou WebP, fond transparent), ex. '/clients/nom.svg'
 // - photo : chemin dans public/clients/ (WebP ~800x600)
 // - temoignage : { texte, auteur, role } tiré mot pour mot d'un message écrit du client
+// - image : photo de secteur NON identifiante (public/secteurs/), affichée même sans consentement
+//   quand il n'y a pas de logo à montrer.
 // - video : lien public vers le témoignage vidéo (Instagram, YouTube)
 // - statut : 'livre' ou 'en-cours'
 //
@@ -55,6 +57,7 @@ export const REALISATIONS = [
     lien: null,
     statut: 'livre',
     ...vide,
+    image: '/secteurs/chalet.webp',
   },
   {
     secteur: "Fabricant de kiosques d'exposition",
@@ -78,6 +81,8 @@ export const REALISATIONS = [
     statut: 'livre',
     ...vide,
     client: 'Karyann Turcotte',
+    // Remplacer par la photo de Karyann (avec son accord) dès qu'elle l'envoie.
+    image: '/secteurs/conseillere.webp',
   },
   {
     secteur: 'Conseillère en sécurité financière',
