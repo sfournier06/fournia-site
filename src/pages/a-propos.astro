@@ -2,13 +2,16 @@
 // Page « À propos » : définit l'entité FournIA et son fondateur pour Google et les moteurs IA (GEO).
 // Ne contient que des faits établis (voir fournia-aios/context/work.md). Aucun client nommé.
 import Base from '../layouts/Base.astro';
-import Portrait from '../components/Portrait.astro';
+import { REALISATIONS } from '../data/realisations.mjs';
 import Temoignages from '../components/Temoignages.astro';
 import { SITE, CTA, ZONES, organisationLd } from '../data/entite.mjs';
 
 const canonical = `${SITE}/a-propos/`;
+// Chiffres tirés de src/data/realisations.mjs (re-mesurés à chaque build).
+const nbSystemes = REALISATIONS.length;
+const nbSecteurs = new Set(REALISATIONS.map((r) => r.secteur)).size;
 const title = "À propos de FournIA et de Simon Fournier | FournIA";
-const description = "FournIA est une firme d'automatisation et d'accompagnement en IA fondée en 2026 par Simon Fournier à Blainville, sur la Rive-Nord de Montréal.";
+const description = "FournIA rend l'IA simple et utile pour les PME du Québec. Fondée en 2026 à Blainville par Simon Fournier : la vision, l'équipe et la façon de travailler.";
 const aboutLd = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
@@ -40,21 +43,68 @@ const breadcrumbLd = {
 
         <div class="intro">
           <div>
-            <h1>À propos de FournIA</h1>
-            <p class="lead">FournIA automatise les tâches répétitives des PME du Québec avec l'IA. Simon Fournier l'a fondée en avril 2026 à Blainville, sur la Rive-Nord de Montréal.</p>
+            <p class="etiquette">À propos de FournIA</p>
+            <h1>On rend l'IA simple et utile pour les PME du Québec.</h1>
+            <p class="lead">FournIA installe dans les PME des systèmes qui font les tâches répétitives à leur place, et forme les équipes qui les utilisent. L'entreprise est née en avril 2026 à Blainville, sur la Rive-Nord de Montréal.</p>
             <a class="btn btn-primary" href={CTA}>Réserver le diagnostic gratuit <span class="arrow">→</span></a>
           </div>
-          <!-- EMPLACEMENT PHOTO : le chemin se branche dans src/data/fondateur.mjs (PHOTO_SIMON). -->
           <div class="photo">
-            <Portrait prioritaire={true} />
+            <img src="/images/simon-fournier-portrait-b.webp" alt="Simon Fournier, fondateur de FournIA" width="960" height="1200" fetchpriority="high" />
             <p class="legende"><strong>Simon Fournier</strong><span>Fondateur de FournIA</span></p>
           </div>
         </div>
 
-        <div class="prose">
-          <h2>Simon Fournier, fondateur</h2>
-          <p>Simon conçoit les systèmes que FournIA livre (automatisations, agents IA et applications sur mesure), en dirige l'implantation et forme lui-même les équipes, dans leurs locaux ou par visioconférence. Du premier appel au suivi, vous parlez à la même personne.</p>
+        <ul class="chiffres">
+          <li><strong>{nbSystemes}</strong><span>systèmes livrés ou en cours</span></li>
+          <li><strong>{nbSecteurs}</strong><span>secteurs d'activité</span></li>
+          <li><strong>1</strong><span>interlocuteur, du premier appel au suivi</span></li>
+        </ul>
 
+        <section class="bloc vision">
+          <p class="etiquette">Notre vision</p>
+          <h2>Devenir la référence en IA pour les PME du Québec.</h2>
+          <div class="deux">
+            <p>La plupart des propriétaires de PME savent que l'IA va changer leur façon de travailler. Ce qui les retient, c'est de ne pas savoir par où commencer, et la peur de mal faire avec leurs données ou leur équipe.</p>
+            <p>Notre travail, c'est d'enlever ce poids : regarder comment l'entreprise fonctionne vraiment, installer ce qui rapporte en premier, et former les gens jusqu'à ce qu'ils soient à l'aise. Une entreprise à la fois, avec des résultats qu'on peut mesurer.</p>
+          </div>
+        </section>
+
+        <section class="bloc equipe">
+          <p class="etiquette">L'équipe</p>
+          <h2>Une équipe qui livre, un fondateur qui répond</h2>
+          <div class="cartes">
+            <article>
+              <h3>Simon Fournier</h3>
+              <p class="role">Fondateur</p>
+              <p>Il dirige chaque projet : le diagnostic, la conception du système, l'implantation et la formation de votre équipe. C'est lui que vous appelez.</p>
+            </article>
+            <article>
+              <h3>Développeurs partenaires</h3>
+              <p class="role">Construction</p>
+              <p>Ils construisent les systèmes avec Simon quand un projet le demande. Chaque projet est revu et testé avant la livraison.</p>
+            </article>
+            <article>
+              <h3>Réseau d'affaires</h3>
+              <p class="role">Partenaires</p>
+              <p>Des agences, des consultants et des entrepreneurs de la région avec qui on travaille et qui nous présentent les PME qu'ils accompagnent.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="bloc humain">
+          <div class="humain-photo">
+            <img src="/images/simon-fournier-atelier.webp" alt="Simon Fournier avec une propriétaire de PME" width="960" height="1200" loading="lazy" decoding="async" />
+          </div>
+          <div>
+            <p class="etiquette">En dehors du bureau</p>
+            <h2>Qui est Simon</h2>
+            <p>Simon habite Blainville. En plus de FournIA, il joue au hockey junior avec les Black Vees de Montréal et étudie à temps partiel à l'Université Concordia, en économie et en finance.</p>
+            <p>En août 2026, il a couru 100 km pour le 100KM d'Espoir, au profit de Leucan. Vingt boucles de 5 km, une à l'heure, jusqu'au bout.</p>
+            <p class="citation">« Le hockey et la course m'ont appris la même chose que les projets : on se prépare, on fait sa part pour l'équipe, et on finit ce qu'on commence. »</p>
+          </div>
+        </section>
+
+        <div class="prose">
           <h2>Ce que fait FournIA</h2>
           <ul>
             <li><strong><a href="/automatisation-entreprise/">Systèmes à la carte</a></strong> : un problème précis (relances, soumissions, demandes entrantes, commandes), un système branché sur vos logiciels actuels.</li>
@@ -62,7 +112,7 @@ const breadcrumbLd = {
             <li><strong><a href="/formation-ia-entreprise/">Formation IA en entreprise</a></strong> : l'équipe apprend à utiliser l'IA sur ses vraies tâches.</li>
           </ul>
 
-          <h2>Comment FournIA travaille</h2>
+          <h2>Comment on travaille</h2>
           <ul>
             <li><strong>Le diagnostic d'abord.</strong> On mesure le temps que prend chaque étape du processus. Ce chiffre décide de ce qu'on automatise en premier.</li>
             <li><strong>L'implantation et la formation vont ensemble.</strong> Chaque système livré vient avec la formation de l'équipe qui l'utilise.</li>
@@ -93,12 +143,33 @@ const breadcrumbLd = {
 <style>
   main { position: relative; z-index: 1; }
   .svc { padding: 8.5rem 0 4rem; }
-  .wrap-a { width: min(980px, 92vw); margin: 0 auto; }
+  .wrap-a { width: min(1100px, 92vw); margin: 0 auto; }
   .crumbs { font-size: .85rem; color: var(--mute); margin-bottom: 1.4rem; }
   .crumbs a:hover { color: var(--lime); }
   .crumbs span { margin: 0 .4rem; }
-  .intro { display: grid; grid-template-columns: 1fr 300px; gap: 3.5rem; align-items: center; }
-  .svc h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -.03em; font-weight: 700; margin-bottom: 1.2rem; }
+  .etiquette { color: var(--lime); font-family: 'Space Grotesk', sans-serif; font-size: .92rem; font-weight: 500; margin-bottom: 1rem; }
+  .intro { display: grid; grid-template-columns: 1.15fr .85fr; gap: 4rem; align-items: center; }
+  .photo img { width: 100%; height: auto; border-radius: 22px; display: block; border: 1px solid var(--line); }
+  .chiffres { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 4rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .chiffres li { padding: 1.8rem 1.4rem; display: flex; flex-direction: column; gap: .3rem; }
+  .chiffres li + li { border-left: 1px solid var(--line); }
+  .chiffres strong { font-family: 'Space Grotesk', sans-serif; font-size: 2.6rem; font-weight: 600; color: var(--white); letter-spacing: -.03em; line-height: 1; }
+  .chiffres span { color: var(--mute); font-size: .95rem; }
+  .bloc { margin-top: 5.5rem; }
+  .bloc h2 { font-family: 'Space Grotesk', sans-serif; color: var(--white); font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.1; letter-spacing: -.03em; font-weight: 600; max-width: 22ch; margin-bottom: 1.6rem; }
+  .bloc p { color: var(--mute); font-size: 1.06rem; line-height: 1.75; }
+  .bloc p.etiquette { color: var(--lime); font-size: .92rem; line-height: 1.4; margin-bottom: 1rem; }
+  .deux { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .cartes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .cartes article { padding: 1.7rem; border-radius: 18px; border: 1px solid var(--line); background: rgba(255,255,255,.02); }
+  .cartes h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 500; color: var(--white); }
+  .cartes .role { color: var(--lime); font-size: .88rem; margin: .2rem 0 .9rem; }
+  .cartes p:not(.role) { font-size: .98rem; line-height: 1.65; }
+  .humain { display: grid; grid-template-columns: .8fr 1.2fr; gap: 4rem; align-items: center; }
+  .humain-photo img { width: 100%; height: auto; border-radius: 22px; display: block; border: 1px solid var(--line); }
+  .humain p + p { margin-top: 1rem; }
+  .citation { color: var(--white) !important; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem !important; line-height: 1.5 !important; border-left: 2px solid var(--lime); padding-left: 1.1rem; margin-top: 1.8rem !important; }
+  .svc h1 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); line-height: 1.05; letter-spacing: -.035em; font-weight: 600; margin-bottom: 1.2rem; }
   .lead { color: var(--mute); font-size: 1.15rem; line-height: 1.65; margin-bottom: 1.8rem; max-width: 36rem; }
   .photo { width: 100%; }
   .legende { margin-top: .9rem; display: flex; flex-direction: column; }
@@ -115,7 +186,9 @@ const breadcrumbLd = {
   .post-cta h3 { font-size: 1.4rem; margin-bottom: .6rem; color: var(--white); }
   .post-cta p { color: var(--mute); margin-bottom: 1.4rem; }
   @media (max-width: 760px) {
-    .intro { grid-template-columns: 1fr; gap: 2rem; }
-    .photo { max-width: 240px; }
+    .intro, .deux, .cartes, .humain { grid-template-columns: 1fr; gap: 2rem; }
+    .photo { max-width: 320px; }
+    .chiffres { grid-template-columns: 1fr; }
+    .chiffres li + li { border-left: none; border-top: 1px solid var(--line); }
   }
 </style>

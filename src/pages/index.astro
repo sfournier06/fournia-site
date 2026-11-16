@@ -49,7 +49,7 @@ const SCENARIOS = [
 ];
 // FAQ : reprend les réponses déjà publiées sur les pages d'offres.
 const FAQ = [
-  { q: 'Faut-il changer de logiciels ?', a: "Rarement. Je branche le système sur les outils que votre équipe utilise déjà : CRM, boutique en ligne, calendrier, courriel, comptabilité. Un nouvel outil n'est proposé que si l'actuel ne permet pas l'intégration, et la raison vous est expliquée." },
+  { q: 'Faut-il changer de logiciels ?', a: "Rarement. On branche le système sur les outils que votre équipe utilise déjà : CRM, boutique en ligne, calendrier, courriel, comptabilité. Un nouvel outil n'est proposé que si l'actuel ne permet pas l'intégration, et la raison vous est expliquée." },
   { q: 'Combien de temps ça prend ?', a: "Un système ciblé se livre généralement en quelques semaines. Le délai dépend surtout de la rapidité à obtenir les accès et les documents de référence. Le calendrier exact est fixé après le diagnostic." },
   { q: 'Combien ça coûte ?', a: "Le diagnostic est gratuit. Ensuite, chaque projet a un prix fixe, connu avant de commencer et présenté en personne. Pas de compteur d'heures." },
   { q: "Mon équipe n'est pas à l'aise avec la technologie.", a: "C'est la situation la plus courante. La formation fait toujours partie de la livraison : démo, tests avec votre équipe, et vous savez qui appeler si quelque chose accroche." },
@@ -284,6 +284,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .fondateur { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; padding-top: 3rem; border-top: 1px solid var(--line); }
   .fondateur p { color: var(--mute); font-size: 1.06rem; max-width: 40rem; margin-bottom: 1rem; }
   .fondateur p.etiquette { color: var(--lime); font-size: .78rem; margin-bottom: 1.6rem; max-width: none; }
+  .fondateur p.vision { color: var(--white); font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: 1.25rem; line-height: 1.45; border-left: 2px solid var(--lime); padding-left: 1.1rem; margin: 1.6rem 0; }
   .garanties { list-style: none; display: grid; gap: .7rem; margin: 1.6rem 0 1.8rem; }
   .garanties li { display: flex; gap: .7rem; align-items: start; color: var(--white); font-size: .98rem; }
   .garanties svg { width: 18px; height: 18px; color: var(--lime); flex: none; margin-top: .2rem; }
@@ -490,7 +491,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     <a href="#top" class="logo" aria-label="FournIA, accueil"><span class="mark" set:html={mark}></span><span>Fourn<span class="ia">IA</span></span></a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
-      <li><a href="#concretement">Ce que je fais</a></li>
+      <li><a href="#concretement">Ce qu'on fait</a></li>
       <li><a href="#exemples">Exemples</a></li>
       <li><a href="/temoignages/">Témoignages</a></li>
       <li><a href="/a-propos/">À propos</a></li>
@@ -508,10 +509,10 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     <div class="hero-texte">
       <p class="etiquette">Automatisation et IA pour PME · Rive-Nord et Montréal</p>
       <h1 class="hero-title">Gagnez 5 à 20 heures par semaine. <span class="accent">Sans embaucher.</span></h1>
-      <p class="hero-sub">J'installe dans votre PME des systèmes qui font les tâches répétitives à votre place : <strong>relances, soumissions, appels manqués, documents</strong>. Je les branche sur vos outils actuels et je forme votre équipe. Vous gardez les décisions.</p>
+      <p class="hero-sub">On installe dans votre PME des systèmes qui font les tâches répétitives à votre place : <strong>relances, soumissions, appels manqués, documents</strong>. On les branche sur vos outils actuels et on forme votre équipe. Vous gardez les décisions.</p>
       <div class="hero-cta">
         <a href="/diagnostic/" class="btn btn-primary">Réserver mon diagnostic gratuit <span class="arrow">→</span></a>
-        <a href="#concretement" class="btn btn-ghost">Voir ce que je fais</a>
+        <a href="#concretement" class="btn btn-ghost">Voir ce qu'on fait</a>
       </div>
       <p class="hero-note">
         <span set:html={check + '30 minutes, sans engagement'}></span>
@@ -523,14 +524,14 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       <Portrait prioritaire={true} />
       <div class="plaque">
         <strong>Simon Fournier</strong>
-        <span>Fondateur de FournIA. Conçoit, installe et forme lui-même.</span>
+        <span>Fondateur de FournIA. Il dirige chaque projet, du diagnostic à la formation.</span>
       </div>
     </div>
   </div>
 
   {logos.length > 0 && (
     <div class="wrap confiance">
-      <p>Ils m'ont confié leurs systèmes</p>
+      <p>Ils nous ont confié leurs systèmes</p>
       <ul>
         {logos.map((l) => <li><img src={l.src} alt={l.nom} loading="eager" decoding="async" /></li>)}
       </ul>
@@ -602,9 +603,9 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       <p class="etiquette reveal">Comment ça marche</p>
       <h2 class="sec-title reveal">Trois étapes, et vous savez toujours où on en est</h2>
       <ol class="etapes-v reveal">
-        <li><span class="n">1</span><div><h3>Diagnostic gratuit</h3><p>30 minutes. On regarde la tâche qui vous coûte le plus. Si l'IA ne peut pas vous aider, je vous le dis.</p></div></li>
+        <li><span class="n">1</span><div><h3>Diagnostic gratuit</h3><p>30 minutes. On regarde la tâche qui vous coûte le plus. Si l'IA ne peut pas vous aider, on vous le dit.</p></div></li>
         <li><span class="n">2</span><div><h3>Un plan et un prix</h3><p>La bonne formule pour votre réalité, avec un prix fixe présenté en personne.</p></div></li>
-        <li><span class="n">3</span><div><h3>Je construis et je forme</h3><p>Le système est branché sur vos outils, testé avec votre équipe, et je reste là après la livraison.</p></div></li>
+        <li><span class="n">3</span><div><h3>On construit et on forme</h3><p>Le système est branché sur vos outils, testé avec votre équipe, et on reste là après la livraison.</p></div></li>
       </ol>
     </div>
   </div>
@@ -648,16 +649,17 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <section id="apropos">
   <div class="wrap fondateur">
     <div class="reveal">
-      <p class="etiquette">Le fondateur</p>
-      <h2 class="sec-title">Vous parlez à la personne qui construit vos systèmes</h2>
+      <p class="etiquette">Qui on est</p>
+      <h2 class="sec-title">Une équipe qui livre. Un fondateur qui répond.</h2>
     </div>
     <div class="reveal" data-d="1">
-      <p>Simon Fournier a fondé FournIA à Blainville en 2026. Il conçoit chaque système, l'installe et forme lui-même votre équipe.</p>
+      <p>FournIA est née à Blainville en 2026. Simon Fournier dirige chaque projet, du diagnostic à la formation, avec une équipe de développeurs partenaires qui construit à ses côtés. Vous avez un seul interlocuteur, du premier appel au suivi.</p>
+      <p class="vision">Notre objectif : devenir la référence en IA pour les PME du Québec, une entreprise à la fois.</p>
       <ul class="garanties">
         <li set:html={check + '<span>Vérification Loi 25 écrite avant tout projet qui touche des renseignements personnels.</span>'}></li>
         <li set:html={check + '<span>Les outils et les comptes restent à votre nom.</span>'}></li>
       </ul>
-      <a class="lien-fleche" href="/a-propos/">En savoir plus sur FournIA →</a>
+      <a class="lien-fleche" href="/a-propos/">Notre histoire et notre vision →</a>
     </div>
   </div>
 </section>
@@ -667,7 +669,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   <div class="wrap faq">
     <div>
       <p class="etiquette reveal">Questions fréquentes</p>
-      <h2 class="sec-title reveal">Ce qu'on me demande avant de commencer</h2>
+      <h2 class="sec-title reveal">Ce qu'on nous demande avant de commencer</h2>
     </div>
     <div class="reveal">
       {FAQ.map((f) => (
