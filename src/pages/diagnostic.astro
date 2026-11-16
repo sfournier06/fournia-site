@@ -102,8 +102,6 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   .result h2 { font-family: 'Space Grotesk'; font-size: 1.5rem; line-height: 1.15; margin-bottom: .7rem; }
   .result p { color: var(--mute); margin-bottom: 1.2rem; }
   .book-btn { display: inline-flex; margin-bottom: 1.4rem; }
-  .booking-inline { min-width: 280px; height: 720px; border-radius: 14px; overflow: hidden; }
-  .booking-inline :global(iframe) { width: 100%; height: 100%; border: 0; }
   .alt-link { display: inline-block; margin-top: .4rem; color: var(--lime); font-size: .92rem; }
 
   .foot { position: relative; z-index: 1; margin-top: 2rem; text-align: center; color: var(--mute-d); font-size: .82rem; }
@@ -186,7 +184,6 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
       <h2>C'est un fit. Réservez votre appel.</h2>
       <p>30 minutes, sans engagement.</p>
       <a id="book-link" class="btn btn-primary book-btn" href={booking} target="_blank" rel="noopener">Réserver mon appel <span class="arrow">&#8594;</span></a>
-      <div id="cal" class="booking-inline" data-cal-url={booking}></div>
     </div>
 
     <!-- ETAPE 2B : non qualifie -->
@@ -208,16 +205,6 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   const stepForm = document.getElementById('step-form');
   const stepOk = document.getElementById('step-qualified');
   const stepNo = document.getElementById('step-rejected');
-
-  // Calendrier chargé seulement à la qualification (sinon il plombe le chargement de la page).
-  function loadBooking() {
-    const el = document.getElementById('cal');
-    if (!el || el.querySelector('iframe')) return;
-    const f = document.createElement('iframe');
-    f.src = el.dataset.calUrl;
-    f.title = 'Réserver le diagnostic';
-    el.appendChild(f);
-  }
 
   function isQualified(d) {
     if (d.type === 'particulier') return false;
@@ -244,7 +231,6 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 
     stepForm.classList.add('hidden');
     (ok ? stepOk : stepNo).classList.remove('hidden');
-    if (ok) loadBooking();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
