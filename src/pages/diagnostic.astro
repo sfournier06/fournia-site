@@ -103,7 +103,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   .result p { color: var(--mute); margin-bottom: 1.2rem; }
   .book-btn { display: inline-flex; margin-bottom: 1.4rem; }
   .booking-inline { min-width: 280px; height: 720px; border-radius: 14px; overflow: hidden; }
-  .booking-inline iframe { width: 100%; height: 100%; border: 0; }
+  .booking-inline :global(iframe) { width: 100%; height: 100%; border: 0; }
   .alt-link { display: inline-block; margin-top: .4rem; color: var(--lime); font-size: .92rem; }
 
   .foot { position: relative; z-index: 1; margin-top: 2rem; text-align: center; color: var(--mute-d); font-size: .82rem; }
@@ -216,7 +216,6 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
     const f = document.createElement('iframe');
     f.src = el.dataset.calUrl;
     f.title = 'Réserver le diagnostic';
-    f.scrolling = 'no';
     el.appendChild(f);
   }
 
