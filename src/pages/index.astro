@@ -3,11 +3,18 @@ import Consentement from '../components/Consentement.astro';
 import Realisations from '../components/Realisations.astro';
 import Temoignages from '../components/Temoignages.astro';
 import Portrait from '../components/Portrait.astro';
+import { REALISATIONS } from '../data/realisations.mjs';
+import { APERCU } from '../data/apercu.mjs';
 // Page d'accueil FournIA. CSS et JS inline (is:global / is:inline).
 // Le haut de page n'utilise PAS la classe `reveal` : le h1 doit s'afficher dès le premier rendu (LCP).
 import { organisationLd, GOOGLE_VERIFICATION, BING_VERIFICATION } from '../data/entite.mjs';
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 const orgLd = organisationLd;
+// Bandeau de confiance : logos blancs (public/clients/mono/), seulement avec accord écrit (ou en aperçu interne).
+const BANDEAU = ['AvecPlaisirs', 'Arbour Aide Académique', 'Pubsphere', 'SeniorTech'];
+const logos = REALISATIONS
+  .filter((r) => BANDEAU.includes(r.client) && r.logo && (APERCU || (r.consentement && r.consentement.date)))
+  .map((r) => ({ nom: r.client, src: r.logo.replace('/clients/', '/clients/mono/') }));
 // Monogramme officiel (references/brand/assets/fournia-monogram.svg, copié dans public/brand/).
 const mark = '<img src="/brand/fournia-monogram.svg" alt="" width="40" height="40" />';
 const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
@@ -90,27 +97,15 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 
   .wrap { width: min(1200px, 92vw); margin: 0 auto; }
 
-  /* ── fond (constellation de points + un glow lime) ── */
+  /* ── fond : un seul halo lime, très doux, et un grain fin. Rien qui bouge sous le texte. ── */
   .bg-fx { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .net { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .4; }
-  .glow { position: absolute; border-radius: 50%; filter: blur(100px); opacity: .45; will-change: transform; }
-  .glow-1 { width: 48vw; height: 48vw; top: -14vw; right: -10vw;
-    background: radial-gradient(circle, rgba(183,217,76,.18), transparent 68%);
-    animation: drift 26s ease-in-out infinite; }
-  .grid-lines {
-    position: absolute; inset: 0;
-    background-image: linear-gradient(var(--line) 1px, transparent 1px),
-                      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 72px 72px;
-    mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 22%, transparent 72%);
-    opacity: .35;
-  }
-  @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(3vw,4vw) scale(1.12); } }
+  .glow { position: absolute; border-radius: 50%; filter: blur(120px); }
+  .glow-1 { width: 60vw; height: 60vw; top: -26vw; right: -18vw;
+    background: radial-gradient(circle, rgba(183,217,76,.13), transparent 66%); }
   .grain {
-    position: absolute; inset: 0; pointer-events: none; opacity: .03;
+    position: absolute; inset: 0; pointer-events: none; opacity: .035;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
-  @media (prefers-reduced-motion: reduce) { .glow-1 { animation: none; } }
 
   /* ── NAV ─────────────────────────────────────── */
   nav {
@@ -157,45 +152,63 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .hamburger span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: .3s; }
 
   /* ── HERO ────────────────────────────────────── */
-  header { position: relative; z-index: 1; padding: 9.5rem 0 3rem; }
-  .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 4rem; align-items: center; }
+  header { position: relative; z-index: 1; padding: 10rem 0 0; }
+  .hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 5.5rem; align-items: center; }
+  .surtitre { display: inline-flex; align-items: center; gap: .7rem; color: var(--lime); font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif;
+    font-size: .78rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 1.6rem; }
+  .surtitre::before { content: ''; width: 1.8rem; height: 1px; background: currentColor; opacity: .7; }
   h1.hero-title {
-    font-size: clamp(2.3rem, 5.2vw, 4.4rem); font-weight: 700;
-    line-height: 1.02; letter-spacing: -.035em; margin-bottom: 1.5rem;
+    font-size: clamp(2.4rem, 5vw, 4.3rem); font-weight: 600;
+    line-height: 1.04; letter-spacing: -.04em; margin-bottom: 1.8rem;
   }
-  h1.hero-title .accent { color: var(--lime); }
-  .hero-sub { max-width: 34rem; color: var(--mute); font-size: 1.15rem; line-height: 1.6; margin-bottom: 2.2rem; }
+  h1.hero-title .accent { color: var(--lime); display: block; }
+  .hero-sub { max-width: 33rem; color: var(--mute); font-size: 1.12rem; line-height: 1.7; margin-bottom: 2.4rem; }
   .hero-sub strong { color: var(--white); font-weight: 500; }
   .hero-cta { display: flex; gap: .8rem; flex-wrap: wrap; align-items: center; }
-  .hero-note { margin-top: 1.4rem; color: var(--mute); font-size: .9rem; display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; }
+  .hero-note { margin-top: 1.6rem; color: var(--mute); font-size: .88rem; display: flex; flex-wrap: wrap; gap: .3rem 1.4rem; }
   .hero-note span { display: inline-flex; align-items: center; gap: .45rem; }
   .hero-note svg { width: 15px; height: 15px; color: var(--lime); flex: none; }
 
-  /* panneau d'exemple : ce qu'un système fait */
-  .demo {
-    border-radius: 22px; border: 1px solid var(--glass-b);
-    background: linear-gradient(170deg, rgba(26,27,25,.92), rgba(14,14,14,.92));
-    box-shadow: 0 30px 70px rgba(0,0,0,.5);
-    padding: 1.4rem;
-  }
-  .demo-tete { display: flex; justify-content: space-between; align-items: center; padding: 0 .3rem 1rem; border-bottom: 1px solid var(--line); margin-bottom: .4rem; }
-  .demo-tete strong { font-family: 'Space Grotesk'; font-size: .98rem; font-weight: 600; }
-  .demo-tete span { font-size: .78rem; color: var(--mute); border: 1px solid var(--glass-b); border-radius: 100px; padding: .2rem .65rem; }
-  .demo ol { list-style: none; }
-  .demo li { display: grid; grid-template-columns: auto 1fr; gap: .9rem; align-items: start; padding: .95rem .3rem; border-bottom: 1px solid var(--line); }
-  .demo li:last-child { border-bottom: none; padding-bottom: .3rem; }
-  .demo .pastille { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: rgba(183,217,76,.1); color: var(--lime); }
-  .demo .pastille svg { width: 16px; height: 16px; }
-  .demo .quoi { color: var(--white); font-size: .95rem; line-height: 1.35; }
-  .demo .fait { display: inline-flex; align-items: center; gap: .4rem; margin-top: .3rem; color: var(--lime); font-size: .86rem; }
-  .demo .fait svg { width: 13px; height: 13px; }
-  .js .demo li { animation: entree .6s cubic-bezier(.16,1,.3,1) both; }
-  .js .demo li:nth-child(2) { animation-delay: .12s; } .js .demo li:nth-child(3) { animation-delay: .24s; } .js .demo li:nth-child(4) { animation-delay: .36s; }
-  @keyframes entree { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  /* portrait du fondateur : la preuve qu'une vraie personne est derrière */
+  .hero-visuel { position: relative; max-width: 440px; justify-self: end; width: 100%; }
+  .hero-visuel::before { content: ''; position: absolute; inset: -1px; border-radius: 24px; padding: 1px; pointer-events: none; z-index: 2;
+    background: linear-gradient(160deg, rgba(183,217,76,.55), rgba(255,255,255,.06) 40%, rgba(255,255,255,0) 70%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+  .hero-visuel .portrait { border-radius: 24px; box-shadow: 0 40px 90px rgba(0,0,0,.55); }
+  .hero-visuel .portrait img { filter: contrast(1.06) brightness(.9) saturate(.95); }
+  .hero-visuel .portrait::after { content: ''; position: absolute; inset: 0;
+    background: radial-gradient(120% 90% at 50% 30%, transparent 55%, rgba(11,11,12,.45)), linear-gradient(180deg, transparent 55%, rgba(11,11,12,.88)); }
+  .plaque { position: absolute; left: 1.6rem; bottom: 1.5rem; z-index: 3; display: flex; flex-direction: column; }
+  .plaque strong { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: 1.2rem; font-weight: 600; letter-spacing: -.01em; }
+  .plaque span { color: var(--mute); font-size: .88rem; }
+  .pastille-flottante { position: absolute; z-index: 3; top: 1.6rem; left: -2.2rem; display: inline-flex; align-items: center; gap: .5rem;
+    padding: .6rem 1rem; border-radius: 100px; font-size: .85rem; color: var(--white);
+    background: rgba(18,18,18,.82); border: 1px solid var(--glass-b); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 14px 40px rgba(0,0,0,.45); }
+  .pastille-flottante svg { width: 14px; height: 14px; color: var(--lime); }
+
+  /* bandeau de confiance */
+  .confiance { margin-top: 5.5rem; padding-top: 2.2rem; border-top: 1px solid var(--line); display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+  .confiance p { color: var(--mute-d); font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+  .confiance ul { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 1.6rem 3.4rem; flex: 1; }
+  .confiance img { height: 34px; width: auto; max-width: 150px; object-fit: contain; opacity: .55; transition: opacity .3s; display: block; }
+  .confiance img:hover { opacity: .9; }
+
+  /* un système au travail : 4 moments */
+  .quotidien { padding: 5rem 0 1rem; }
+  .flux { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--glass-b); border-radius: 22px;
+    background: linear-gradient(170deg, rgba(26,27,25,.7), rgba(14,14,14,.7)); overflow: hidden; }
+  .flux li { padding: 1.8rem 1.6rem; display: flex; flex-direction: column; gap: .5rem; }
+  .flux li + li { border-left: 1px solid var(--line); }
+  .flux .pastille { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: rgba(183,217,76,.08);
+    color: var(--lime); margin-bottom: .7rem; border: 1px solid rgba(183,217,76,.14); }
+  .flux .pastille svg { width: 17px; height: 17px; }
+  .flux .quoi { color: var(--white); font-size: .98rem; line-height: 1.4; }
+  .flux .fait { color: var(--lime); font-size: .88rem; }
 
   /* ── SECTIONS ────────────────────────────────── */
-  section { position: relative; z-index: 1; padding: 4.5rem 0; }
-  h2.sec-title { font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.06; letter-spacing: -.025em; font-weight: 700; margin-bottom: 1rem; max-width: 22ch; }
+  section { position: relative; z-index: 1; padding: 6.5rem 0; }
+  h2.sec-title { font-size: clamp(1.9rem, 3.8vw, 2.9rem); line-height: 1.08; letter-spacing: -.035em; font-weight: 600; margin-bottom: 1rem; max-width: 22ch; }
   h2.sec-title .accent { color: var(--lime); }
   .sec-intro { color: var(--mute); max-width: 36rem; font-size: 1.08rem; margin-bottom: 2.6rem; }
   .suite { margin-top: 1.8rem; }
@@ -207,7 +220,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .offre { padding: 2.2rem 2rem; display: flex; flex-direction: column; gap: .9rem; transition: background .3s; }
   .offre + .offre { border-left: 1px solid var(--line); }
   .offre:hover { background: rgba(183,217,76,.035); }
-  .offre h3 { font-size: 1.45rem; letter-spacing: -.015em; line-height: 1.15; }
+  .offre h3 { font-weight: 600; font-size: 1.45rem; letter-spacing: -.015em; line-height: 1.15; }
   .offre p { color: var(--mute); font-size: .98rem; }
   .offre .pour { color: var(--white); font-size: .95rem; padding-top: .9rem; border-top: 1px solid var(--line); margin-top: auto; }
   .offre .pour b { color: var(--lime); font-weight: 500; }
@@ -223,9 +236,9 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .etapes p { color: var(--mute); font-size: .98rem; }
 
   /* ── QUI EST DERRIÈRE ────────────────────────── */
-  .fondateur { display: grid; grid-template-columns: 300px 1fr; gap: 4rem; align-items: center; }
-  .fondateur .portrait { max-width: 300px; width: 100%; }
+  .fondateur { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; padding-top: 3rem; border-top: 1px solid var(--line); }
   .fondateur p { color: var(--mute); font-size: 1.06rem; max-width: 40rem; margin-bottom: 1rem; }
+  .fondateur p.surtitre { color: var(--lime); font-size: .78rem; margin-bottom: 1.6rem; max-width: none; }
   .garanties { list-style: none; display: grid; gap: .7rem; margin: 1.6rem 0 1.8rem; }
   .garanties li { display: flex; gap: .7rem; align-items: start; color: var(--white); font-size: .98rem; }
   .garanties svg { width: 18px; height: 18px; color: var(--lime); flex: none; margin-top: .2rem; }
@@ -280,17 +293,20 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .reveal[data-d="1"]{transition-delay:.08s;} .reveal[data-d="2"]{transition-delay:.16s;}
   @media (prefers-reduced-motion: reduce) {
     .js .reveal { opacity: 1; transform: none; transition: none; }
-    .js .demo li { animation: none; }
   }
 
   /* ── responsive ──────────────────────────────── */
   @media (max-width: 960px) {
-    .hero { grid-template-columns: 1fr; gap: 2.8rem; }
+    .hero { grid-template-columns: 1fr; gap: 3.2rem; }
+    .hero-visuel { justify-self: start; max-width: 380px; }
+    .pastille-flottante { left: 1rem; }
+    .flux { grid-template-columns: 1fr 1fr; }
+    .flux li:nth-child(3) { border-left: none; }
+    .flux li:nth-child(n+3) { border-top: 1px solid var(--line); }
     .offres { grid-template-columns: 1fr; }
     .offre + .offre { border-left: none; border-top: 1px solid var(--line); }
     .etapes { grid-template-columns: 1fr; gap: 1.8rem; }
-    .fondateur { grid-template-columns: 1fr; gap: 2rem; }
-    .fondateur .portrait { max-width: 180px; }
+    .fondateur { grid-template-columns: 1fr; gap: 1.5rem; }
   }
   @media (max-width: 900px) {
     .hamburger { display: flex; }
@@ -319,13 +335,18 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     form { grid-template-columns: 1fr; padding: 2rem; }
   }
   @media (max-width: 560px) {
-    header { padding: 7.5rem 0 3rem; }
+    header { padding: 7.5rem 0 0; }
+    .confiance { margin-top: 3.5rem; gap: 1.4rem; }
+    .confiance ul { gap: 1.4rem 2.2rem; }
+    .confiance img { height: 26px; }
+    .flux { grid-template-columns: 1fr; }
+    .flux li + li { border-left: none; border-top: 1px solid var(--line); }
+    section { padding: 4.5rem 0; }
     .hero-sub { font-size: 1.05rem; margin-bottom: 1.8rem; }
     .hero-cta .btn { width: 100%; justify-content: center; }
     section { padding: 4rem 0; }
     .sec-intro { margin-bottom: 2rem; }
     .offre { padding: 1.8rem 1.5rem; }
-    .demo { padding: 1.1rem; }
     .cta-left { padding: 2rem 1.5rem; }
     form { padding: 1.5rem; }
   }
@@ -334,8 +355,6 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <body>
 
 <div class="bg-fx">
-  <canvas id="net" class="net"></canvas>
-  <div class="grid-lines"></div>
   <div class="glow glow-1"></div>
   <div class="grain"></div>
 </div>
@@ -360,9 +379,10 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <!-- HERO -->
 <header id="top">
   <div class="wrap hero">
-    <div>
-      <h1 class="hero-title">Moins de paperasse. <span class="accent">Plus de temps</span> pour vos clients.</h1>
-      <p class="hero-sub">On installe l'IA dans votre PME, on vous l'explique en mots simples et on <strong>forme votre équipe</strong>. Relances, soumissions, demandes de clients, documents : le système s'en occupe, vous gardez les décisions.</p>
+    <div class="hero-texte">
+      <p class="surtitre">IA pour PME · Rive-Nord et Montréal</p>
+      <h1 class="hero-title">Vous n'avez pas le temps d'apprendre l'IA. <span class="accent">C'est mon travail.</span></h1>
+      <p class="hero-sub">Je regarde comment votre entreprise fonctionne, j'installe les systèmes qui enlèvent les tâches répétitives et je <strong>forme votre équipe</strong>. Relances, soumissions, demandes de clients, documents : le système s'en occupe, vous gardez les décisions.</p>
       <div class="hero-cta">
         <a href="/diagnostic/" class="btn btn-primary">Réserver mon diagnostic gratuit <span class="arrow">→</span></a>
         <a href="#exemples" class="btn btn-ghost">Voir des exemples</a>
@@ -373,33 +393,55 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       </p>
     </div>
 
-    <figure class="demo" aria-label="Exemple de ce qu'un système fait pour une PME">
-      <div class="demo-tete"><strong>Un système au travail</strong><span>Exemple</span></div>
-      <ol>
-        <li>
-          <span class="pastille"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
-          <div><div class="quoi">Une demande de soumission arrive</div><div class="fait" set:html={check + 'Brouillon prêt, vous validez'}></div></div>
-        </li>
-        <li>
-          <span class="pastille"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-          <div><div class="quoi">Un client ne répond plus depuis 5 jours</div><div class="fait" set:html={check + 'Relance envoyée par texto'}></div></div>
-        </li>
-        <li>
-          <span class="pastille"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
-          <div><div class="quoi">Un appel est manqué</div><div class="fait" set:html={check + 'Texto de suivi envoyé'}></div></div>
-        </li>
-        <li>
-          <span class="pastille"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span>
-          <div><div class="quoi">Une commande entre en ligne</div><div class="fait" set:html={check + 'Document de production créé'}></div></div>
-        </li>
-      </ol>
-    </figure>
+    <div class="hero-visuel">
+      <Portrait prioritaire={true} />
+      <div class="plaque">
+        <strong>Simon Fournier</strong>
+        <span>Fondateur de FournIA</span>
+      </div>
+      <p class="pastille-flottante" set:html={check + 'Conçoit, installe et forme lui-même'}></p>
+    </div>
   </div>
+
+  {logos.length > 0 && (
+    <div class="wrap confiance">
+      <p>Ils m'ont confié leurs systèmes</p>
+      <ul>
+        {logos.map((l) => <li><img src={l.src} alt={l.nom} loading="eager" decoding="async" /></li>)}
+      </ul>
+    </div>
+  )}
 </header>
+
+<!-- AU QUOTIDIEN -->
+<section id="quotidien" class="quotidien">
+  <div class="wrap">
+    <p class="surtitre reveal">Un système au travail</p>
+    <ol class="flux reveal">
+      <li>
+        <span class="pastille"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
+        <div class="quoi">Une demande de soumission arrive</div><div class="fait">Brouillon prêt, vous validez</div>
+      </li>
+      <li>
+        <span class="pastille"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <div class="quoi">Un client ne répond plus depuis 5 jours</div><div class="fait">Relance envoyée par texto</div>
+      </li>
+      <li>
+        <span class="pastille"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+        <div class="quoi">Un appel est manqué</div><div class="fait">Texto de suivi envoyé</div>
+      </li>
+      <li>
+        <span class="pastille"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span>
+        <div class="quoi">Une commande entre en ligne</div><div class="fait">Document de production créé</div>
+      </li>
+    </ol>
+  </div>
+</section>
 
 <!-- EXEMPLES -->
 <section id="exemples">
   <div class="wrap">
+    <p class="surtitre reveal">Réalisations</p>
     <h2 class="sec-title reveal">Des systèmes qu'on a <span class="accent">déjà livrés</span>, secteur par secteur</h2>
     <div class="reveal"><Realisations court={true} /></div>
     <p class="suite reveal"><a class="lien-fleche" href="/secteurs/">Voir tous les secteurs →</a></p>
@@ -409,6 +451,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <!-- SERVICES -->
 <section id="services">
   <div class="wrap">
+    <p class="surtitre reveal">Services</p>
     <h2 class="sec-title reveal">Trois façons de <span class="accent">travailler ensemble</span></h2>
     <p class="sec-intro reveal">Le diagnostic gratuit vous dit laquelle vous convient.</p>
     <div class="offres reveal">
@@ -437,6 +480,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <!-- PROCESSUS -->
 <section id="processus">
   <div class="wrap">
+    <p class="surtitre reveal">Processus</p>
     <h2 class="sec-title reveal">Comment ça <span class="accent">marche</span></h2>
     <ol class="etapes reveal">
       <li><span class="n">Étape 1</span><h3>Diagnostic gratuit</h3><p>30 minutes. Si l'IA ne peut pas vous aider, on vous le dit.</p></li>
@@ -451,9 +495,11 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <!-- QUI EST DERRIÈRE -->
 <section id="apropos">
   <div class="wrap fondateur">
-    <Portrait classe="reveal" />
-    <div class="reveal" data-d="1">
+    <div class="reveal">
+      <p class="surtitre">Le fondateur</p>
       <h2 class="sec-title">Vous parlez à la personne qui <span class="accent">construit vos systèmes</span></h2>
+    </div>
+    <div class="reveal" data-d="1">
       <p>Simon Fournier a fondé FournIA à Blainville en 2026. Il conçoit chaque système, l'installe et forme lui-même votre équipe.</p>
       <ul class="garanties">
         <li set:html={check + '<span>Vérification Loi 25 écrite avant tout projet qui touche des renseignements personnels.</span>'}></li>
@@ -565,53 +611,6 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 </footer>
 
 <script is:inline>
-  // ── fond : constellation de points (démarre après le chargement pour ne pas retarder l'affichage) ──
-  (function () {
-    const cv = document.getElementById('net');
-    if (!cv) return;
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const ctx = cv.getContext('2d', { alpha: true });
-    const dpr = Math.min(devicePixelRatio || 1, 1.5);
-    let w, h, pts, raf, running = false;
-    const count = () => (innerWidth < 700 ? 18 : innerWidth < 1100 ? 32 : 46);
-    function resize() { w = cv.width = innerWidth * dpr; h = cv.height = innerHeight * dpr; }
-    function init() {
-      pts = Array.from({ length: count() }, () => ({
-        x: Math.random() * w, y: Math.random() * h,
-        vx: (Math.random() - .5) * .16 * dpr, vy: (Math.random() - .5) * .16 * dpr,
-      }));
-    }
-    function frame() {
-      ctx.clearRect(0, 0, w, h);
-      for (const p of pts) {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > w) p.vx *= -1;
-        if (p.y < 0 || p.y > h) p.vy *= -1;
-      }
-      const R = 130 * dpr, R2 = R * R;
-      for (let i = 0; i < pts.length; i++) {
-        for (let j = i + 1; j < pts.length; j++) {
-          const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
-          const d2 = dx * dx + dy * dy;
-          if (d2 < R2) {
-            ctx.strokeStyle = 'rgba(183,217,76,' + (1 - Math.sqrt(d2) / R) * .16 + ')';
-            ctx.lineWidth = dpr;
-            ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
-          }
-        }
-      }
-      ctx.fillStyle = 'rgba(183,217,76,.55)';
-      for (const p of pts) { ctx.beginPath(); ctx.arc(p.x, p.y, 1.5 * dpr, 0, 6.3); ctx.fill(); }
-      if (running) raf = requestAnimationFrame(frame);
-    }
-    function start() { if (!running && !reduce) { running = true; raf = requestAnimationFrame(frame); } }
-    function stop() { running = false; cancelAnimationFrame(raf); }
-    function go() { resize(); init(); if (reduce) frame(); else start(); }
-    if (document.readyState === 'complete') go(); else addEventListener('load', go, { once: true });
-    document.addEventListener('visibilitychange', () => document.hidden ? stop() : (pts && start()));
-    let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { resize(); init(); }, 150); });
-  })();
-
   // nav : état au défilement
   const nav = document.getElementById('nav');
   let ticking = false;
