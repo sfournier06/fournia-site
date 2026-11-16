@@ -4,7 +4,7 @@
 // vidéos de clients avec consentement écrit dans src/data/temoignages.mjs). Rien de réel = rien d'affiché.
 // Aperçu interne (APERCU=1) : des cartes MAQUETTES marquées « Exemple » montrent la mise en page.
 // Leur texte est fictif et ne doit JAMAIS être publié (Loi sur la concurrence, faux témoignages).
-import { AVIS, LIEN_FICHE_GOOGLE } from '../data/avis.mjs';
+import { AVIS, LIEN_FICHE_GOOGLE, LIEN_LAISSER_AVIS } from '../data/avis.mjs';
 import { TEMOIGNAGES } from '../data/temoignages.mjs';
 import { APERCU } from '../data/apercu.mjs';
 
@@ -60,8 +60,9 @@ const etoiles = '★★★★★';
         <div class="avis">
           <div class="note-globale">
             <span class="g" aria-hidden="true">G</span>
-            <div><strong>Avis Google</strong><span class="etoiles">{etoiles}</span></div>
-            {LIEN_FICHE_GOOGLE && <a href={LIEN_FICHE_GOOGLE} target="_blank" rel="noopener">Voir tous les avis →</a>}
+            <div><strong>Avis Google</strong><span class="etoiles">{etoiles}</span>{avis.length > 0 && <span class="moyenne">{(avis.reduce((t, x) => t + x.note, 0) / avis.length).toFixed(1).replace('.', ',')} sur 5 · {avis.length} avis</span>}</div>
+            {LIEN_FICHE_GOOGLE && <a href={LIEN_FICHE_GOOGLE} target="_blank" rel="noopener">Voir les avis sur Google →</a>}
+            {LIEN_LAISSER_AVIS && <a class="laisser" href={LIEN_LAISSER_AVIS} target="_blank" rel="noopener">Client de FournIA ? Laissez un avis</a>}
           </div>
           {(avis.length > 0 ? avis : MAQUETTE_AVIS).map((a) => (
             <figure class:list={['carte-avis', { exemple: avis.length === 0 }]}>
@@ -104,6 +105,8 @@ const etoiles = '★★★★★';
     font-family: Arial, sans-serif; font-weight: 700; font-size: 1.2rem; }
   .note-globale strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; }
   .note-globale a { color: var(--lime); font-size: .9rem; }
+  .note-globale a.laisser { color: var(--mute); font-size: .84rem; }
+  .note-globale .moyenne { display: block; color: var(--mute); font-size: .86rem; margin-top: .2rem; }
   .etoiles { color: #f5c518; letter-spacing: .12em; font-size: .95rem; }
   .carte-avis { position: relative; margin: 0; padding: 1.6rem; border-radius: 16px; border: 1px solid var(--line); background: rgba(255,255,255,.02);
     display: flex; flex-direction: column; gap: .9rem; }
