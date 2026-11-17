@@ -20,7 +20,7 @@ const T = en
       exemple: 'Exemple', avisGoogle: 'Avis Google', sur5: 'sur 5', avis: 'avis', voir: 'Voir les avis sur Google →', laisser: 'Client de FournIA ? Laissez un avis', note5: '5 sur 5', decimale: ',' };
 
 const ok = (x) => Boolean(x && x.consentement && x.consentement.date);
-const avis = AVIS.filter((a) => a && a.texte && a.auteur);
+const avis = AVIS.filter((a) => a && a.texte && a.auteur && a.publier !== false);
 const videos = TEMOIGNAGES.filter((t) => ok(t) && t.video);
 
 // Miniatures de personnes FICTIVES générées par IA (public/apercu/), pour tester la mise en page seulement.
@@ -89,7 +89,11 @@ const etoiles = '★★★★★';
               {avis.length === 0 && <span class="badge">{T.exemple}</span>}
               <p class="etoiles" aria-label={T.note5}>{etoiles}</p>
               <blockquote lang={en && avis.length > 0 ? 'fr' : undefined}>{a.texte}</blockquote>
-              <figcaption>{a.auteur}</figcaption>
+              <figcaption>
+                <strong>{a.auteur}</strong>
+                {a.systeme && <span class="systeme">{en ? (a.systeme_en || a.systeme) : a.systeme}</span>}
+                {a.secteur && <span class="secteur">{en ? (a.secteur_en || a.secteur) : a.secteur}</span>}
+              </figcaption>
             </figure>
           ))}
         </div>
@@ -132,7 +136,10 @@ const etoiles = '★★★★★';
   .carte-avis { position: relative; margin: 0; padding: 1.6rem; border-radius: 16px; border: 1px solid var(--line); background: rgba(255,255,255,.02);
     display: flex; flex-direction: column; gap: .9rem; }
   .carte-avis blockquote { color: var(--white); font-size: .96rem; line-height: 1.6; margin: 0; flex: 1; }
-  .carte-avis figcaption { color: var(--mute); font-size: .88rem; }
+  .carte-avis figcaption { display: flex; flex-direction: column; gap: .25rem; padding-top: .9rem; border-top: 1px solid var(--line); }
+  .carte-avis figcaption strong { color: var(--white); font-size: .92rem; font-weight: 600; }
+  .carte-avis figcaption .systeme { color: var(--lime); font-size: .84rem; }
+  .carte-avis figcaption .secteur { color: var(--mute); font-size: .8rem; }
   @media (max-width: 960px) {
     .videos { grid-template-columns: 1fr 1fr; }
     .avis { grid-template-columns: 1fr; }
