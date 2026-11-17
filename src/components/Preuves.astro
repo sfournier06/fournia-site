@@ -43,7 +43,7 @@ const MAQUETTE_AVIS = en ? [
   { auteur: 'Prénom N.', texte: "Texte d'exemple : Livré rapidement, formation incluse, et il répond quand on a une question." },
 ];
 
-const montrerVideos = videos.length > 0 || APERCU;
+const montrerVideos = false; // Pas de vidéos pour l'instant (décision de Simon, 2026-11-17) : seulement les avis Google.
 const montrerAvis = avis.length > 0 || APERCU;
 const etoiles = '★★★★★';
 ---
@@ -52,28 +52,7 @@ const etoiles = '★★★★★';
     <div class="wrap">
       <p class="etiquette">{T.etiquette}</p>
       <h2 id="preuves-titre" class="sec-title">{T.titre}</h2>
-      {APERCU && <p class="maquette">{T.maquette}</p>}
-
-      {montrerVideos && (
-        <div class="videos">
-          {videos.length > 0
-            ? videos.map((v) => (
-                <a class="video" href={v.video} target="_blank" rel="noopener">
-                  {v.logo && <img class="logo" src={v.logo} alt="" loading="lazy" />}
-                  <span class="play" aria-hidden="true"></span>
-                  <span class="legende"><strong>{v.nom}</strong>{v.entreprise && <span>{v.entreprise}</span>}</span>
-                </a>
-              ))
-            : MAQUETTE_VIDEOS.map((v) => (
-                <div class="video exemple">
-                  <span class="badge">{T.exemple}</span>
-                  <img class="fond" src={v.image} alt="" loading="lazy" />
-                  <span class="play" aria-hidden="true"></span>
-                  <span class="legende"><strong>{en ? `“${v.sujet}”` : `« ${v.sujet} »`}</strong><span>{v.nom}</span></span>
-                </div>
-              ))}
-        </div>
-      )}
+      {APERCU && avis.length === 0 && <p class="maquette">{T.maquette}</p>}
 
       {montrerAvis && (
         <div class="avis">

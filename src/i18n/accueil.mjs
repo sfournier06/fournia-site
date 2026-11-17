@@ -318,12 +318,9 @@ export const fr = {
     accueilAria: 'FournIA, accueil',
     liens: [
       { href: '#services', label: 'Services' },
-      { href: '#concretement', label: "Ce qu'on fait" },
-      { href: '#exemples', label: 'Exemples' },
-      { href: '/temoignages/', label: 'Témoignages' },
+      { href: '#exemples', label: 'Réalisations' },
       { href: '/a-propos/', label: 'À propos' },
       { href: '/blog', label: 'Blogue' },
-      { href: '#contact', label: 'Contact' },
     ],
     cta: { href: '/diagnostic/', label: 'Réserver un appel' },
     menuAria: 'Ouvrir le menu',
@@ -401,6 +398,7 @@ export const fr = {
       'Vérification Loi 25 écrite avant tout projet qui touche des renseignements personnels.',
       'Les outils et les comptes restent à votre nom.',
     ],
+    partenaire: '<b>Partenaire officiel des Black Vees de Montréal</b> · hockey junior',
     lien: { href: '/a-propos/', label: 'Notre histoire et notre vision →' },
   },
   faq: {
@@ -463,12 +461,9 @@ export const en = {
     accueilAria: 'FournIA, home',
     liens: [
       { href: '#services', label: 'Services' },
-      { href: '#concretement', label: 'What we do' },
-      { href: '#exemples', label: 'Examples' },
+      { href: '#exemples', label: 'Our work' },
       { href: '#preuves', label: 'Reviews' },
       { href: '#apropos', label: 'About' },
-      { href: '#faq', label: 'FAQ' },
-      { href: '#contact', label: 'Contact' },
     ],
     cta: { href: '#contact', label: 'Book a call' },
     menuAria: 'Open menu',
@@ -546,6 +541,7 @@ export const en = {
       "A written review under Quebec's Law 25 before any project that involves personal information.",
       'The tools and accounts stay in your name.',
     ],
+    partenaire: '<b>Official partner of the Montréal Black Vees</b> · junior hockey',
     lien: null,
   },
   faq: {

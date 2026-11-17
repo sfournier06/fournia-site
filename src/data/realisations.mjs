@@ -15,7 +15,8 @@
 // - image : photo de secteur NON identifiante (public/secteurs/), affichée même sans consentement
 //   quand il n'y a pas de logo à montrer.
 // - video : lien public vers le témoignage vidéo (Instagram, YouTube)
-// - statut : 'livre' ou 'en-cours'
+// - statut : 'livre' (seuls les systèmes livrés sont affichés)
+// - avis : nom de l'auteur d'un avis Google (src/data/avis.mjs) affiché dans la carte, avec consentement
 //
 // Mandats faits en sous-traitance (marque blanche) : le contrat de l'agence décide. Pour Élan,
 // seule la description anonyme est permise : jamais de nom ni de logo sans l'accord écrit d'Élan
@@ -41,22 +42,6 @@ export const REALISATIONS = [
     ...vide,
     client: 'AvecPlaisirs',
     logo: '/clients/avecplaisirs.webp',
-  },
-  {
-    secteur: 'Location de sonorisation',
-    titre: 'Les demandes reçues partout, au même endroit',
-    systeme:
-      "Les demandes qui arrivent par plusieurs canaux sont réunies en un seul endroit. Après chaque événement, le client reçoit un sondage de satisfaction et une demande d'avis Google.",
-    court: 'Toutes les demandes au même endroit, puis un sondage après chaque événement.',
-    secteur_en: 'Sound equipment rental',
-    titre_en: 'Requests from everywhere, in one place',
-    systeme_en: 'Requests that come in through several channels are brought together in one place. After each event, the client gets a satisfaction survey and a request for a Google review.',
-    court_en: 'All requests in one place, then a survey after every event.',
-    lien: '/secteurs/evenementiel/',
-    statut: 'livre',
-    ...vide,
-    client: "Location Son'OR",
-    logo: '/clients/sonor.webp',
   },
   {
     secteur: 'Location de chalets',
@@ -88,6 +73,8 @@ export const REALISATIONS = [
     ...vide,
     client: 'Pubsphere',
     logo: '/clients/pubsphere.webp',
+    avis: 'Stéphane Bernier',
+    consentement: { date: '2026-11-17', preuve: "Accord du client confirmé par Simon le 2026-11-17 (garder la trace écrite au registre des preuves)" },
   },
   {
     secteur: 'Conseillère en sécurité financière',
@@ -103,24 +90,10 @@ export const REALISATIONS = [
     statut: 'livre',
     ...vide,
     client: 'Karyann Turcotte',
-    // Remplacer par la photo de Karyann (avec son accord) dès qu'elle l'envoie.
+    photo: '/clients/karyann-turcotte.webp',
     image: '/secteurs/conseillere.webp',
-  },
-  {
-    secteur: 'Conseillère en sécurité financière',
-    titre: 'Les anciens prospects relancés, les clients suivis',
-    systeme:
-      "Le CRM est monté à partir de son calendrier, les anciens prospects sont relancés par texto et chaque client reçoit son suivi. Elle reprend la conversation quand quelqu'un répond.",
-    court: 'Anciens prospects relancés, clients suivis, elle reprend la conversation.',
-    secteur_en: 'Financial security advisor',
-    titre_en: 'Old leads re-engaged, clients followed up',
-    systeme_en: 'The CRM is built from her calendar, old leads are re-engaged by text and each client gets their follow-up. She takes over the conversation when someone replies.',
-    court_en: 'Old leads re-engaged, clients followed up, she takes over the conversation.',
-    lien: '/secteurs/conseillers-financiers/',
-    statut: 'en-cours',
-    ...vide,
-    client: 'Ana Stirbu',
-    logo: '/clients/ana-stirbu.webp',
+    avis: 'Karyann Turcotte',
+    consentement: { date: '2026-11-17', preuve: "Accord du client confirmé par Simon le 2026-11-17 (garder la trace écrite au registre des preuves)" },
   },
   {
     secteur: "Centre d'aide académique",
@@ -137,6 +110,7 @@ export const REALISATIONS = [
     ...vide,
     client: 'Arbour Aide Académique',
     logo: '/clients/arbour.webp',
+    consentement: { date: '2026-11-17', preuve: "Accord du client confirmé par Simon le 2026-11-17 (garder la trace écrite au registre des preuves)" },
   },
   {
     secteur: 'Formation numérique pour aînés',
@@ -149,9 +123,48 @@ export const REALISATIONS = [
     systeme_en: 'A CRM kept up to date at all times and follow-up messages prepared by AI. The founder approves each message before it goes out.',
     court_en: 'CRM always up to date, follow-ups prepared by AI, the founder approves.',
     lien: null,
-    statut: 'en-cours',
+    statut: 'livre',
     ...vide,
     client: 'SeniorTech',
     logo: '/clients/seniortech.webp',
+    avis: 'Freddy Aubuchon',
+    consentement: { date: '2026-11-17', preuve: "Accord du client confirmé par Simon le 2026-11-17 (garder la trace écrite au registre des preuves)" },
+  },
+];
+
+// Retirés de l'affichage le 2026-11-17 (décision de Simon) : mandat en cours ou à confirmer.
+// On les remet dans REALISATIONS quand c'est livré et confirmé par le client. Non affichés.
+export const EN_ATTENTE = [
+  {
+    secteur: 'Location de sonorisation',
+    titre: 'Les demandes reçues partout, au même endroit',
+    systeme:
+      "Les demandes qui arrivent par plusieurs canaux sont réunies en un seul endroit. Après chaque événement, le client reçoit un sondage de satisfaction et une demande d'avis Google.",
+    court: 'Toutes les demandes au même endroit, puis un sondage après chaque événement.',
+    secteur_en: 'Sound equipment rental',
+    titre_en: 'Requests from everywhere, in one place',
+    systeme_en: 'Requests that come in through several channels are brought together in one place. After each event, the client gets a satisfaction survey and a request for a Google review.',
+    court_en: 'All requests in one place, then a survey after every event.',
+    lien: '/secteurs/evenementiel/',
+    statut: 'livre',
+    ...vide,
+    client: "Location Son'OR",
+    logo: '/clients/sonor.webp',
+  },
+  {
+    secteur: 'Conseillère en sécurité financière',
+    titre: 'Les anciens prospects relancés, les clients suivis',
+    systeme:
+      "Le CRM est monté à partir de son calendrier, les anciens prospects sont relancés par texto et chaque client reçoit son suivi. Elle reprend la conversation quand quelqu'un répond.",
+    court: 'Anciens prospects relancés, clients suivis, elle reprend la conversation.',
+    secteur_en: 'Financial security advisor',
+    titre_en: 'Old leads re-engaged, clients followed up',
+    systeme_en: 'The CRM is built from her calendar, old leads are re-engaged by text and each client gets their follow-up. She takes over the conversation when someone replies.',
+    court_en: 'Old leads re-engaged, clients followed up, she takes over the conversation.',
+    lien: '/secteurs/conseillers-financiers/',
+    statut: 'en-cours',
+    ...vide,
+    client: 'Ana Stirbu',
+    logo: '/clients/ana-stirbu.webp',
   },
 ];

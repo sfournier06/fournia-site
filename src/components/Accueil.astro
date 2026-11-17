@@ -5,7 +5,6 @@
 // Le haut de page n'utilise PAS la classe `reveal` : le h1 doit s'afficher dès le premier rendu (LCP).
 import Consentement from './Consentement.astro';
 import Realisations from './Realisations.astro';
-import Temoignages from './Temoignages.astro';
 import Portrait from './Portrait.astro';
 import Preuves from './Preuves.astro';
 import { AVIS, LIEN_FICHE_GOOGLE } from '../data/avis.mjs';
@@ -224,7 +223,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   /* portrait du fondateur : la preuve qu'une vraie personne est derrière */
   .hero-visuel { position: relative; max-width: 440px; justify-self: end; width: 100%; }
   .hero-visuel .portrait { border-radius: 24px; box-shadow: 0 40px 90px rgba(0,0,0,.55); }
-  .hero-visuel .portrait img { filter: contrast(1.06) brightness(.9) saturate(.95); }
+  .hero-visuel .portrait img { filter: contrast(1.04); }
   .hero-visuel .portrait::after { content: ''; position: absolute; inset: 0;
     background: radial-gradient(120% 90% at 50% 30%, transparent 55%, rgba(11,11,12,.45)), linear-gradient(180deg, transparent 55%, rgba(11,11,12,.88)); }
   .plaque { position: absolute; left: 1.6rem; bottom: 1.5rem; z-index: 3; display: flex; flex-direction: column; }
@@ -490,8 +489,8 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .chiffres small { font-size: .45em; letter-spacing: 0; }
   .chiffres li > span { color: var(--mute); font-size: .95rem; }
 
-  /* barre d'action mobile */
-  .barre-cta { display: none; }
+  .partenaire { margin: 1.4rem 0; padding: .7rem 1rem; border: 1px solid var(--line); border-radius: 12px; color: var(--mute); font-size: .9rem; display: inline-block; }
+  .partenaire b { color: var(--white); font-weight: 600; }
 
   /* ── responsive ──────────────────────────────── */
   @media (max-width: 960px) {
@@ -539,15 +538,13 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   }
   @media (max-width: 560px) {
     header { padding: 7.5rem 0 0; }
+    /* mobile : portrait compact pour que le haut de page tienne et donne envie de descendre */
+    .hero { gap: 2.4rem; }
+    .hero-visuel { max-width: 300px; }
+    .hero-visuel .portrait { aspect-ratio: 1 / 1; }
+    .hero-visuel .portrait img { object-position: 50% 22%; }
     header { overflow-x: clip; }
     .chiffres li { padding: 1.4rem 1rem; }
-    .barre-cta { display: flex; position: fixed; left: 12px; right: 84px; bottom: 12px; z-index: 90; align-items: center; justify-content: space-between; gap: .6rem;
-      padding: .5rem .5rem .5rem 1rem; border-radius: 100px; background: rgba(18,18,18,.88); border: 1px solid var(--glass-b);
-      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 14px 40px rgba(0,0,0,.5);
-      font-size: .82rem; color: var(--mute); transform: translateY(140%); transition: transform .4s cubic-bezier(.2,.8,.3,1); }
-    .barre-cta b { color: var(--white); }
-    .barre-cta .btn { padding: .6rem 1rem; font-size: .85rem; }
-    .barre-cta.visible { transform: none; }
     .confiance { margin-top: 3.5rem; gap: 1.4rem; }
     .confiance ul { gap: 1.4rem 2.2rem; }
     .confiance img { height: 26px; }
@@ -556,7 +553,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     section { padding: 4.5rem 0; }
     .hero-sub { font-size: 1.05rem; margin-bottom: 1.8rem; }
     .hero-cta .btn { width: 100%; justify-content: center; }
-    section { padding: 4rem 0; }
+    section { padding: 3.2rem 0; }
     .sec-intro { margin-bottom: 2rem; }
     .offre { padding: 1.8rem 1.5rem; }
     .cta-left { padding: 2rem 1.5rem; }
@@ -767,7 +764,6 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 </section>
 
 <Preuves lang={t.lang} />
-<Temoignages />
 
 <!-- QUI EST DERRIÈRE -->
 <section id="apropos">
@@ -782,6 +778,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       <ul class="garanties">
         {t.apropos.garanties.map((g) => <li set:html={check + `<span>${g}</span>`}></li>)}
       </ul>
+      {t.apropos.partenaire && <p class="partenaire" set:html={t.apropos.partenaire}></p>}
       {t.apropos.lien && <a class="lien-fleche" href={t.apropos.lien.href}>{t.apropos.lien.label}</a>}
     </div>
   </div>
@@ -864,10 +861,6 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   </div>
 </section>
 
-<div class="barre-cta" data-barre-cta aria-hidden="true">
-  <span set:html={t.barre.texte}></span>
-  <a href={t.barre.href} class="btn btn-primary" tabindex="-1">{t.barre.bouton} <span class="arrow">→</span></a>
-</div>
 
 <!-- FOOTER -->
 <footer>
@@ -992,14 +985,6 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       requestAnimationFrame(pas);
     }), { threshold: .6 });
     document.querySelectorAll('[data-compte]').forEach((el) => cio.observe(el));
-    // barre d'action mobile : visible après le haut de page, cachée au formulaire
-    const barre = document.querySelector('[data-barre-cta]');
-    const contact = document.getElementById('contact');
-    if (barre) addEventListener('scroll', () => {
-      const apres = scrollY > innerHeight * .9;
-      const auForm = contact && contact.getBoundingClientRect().top < innerHeight;
-      barre.classList.toggle('visible', apres && !auForm);
-    }, { passive: true });
   })();
 
   // menu mobile
