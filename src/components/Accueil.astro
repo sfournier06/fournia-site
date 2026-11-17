@@ -469,6 +469,13 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 
 
   /* ── premium : profondeur, lumière, preuves ── */
+  /* une seule ligne de réassurance sous le bouton : pas un deuxième appel à l'action */
+  .preuve-ligne { margin-top: 1.2rem; display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .6rem; color: var(--mute); font-size: .9rem; }
+  .preuve-ligne a { color: inherit; text-decoration: none; }
+  .preuve-ligne a:hover b { text-decoration: underline; }
+  .preuve-ligne b { color: var(--white); font-weight: 600; }
+  .preuve-ligne .etoiles { color: #f5c518; letter-spacing: .08em; }
+  .preuve-ligne .sep { opacity: .5; }
   .note-google { display: inline-flex; align-items: center; gap: .6rem; margin-top: 1.4rem; padding: .5rem .9rem .5rem .75rem; border-radius: 100px;
     border: 1px solid var(--glass-b); background: rgba(255,255,255,.03); color: var(--mute); font-size: .88rem; transition: border-color .25s, color .25s; }
   .note-google:hover { border-color: rgba(245,197,24,.45); color: var(--white); }
@@ -538,6 +545,8 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   }
   @media (max-width: 560px) {
     header { padding: 7.5rem 0 0; }
+    .preuve-ligne { justify-content: center; }
+    .preuve-ligne .sep { display: none; }
     /* mobile : portrait compact pour que le haut de page tienne et donne envie de descendre */
     .hero { gap: 2.4rem; }
     .hero-visuel { max-width: 300px; }
@@ -599,16 +608,13 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       <p class="hero-sub" set:html={t.hero.sousTitre}></p>
       <div class="hero-cta">
         <a href={t.hero.cta.href} class="btn btn-primary">{t.hero.cta.label} <span class="arrow">→</span></a>
-        <a href="#concretement" class="btn btn-ghost">{t.hero.ctaSecondaire}</a>
       </div>
-      {moyenne && (
-        <a class="note-google" href={LIEN_FICHE_GOOGLE} target="_blank" rel="noopener">
-          <span class="etoiles" aria-hidden="true">★★★★★</span>
-          <span><b>{moyenne}</b> {t.hero.googleSur} · {nbAvis} {t.hero.googleAvis}</span>
-        </a>
-      )}
-      <p class="hero-note">
-        {t.hero.notes.map((n) => <span set:html={check + n}></span>)}
+      <p class="preuve-ligne">
+        {moyenne && (
+          <a href={LIEN_FICHE_GOOGLE} target="_blank" rel="noopener"><span class="etoiles" aria-hidden="true">★★★★★</span> <b>{moyenne}</b> {t.hero.googleSur}</a>
+        )}
+        {moyenne && <span class="sep" aria-hidden="true">·</span>}
+        <span>{t.hero.notes[0]}</span>
       </p>
     </div>
 
