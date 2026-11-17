@@ -2,6 +2,8 @@
 //
 // Règle : seulement des faits vérifiés, décrits par secteur, sans nom de client ni chiffre de résultat.
 // `court` = version d'une ligne (accueil).
+// `secteur_en`, `titre_en`, `systeme_en`, `court_en` = version anglaise (accueil /en/). Les champs
+// qui viennent du client (temoignage, resultat) ne se traduisent jamais.
 //
 // Tout ce qui identifie le client ne s'affiche QUE si `consentement.date` est rempli (preuve écrite
 // gardée dans le registre des preuves) : `client`, `logo`, `photo`, `resultat`, `temoignage`, `video`.
@@ -30,6 +32,10 @@ export const REALISATIONS = [
     systeme:
       "L'IA compose l'offre à la charte du traiteur, le code calcule les prix selon sa grille, et une personne valide avant l'envoi. Un second outil produit les plans de production à partir des commandes.",
     court: "L'IA rédige l'offre, le code calcule les prix, une personne valide.",
+    secteur_en: 'Corporate caterer',
+    titre_en: 'Service proposals and production plans',
+    systeme_en: "AI writes the proposal in the caterer's branding, code calculates the prices from its price list, and a person approves before it goes out. A second tool produces the production plans from the orders.",
+    court_en: 'AI writes the proposal, code calculates the prices, a person approves.',
     lien: '/secteurs/traiteurs/',
     statut: 'livre',
     ...vide,
@@ -42,6 +48,10 @@ export const REALISATIONS = [
     systeme:
       "Les demandes qui arrivent par plusieurs canaux sont réunies en un seul endroit. Après chaque événement, le client reçoit un sondage de satisfaction et une demande d'avis Google.",
     court: 'Toutes les demandes au même endroit, puis un sondage après chaque événement.',
+    secteur_en: 'Sound equipment rental',
+    titre_en: 'Requests from everywhere, in one place',
+    systeme_en: 'Requests that come in through several channels are brought together in one place. After each event, the client gets a satisfaction survey and a request for a Google review.',
+    court_en: 'All requests in one place, then a survey after every event.',
     lien: '/secteurs/evenementiel/',
     statut: 'livre',
     ...vide,
@@ -54,6 +64,10 @@ export const REALISATIONS = [
     systeme:
       "Les automatisations qui préparent les contrats et les dossiers ont été refaites pour gérer plusieurs provinces : le bon gabarit de contrat part selon la province du chalet.",
     court: 'Le bon contrat part selon la province, dans une seule chaîne.',
+    secteur_en: 'Chalet rentals',
+    titre_en: 'Contracts for several provinces, in a single workflow',
+    systeme_en: "The automations that prepare contracts and files were rebuilt to handle several provinces: the right contract template goes out based on the chalet's province.",
+    court_en: 'The right contract goes out based on the province, in a single workflow.',
     lien: null,
     statut: 'livre',
     ...vide,
@@ -65,6 +79,10 @@ export const REALISATIONS = [
     systeme:
       "Les relevés de cartes corporatives sont lus, chaque dépense est classée, et une personne révise le tableau avant que tout s'écrive dans le classeur comptable.",
     court: 'Chaque dépense lue et classée, une personne révise avant Excel.',
+    secteur_en: 'Trade show booth manufacturer',
+    titre_en: 'Credit card statements, sorted into Excel',
+    systeme_en: 'Corporate card statements are read, each expense is categorized, and a person reviews the table before everything is written to the accounting workbook.',
+    court_en: 'Each expense read and categorized, a person reviews before Excel.',
     lien: null,
     statut: 'livre',
     ...vide,
@@ -77,6 +95,10 @@ export const REALISATIONS = [
     systeme:
       'Chaque client reçoit son suivi au bon moment. Les réponses sont gérées et les rendez-vous se prennent sans aller-retour.',
     court: 'Chaque client reçoit son suivi au bon moment, les réponses sont gérées.',
+    secteur_en: 'Financial security advisor',
+    titre_en: 'Client follow-ups by text',
+    systeme_en: 'Each client gets their follow-up at the right time. Replies are handled and appointments are booked without back-and-forth.',
+    court_en: 'Each client gets their follow-up at the right time, replies are handled.',
     lien: '/secteurs/conseillers-financiers/',
     statut: 'livre',
     ...vide,
@@ -90,6 +112,10 @@ export const REALISATIONS = [
     systeme:
       "Le CRM est monté à partir de son calendrier, les anciens prospects sont relancés par texto et chaque client reçoit son suivi. Elle reprend la conversation quand quelqu'un répond.",
     court: 'Anciens prospects relancés, clients suivis, elle reprend la conversation.',
+    secteur_en: 'Financial security advisor',
+    titre_en: 'Old leads re-engaged, clients followed up',
+    systeme_en: 'The CRM is built from her calendar, old leads are re-engaged by text and each client gets their follow-up. She takes over the conversation when someone replies.',
+    court_en: 'Old leads re-engaged, clients followed up, she takes over the conversation.',
     lien: '/secteurs/conseillers-financiers/',
     statut: 'en-cours',
     ...vide,
@@ -102,6 +128,10 @@ export const REALISATIONS = [
     systeme:
       'Le système répond aux nouvelles demandes en quelques minutes et propose des plages selon les disponibilités réelles.',
     court: 'Réponse en quelques minutes, avec des plages selon les vraies disponibilités.',
+    secteur_en: 'Academic support centre',
+    titre_en: 'Replying to new requests',
+    systeme_en: 'The system replies to new requests within minutes and suggests times based on real availability.',
+    court_en: 'A reply within minutes, with times based on real availability.',
     lien: '/secteurs/centres-de-tutorat/',
     statut: 'livre',
     ...vide,
@@ -114,6 +144,10 @@ export const REALISATIONS = [
     systeme:
       "Un CRM tenu à jour en tout temps et des messages de suivi préparés par l'IA. Le fondateur approuve chaque envoi avant qu'il parte.",
     court: "CRM à jour, suivis préparés par l'IA, le fondateur approuve.",
+    secteur_en: 'Digital skills training for seniors',
+    titre_en: "A solo founder's CRM and follow-ups",
+    systeme_en: 'A CRM kept up to date at all times and follow-up messages prepared by AI. The founder approves each message before it goes out.',
+    court_en: 'CRM always up to date, follow-ups prepared by AI, the founder approves.',
     lien: null,
     statut: 'en-cours',
     ...vide,

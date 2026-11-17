@@ -1,7 +1,7 @@
 // Vérificateur SEO de fournia.net. Roule sur le build (dist/) et échoue (code 1) au premier vrai
 // problème. Usage : npm run build && npm run seo:check
 // Vérifie chaque page HTML : title (10-65 car.), meta description (70-170), canonical, un seul h1,
-// lang fr-CA, JSON-LD parsable, liens internes qui pointent vers une page existante,
+// lang fr-CA (en-CA sous /en/), JSON-LD parsable, liens internes qui pointent vers une page existante,
 // et l'absence de tirets longs dans le texte visible (règle de voix FournIA).
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative } from 'node:path';
@@ -39,7 +39,8 @@ for (const file of pages) {
   if (!/<link rel="canonical"/.test(html)) err(rel, 'canonical manquant');
   const can = html.match(/<link rel="canonical" href="([^"]*)"/)?.[1];
   if (can && !can.endsWith('/')) err(rel, `canonical sans / final (Netlify redirige) : ${can}`);
-  if (!/<html lang="fr-CA"/.test(html)) err(rel, 'lang fr-CA manquant');
+  const langAttendue = rel.startsWith('/en/') ? 'en-CA' : 'fr-CA';
+  if (!html.includes(`<html lang="${langAttendue}"`)) err(rel, `lang ${langAttendue} manquant`);
   const h1 = (html.match(/<h1[\s>]/g) ?? []).length;
   if (h1 !== 1) err(rel, `${h1} balises h1 (attendu 1)`);
   for (const m of html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {

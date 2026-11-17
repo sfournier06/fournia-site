@@ -3,13 +3,13 @@
 // Sans photo : bloc au monogramme FournIA (vrai fichier de marque), même format, rien ne saute.
 import { PHOTO_SIMON, PHOTO_SIMON_ALT, PHOTO_SIMON_LARGEUR, PHOTO_SIMON_HAUTEUR } from '../data/fondateur.mjs';
 
-const { prioritaire = false, classe = '' } = Astro.props;
+const { prioritaire = false, classe = '', alt } = Astro.props;
 ---
 <figure class:list={['portrait', classe]} data-photo={PHOTO_SIMON ? 'oui' : 'manquante'}>
   {PHOTO_SIMON ? (
     <img
       src={PHOTO_SIMON}
-      alt={PHOTO_SIMON_ALT}
+      alt={alt ?? PHOTO_SIMON_ALT}
       width={PHOTO_SIMON_LARGEUR}
       height={PHOTO_SIMON_HAUTEUR}
       loading={prioritaire ? 'eager' : 'lazy'}

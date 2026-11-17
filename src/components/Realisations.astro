@@ -5,7 +5,14 @@
 import { REALISATIONS } from '../data/realisations.mjs';
 import { APERCU } from '../data/apercu.mjs';
 
-const { limite, court = false } = Astro.props;
+const { limite, court = false, lang = 'fr' } = Astro.props;
+const en = lang === 'en';
+// Textes de l'interface. Les liens « Voir le secteur » mènent à des pages en français : cachés en anglais.
+const T = en
+  ? { aria: 'Delivered systems by sector', enCours: 'In progress', emplacement: 'Placeholder: written or video testimonial from', video: 'Watch the video testimonial', secteur: 'See the sector', prec: 'Previous example', suiv: 'Next example' }
+  : { aria: 'Systèmes livrés par secteur', enCours: 'En cours', emplacement: 'Emplacement : témoignage écrit ou vidéo de', video: 'Voir le témoignage vidéo', secteur: 'Voir le secteur', prec: 'Exemple précédent', suiv: 'Exemple suivant' };
+// Champ traduit s'il existe (ex. titre_en), sinon le français.
+const tr = (r, champ) => (en && r[`${champ}_en`]) || r[champ];
 const liste = typeof limite === 'number' ? REALISATIONS.slice(0, limite) : REALISATIONS;
 // En aperçu interne (APERCU=1), on affiche tout pour voir le rendu final. Jamais en production.
 const autorise = (r) => APERCU || Boolean(r.consentement && r.consentement.date);
@@ -13,7 +20,7 @@ const initiale = (s) => s.trim().charAt(0).toUpperCase();
 const id = `car-${Math.random().toString(36).slice(2, 8)}`;
 ---
 <div class="carrousel" data-carrousel>
-  <ul class="piste" id={id} tabindex="0" aria-label="Systèmes livrés par secteur">
+  <ul class="piste" id={id} tabindex="0" aria-label={T.aria}>
     {liste.map((r) => {
       const ok = autorise(r);
       return (
@@ -25,18 +32,18 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
             <div class="bandeau-photo"><img src={r.image} alt="" loading="lazy" decoding="async" width="800" height="600" /></div>
           ) : null}
           <div class="tete">
-            {!(ok && r.logo) && !r.image && <span class="monogramme" aria-hidden="true">{initiale(ok && r.client ? r.client : r.secteur)}</span>}
+            {!(ok && r.logo) && !r.image && <span class="monogramme" aria-hidden="true">{initiale(ok && r.client ? r.client : tr(r, 'secteur'))}</span>}
             <div>
-              <p class="secteur">{ok && r.client ? r.client : r.secteur}</p>
-              {ok && r.client && <p class="sous-secteur">{r.secteur}</p>}
+              <p class="secteur">{ok && r.client ? r.client : tr(r, 'secteur')}</p>
+              {ok && r.client && <p class="sous-secteur">{tr(r, 'secteur')}</p>}
             </div>
-            {r.statut === 'en-cours' && <span class="statut">En cours</span>}
+            {r.statut === 'en-cours' && <span class="statut">{T.enCours}</span>}
           </div>
-          <h3>{r.titre}</h3>
-          <p class="systeme">{court && r.court ? r.court : r.systeme}</p>
+          <h3>{tr(r, 'titre')}</h3>
+          <p class="systeme">{court && r.court ? tr(r, 'court') : tr(r, 'systeme')}</p>
           {ok && r.resultat && <p class="resultat">{r.resultat}</p>}
           {APERCU && !r.temoignage && r.client && (
-            <p class="emplacement">Emplacement : témoignage écrit ou vidéo de {r.client}</p>
+            <p class="emplacement">{T.emplacement} {r.client}</p>
           )}
           {ok && r.temoignage && (
             <blockquote class="temoignage">
@@ -45,16 +52,16 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
             </blockquote>
           )}
           <div class="liens">
-            {ok && r.video && <a class="lien" href={r.video} target="_blank" rel="noopener">Voir le témoignage vidéo <span aria-hidden="true">→</span></a>}
-            {r.lien && <a class="lien" href={r.lien}>Voir le secteur <span aria-hidden="true">→</span></a>}
+            {ok && r.video && <a class="lien" href={r.video} target="_blank" rel="noopener">{T.video} <span aria-hidden="true">→</span></a>}
+            {r.lien && !en && <a class="lien" href={r.lien}>{T.secteur} <span aria-hidden="true">→</span></a>}
           </div>
         </li>
       );
     })}
   </ul>
   <div class="controles">
-    <button type="button" class="fleche" data-dir="-1" aria-controls={id} aria-label="Exemple précédent">←</button>
-    <button type="button" class="fleche" data-dir="1" aria-controls={id} aria-label="Exemple suivant">→</button>
+    <button type="button" class="fleche" data-dir="-1" aria-controls={id} aria-label={T.prec}>←</button>
+    <button type="button" class="fleche" data-dir="1" aria-controls={id} aria-label={T.suiv}>→</button>
   </div>
 </div>
 

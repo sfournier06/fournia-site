@@ -96,6 +96,8 @@ nav.scrolled .nav-inner { background: rgba(14,14,14,.85); box-shadow: 0 12px 40p
 .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
 .nav-links a { font-size: .9rem; color: var(--mute); transition: color .2s; }
 .nav-links a:hover { color: var(--white); }
+.nav-links a.lien-langue { font-family: 'Space Grotesk', sans-serif; font-size: .8rem; font-weight: 600; letter-spacing: .06em; padding: .2rem .55rem; border: 1px solid var(--glass-b); border-radius: 100px; }
+.nav-links a.lien-langue:hover { border-color: rgba(183,217,76,.45); color: var(--lime); }
 
 .btn {
   display: inline-flex; align-items: center; gap: .55rem;
@@ -152,6 +154,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--line); padd
     transition: opacity .25s, transform .25s;
   }
   .nav-links a { padding: .8rem 1rem; border-radius: 12px; font-size: 1rem; color: var(--white); display: block; }
+  .nav-links a.lien-langue { display: inline-block; margin: .3rem 1rem; padding: .45rem .9rem; font-size: .9rem; border-radius: 100px; }
   .nav-links a:hover { background: rgba(183,217,76,.1); color: var(--lime); }
   nav.open .nav-links { opacity: 1; transform: none; pointer-events: auto; }
   nav.open .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
