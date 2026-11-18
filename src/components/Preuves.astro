@@ -66,7 +66,7 @@ const etoiles = '★★★★★';
           {/* défilement automatique et sans fin : la liste est rendue deux fois (la 2e copie est cachée aux
               lecteurs d'écran) et la piste glisse de -50 %. Pause au survol. Les avis ne sont jamais coupés en
               contenu : seul l'affichage limite les plus longs à quelques lignes. */}
-          <div class="defile" style={`--duree: ${Math.max(30, (avis.length || 3) * 9)}s`}>
+          <div class="defile" data-defile>
             <div class="piste-avis">
               {[0, 1].map((copie) => (avis.length > 0 ? avis : MAQUETTE_AVIS).map((a) => (
                 <figure class:list={['carte-avis', { exemple: avis.length === 0 }]} aria-hidden={copie === 1 ? 'true' : undefined}>
@@ -90,6 +90,31 @@ const etoiles = '★★★★★';
   </section>
 )}
 
+<script>
+  // Défilement automatique doux, mis en pause dès que la personne touche, survole ou fait défiler elle-même.
+  document.querySelectorAll('[data-defile]').forEach((d) => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let pauseJusqua = 0;
+    let pos = d.scrollLeft;
+    const pause = (ms) => { pauseJusqua = performance.now() + ms; };
+    ['pointerdown', 'touchstart', 'wheel'].forEach((e) => d.addEventListener(e, () => pause(4000), { passive: true }));
+    d.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') pause(1e9); });
+    d.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') pause(800); });
+    d.addEventListener('scroll', () => { if (performance.now() < pauseJusqua) pos = d.scrollLeft; }, { passive: true });
+    const vitesse = innerWidth < 760 ? 0.35 : 0.5; // pixels par image
+    const tour = () => {
+      const moitie = d.scrollWidth / 2;
+      if (performance.now() >= pauseJusqua) {
+        pos += vitesse;
+        if (pos >= moitie) pos -= moitie;
+        d.scrollLeft = pos;
+      } else if (d.scrollLeft >= moitie) { d.scrollLeft -= moitie; pos = d.scrollLeft; }
+      requestAnimationFrame(tour);
+    };
+    requestAnimationFrame(tour);
+  });
+</script>
+
 <style>
   .preuves { position: relative; z-index: 1; padding: 7rem 0; }
   .maquette { color: var(--mute); font-size: .88rem; border-left: 2px solid var(--lime); padding-left: .9rem; margin: -0.4rem 0 2.4rem; max-width: 46rem; }
@@ -112,27 +137,20 @@ const etoiles = '★★★★★';
   .badge { position: absolute; top: 1.2rem; right: 1.2rem; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: #0b0b0c;
     background: #e9c46a; border-radius: 6px; padding: .2rem .5rem; font-weight: 600; z-index: 2; }
   /* en-tête de note sur toute la largeur, puis les avis en colonnes (hauteurs libres, aucun trou) */
-  .defile { overflow: hidden; margin: 0 calc(50% - 50vw); padding: .4rem 0;
+  /* rangée d'avis : avance toute seule ; au toucher, au survol ou à la roulette elle s'arrête et se fait défiler
+     à la main, puis repart après quelques secondes. La liste est doublée pour boucler sans fin. */
+  .defile { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    margin: 0 calc(50% - 50vw); padding: .4rem 0;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
             mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
-  .piste-avis { display: flex; width: max-content; animation: defile var(--duree) linear infinite; }
-  .defile:hover .piste-avis { animation-play-state: paused; }
-  @keyframes defile { to { transform: translateX(-50%); } }
+  .defile::-webkit-scrollbar { display: none; }
+  .piste-avis { display: flex; width: max-content; }
   .piste-avis .carte-avis { width: 360px; flex: none; margin-right: 1.4rem; }
   .piste-avis blockquote { display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; }
-  @media (prefers-reduced-motion: reduce) {
-    .piste-avis { animation: none; }
-    .defile { overflow-x: auto; }
-  }
-  /* téléphone : on glisse au doigt d'un avis à l'autre (plus de défilement automatique) */
-  @media (max-width: 760px), (pointer: coarse) {
-    .defile { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none;
-      -webkit-mask-image: none; mask-image: none; margin: 0 -16px; padding: .4rem 16px; scroll-padding-left: 16px; }
-    .defile::-webkit-scrollbar { display: none; }
-    .piste-avis { animation: none; }
-    .piste-avis .carte-avis { scroll-snap-align: start; width: 82vw; max-width: 340px; }
-    .piste-avis .carte-avis[aria-hidden="true"] { display: none; }
-    .piste-avis blockquote { -webkit-line-clamp: unset; display: block; }
+  @media (max-width: 760px) {
+    .defile { -webkit-mask-image: none; mask-image: none; }
+    .piste-avis .carte-avis { width: 82vw; max-width: 340px; margin-right: 1rem; }
+    .piste-avis blockquote { -webkit-line-clamp: 6; }
   }
   .note-globale { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.6rem; padding: 0 0 2rem; }
   .note-globale .g { width: 40px; height: 40px; border-radius: 50%; background: #fff; color: #4285f4; display: grid; place-items: center;
