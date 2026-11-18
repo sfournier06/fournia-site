@@ -5,11 +5,10 @@
 //   2. Écrire son chemin ici, par exemple '/images/simon-fournier.webp'.
 // Tant que la valeur est vide, le site affiche un bloc au monogramme FournIA à la place
 // (composant src/components/Portrait.astro).
-// Portrait actuel : généré par IA (Nano Banana) à partir d'une image de la vidéo de Simon, à sa
-// demande (2026-11-15). À remplacer par la séance photo réelle dès qu'elle existe.
+// Photos réelles de la séance du 17 novembre 2026 (originaux : ~/Downloads/IMG_3169, 3171, 3183, 3198).
 export const PHOTO_SIMON = '/images/simon-fournier-portrait.webp';
-// Photo de mise en situation (section « Comment ça marche »), même origine.
-export const PHOTO_ATELIER = '/images/simon-fournier-atelier.webp';
+// Photo de mise en situation (section « Comment ça marche »), 1200 x 900.
+export const PHOTO_ATELIER = '/images/simon-fournier-client.webp';
 
 // Dimensions réelles du fichier déposé (évite le saut de mise en page).
 export const PHOTO_SIMON_LARGEUR = 960;

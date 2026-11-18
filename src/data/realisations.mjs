@@ -16,6 +16,8 @@
 //   quand il n'y a pas de logo à montrer.
 // - video : lien public vers le témoignage vidéo (Instagram, YouTube)
 // - statut : 'livre' (seuls les systèmes livrés sont affichés)
+// - resultat_carte : ce que le système a changé pour cette entreprise, en une phrase, sans nom du client.
+//   Affiché sur toutes les cartes (non identifiant). Seulement des faits vérifiés : aucun chiffre inventé.
 // - avis : nom de l'auteur d'un avis Google (src/data/avis.mjs) affiché dans la carte, avec consentement
 //
 // Mandats faits en sous-traitance (marque blanche) : le contrat de l'agence décide. Pour Élan,
@@ -39,6 +41,8 @@ export const REALISATIONS = [
     court_en: 'AI writes the proposal, code calculates the prices, a person approves.',
     lien: '/secteurs/traiteurs/',
     statut: 'livre',
+    resultat_carte: "Les 6 documents de production d'une journée sortent d'un clic. Plus rien à retaper.",
+    resultat_carte_en: "A day's 6 production documents come out in one click. Nothing left to retype.",
     ...vide,
     client: 'AvecPlaisirs',
     logo: '/clients/avecplaisirs.webp',
@@ -55,6 +59,8 @@ export const REALISATIONS = [
     court_en: 'The right contract goes out based on the province, in a single workflow.',
     lien: null,
     statut: 'livre',
+    resultat_carte: 'Un seul système pour toutes les provinces : le bon contrat part tout seul.',
+    resultat_carte_en: 'One system for every province: the right contract goes out on its own.',
     ...vide,
     image: '/secteurs/chalet.webp',
   },
@@ -70,6 +76,8 @@ export const REALISATIONS = [
     court_en: 'Each expense read and categorized, a person reviews before Excel.',
     lien: null,
     statut: 'livre',
+    resultat_carte: "Fini la saisie à la main : chaque transaction est lue, il ne reste qu'à réviser.",
+    resultat_carte_en: "No more manual entry: every transaction is read, all that's left is to review.",
     ...vide,
     client: 'Pubsphere',
     logo: '/clients/pubsphere.webp',
@@ -88,6 +96,8 @@ export const REALISATIONS = [
     court_en: 'Each client gets their follow-up at the right time, replies are handled.',
     lien: '/secteurs/conseillers-financiers/',
     statut: 'livre',
+    resultat_carte: '25 clients suivis par texto dès le premier mois, sans écrire un seul message.',
+    resultat_carte_en: '25 clients followed up by text in the first month, without writing a single message.',
     ...vide,
     client: 'Karyann Turcotte',
     photo: '/clients/karyann-turcotte.webp',
@@ -107,6 +117,8 @@ export const REALISATIONS = [
     court_en: 'A reply within minutes, with times based on real availability.',
     lien: '/secteurs/centres-de-tutorat/',
     statut: 'livre',
+    resultat_carte: 'Chaque parent reçoit une réponse en quelques minutes, avec de vraies plages libres.',
+    resultat_carte_en: 'Every parent gets a reply within minutes, with real open time slots.',
     ...vide,
     client: 'Arbour Aide Académique',
     logo: '/clients/arbour.webp',
@@ -124,6 +136,8 @@ export const REALISATIONS = [
     court_en: 'CRM always up to date, follow-ups prepared by AI, the founder approves.',
     lien: null,
     statut: 'livre',
+    resultat_carte: "Chaque suivi est prêt à partir : le fondateur n'a qu'à approuver.",
+    resultat_carte_en: 'Every follow-up is ready to go: the founder just approves.',
     ...vide,
     client: 'SeniorTech',
     logo: '/clients/seniortech.webp',

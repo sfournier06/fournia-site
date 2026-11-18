@@ -429,7 +429,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 
   /* ── processus avec photo ── */
   .processus { display: grid; grid-template-columns: .9fr 1.1fr; gap: 5rem; align-items: center; }
-  .photo-atelier { margin: 0; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 5; }
+  .photo-atelier { margin: 0; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; }
   .photo-atelier img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .etapes-v { list-style: none; margin-top: 2.4rem; display: grid; gap: 0; }
   .etapes-v li { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 1.5rem 0; border-top: 1px solid var(--line); }
@@ -734,7 +734,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <section id="processus">
   <div class="wrap processus">
     <figure class="photo-atelier reveal">
-      <img src={PHOTO_ATELIER} alt={t.processus.photoAlt} width="960" height="1200" loading="lazy" decoding="async" />
+      <img src={PHOTO_ATELIER} alt={t.processus.photoAlt} width="1200" height="900" loading="lazy" decoding="async" />
     </figure>
     <div>
       <p class="etiquette reveal">{t.processus.etiquette}</p>
