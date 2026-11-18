@@ -18,7 +18,7 @@
 // - statut : 'livre' (seuls les systèmes livrés sont affichés)
 // - resultat_carte : ce que le système a changé pour cette entreprise, en une phrase, sans nom du client.
 //   Affiché sur toutes les cartes (non identifiant). Seulement des faits vérifiés : aucun chiffre inventé.
-// - avis : nom de l'auteur d'un avis Google (src/data/avis.mjs) affiché dans la carte, avec consentement
+// - avis : nom de l'auteur de l'avis Google lié à ce système (src/data/avis.mjs). Pas affiché dans les cartes.
 //
 // Mandats faits en sous-traitance (marque blanche) : le contrat de l'agence décide. Pour Élan,
 // seule la description anonyme est permise : jamais de nom ni de logo sans l'accord écrit d'Élan

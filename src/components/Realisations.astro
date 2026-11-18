@@ -4,7 +4,6 @@
 // consentement écrit daté. Sans lui : carte anonyme (secteur + système).
 import { REALISATIONS } from '../data/realisations.mjs';
 import { APERCU } from '../data/apercu.mjs';
-import { AVIS } from '../data/avis.mjs';
 
 const { limite, court = false, lang = 'fr' } = Astro.props;
 const en = lang === 'en';
@@ -17,8 +16,6 @@ const tr = (r, champ) => (en && r[`${champ}_en`]) || r[champ];
 const liste = typeof limite === 'number' ? REALISATIONS.slice(0, limite) : REALISATIONS;
 // En aperçu interne (APERCU=1), on affiche tout pour voir le rendu final. Jamais en production.
 const autorise = (r) => APERCU || Boolean(r.consentement && r.consentement.date);
-// Avis Google relié à la carte (publié seulement : un avis retenu n'apparaît nulle part).
-const avisDe = (r) => (r.avis ? AVIS.find((a) => a.auteur === r.avis) : null);
 const initiale = (s) => s.trim().charAt(0).toUpperCase();
 const id = `car-${Math.random().toString(36).slice(2, 8)}`;
 ---
@@ -51,23 +48,16 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
             </div>
           )}
           {ok && r.resultat && <p class="resultat">{r.resultat}</p>}
-          {ok && avisDe(r) && (
-            <blockquote class="temoignage" lang="fr">
-              <p class="etoiles" aria-label={T.note5}>★★★★★</p>
-              <p>« {avisDe(r).texte} »</p>
-              <footer>{avisDe(r).auteur}, {T.avisGoogle}</footer>
-            </blockquote>
-          )}
           {ok && r.temoignage && (
             <blockquote class="temoignage">
               <p>« {r.temoignage.texte} »</p>
               <footer>{r.temoignage.auteur}{r.temoignage.role && `, ${r.temoignage.role}`}</footer>
             </blockquote>
           )}
-          <div class="liens">
+          {!court && <div class="liens">
             {ok && r.video && <a class="lien" href={r.video} target="_blank" rel="noopener">{T.video} <span aria-hidden="true">→</span></a>}
             {r.lien && !en && <a class="lien" href={r.lien}>{T.secteur} <span aria-hidden="true">→</span></a>}
-          </div>
+          </div>}
         </li>
       );
     })}
@@ -104,17 +94,17 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
   .tete { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
   .monogramme { flex: none; width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center;
     background: rgba(200,255,0,.08); color: var(--lime); font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.15rem; }
-  .bandeau-logo { margin: -1.5rem -1.5rem 1.2rem; height: 104px; border-radius: 14px 14px 0 0; background: #f6f6f2;
+  .bandeau-logo { margin: -1.5rem -1.5rem 1.2rem; height: 88px; border-radius: 14px 14px 0 0; background: #f6f6f2;
     display: grid; place-items: center; padding: 14px 24px; }
-  .bandeau-logo img { max-width: 78%; max-height: 80px; object-fit: contain; }
-  .bandeau-photo { margin: -1.5rem -1.5rem 1.2rem; height: 104px; border-radius: 14px 14px 0 0; overflow: hidden; }
+  .bandeau-logo img { max-width: 70%; max-height: 58px; object-fit: contain; }
+  .bandeau-photo { margin: -1.5rem -1.5rem 1.2rem; height: 88px; border-radius: 14px 14px 0 0; overflow: hidden; }
   .bandeau-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .bandeau-photo.client { height: 150px; }
-  .res { margin: .2rem 0 1rem; padding: .9rem 1rem; border-radius: 12px; background: rgba(183,217,76,.08); border: 1px solid rgba(183,217,76,.25); }
+  .bandeau-photo.client { height: 88px; }
+  .res { margin: .1rem 0 0; padding-top: .8rem; border-top: 1px solid var(--line); }
   .res-lbl { margin: 0 0 .3rem; color: var(--lime); font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
   .res-txt { margin: 0; color: var(--white); font-size: 1rem; line-height: 1.45; font-weight: 500; }
   .temoignage p:not(.etoiles) { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  .bandeau-photo.client img { object-position: 50% 30%; }
+  .bandeau-photo.client img { object-position: 50% 28%; }
   .temoignage .etoiles { color: #f5c518; letter-spacing: .12em; font-size: .8rem; margin: 0 0 .3rem; }
   .emplacement { margin: 0 0 1rem; padding: .7rem .8rem; border: 1px dashed var(--line); border-radius: 10px; color: var(--mute); font-size: .85rem; }
   .secteur { color: var(--lime); font-size: .9rem; font-weight: 500; margin: 0; }
@@ -137,7 +127,5 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
   @media (prefers-reduced-motion: reduce) { ul.piste { scroll-behavior: auto; } }
   @media (max-width: 560px) {
     ul.piste.piste { align-items: start; }
-    /* l'avis complet est juste en dessous, dans la section des avis : cartes plus courtes et égales sur mobile */
-    .temoignage { display: none; }
   }
 </style>
