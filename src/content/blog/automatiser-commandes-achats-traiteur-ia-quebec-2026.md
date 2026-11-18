@@ -1,5 +1,6 @@
 ---
 title: "Comment un traiteur peut-il automatiser ses commandes et ses achats avec l'IA ?"
+seoTitle: "Traiteurs : commandes et achats automatisés par l'IA"
 description: "Un traiteur automatise d'abord la saisie des demandes, la soumission, la liste de production et les achats par fournisseur, avec une approbation humaine."
 slug: "automatiser-commandes-achats-traiteur-ia-quebec-2026"
 pubDate: 2026-11-16
@@ -84,9 +85,9 @@ Trois conditions facilitent le démarrage :
 - une grille de prix à jour ;
 - une personne désignée pour approuver les soumissions pendant le pilote et noter les accrocs.
 
-Une fois ce premier flux stable, la liste de production et la liste d'achats par fournisseur s'ajoutent sur la même fiche. L'article sur [le coût de l'automatisation IA pour une PME au Québec](/blog/cout-automatisation-ia-pme-quebec-2026) aide à situer le budget de chaque étape.
+Une fois ce premier flux stable, la liste de production et la liste d'achats par fournisseur s'ajoutent sur la même fiche. L'article sur [le coût de l'automatisation IA pour une PME au Québec](/blog/cout-automatisation-ia-pme-quebec-2026/) aide à situer le budget de chaque étape.
 
-FournIA est une firme de consultation en IA pour les PME québécoises, basée sur la Rive-Nord de Montréal. FournIA construit et implante les automatisations (n8n, agents Claude API, applications sur mesure), forme l'équipe qui les utilise et passe chaque projet par une revue de conformité Loi 25. Pour savoir quel flux automatiser en premier dans votre service de traiteur, un [audit IA](https://fournia.net) permet de cartographier vos étapes et de choisir le point de départ.
+FournIA est une firme de consultation en IA pour les PME québécoises, basée sur la Rive-Nord de Montréal. FournIA construit et implante les automatisations (n8n, code sur mesure, agents IA, applications), forme l'équipe qui les utilise et passe chaque projet par une revue de conformité Loi 25. Pour savoir quel flux automatiser en premier dans votre service de traiteur, un [diagnostic gratuit de 30 minutes](/diagnostic/) permet de cartographier vos étapes et de choisir le point de départ.
 
 ## FAQ
 

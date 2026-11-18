@@ -33,6 +33,7 @@ export const PAGES_FR_EN = {
   '/offre/securite-loi25/': '/en/offer/law-25-security/',
   '/offre/soumission-qui-traine/': '/en/offer/stalled-quotes/',
   '/blog/': '/en/blog/',
+  '/blog/automatiser-commandes-achats-traiteur-ia-quebec-2026/': '/en/blog/caterer-automate-orders-purchasing-ai-2026/',
   '/blog/agent-ia-pme-definition-exemples-2026/': '/en/blog/what-is-an-ai-agent-small-business-2026/',
   '/blog/choisir-consultant-ia-pme-quebec-2026/': '/en/blog/choosing-ai-consultant-quebec-2026/',
   '/blog/consultant-ia-rive-nord-montreal-2026/': '/en/blog/ai-consultant-north-shore-montreal-2026/',

@@ -32,3 +32,15 @@
 - [Consultant IA sur la Rive-Nord de Montréal : à qui s'adresser en 2026 ?](https://fournia.net/blog/consultant-ia-rive-nord-montreal-2026) : carte des rôles pour une PME de la Rive-Nord : consultant qui construit, organismes régionaux, financement IRIA de DEC (remboursable, jusqu'à 50 %) et Loi 25.
 - [Comment former ses employés à l'IA dans une PME au Québec ?](https://fournia.net/blog/former-employes-ia-pme-quebec-2026) : méthode en 4 étapes (une tâche par poste, un outil approuvé, une règle d'usage d'une page, revue après 30 jours), formation gratuite ou sur mesure, Loi 25.
 - [Comment un traiteur peut-il automatiser ses commandes et ses achats avec l'IA ?](https://fournia.net/blog/automatiser-commandes-achats-traiteur-ia-quebec-2026) : saisie des demandes, soumission, liste de production et achats par fournisseur, ce qui reste humain (allergènes, permis) et Loi 25.
+
+## English
+The whole site is also available in English (same pages, same content).
+- [Home](https://fournia.net/en/) : automation and AI for Quebec small businesses, Montreal's North Shore and Montreal.
+- [Custom systems](https://fournia.net/en/custom-systems/) : one specific problem, one system, fixed price, team trained.
+- [Full AI support](https://fournia.net/en/ai-support/) : the whole business over 6 months to a year, one project at a time.
+- [AI training](https://fournia.net/en/ai-training/) : AI explained in plain words, in a group, one on one, or to train an in-house expert.
+- [AI for small businesses in Montreal](https://fournia.net/en/small-business-ai-montreal/)
+- [AI consultant on the North Shore](https://fournia.net/en/ai-consultant-north-shore/)
+- [Automation by industry](https://fournia.net/en/industries/)
+- [About FournIA](https://fournia.net/en/about/)
+- [Blog](https://fournia.net/en/blog/) : costs, ROI, tools and Quebec's privacy law (Law 25), in English.

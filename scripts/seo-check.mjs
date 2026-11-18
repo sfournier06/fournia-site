@@ -31,8 +31,10 @@ const warn = (p, m) => { warns++; console.log(`avert.  ${p}  ${m}`); };
 for (const file of pages) {
   const rel = '/' + relative(DIST, file).replace(/index\.html$/, '');
   const html = readFileSync(file, 'utf8');
-  const title = html.match(/<title>([^<]*)<\/title>/)?.[1]?.trim() ?? '';
-  const desc = html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '';
+  // les entités HTML (&#39; pour l'apostrophe) comptent pour 1 caractère, comme dans Google
+  const dec = (t) => t.replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  const title = dec(html.match(/<title>([^<]*)<\/title>/)?.[1]?.trim() ?? '');
+  const desc = dec(html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '');
   if (!title) err(rel, 'title manquant');
   else if (title.length < 10 || title.length > 65) warn(rel, `title ${title.length} car. (cible 10-65) : ${title}`);
   if (!desc) err(rel, 'meta description manquante');
