@@ -129,14 +129,37 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 
   .wrap { width: min(1200px, 92vw); margin: 0 auto; }
 
-  /* ── fond : un seul halo lime, très doux, et un grain fin. Rien qui bouge sous le texte. ── */
-  .bg-fx { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .glow { position: absolute; border-radius: 50%; filter: blur(120px); }
-  .glow-1 { width: 60vw; height: 60vw; top: -26vw; right: -18vw;
-    background: radial-gradient(circle, rgba(183,217,76,.13), transparent 66%); }
+  /* fond identique à la version en ligne : réseau de points, grille, deux halos, grain */
+  .bg-fx {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  }
+  /* réseau de points connectés dessiné sur canvas */
+  .net { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .45; }
+  .glow {
+    position: absolute; border-radius: 50%; filter: blur(100px); opacity: .45;
+    will-change: transform; /* promu en couche GPU : la dérive ne repeint rien */
+  }
+  .glow-1 { width: 48vw; height: 48vw; top: -14vw; right: -10vw;
+    background: radial-gradient(circle, rgba(183,217,76,.18), transparent 68%);
+    animation: drift 26s ease-in-out infinite; }
+  .glow-2 { display: block; width: 40vw; height: 40vw; bottom: -12vw; left: -10vw;
+    background: radial-gradient(circle, rgba(120,180,140,.12), transparent 66%);
+    animation: drift 32s ease-in-out infinite reverse; }
+  .grid-lines {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 22%, transparent 72%);
+    opacity: .35; /* grille statique : aucun repaint au scroll */
+  }
+  @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(3vw,4vw) scale(1.12); } }
   .grain {
-    position: absolute; inset: 0; pointer-events: none; opacity: .035;
+    position: absolute; inset: 0; pointer-events: none; opacity: .03;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .glow-1, .glow-2 { animation: none; }
   }
 
   /* ── NAV ─────────────────────────────────────── */
@@ -573,7 +596,10 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <body>
 
 <div class="bg-fx">
+  <canvas id="net" class="net"></canvas>
+  <div class="grid-lines"></div>
   <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
   <div class="grain"></div>
 </div>
 
@@ -890,6 +916,54 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 </footer>
 
 <script is:inline>
+  // ── background réseau animé (constellation de points) ──
+  (function () {
+    const cv = document.getElementById('net');
+    if (!cv) return;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ctx = cv.getContext('2d', { alpha: true });
+    const dpr = Math.min(devicePixelRatio || 1, 1.5);
+    let w, h, pts, raf, running = false;
+    const count = () => (innerWidth < 700 ? 22 : innerWidth < 1100 ? 36 : 50);
+    function resize() { w = cv.width = innerWidth * dpr; h = cv.height = innerHeight * dpr; }
+    function init() {
+      pts = Array.from({ length: count() }, () => ({
+        x: Math.random() * w, y: Math.random() * h,
+        vx: (Math.random() - .5) * .16 * dpr, vy: (Math.random() - .5) * .16 * dpr,
+      }));
+    }
+    function frame() {
+      ctx.clearRect(0, 0, w, h);
+      for (const p of pts) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+      }
+      const R = 130 * dpr, R2 = R * R;
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < R2) {
+            ctx.strokeStyle = 'rgba(183,217,76,' + (1 - Math.sqrt(d2) / R) * .16 + ')';
+            ctx.lineWidth = dpr;
+            ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
+          }
+        }
+      }
+      ctx.fillStyle = 'rgba(183,217,76,.55)';
+      for (const p of pts) { ctx.beginPath(); ctx.arc(p.x, p.y, 1.5 * dpr, 0, 6.3); ctx.fill(); }
+      if (running) raf = requestAnimationFrame(frame);
+    }
+    function start() { if (!running && !reduce) { running = true; raf = requestAnimationFrame(frame); } }
+    function stop() { running = false; cancelAnimationFrame(raf); }
+    resize(); init();
+    if (reduce) frame(); else start();
+    // pause quand l'onglet n'est pas visible (économie CPU)
+    document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+    let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { resize(); init(); }, 150); });
+  })();
+
   // nav : état au défilement
   const nav = document.getElementById('nav');
   let ticking = false;

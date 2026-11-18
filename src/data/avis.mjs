@@ -5,15 +5,24 @@
 // (avis « auto-promotionnels »), et le risque est une pénalité manuelle.
 //
 // Format : { auteur, note, texte, date (approx. selon Google), lien }
-// Source : fiche Google de FournIA, captures fournies par Simon le 2026-11-16 (texte original en français).
+// Source : fiche Google de FournIA, lue par l'API Google Places le 2026-11-17 (5 avis, texte original en français).
 const FICHE = 'https://www.google.com/maps/place/?q=place_id:ChIJsdQghSzNcYYRYtKfR1rBPgc';
 
 export const TOUS_AVIS = [
   {
+    auteur: 'Thomas Arbour',
+    note: 5,
+    texte: "Je recommande Simon et l’équipe de FournIA sans hésiter! Ils ont automatisé la messagerie de mon entreprise, et ça a fait une vraie différence au quotidien. Les suivis avec les clients se font maintenant beaucoup plus rapidement, et on sauve énormément de temps sur les tâches répétitives. Simon a pris le temps de bien comprendre notre fonctionnement, il a été très disponible, et il a livré une solution efficace et adaptée à nos besoins. Un service professionnel et humain. Merci, Simon!",
+    date: '2026-11-16',
+    lien: FICHE,
+    systeme: 'La réponse aux nouvelles demandes', systeme_en: 'Replying to new requests',
+    secteur: "Centre d'aide académique", secteur_en: 'Academic support centre',
+  },
+  {
     auteur: 'Freddy Aubuchon',
     note: 5,
     texte: "Simon est un jeune génie. Il trouve des solutions pour tous. Je le recommande à 100%. I'l m'a construit une solution pour ma compagnie qui m'a sauvé énormément de temps et de maux de têtes.",
-    date: '2026-11-15',
+    date: '2026-11-14',
     lien: FICHE,
     systeme: 'Un agent de prospection complet', systeme_en: 'A complete outreach agent',
     secteur: 'Formation numérique pour aînés', secteur_en: 'Digital training for seniors',
@@ -21,8 +30,8 @@ export const TOUS_AVIS = [
   {
     auteur: 'Karyann Turcotte',
     note: 5,
-    texte: "J'ai adoré mon expérience avec Simon! Il était vraiment à l'écoute de mes besoins et est arrivé avec plusieurs idées pour améliorer les pratiques de mon entreprise ! Je le recommande à tous !",
-    date: '2026-09',
+    texte: "J’ai adoré mon expérience avec Simon! Il était vraiment à l’écoute de mes besoins et est arrivé avec plusieurs idées pour améliorer les pratiques de mon entreprise ! Je le recommande à tous !",
+    date: '2026-08-20',
     lien: FICHE,
     systeme: 'Les suivis clients par texto', systeme_en: 'Client follow-ups by text message',
     secteur: 'Conseillère en sécurité financière', secteur_en: 'Financial security advisor',
@@ -31,25 +40,22 @@ export const TOUS_AVIS = [
     auteur: 'Alexandre Mercier',
     note: 5,
     texte: 'Simon est excellent, il sait très bien détecter les besoins!',
-    date: '2026-08',
+    date: '2026-08-05',
     lien: FICHE,
     // Partenaire (agence), pas un client final : on ne nomme jamais le mandat livré pour lui.
     systeme: 'Partenaire de livraison', systeme_en: 'Delivery partner',
     secteur: "Agence d'automatisation", secteur_en: 'Automation agency',
   },
-  // NON PUBLIÉ : avis de Stéphane Bernier (Pubsphere), mis en ligne le 2026-11-17 depuis le compte Google
-  // de Charles-Alexandre Bernier, partenaire à commission de FournIA. Le nom public sur Google n'est pas celui
-  // du client : l'afficher sous « Stéphane » serait faux, sous « Charles-Alexandre » ce serait un avis de
-  // partenaire présenté comme un avis client. Il s'active quand Stéphane le republie de son propre compte.
   {
-    publier: false,
-    auteur: 'Stéphane Bernier',
+    // Publié sur Google depuis le compte de Charles-Alexandre Bernier, partenaire d'affaires de FournIA
+    // (à commission). Affiché sous le nom que Google montre, avec le lien d'affaires dit en clair :
+    // un avis de partenaire ne se présente jamais comme un avis de client.
+    auteur: 'Charles-Alexandre Bernier',
     note: 5,
-    texte: "malade, j'ai adoré mon expérience. Ma vie a changé.",
+    texte: "malade, j’ai adoré mon expérience. Ma vie a changé.",
     date: '2026-11-17',
     lien: FICHE,
-    systeme: 'Les relevés de cartes de crédit, classés dans Excel', systeme_en: 'Credit card statements, sorted into Excel',
-    secteur: "Fabricant de kiosques d'exposition", secteur_en: 'Trade show booth maker',
+    systeme: "Partenaire d'affaires de FournIA", systeme_en: 'FournIA business partner',
   },
 ];
 

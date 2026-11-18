@@ -102,8 +102,10 @@ const etoiles = '★★★★★';
   .legende span { color: var(--mute); font-size: .86rem; }
   .badge { position: absolute; top: 1.2rem; right: 1.2rem; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: #0b0b0c;
     background: #e9c46a; border-radius: 6px; padding: .2rem .5rem; font-weight: 600; z-index: 2; }
-  .avis { display: grid; grid-template-columns: .8fr 1fr 1fr 1fr; gap: 1.4rem; align-items: stretch; }
-  .note-globale { display: flex; flex-direction: column; justify-content: center; gap: .8rem; padding: 1.5rem 0; }
+  /* en-tête de note sur toute la largeur, puis les avis en colonnes (hauteurs libres, aucun trou) */
+  .avis { columns: 3; column-gap: 1.4rem; }
+  .avis > .carte-avis { break-inside: avoid; margin-bottom: 1.4rem; }
+  .note-globale { column-span: all; display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.6rem; padding: 0 0 2rem; }
   .note-globale .g { width: 40px; height: 40px; border-radius: 50%; background: #fff; color: #4285f4; display: grid; place-items: center;
     font-family: Arial, sans-serif; font-weight: 700; font-size: 1.2rem; }
   .note-globale strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; }
@@ -120,11 +122,12 @@ const etoiles = '★★★★★';
   .carte-avis figcaption .systeme { color: var(--lime); font-size: .84rem; }
   .carte-avis figcaption .secteur { color: var(--mute); font-size: .8rem; }
   @media (max-width: 960px) {
+    .avis { columns: 2; }
     .videos { grid-template-columns: 1fr 1fr; }
-    .avis { grid-template-columns: 1fr; }
   }
   @media (max-width: 560px) {
     .preuves { padding: 4.5rem 0; }
+    .avis { columns: 1; }
     .videos { grid-template-columns: 1fr; }
     .video { aspect-ratio: 16 / 11; }
   }
