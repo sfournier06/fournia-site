@@ -43,6 +43,7 @@ const LANGUES = [
 const BANDEAU = ['AvecPlaisirs', 'Arbour Aide Académique', 'Pubsphere', 'SeniorTech'];
 const logos = REALISATIONS
   .filter((r) => BANDEAU.includes(r.client) && r.logo && (APERCU || (r.consentement && r.consentement.date)))
+  .filter((r, i, liste) => liste.findIndex((x) => x.client === r.client) === i) // un client = un logo, même s'il a plusieurs systèmes
   .map((r) => ({ nom: r.client, src: r.logo.replace('/clients/', '/clients/mono/') }));
 // Monogramme officiel (references/brand/assets/fournia-monogram.svg, copié dans public/brand/).
 const mark = '<img src="/brand/fournia-monogram.svg" alt="" width="40" height="40" />';
@@ -531,7 +532,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 
   /* bande de preuves chiffrées */
   .chiffres-bande { padding: 4.5rem 0 1rem; }
-  .chiffres { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .chiffres { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .chiffres li { padding: 2rem 1.6rem; display: flex; flex-direction: column; gap: .4rem; }
   .chiffres li + li { border-left: 1px solid var(--line); }
   .chiffres strong { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 600; letter-spacing: -.04em; line-height: 1;
@@ -546,9 +547,6 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   @media (max-width: 960px) {
     .hero { grid-template-columns: 1fr; gap: 3.2rem; }
     .hero-visuel { justify-self: center; max-width: 360px; }
-    .chiffres { grid-template-columns: 1fr 1fr; }
-    .chiffres li:nth-child(3) { border-left: none; }
-    .chiffres li:nth-child(n+3) { border-top: 1px solid var(--line); }
     .pastille-flottante { left: 1rem; }
     .flux { grid-template-columns: 1fr 1fr; }
     .flux li:nth-child(3) { border-left: none; }
@@ -596,7 +594,9 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     .hero-visuel .portrait { aspect-ratio: 1 / 1; }
     .hero-visuel .portrait img { object-position: 50% 22%; }
     header { overflow-x: clip; }
-    .chiffres li { padding: 1.4rem 1rem; }
+    .chiffres li { padding: 1.3rem .7rem; }
+    .chiffres strong { font-size: 2rem; }
+    .chiffres li > span { font-size: .82rem; }
     .confiance { margin-top: 3.5rem; gap: 1.4rem; }
     .confiance ul { gap: 1.4rem 2.2rem; }
     .confiance img { height: 26px; }
@@ -656,13 +656,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       <div class="hero-cta">
         <a href={t.hero.cta.href} class="btn btn-primary">{t.hero.cta.label} <span class="arrow">→</span></a>
       </div>
-      <p class="preuve-ligne">
-        {moyenne && (
-          <a href={LIEN_FICHE_GOOGLE} target="_blank" rel="noopener"><span class="etoiles" aria-hidden="true">★★★★★</span> <b>{moyenne}</b> {t.hero.googleSur}</a>
-        )}
-        {moyenne && <span class="sep" aria-hidden="true">·</span>}
-        <span>{t.hero.notes[0]}</span>
-      </p>
+      <p class="preuve-ligne"><span>{t.hero.notes[0]}</span></p>
     </div>
 
     <div class="hero-visuel">
@@ -692,7 +686,6 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     <ul class="chiffres reveal">
       <li><strong><span data-compte="100">100</span>+</strong><span>{t.chiffres.automatisations}</span></li>
       <li><strong><span data-compte={nbSecteurs}>{nbSecteurs}</span></strong><span>{t.chiffres.secteurs}</span></li>
-      {moyenne && <li><strong>{moyenne}<small>/5</small></strong><span>{t.chiffres.note}</span></li>}
       <li><strong><span data-compte="30">30</span><small> min</small></strong><span>{t.chiffres.minutes}</span></li>
     </ul>
   </div>
