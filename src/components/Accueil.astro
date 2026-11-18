@@ -452,9 +452,10 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .resultat svg { width: 18px; height: 18px; color: var(--lime); flex: none; margin-top: .2rem; }
 
   /* ── processus avec photo ── */
-  .processus { display: grid; grid-template-columns: .9fr 1.1fr; gap: 5rem; align-items: center; }
-  .photo-atelier { margin: 0; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; }
-  .photo-atelier img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* la photo prend toute la hauteur du texte : plus de vide au-dessus et en dessous */
+  .processus { display: grid; grid-template-columns: .9fr 1.1fr; gap: 5rem; align-items: stretch; }
+  .photo-atelier { margin: 0; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); min-height: 520px; }
+  .photo-atelier img { width: 100%; height: 100%; object-fit: cover; object-position: 68% 50%; display: block; }
   .etapes-v { list-style: none; margin-top: 2.4rem; display: grid; gap: 0; }
   .etapes-v li { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 1.5rem 0; border-top: 1px solid var(--line); }
   .etapes-v .n { width: 2.2rem; height: 2.2rem; border-radius: 50%; border: 1px solid rgba(183,217,76,.5); color: var(--lime); display: grid; place-items: center;
@@ -488,7 +489,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     .tel { max-width: 380px; width: 100%; margin: 0 auto; }
     .tel-fil { height: 340px; }
     .processus, .faq { grid-template-columns: 1fr; gap: 2.4rem; }
-    .photo-atelier { aspect-ratio: 4 / 3; }
+    .photo-atelier { aspect-ratio: 4 / 3; min-height: 0; }
   }
 
 
