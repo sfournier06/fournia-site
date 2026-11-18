@@ -15,7 +15,7 @@ export const TOUS_AVIS = [
     texte: "Simon est un jeune génie. Il trouve des solutions pour tous. Je le recommande à 100%. I'l m'a construit une solution pour ma compagnie qui m'a sauvé énormément de temps et de maux de têtes.",
     date: '2026-11-15',
     lien: FICHE,
-    systeme: "Le CRM et les suivis d'un fondateur seul", systeme_en: 'A solo founder\'s CRM and follow-ups',
+    systeme: 'Un agent de prospection complet', systeme_en: 'A complete outreach agent',
     secteur: 'Formation numérique pour aînés', secteur_en: 'Digital training for seniors',
   },
   {
