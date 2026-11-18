@@ -137,5 +137,7 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
   @media (prefers-reduced-motion: reduce) { ul.piste { scroll-behavior: auto; } }
   @media (max-width: 560px) {
     ul.piste.piste { align-items: start; }
+    /* l'avis complet est juste en dessous, dans la section des avis : cartes plus courtes et égales sur mobile */
+    .temoignage { display: none; }
   }
 </style>
