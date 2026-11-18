@@ -50,7 +50,8 @@ export const TOUS_AVIS = [
     // Écrit par Stéphane Bernier (Pubsphere, client) selon Simon (2026-11-18), mais publié sur Google depuis le
     // compte de Charles-Alexandre Bernier, partenaire d'affaires de FournIA. Sur Google, le nom affiché est donc
     // celui de Charles-Alexandre : la carte le dit en clair (champ `note`) pour qu'un visiteur qui compare avec
-    // Google ne croie pas à un faux avis. À retirer quand Stéphane le republie de son propre compte.
+    // Google ne croie pas à un faux avis. Simon ne lui redemande pas de le republier (décision du 2026-11-18) :
+    // la mention reste. Si Google retire l'avis, le retirer d'ici aussi.
     auteur: 'Stéphane Bernier',
     note: 5,
     texte: "malade, j’ai adoré mon expérience. Ma vie a changé.",
