@@ -302,7 +302,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .offre-voir { all: unset; cursor: pointer; color: var(--lime); font-weight: 500; font-size: .95rem; }
   .offre-voir:hover { color: var(--lime-l); }
   .offre-voir:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; border-radius: 4px; }
-  .offre-detail { width: min(600px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow: auto; padding: 2.2rem; border-radius: 20px;
+  .offre-detail { margin: auto; width: min(600px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow: auto; padding: 2.2rem; border-radius: 20px;
     border: 1px solid var(--glass-b); background: #121212; color: var(--white); }
   .offre-detail::backdrop { background: rgba(0,0,0,.7); backdrop-filter: blur(4px); }
   .offre-detail h3 { font-size: 1.6rem; margin: 0 2.5rem .8rem 0; }
@@ -820,7 +820,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
                 <p class="intro">{o.detail.intro}</p>
                 <dl>{o.detail.points.map(([t, d]) => <div><dt>{t}</dt><dd>{d}</dd></div>)}</dl>
                 <ol>{o.detail.etapes.map((e) => <li>{e}</li>)}</ol>
-                <a class="btn btn-primary" href="#contact" data-fermer>{t.hero.cta.label} <span class="arrow">→</span></a>
+                <a class="btn btn-primary" href={t.hero.cta.href}>{t.hero.cta.label} <span class="arrow">→</span></a>
               </dialog>
             </Fragment>
           )}

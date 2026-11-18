@@ -59,6 +59,10 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
           {court && (
             <dialog class="detail" id={dlg} aria-label={tr(r, 'titre')}>
               <button type="button" class="fermer" data-fermer aria-label={T.fermer}>×</button>
+              {ok && r.photo ? <div class="detail-visuel photo"><img src={r.photo} alt="" /></div>
+                : ok && r.logo ? <div class="detail-visuel"><img src={r.logo} alt="" /></div>
+                : r.image ? <div class="detail-visuel photo"><img src={r.image} alt="" /></div> : null}
+              <div class="detail-corps">
               <p class="secteur">{ok && r.client ? r.client : tr(r, 'secteur')}</p>
               <p class="sous-secteur">{ok && r.client ? tr(r, 'secteur') : T.confidentiel}</p>
               <h3>{tr(r, 'titre')}</h3>
@@ -70,6 +74,7 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
                 </div>
               )}
               {r.lien && !en && <a class="lien" href={r.lien}>{T.secteur} <span aria-hidden="true">→</span></a>}
+              </div>
             </dialog>
           )}
           {!court && <div class="liens">
@@ -141,14 +146,19 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
   .ouvrir:focus-visible::after { outline: 2px solid var(--lime); outline-offset: 2px; }
   .voir { display: inline-flex; gap: .35rem; color: var(--mute); font-size: .85rem; margin: 0 0 1.2rem; transition: color .2s; }
   .carte.cliquable:hover .voir { color: var(--lime); }
-  .detail { width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow: auto; padding: 2rem; border-radius: 18px;
+  /* le reset global met margin: 0 partout : on recentre la boîte au milieu de l'écran */
+  .detail { margin: auto; padding: 0 !important; width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow: auto; padding: 2rem; border-radius: 18px;
     border: 1px solid var(--glass-b); background: #121212; color: var(--white); }
   .detail::backdrop { background: rgba(0,0,0,.7); backdrop-filter: blur(4px); }
-  .detail h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; margin: .8rem 0 .8rem; line-height: 1.25; min-height: 0; }
+  .carte .detail h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.45rem; margin: .5rem 0 .9rem; line-height: 1.25; min-height: 0; }
+  .detail-corps { padding: 1.8rem 2rem 2rem; }
+  .detail-visuel { height: 170px; background: #fff; display: grid; place-items: center; overflow: hidden; border-radius: 18px 18px 0 0; }
+  .detail-visuel img { max-height: 70px; max-width: 60%; object-fit: contain; }
+  .detail-visuel.photo img { width: 100%; height: 100%; max-height: none; max-width: none; object-fit: cover; object-position: 50% 40%; }
   .detail .secteur { padding-right: 3rem; }
   .detail .systeme { color: var(--mute); line-height: 1.6; margin: 0 0 1.4rem; }
   .detail .res { margin: 0 0 1.2rem; border-radius: 12px; border: 1px solid rgba(183,217,76,.35); }
-  .detail .fermer { position: absolute; top: .8rem; right: .9rem; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line);
+  .detail .fermer { position: absolute; z-index: 2; top: .8rem; right: .9rem; background: rgba(18,18,18,.8) !important; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line);
     background: transparent; color: var(--white); font-size: 1.3rem; cursor: pointer; }
   .detail .fermer:hover { border-color: var(--lime); color: var(--lime); }
   .temoignage p:not(.etoiles) { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }

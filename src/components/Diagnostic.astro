@@ -1,0 +1,312 @@
+---
+import Consentement from './Consentement.astro';
+// Landing diagnostic : formulaire de qualification simple.
+// Qualifie -> revele le booking de la plateforme (SaaS AI System). Non qualifie -> message courtois.
+// Volontairement simple et pro : une seule carte centree, pas d'effets lourds.
+// Composant partagé : /diagnostic/ (fr) et /en/diagnostic/ (en). Les coordonnées sont demandées AVANT le résultat :
+// sans elles, un formulaire rempli ne donne aucun lead (constat de Simon, 2026-11-18).
+import '../styles/global.css';
+
+const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
+
+// Lien de booking (qualifies seulement).
+// Calendrier « Diagnostic gratuit de 30 minutes » de la plateforme (remplace Calendly le 2026-11-04).
+const { lang = 'fr' } = Astro.props;
+const en = lang === 'en';
+const booking = `https://liens.fournia.net/widget/booking/2Q3gAQkopvF9qtynB4Ct?lang=${en ? 'en' : 'fr'}`;
+const T = en ? {
+  html: 'en-CA', path: '/en/diagnostic/', locale: 'en_CA',
+  title: 'Free AI assessment for Quebec small businesses | FournIA',
+  desc: 'Answer 3 questions. If AI can really save you time, we book a free 30-minute assessment.',
+  ogdesc: '3 questions to see if it is a fit. If so, we book a free 30-minute assessment.',
+  eyebrow: 'Free AI assessment', h1a: 'Can AI help you ', h1b: 'save time', h1c: '?',
+  lead: 'FournIA automates the manual tasks of Quebec small businesses. We design, set up and train your team. You keep the time saved.',
+  chips: ['Assessment', 'Custom automations', 'Training included'],
+  proof1: 'We already automate small businesses in corporate catering, accounting, finance and property management.',
+  proof2: 'Compliant with Quebec privacy law (Law 25). Your data stays protected.',
+  hint: '3 questions, then where to reach you. If it is a fit, we book the call right away.',
+  vous: 'You are', choisir: 'Choose...', pme: 'A business (SMB)', autonome: 'A self-employed worker', particulier: 'An individual',
+  employes: 'How many employees?', moi: 'Just me', e1: '2 to 10', e2: '11 to 50', e3: '50 or more',
+  intention: 'Where are you at?', bientot: 'I want to fix this soon', explore: 'I am exploring options', non: 'Not for now, just curious',
+  prenom: 'First name', nom: 'Last name', courriel: 'Email', tel: 'Phone (optional)', entreprise: 'Business name',
+  envoyer: 'See if I qualify', consent: 'By sending, you agree that FournIA may contact you about your request. No newsletter, no resale.',
+  okTitle: 'It is a fit. Book your call.', okSub: '30 minutes, no commitment.', book: 'Book my call',
+  noTitle: 'Not a fit for now.', noSub: 'The assessment is for small businesses with a team and a concrete need. We have your details: if that changes, write to us.',
+  confid: 'Privacy policy (in French)',
+} : {
+  html: 'fr-CA', path: '/diagnostic/', locale: 'fr_CA',
+  title: 'Diagnostic IA gratuit pour PME québécoises | FournIA',
+  desc: "Répondez à 3 questions. Si l'IA peut vraiment vous faire gagner du temps, on réserve un diagnostic gratuit de 30 minutes.",
+  ogdesc: "3 questions pour voir si c'est un fit. Si oui, on réserve un diagnostic gratuit de 30 minutes.",
+  eyebrow: 'Diagnostic IA gratuit', h1a: "L'IA peut-elle vous faire ", h1b: 'gagner du temps', h1c: ' ?',
+  lead: 'FournIA automatise les tâches manuelles des PME québécoises. On conçoit, on implante, on forme votre équipe. Vous gardez le temps gagné.',
+  chips: ['Audit', 'Automatisations sur mesure', 'Formation incluse'],
+  proof1: 'On automatise déjà des PME en restauration corporative, comptabilité, finance et gestion immobilière.',
+  proof2: 'Conforme Loi 25. Vos données restent protégées.',
+  hint: "3 questions, puis où vous joindre. Si c'est un fit, on réserve l'appel tout de suite.",
+  vous: 'Vous êtes', choisir: 'Choisir...', pme: 'Une entreprise (PME)', autonome: 'Un travailleur autonome', particulier: 'Un particulier',
+  employes: "Combien d'employés ?", moi: 'Juste moi', e1: '2 à 10', e2: '11 à 50', e3: '50 et plus',
+  intention: 'Où en êtes-vous ?', bientot: 'Je veux régler ça bientôt', explore: "J'explore les options", non: 'Pas pour l\'instant, juste curieux',
+  prenom: 'Prénom', nom: 'Nom', courriel: 'Courriel', tel: 'Téléphone (facultatif)', entreprise: "Nom de l'entreprise",
+  envoyer: 'Voir si je suis admissible', consent: "En envoyant, vous acceptez que FournIA vous contacte au sujet de votre demande. Pas d'infolettre, aucune revente.",
+  okTitle: "C'est un fit. Réservez votre appel.", okSub: '30 minutes, sans engagement.', book: 'Réserver mon appel',
+  noTitle: "Pas un fit pour l'instant.", noSub: "Le diagnostic est pour les PME avec une équipe et un besoin concret. On a vos coordonnées : si ça change, écrivez-nous.",
+  confid: 'Politique de confidentialité',
+};
+
+// Pixel Meta : inactif tant que vide. Pre-requis : /confidentialite en ligne + artefact Loi 25.
+const FB_PIXEL_ID = '2092349601673992';
+const pixelInit = FB_PIXEL_ID
+  ? `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${FB_PIXEL_ID}');fbq('track','PageView');`
+  : '';
+
+const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs><filter id="fglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <g fill="none" stroke="#b7d94c" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M50 16 L79 33 L79 67 L50 84 L21 67 L21 33 Z" stroke-width="3"/>
+    <path d="M50 50 L50 16 M50 50 L79 67 M50 50 L21 67" stroke-width="2.2" opacity="0.9"/>
+  </g>
+  <g fill="#b7d94c"><circle cx="50" cy="16" r="4.6"/><circle cx="79" cy="33" r="4.6"/><circle cx="79" cy="67" r="4.6"/><circle cx="50" cy="84" r="4.6"/><circle cx="21" cy="67" r="4.6"/><circle cx="21" cy="33" r="4.6"/></g>
+  <circle cx="50" cy="50" r="7" fill="#c9e86b" filter="url(#fglow)"/>
+</svg>`;
+---
+<!DOCTYPE html>
+<html lang={T.html}>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{T.title}</title>
+<meta name="description" content={T.desc}>
+<link rel="canonical" href={`${siteUrl}${T.path}`} />
+<link rel="alternate" hreflang="fr-CA" href={`${siteUrl}/diagnostic/`} />
+<link rel="alternate" hreflang="en-CA" href={`${siteUrl}/en/diagnostic/`} />
+<meta property="og:title" content={T.title}>
+<meta property="og:description" content={T.ogdesc}>
+<meta property="og:type" content="website">
+<meta property="og:locale" content={T.locale}>
+<meta property="og:image" content={`${siteUrl}/brand/fournia-lockup-horizontal-dark.png`}>
+<link rel="icon" type="image/svg+xml" href="/brand/fournia-favicon.svg">
+<link rel="icon" type="image/png" href="/brand/fournia-icon-512.png">
+<link rel="apple-touch-icon" href="/brand/fournia-icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Syne:wght@800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Syne:wght@800&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Syne:wght@800&family=Inter:wght@400;500;600&display=swap"></noscript>
+{FB_PIXEL_ID && <script is:inline set:html={`window.__fourniaPixel=function(){${pixelInit}};`} />}
+
+<style>
+  html, body { min-height: 100vh; overflow-x: hidden; max-width: 100%; }
+  .bg-soft { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .bg-soft .halo { position: absolute; top: -18vh; left: 50%; transform: translateX(-50%); width: 70vw; height: 70vw; max-width: 900px; max-height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(183,217,76,.10), transparent 65%); }
+  .bg-soft .grid-lines { position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse 75% 55% at 50% 0%, #000 20%, transparent 70%); opacity: .5; }
+
+  .shell { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 2.4rem 1.2rem 3rem; }
+  .brand { display: flex; align-items: center; gap: .6rem; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.35rem; letter-spacing: -.03em; margin-bottom: 2.4rem; }
+  .brand .mark { width: 1.7em; height: 1.7em; display: inline-flex; }
+  .brand .mark svg { width: 100%; height: 100%; }
+  .brand .ia { color: var(--lime); }
+
+  .card { width: 100%; max-width: min(560px, 100%); background: #141414; border: 1px solid var(--glass-b); border-radius: 22px; padding: 2.4rem; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+  @media (max-width: 560px) { .card { padding: 1.7rem 1.3rem; } }
+
+  .eyebrow { margin-bottom: 1.2rem; }
+  h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.7rem, 5vw, 2.3rem); line-height: 1.1; letter-spacing: -.02em; font-weight: 700; margin-bottom: .8rem; }
+  h1 .accent { color: var(--lime); }
+  .lead { color: var(--mute); font-size: 1.02rem; margin-bottom: 1.1rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.6rem; }
+  .chip { font-size: .8rem; color: var(--white); background: var(--glass); border: 1px solid var(--glass-b); border-radius: 100px; padding: .42rem .9rem; display: inline-flex; align-items: center; gap: .45rem; }
+  .chip::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--lime); }
+  .formhint { font-size: .85rem; color: var(--mute-d); margin-bottom: 1.4rem; }
+
+  .proof { display: grid; gap: .55rem; margin-bottom: 1.6rem; padding: 1rem 1.1rem; background: var(--glass); border: 1px solid var(--glass-b); border-radius: 14px; }
+  .proof-line { display: flex; align-items: flex-start; gap: .6rem; font-size: .9rem; color: var(--white); line-height: 1.35; margin: 0; }
+  .proof-ico { color: var(--lime); font-weight: 700; flex: none; line-height: 1.35; }
+
+  form { display: grid; gap: 1.1rem; }
+  .field { display: grid; gap: .45rem; min-width: 0; }
+  .field label { font-size: .85rem; color: var(--white); font-weight: 500; }
+  .field input, .field select { width: 100%; min-width: 0; max-width: 100%; background: rgba(255,255,255,.04); border: 1px solid var(--glass-b); border-radius: 11px; padding: .85rem 1rem; color: var(--white); font-family: inherit; font-size: .96rem; transition: border-color .2s, background .2s; }
+  .field input::placeholder { color: var(--mute-d); }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--lime); background: rgba(183,217,76,.04); }
+  .field select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239a9c95' d='M6 8L0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.4rem; }
+  .field select option { background: var(--ink-850); }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  @media (max-width: 460px) { .row2 { grid-template-columns: 1fr; } }
+  .hp { position: absolute; left: -9999px; }
+
+  .submit { width: 100%; justify-content: center; margin-top: .4rem; padding: 1rem; font-size: 1rem; }
+  .note { font-size: .8rem; color: var(--mute-d); text-align: center; margin-top: .2rem; }
+
+  /* etats reveles */
+  .hidden { display: none; }
+  .result-icon { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 1.2rem; }
+  .result-icon.ok { background: rgba(183,217,76,.14); color: var(--lime); }
+  .result-icon.no { background: rgba(255,255,255,.06); color: var(--mute); }
+  .result-icon svg { width: 28px; height: 28px; }
+  .result h2 { font-family: 'Space Grotesk'; font-size: 1.5rem; line-height: 1.15; margin-bottom: .7rem; }
+  .result p { color: var(--mute); margin-bottom: 1.2rem; }
+  .book-btn { display: inline-flex; margin-bottom: 1.4rem; }
+  .alt-link { display: inline-block; margin-top: .4rem; color: var(--lime); font-size: .92rem; }
+
+  .foot { position: relative; z-index: 1; margin-top: 2rem; text-align: center; color: var(--mute-d); font-size: .82rem; }
+  .foot a { color: var(--mute); } .foot a:hover { color: var(--lime); }
+</style>
+</head>
+<body>
+
+<div class="bg-soft">
+  <div class="grid-lines"></div>
+  <div class="halo"></div>
+</div>
+
+<div class="shell">
+  <a href={en ? "/en/" : "/"} class="brand"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
+
+  <div class="card">
+    <!-- ETAPE 1 : formulaire de qualification -->
+    <div id="step-form">
+      <span class="eyebrow">{T.eyebrow}</span>
+      <h1>{T.h1a}<span class="accent">{T.h1b}</span>{T.h1c}</h1>
+      <p class="lead">{T.lead}</p>
+      <div class="chips">
+        {T.chips.map((c) => <span class="chip">{c}</span>)}
+      </div>
+
+      <div class="proof">
+        <p class="proof-line"><span class="proof-ico">&#10003;</span> {T.proof1}</p>
+        <p class="proof-line"><span class="proof-ico">&#10003;</span> {T.proof2}</p>
+      </div>
+
+      <p class="formhint">{T.hint}</p>
+
+      <form id="qualForm" name="diagnostic-qualification" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="diagnostic-qualification" />
+        <input type="hidden" name="qualifie" id="f-qualifie" value="" />
+        <input type="hidden" name="langue" value={lang} />
+        <p class="hp"><label>Ne pas remplir <input name="bot-field" /></label></p>
+
+        <div class="field">
+          <label for="type">{T.vous}</label>
+          <select id="type" name="type" required>
+            <option value="">{T.choisir}</option>
+            <option value="pme">{T.pme}</option>
+            <option value="autonome">{T.autonome}</option>
+            <option value="particulier">{T.particulier}</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="employes">{T.employes}</label>
+          <select id="employes" name="employes" required>
+            <option value="">{T.choisir}</option>
+            <option value="moi">{T.moi}</option>
+            <option value="2-10">{T.e1}</option>
+            <option value="11-50">{T.e2}</option>
+            <option value="50+">{T.e3}</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="intention">{T.intention}</label>
+          <select id="intention" name="intention" required>
+            <option value="">{T.choisir}</option>
+            <option value="bientot">{T.bientot}</option>
+            <option value="explore">{T.explore}</option>
+            <option value="non">{T.non}</option>
+          </select>
+        </div>
+
+        <div class="row2">
+          <div class="field"><label for="prenom">{T.prenom}</label><input id="prenom" name="prenom" autocomplete="given-name" required /></div>
+          <div class="field"><label for="nom">{T.nom}</label><input id="nom" name="nom" autocomplete="family-name" required /></div>
+        </div>
+        <div class="field"><label for="courriel">{T.courriel}</label><input id="courriel" name="courriel" type="email" autocomplete="email" required /></div>
+        <div class="row2">
+          <div class="field"><label for="telephone">{T.tel}</label><input id="telephone" name="telephone" type="tel" autocomplete="tel" /></div>
+          <div class="field"><label for="entreprise">{T.entreprise}</label><input id="entreprise" name="entreprise" autocomplete="organization" /></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary submit">{T.envoyer} <span class="arrow">&#8594;</span></button>
+        <p class="note">{T.consent}</p>
+      </form>
+    </div>
+
+    <!-- ETAPE 2A : qualifie -> booking -->
+    <div id="step-qualified" class="result hidden">
+      <div class="result-icon ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h2>{T.okTitle}</h2>
+      <p>{T.okSub}</p>
+      <a id="book-link" class="btn btn-primary book-btn" href={booking} target="_blank" rel="noopener">{T.book} <span class="arrow">&#8594;</span></a>
+    </div>
+
+    <!-- ETAPE 2B : non qualifie -->
+    <div id="step-rejected" class="result hidden">
+      <div class="result-icon no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12h6"/></svg></div>
+      <h2>{T.noTitle}</h2>
+      <p>{T.noSub}</p>
+      <a class="alt-link" href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <a href="/confidentialite">{T.confid}</a> &nbsp;·&nbsp; &#169; 2026 FournIA
+  </div>
+</div>
+
+<script is:inline>
+  const form = document.getElementById('qualForm');
+  const bookLink = document.getElementById('book-link');
+  const stepForm = document.getElementById('step-form');
+  const stepOk = document.getElementById('step-qualified');
+  const stepNo = document.getElementById('step-rejected');
+
+  function isQualified(d) {
+    if (d.type === 'particulier') return false;
+    if (d.intention === 'non') return false;
+    if (d.type === 'autonome' && d.employes === 'moi') return false;
+    return true;
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    const ok = isQualified(data);
+    document.getElementById('f-qualifie').value = ok ? 'oui' : 'non';
+
+    // Capture best-effort dans Netlify Forms (ne bloque pas l'UI).
+    try {
+      const body = new URLSearchParams(new FormData(form)).toString();
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+    } catch (_) {}
+
+    // Pixel : signal d'intention quand la personne est qualifiee.
+    if (ok && window.fbq) fbq('track', 'Lead');
+    if (window.fourniaEvent) window.fourniaEvent('diagnostic_envoye', { qualifie: ok ? 'oui' : 'non' });
+
+    // le calendrier reçoit déjà le nom et le courriel : la personne n'a rien à retaper
+    if (ok && bookLink) {
+      const u = new URL(bookLink.href);
+      if (data.prenom) u.searchParams.set('first_name', data.prenom);
+      if (data.nom) u.searchParams.set('last_name', data.nom);
+      if (data.courriel) u.searchParams.set('email', data.courriel);
+      if (data.telephone) u.searchParams.set('phone', data.telephone);
+      bookLink.href = u.toString();
+    }
+
+    stepForm.classList.add('hidden');
+    (ok ? stepOk : stepNo).classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Clic sur "Reserver mon appel" (ouvre le calendrier en nouvel onglet) : signal
+  // d'intention de booking, capte le geste meme si le postMessage Schedule ne revient pas.
+  if (bookLink) bookLink.addEventListener('click', () => {
+    if (window.fbq) fbq('track', 'InitiateCheckout');
+  });
+</script>
+  <!-- Bulle de clavardage SaaS AI System : les messages arrivent dans la boite unifiee du CRM. -->
+  <script is:inline defer src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6ae1461330238e5401f16cde" data-source="WEB_USER"></script>
+  <Consentement lang={lang} />
+</body>
+</html>
