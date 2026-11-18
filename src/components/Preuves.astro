@@ -63,8 +63,10 @@ const etoiles = '★★★★★';
             {T.origine && avis.length > 0 && <span class="origine">{T.origine}</span>}
             {LIEN_LAISSER_AVIS && <a class="laisser" href={LIEN_LAISSER_AVIS} target="_blank" rel="noopener">{T.laisser}</a>}
           </div>
-          {(avis.length > 0 ? avis : MAQUETTE_AVIS).map((a) => (
-            <figure class:list={['carte-avis', { exemple: avis.length === 0 }]}>
+          {/* l'avis le plus complet en vedette à gauche, les autres en grille 2 x 2 à droite */}
+          <div class="avis-grille">
+            {(avis.length > 0 ? avis : MAQUETTE_AVIS).map((a, i) => (
+            <figure class:list={['carte-avis', { exemple: avis.length === 0, vedette: i === 0 }]}>
               {avis.length === 0 && <span class="badge">{T.exemple}</span>}
               <p class="etoiles" aria-label={T.note5}>{etoiles}</p>
               <blockquote lang={en && avis.length > 0 ? 'fr' : undefined}>{a.texte}</blockquote>
@@ -74,7 +76,8 @@ const etoiles = '★★★★★';
                 {a.secteur && <span class="secteur">{en ? (a.secteur_en || a.secteur) : a.secteur}</span>}
               </figcaption>
             </figure>
-          ))}
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -103,9 +106,10 @@ const etoiles = '★★★★★';
   .badge { position: absolute; top: 1.2rem; right: 1.2rem; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: #0b0b0c;
     background: #e9c46a; border-radius: 6px; padding: .2rem .5rem; font-weight: 600; z-index: 2; }
   /* en-tête de note sur toute la largeur, puis les avis en colonnes (hauteurs libres, aucun trou) */
-  .avis { columns: 3; column-gap: 1.4rem; }
-  .avis > .carte-avis { break-inside: avoid; margin-bottom: 1.4rem; }
-  .note-globale { column-span: all; display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.6rem; padding: 0 0 2rem; }
+  .avis-grille { display: grid; grid-template-columns: 1.15fr 1fr 1fr; grid-auto-rows: auto; gap: 1.4rem; }
+  .avis-grille .vedette { grid-row: span 2; }
+  .avis-grille .vedette blockquote { font-size: 1.08rem; line-height: 1.65; }
+  .note-globale { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.6rem; padding: 0 0 2rem; }
   .note-globale .g { width: 40px; height: 40px; border-radius: 50%; background: #fff; color: #4285f4; display: grid; place-items: center;
     font-family: Arial, sans-serif; font-weight: 700; font-size: 1.2rem; }
   .note-globale strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; }
@@ -122,12 +126,14 @@ const etoiles = '★★★★★';
   .carte-avis figcaption .systeme { color: var(--lime); font-size: .84rem; }
   .carte-avis figcaption .secteur { color: var(--mute); font-size: .8rem; }
   @media (max-width: 960px) {
-    .avis { columns: 2; }
+    .avis-grille { grid-template-columns: 1fr 1fr; }
+    .avis-grille .vedette { grid-column: span 2; grid-row: auto; }
     .videos { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 560px) {
     .preuves { padding: 4.5rem 0; }
-    .avis { columns: 1; }
+    .avis-grille { grid-template-columns: 1fr; }
+    .avis-grille .vedette { grid-column: auto; }
     .videos { grid-template-columns: 1fr; }
     .video { aspect-ratio: 16 / 11; }
   }

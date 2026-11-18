@@ -291,6 +291,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .offre { padding: 2.2rem 2rem; display: flex; flex-direction: column; gap: .9rem; transition: background .3s; }
   .offre + .offre { border-left: 1px solid var(--line); }
   .offre:hover { background: rgba(183,217,76,.035); }
+  .offre-img { width: calc(100% + 4rem); max-width: none; height: 210px; flex: none; margin: -2.2rem -2rem .6rem; object-fit: cover; display: block; }
   .offre h3 { font-weight: 600; font-size: 1.45rem; letter-spacing: -.015em; line-height: 1.15; }
   .offre p { color: var(--mute); font-size: .98rem; }
   .offre .pour { color: var(--white); font-size: .95rem; padding-top: .9rem; border-top: 1px solid var(--line); margin-top: auto; }
@@ -588,6 +589,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     section { padding: 2.6rem 0; }
     .sec-intro { margin-bottom: 2rem; }
     .offre { padding: 1.8rem 1.5rem; }
+    .offre-img { width: calc(100% + 3rem); margin: -1.8rem -1.5rem .6rem; }
     .cta-left { padding: 2rem 1.5rem; }
     form { padding: 1.5rem; }
   }
@@ -785,6 +787,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     <div class="offres reveal">
       {t.services.offres.map((o) => (
         <article class="offre">
+          {o.image && <img class="offre-img" src={o.image} alt="" width="1200" height="900" loading="lazy" decoding="async" />}
           <h3>{o.titre}</h3>
           <p>{o.texte}</p>
           <p class="pour" set:html={o.pour}></p>

@@ -380,13 +380,13 @@ export const fr = {
     offres: [
       { titre: 'Systèmes à la carte', texte: 'Un problème précis, un système qui le règle. Installé dans vos outils, livré une fois, à prix fixe.',
         pour: '<b>Pour vous si</b> une tâche précise vous coûte des heures chaque semaine.',
-        lien: { href: '/automatisation-entreprise/', label: 'Voir les systèmes à la carte →' } },
+        image: '/images/services/systemes.webp', lien: { href: '/automatisation-entreprise/', label: 'Voir les systèmes à la carte →' } },
       { titre: 'Accompagnement complet', texte: "Toute l'entreprise, de A à Z, sur 6 à 12 mois. Un plan, puis un chantier à la fois.",
         pour: '<b>Pour vous si</b> vous voulez un partenaire pour toute la transition.',
-        lien: { href: '/accompagnement-intelligence-artificielle/', label: "Voir l'accompagnement →" } },
+        image: '/images/services/accompagnement.webp', lien: { href: '/accompagnement-intelligence-artificielle/', label: "Voir l'accompagnement →" } },
       { titre: 'Formation', texte: "L'IA expliquée en mots simples. En groupe, en un pour un, ou pour former votre experte à l'interne.",
         pour: "<b>Pour vous si</b> votre équipe doit d'abord comprendre l'IA.",
-        lien: { href: '/formation-ia-entreprise/', label: 'Voir les formations →' } },
+        image: '/images/simon-fournier-client.webp', lien: { href: '/formation-ia-entreprise/', label: 'Voir les formations →' } },
     ],
   },
   apropos: {
@@ -525,11 +525,11 @@ export const en = {
     // Les pages de services n'existent qu'en français : pas de lien en anglais.
     offres: [
       { titre: 'Custom systems', texte: 'One specific problem, one system that solves it. Set up in your tools, delivered once, at a fixed price.',
-        pour: '<b>For you if</b> one specific task costs you hours every week.', lien: null },
+        pour: '<b>For you if</b> one specific task costs you hours every week.', image: '/images/services/systemes.webp', lien: null },
       { titre: 'Full support', texte: 'Your whole business, from A to Z, over 6 to 12 months. A plan, then one project at a time.',
-        pour: '<b>For you if</b> you want a partner for the whole transition.', lien: null },
+        pour: '<b>For you if</b> you want a partner for the whole transition.', image: '/images/services/accompagnement.webp', lien: null },
       { titre: 'Training', texte: 'AI explained in plain words. In a group, one on one, or to train your in-house expert.',
-        pour: '<b>For you if</b> your team needs to understand AI first.', lien: null },
+        pour: '<b>For you if</b> your team needs to understand AI first.', image: '/images/simon-fournier-client.webp', lien: null },
     ],
   },
   apropos: {
