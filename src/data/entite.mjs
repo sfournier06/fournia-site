@@ -14,6 +14,7 @@ export const BING_VERIFICATION = '';
 
 export const SAME_AS = [
   'https://www.instagram.com/fourn.ia/',
+  'https://www.facebook.com/61591331194721/',
   'https://www.google.com/maps?cid=522067200314430050',   // fiche Google Business (lien court : maps.app.goo.gl/jFgptbrFZofbuoyQ9)
   // 'https://hellodarwin.com/fr/agences/...',  // à ajouter quand la fiche existe
 ];
@@ -21,6 +22,14 @@ export const SAME_AS = [
 // Profils personnels du fondateur (sameAs de la Person, pas de l'entreprise).
 export const FOUNDER_SAME_AS = [
   'https://www.linkedin.com/in/simon-fournier-432a95419/',
+];
+
+// Liens affichés dans le pied de page (composant Reseaux). LinkedIn = profil du fondateur (pas de page entreprise).
+export const RESEAUX = [
+  { icone: 'instagram', url: 'https://www.instagram.com/fourn.ia/', label: 'Instagram de FournIA', label_en: 'FournIA on Instagram' },
+  { icone: 'facebook', url: 'https://www.facebook.com/61591331194721/', label: 'Page Facebook de FournIA', label_en: 'FournIA on Facebook' },
+  { icone: 'linkedin', url: 'https://www.linkedin.com/in/simon-fournier-432a95419/', label: 'LinkedIn de Simon Fournier', label_en: 'Simon Fournier on LinkedIn' },
+  { icone: 'google', url: 'https://www.google.com/maps/place/?q=place_id:ChIJsdQghSzNcYYRYtKfR1rBPgc', label: 'FournIA sur Google', label_en: 'FournIA on Google' },
 ];
 
 export const SITE = 'https://fournia.net';

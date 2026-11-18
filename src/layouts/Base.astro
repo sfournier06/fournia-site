@@ -10,6 +10,7 @@ const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 const cta = '/diagnostic/';
 // Monogramme officiel (references/brand/assets/fournia-monogram.svg, copié dans public/brand/).
 const markSvg = '<img src="/brand/fournia-monogram.svg" alt="" width="40" height="40" />';
+import Reseaux from '../components/Reseaux.astro';
 ---
 <!doctype html>
 <html lang="fr-CA">
@@ -69,6 +70,7 @@ const markSvg = '<img src="/brand/fournia-monogram.svg" alt="" width="40" height
         <div>
           <a href="/" class="logo" style="font-size:1.5rem"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
           <p style="color:var(--mute); margin-top:1rem; max-width:280px; font-size:.92rem;">On automatise les tâches répétitives des PME du Québec. Basé à Blainville, Rive-Nord de Montréal.</p>
+          <Reseaux />
         </div>
         <div class="foot-contact">
           <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>

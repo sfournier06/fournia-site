@@ -7,6 +7,7 @@ import Consentement from './Consentement.astro';
 import Realisations from './Realisations.astro';
 import Portrait from './Portrait.astro';
 import Preuves from './Preuves.astro';
+import Reseaux from './Reseaux.astro';
 import { AVIS, LIEN_FICHE_GOOGLE } from '../data/avis.mjs';
 import { PHOTO_ATELIER } from '../data/fondateur.mjs';
 import { REALISATIONS } from '../data/realisations.mjs';
@@ -905,6 +906,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       <div>
         <a href="#top" class="logo" style="font-size:1.5rem" aria-label={t.nav.accueilAria}><span class="mark" set:html={mark}></span><span>Fourn<span class="ia">IA</span></span></a>
         <p class="foot-desc">{t.pied.description}</p>
+        <Reseaux lang={t.lang} />
       </div>
       <div class="foot-contact">
         <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>
