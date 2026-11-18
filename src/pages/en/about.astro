@@ -62,10 +62,10 @@ const breadcrumbLd = {
 
         <section class="bloc histoire">
           <p class="etiquette">Our story</p>
-          <h2>It all started with a caterer retyping orders by hand.</h2>
+          <h2>It all started in the United States, in 2025.</h2>
           <div class="deux">
-            <p>In April 2026, Simon Fournier launched FournIA in Blainville. The first project: a corporate caterer in Montreal whose team spent hours retyping orders and putting together service proposals. Once the first system was in place, the same client asked for a second one, then a third.</p>
-            <p>The lesson quickly became clear: small businesses are not short on ideas for AI, they are short on someone who actually sets it up, in their tools, and trains their people. Since then, the team has built more than 100 automations across {nbSecteurs} industries, from catering to equipment rental to financial advisors.</p>
+            <p>In October 2025, Simon Fournier discovered artificial intelligence. He took courses, practised and built his first automations, then launched FournIA in Blainville in April 2026.</p>
+            <p>The lesson quickly became clear: small businesses are not short on ideas for AI, they are short on someone who actually sets it up, in their tools, and trains their people. Since 2025, he has built more than 100 automations across {nbSecteurs} different industries and helped more than 10 businesses automate their processes.</p>
           </div>
         </section>
 
@@ -91,11 +91,6 @@ const breadcrumbLd = {
               <h3>Design and development</h3>
               <p class="role">The build team</p>
               <p>They build the systems, connect them to your tools and test them before delivery. Every project has a dedicated lead.</p>
-            </article>
-            <article>
-              <h3>Business network</h3>
-              <p class="role">Partners</p>
-              <p>Agencies, consultants and local entrepreneurs we work with, who introduce us to the small businesses they support.</p>
             </article>
           </div>
         </section>
@@ -156,6 +151,7 @@ const breadcrumbLd = {
   .bloc p.etiquette { color: var(--lime); font-size: .92rem; line-height: 1.4; margin-bottom: 1rem; }
   .deux { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .cartes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .equipe .cartes { grid-template-columns: repeat(2, 1fr); }
   .cartes article { padding: 1.7rem; border-radius: 18px; border: 1px solid var(--line); background: rgba(255,255,255,.02); }
   .cartes h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 500; color: var(--white); }
   .cartes .role { color: var(--lime); font-size: .88rem; margin: .2rem 0 .9rem; }
@@ -181,7 +177,7 @@ const breadcrumbLd = {
   .post-cta h3 { font-size: 1.4rem; margin-bottom: .6rem; color: var(--white); }
   .post-cta p { color: var(--mute); margin-bottom: 1.4rem; }
   @media (max-width: 760px) {
-    .intro, .deux, .cartes, .humain { grid-template-columns: 1fr; gap: 2rem; }
+    .intro, .deux, .cartes, .equipe .cartes, .humain { grid-template-columns: 1fr; gap: 2rem; }
     .photo { max-width: 320px; }
     .chiffres { grid-template-columns: 1fr; }
     .chiffres li + li { border-left: none; border-top: 1px solid var(--line); }
