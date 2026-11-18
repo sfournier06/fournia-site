@@ -165,7 +165,9 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
   .bandeau-photo.client img { object-position: 50% 45%; }
   .temoignage .etoiles { color: #f5c518; letter-spacing: .12em; font-size: .8rem; margin: 0 0 .3rem; }
   .emplacement { margin: 0 0 1rem; padding: .7rem .8rem; border: 1px dashed var(--line); border-radius: 10px; color: var(--mute); font-size: .85rem; }
-  .secteur { color: var(--lime); font-size: .9rem; font-weight: 500; margin: 0; }
+  /* dans une page de service, la classe .prose ajoute des marges aux paragraphes : on les neutralise dans les cartes */
+  .carte .secteur { color: var(--lime); font-size: .9rem; font-weight: 500; margin: 0 !important; }
+  .carte .sous-secteur, .carte .res-lbl, .carte .res-txt { margin-top: 0 !important; }
   .sous-secteur { color: var(--mute); font-size: .82rem; margin: .1rem 0 0; }
   .statut { margin-left: auto; font-size: .75rem; color: var(--mute); border: 1px solid var(--line); border-radius: 99px; padding: .15rem .6rem; }
   .carte h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; line-height: 1.25; letter-spacing: -.01em; color: var(--white); margin: 0 0 1rem; min-height: 3.75em; }

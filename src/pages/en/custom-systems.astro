@@ -1,0 +1,66 @@
+---
+// Version anglaise de /automatisation-entreprise/ (Systèmes à la carte). Traduction fidèle, aucune promesse ajoutée.
+import ServicePage from '../../layouts/ServicePage.astro';
+import Realisations from '../../components/Realisations.astro';
+
+const faq = [
+  {
+    q: 'What is business automation?',
+    a: 'It means handing the repetitive tasks someone does by hand every day to a system: following up with a client, moving an order from one software to another, preparing a quote, sorting emails. With artificial intelligence, the system can also read a document, understand a written request and draft a reply, with a person approving it.',
+  },
+  {
+    q: 'Which tasks should a small business automate first?',
+    a: 'The ones that come back often, follow clear rules and cost hours every week: client follow-ups, sorting incoming requests, pulling data out of documents (invoices, purchase orders) and preparing quotes. We start with a single task, measure the time saved, then expand.',
+  },
+  {
+    q: 'Do I need to change my software to automate?',
+    a: 'Rarely. FournIA connects the automation to the tools your team already uses (CRM, online store, calendar, email, accounting). A new tool is only suggested if the current one cannot be connected, and the reason is explained during the assessment.',
+  },
+  {
+    q: 'How long does an automation take?',
+    a: 'A targeted automation is usually delivered within a few weeks. The timeline depends mostly on how quickly we get access to your software and your reference documents, more than on the build itself. The exact schedule is set after the assessment.',
+  },
+  {
+    q: 'Does my data stay compliant with Quebec privacy law (Law 25)?',
+    a: 'Every FournIA project that touches personal information goes through a Law 25 review before the build: data minimization, consent, transfers outside Quebec, human review and retention. You receive a written compliance document for your records.',
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/automatisation-entreprise/"
+  image="/images/services/systemes.webp"
+  imageAlt="A system's workflow on a laptop screen, from request to sent quote"
+  path="/en/custom-systems"
+  title="Custom AI automation for Quebec small businesses | FournIA"
+  description="One specific problem, one system delivered once: follow-ups, quotes, incoming requests or documents automated with AI, connected to your tools, your team trained."
+  h1="A task eating up your hours? We build the system that handles it."
+  lead="Custom systems: we solve one specific problem, set it up in your tools and train your team. One system, one fixed price, delivered once. It belongs to you."
+  serviceName="Custom automation systems"
+  serviceType="Business process automation with artificial intelligence"
+  areaServed={['Quebec', "Montreal's North Shore", 'Laval', 'Montreal']}
+  faq={faq}
+  updated="2026-11-18"
+  essentiel={[
+    { t: 'Who it is for', d: 'Small businesses that already know which task slows them down.' },
+    { t: 'What you get', d: 'A system set up in your tools, and your team trained to use it.' },
+    { t: 'Price', d: 'Fixed, known before we start. Delivered once.' },
+  ]}
+>
+  <h2>Systems already delivered</h2>
+  <p>Text follow-ups, quotes, incoming requests, production documents: a few systems FournIA has built.</p>
+  <Realisations court={true} lang="en" />
+
+  <h2>How it works</h2>
+  <ol class="etapes">
+    <li><strong>A free 30-minute assessment.</strong> We check that a system really solves your problem. If not, we tell you.</li>
+    <li><strong>We measure the task.</strong> We follow it step by step and put a number on the time it takes. You get a detailed game plan.</li>
+    <li><strong>We build and test.</strong> With your documents and access, in the software you already use.</li>
+    <li><strong>We deliver and train.</strong> Demo, tests with your team, setup, training. The system is yours, in your accounts.</li>
+  </ol>
+
+  <h2>Why AI changes automation</h2>
+  <p>Classic automation follows fixed rules and breaks as soon as a request arrives in an unexpected format. With AI, the system <strong>reads and understands</strong> a freely written email, a PDF invoice or an incomplete request, prepares the next step and leaves the decision to a person.</p>
+  <p>According to the <a href="https://statistique.quebec.ca/fr/document/situation-attentes-entreprises-quebec/publication/adoption-et-utilisation-intelligence-artificielle-entreprises-au-quebec-2024-2025" target="_blank" rel="noopener">Institut de la statistique du Québec</a> (in French), 12.7% of Quebec businesses used AI in production during the 12 months before the second quarter of 2025.</p>
+  <p>Want to rethink the whole business over several months? That is <a href="/en/ai-support/">full AI support</a>.</p>
+</ServicePage>

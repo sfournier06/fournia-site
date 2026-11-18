@@ -109,6 +109,14 @@ export const publisherLd = {
   ...(SAME_AS.length ? { sameAs: SAME_AS } : {}),
 };
 
+// Pages de service anglaises (accueil /en/ et pied de page anglais). Chaque page a son équivalent français.
+export const SERVICES_EN = [
+  { href: '/en/small-business-ai-montreal/', label: 'AI for small businesses in Montreal' },
+  { href: '/en/ai-support/', label: 'Full AI support' },
+  { href: '/en/ai-training/', label: 'AI training for teams' },
+  { href: '/en/custom-systems/', label: 'Custom automation systems' },
+];
+
 export const SERVICES = [
   { href: '/ia-petite-entreprise-montreal/', label: 'IA pour petite entreprise à Montréal' },
   { href: '/accompagnement-intelligence-artificielle/', label: 'Accompagnement complet en IA' },

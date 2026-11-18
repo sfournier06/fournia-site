@@ -3,10 +3,17 @@
 // Émet au build : WebPage + Service + FAQPage + BreadcrumbList, reliés à l'entité FournIA (#fournia).
 import Base from './Base.astro';
 import Temoignages from '../components/Temoignages.astro';
-import { SITE, CTA, SERVICES } from '../data/entite.mjs';
+import { SITE, CTA, SERVICES, SERVICES_EN } from '../data/entite.mjs';
 
 // `essentiel` (optionnel) : 3 ou 4 points { t, d } affichés sous le bouton, pour comprendre la page en 5 secondes.
-const { path, title, description, h1, lead, serviceName, serviceType, areaServed, faq = [], updated, essentiel = [], image, imageAlt = '' } = Astro.props;
+const { path, title, description, h1, lead, serviceName, serviceType, areaServed, faq = [], updated, essentiel = [], image, imageAlt = '', lang = 'fr', alt } = Astro.props;
+const en = lang === 'en';
+const cta = en ? '/en/diagnostic/' : CTA;
+const L = en
+  ? { accueil: 'Home', home: '/en/', cta1: 'Book a free discovery call', faq: 'Frequently asked questions', postT: 'Is a manual process costing you time?',
+      postP: 'A free 30-minute discovery call to see if AI can help. No commitment.', cta2: 'Book a call', voir: 'See also:', inLang: 'en-CA' }
+  : { accueil: 'Accueil', home: '/', cta1: 'Réserver un appel découverte gratuit', faq: 'Questions fréquentes', postT: 'Un processus manuel vous coûte du temps ?',
+      postP: "Un appel découverte gratuit de 30 minutes pour voir si l'IA peut vous aider. Sans engagement.", cta2: 'Réserver un appel', voir: 'Voir aussi :', inLang: 'fr-CA' };
 const canonical = `${SITE}${path}/`;
 
 const webPageLd = {
@@ -16,7 +23,7 @@ const webPageLd = {
   url: canonical,
   name: title,
   description,
-  inLanguage: 'fr-CA',
+  inLanguage: L.inLang,
   isPartOf: { '@type': 'WebSite', '@id': `${SITE}/#site`, url: `${SITE}/`, name: 'FournIA' },
   about: { '@id': `${SITE}/#fournia` },
   ...(updated ? { dateModified: updated } : {}),
@@ -30,7 +37,7 @@ const serviceLd = {
   url: canonical,
   provider: { '@id': `${SITE}/#fournia` },
   areaServed: (areaServed ?? ['Québec']).map((name) => ({ '@type': 'Place', name })),
-  inLanguage: 'fr-CA',
+  inLanguage: L.inLang,
 };
 const faqLd = faq.length
   ? {
@@ -43,13 +50,13 @@ const breadcrumbLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 1, name: L.accueil, item: `${SITE}${L.home}` },
     { '@type': 'ListItem', position: 2, name: serviceName, item: canonical },
   ],
 };
-const autres = SERVICES.filter((s) => s.href.replace(/\/$/, '') !== path);
+const autres = (en ? SERVICES_EN : SERVICES).filter((s) => s.href.replace(/\/$/, '') !== path);
 ---
-<Base title={title} description={description} canonical={canonical}>
+<Base title={title} description={description} canonical={canonical} lang={lang} alt={alt}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(webPageLd)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceLd)} />
   {faqLd && <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqLd)} />}
@@ -59,10 +66,10 @@ const autres = SERVICES.filter((s) => s.href.replace(/\/$/, '') !== path);
     <article class="svc">
       <div class="wrap-narrow">
         <!-- Haut de page sans `reveal` : visible dès le premier rendu (LCP). -->
-        <div class="crumbs"><a href="/">Accueil</a> <span>/</span> {serviceName}</div>
+        <div class="crumbs"><a href={L.home}>{L.accueil}</a> <span>/</span> {serviceName}</div>
         <h1>{h1}</h1>
         <p class="lead">{lead}</p>
-        <a class="btn btn-primary" href={CTA}>Réserver un appel découverte gratuit <span class="arrow">→</span></a>
+        <a class="btn btn-primary" href={cta}>{L.cta1} <span class="arrow">→</span></a>
 
         {essentiel.length > 0 && (
           <dl class="essentiel">
@@ -77,11 +84,11 @@ const autres = SERVICES.filter((s) => s.href.replace(/\/$/, '') !== path);
         )}
         <div class="prose"><slot /></div>
 
-        <Temoignages />
+        {!en && <Temoignages />}
 
         {faq.length > 0 && (
           <section class="faq">
-            <h2>Questions fréquentes</h2>
+            <h2>{L.faq}</h2>
             {faq.map((f) => (
               <details>
                 <summary>{f.q}</summary>
@@ -92,15 +99,15 @@ const autres = SERVICES.filter((s) => s.href.replace(/\/$/, '') !== path);
         )}
 
         <div class="post-cta">
-          <h3>Un processus manuel vous coûte du temps ?</h3>
-          <p>Un appel découverte gratuit de 30 minutes pour voir si l'IA peut vous aider. Sans engagement.</p>
-          <a class="btn btn-primary" href={CTA}>Réserver un appel <span class="arrow">→</span></a>
+          <h3>{L.postT}</h3>
+          <p>{L.postP}</p>
+          <a class="btn btn-primary" href={cta}>{L.cta2} <span class="arrow">→</span></a>
         </div>
 
         <div class="autres">
-          <span>Voir aussi :</span>
+          <span>{L.voir}</span>
           {autres.map((s) => <a href={s.href}>{s.label}</a>)}
-          <a href="/blog">Le blogue</a>
+          {!en && <a href="/blog">Le blogue</a>}
         </div>
       </div>
     </article>

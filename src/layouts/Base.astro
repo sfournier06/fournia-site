@@ -3,17 +3,29 @@ import Consentement from '../components/Consentement.astro';
 // Shell partagé du site (nav + fond + footer + design system).
 // Utilisé par les pages qui doivent matcher l'accueil (blog, articles).
 import '../styles/global.css';
-import { GOOGLE_VERIFICATION, BING_VERIFICATION, SERVICES } from '../data/entite.mjs';
+import { GOOGLE_VERIFICATION, BING_VERIFICATION, SERVICES, SERVICES_EN } from '../data/entite.mjs';
 
-const { title, description, canonical, ogType = 'website' } = Astro.props;
+// lang : 'fr' (défaut) ou 'en'. alt : chemin de la même page dans l'autre langue (hreflang + bouton FR | EN).
+const { title, description, canonical, ogType = 'website', lang = 'fr', alt } = Astro.props;
+const en = lang === 'en';
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
-const cta = '/diagnostic/';
+const cta = en ? '/en/diagnostic/' : '/diagnostic/';
+const L = en
+  ? { services: 'Services', real: 'Our work', apropos: 'About', blog: 'Blog', cta: 'Book a call', menu: 'Open menu', accueil: '/en/',
+      desc: 'We automate the repetitive tasks of Quebec small businesses. Based in Blainville, on Montreal\'s North Shore.',
+      temoignages: 'Reviews', droits: '© 2026 FournIA. All rights reserved.', temoins: 'Manage cookies' }
+  : { services: 'Services', real: 'Réalisations', apropos: 'À propos', blog: 'Blogue', cta: 'Réserver un appel', menu: 'Ouvrir le menu', accueil: '/',
+      desc: 'On automatise les tâches répétitives des PME du Québec. Basé à Blainville, Rive-Nord de Montréal.',
+      temoignages: 'Témoignages', droits: '© 2026 FournIA. Tous droits réservés.', temoins: 'Gérer les témoins' };
+const autreLangue = alt ?? (en ? '/' : '/en/');
+const frPath = en ? alt : canonical?.replace(siteUrl, '');
+const enPath = en ? canonical?.replace(siteUrl, '') : alt;
 // Monogramme officiel (references/brand/assets/fournia-monogram.svg, copié dans public/brand/).
 const markSvg = '<img src="/brand/fournia-monogram.svg" alt="" width="40" height="40" />';
 import Reseaux from '../components/Reseaux.astro';
 ---
 <!doctype html>
-<html lang="fr-CA">
+<html lang={en ? "en-CA" : "fr-CA"}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,11 +36,13 @@ import Reseaux from '../components/Reseaux.astro';
   <title>{title}</title>
   {description && <meta name="description" content={description} />}
   {canonical && <link rel="canonical" href={canonical} />}
+  {alt && frPath && <link rel="alternate" hreflang="fr-CA" href={`${siteUrl}${frPath}`} />}
+  {alt && enPath && <link rel="alternate" hreflang="en-CA" href={`${siteUrl}${enPath}`} />}
   <meta property="og:type" content={ogType} />
   <meta property="og:title" content={title} />
   {description && <meta property="og:description" content={description} />}
   {canonical && <meta property="og:url" content={canonical} />}
-  <meta property="og:locale" content="fr_CA" />
+  <meta property="og:locale" content={en ? "en_CA" : "fr_CA"} />
   <meta property="og:site_name" content="FournIA" />
   <meta property="og:image" content="https://fournia.net/brand/fournia-lockup-horizontal-dark.png" />
   {GOOGLE_VERIFICATION && <meta name="google-site-verification" content={GOOGLE_VERIFICATION} />}
@@ -49,16 +63,16 @@ import Reseaux from '../components/Reseaux.astro';
 
   <nav id="nav">
     <div class="nav-inner">
-      <a href="/" class="logo" aria-label="FournIA, accueil"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
+      <a href={L.accueil} class="logo" aria-label="FournIA"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
       <ul class="nav-links">
-        <li><a href="/#services">Services</a></li>
-        <li><a href="/#exemples">Réalisations</a></li>
-        <li><a href="/a-propos/">À propos</a></li>
-        <li><a href="/blog">Blogue</a></li>
-        <li><a href="/en/" class="lien-langue" lang="en" hreflang="en-CA" aria-label="English version">EN</a></li>
+        <li><a href={`${L.accueil}#services`}>{L.services}</a></li>
+        <li><a href={`${L.accueil}#exemples`}>{L.real}</a></li>
+        <li><a href={en ? '/en/#apropos' : '/a-propos/'}>{L.apropos}</a></li>
+        {!en && <li><a href="/blog">{L.blog}</a></li>}
+        <li><a href={autreLangue} class="lien-langue" lang={en ? 'fr' : 'en'} hreflang={en ? 'fr-CA' : 'en-CA'} aria-label={en ? 'Version française' : 'English version'}>{en ? 'FR' : 'EN'}</a></li>
       </ul>
-      <a href={cta} class="btn btn-primary cta-nav">Réserver un appel <span class="arrow">→</span></a>
-      <button type="button" class="hamburger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a href={cta} class="btn btn-primary cta-nav">{L.cta} <span class="arrow">→</span></a>
+      <button type="button" class="hamburger" id="burger" aria-label={L.menu} aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -68,9 +82,9 @@ import Reseaux from '../components/Reseaux.astro';
     <div class="wrap">
       <div class="foot-grid">
         <div>
-          <a href="/" class="logo" style="font-size:1.5rem"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
-          <p style="color:var(--mute); margin-top:1rem; max-width:280px; font-size:.92rem;">On automatise les tâches répétitives des PME du Québec. Basé à Blainville, Rive-Nord de Montréal.</p>
-          <Reseaux />
+          <a href={L.accueil} class="logo" style="font-size:1.5rem"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
+          <p style="color:var(--mute); margin-top:1rem; max-width:280px; font-size:.92rem;">{L.desc}</p>
+          <Reseaux lang={lang} />
         </div>
         <div class="foot-contact">
           <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>
@@ -78,15 +92,25 @@ import Reseaux from '../components/Reseaux.astro';
           <a href="/">fournia.net</a>
         </div>
         <div class="foot-contact">
-          <a href="/a-propos/">À propos</a>
-          <a href="/temoignages/">Témoignages</a>
-          {SERVICES.map((sv) => <a href={sv.href}>{sv.label}</a>)}
-          <a href="/#processus">Processus</a>
-          <a href="/blog">Blogue</a>
-          <a href={cta}>Réserver un appel</a>
+          {en ? (
+            <Fragment>
+              {SERVICES_EN.map((sv) => <a href={sv.href}>{sv.label}</a>)}
+              <a href="/en/#preuves">{L.temoignages}</a>
+              <a href={cta}>{L.cta}</a>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <a href="/a-propos/">À propos</a>
+              <a href="/temoignages/">Témoignages</a>
+              {SERVICES.map((sv) => <a href={sv.href}>{sv.label}</a>)}
+              <a href="/#processus">Processus</a>
+              <a href="/blog">Blogue</a>
+              <a href={cta}>Réserver un appel</a>
+            </Fragment>
+          )}
         </div>
       </div>
-      <div class="foot-bottom">© 2026 FournIA. Tous droits réservés. · <a href="#" onclick="window.fourniaTemoins&&fourniaTemoins();return false">Gérer les témoins</a></div>
+      <div class="foot-bottom">{L.droits} · <a href="#" onclick="window.fourniaTemoins&&fourniaTemoins();return false">{L.temoins}</a></div>
     </div>
   </footer>
 
@@ -105,6 +129,6 @@ import Reseaux from '../components/Reseaux.astro';
   </script>
   <!-- Bulle de clavardage SaaS AI System : les messages arrivent dans la boite unifiee du CRM. -->
   <script is:inline defer src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6ae1461330238e5401f16cde" data-source="WEB_USER"></script>
-  <Consentement />
+  <Consentement lang={lang} />
 </body>
 </html>

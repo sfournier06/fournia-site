@@ -1,0 +1,94 @@
+---
+// Version anglaise de /formation-ia-entreprise/ (Formation). Traduction fidèle.
+import ServicePage from '../../layouts/ServicePage.astro';
+
+const MFOR = 'https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/emploi-solidarite-sociale/gmse/02Guide_MFOR_volet_entreprises.pdf';
+
+const faq = [
+  {
+    q: 'What is corporate AI training?',
+    a: 'It is training given to a team, on its own tasks, so it knows how to use artificial intelligence at work: which tools to use, how to word a request, where AI helps, where it gets things wrong, and how to protect client information. It ends with material the team keeps.',
+  },
+  {
+    q: 'How long does AI training for a small business take?',
+    a: "FournIA's basic format is a 3.5 to 5 hour session, in person or by video call. The length adjusts to the number of participants and the tasks covered.",
+  },
+  {
+    q: 'Can we train one person to become the AI expert in the business?',
+    a: "Yes. It is one of FournIA's three formats: one person on the team is trained in depth (tools, best practices, Law 25, small automations) to become the in-house reference and train their colleagues. Training is also given in groups or one on one.",
+  },
+  {
+    q: 'Do participants need to know AI before the training?',
+    a: 'No. The training starts from zero, without jargon, with demos on the team\'s real tasks. Participants who already use ChatGPT or Copilot learn to use them more reliably and more safely.',
+  },
+  {
+    q: 'What does the team keep after the training?',
+    a: 'After a FournIA training, the team keeps specific uses for each participant, a cheat sheet of ready-to-use requests written for its tasks, a one-page AI usage policy drafted together and ready to adopt, a guide to the tools and their privacy settings, and the tutorials from the demos.',
+  },
+  {
+    q: 'Can AI training be funded in Quebec?',
+    a: "Possibly. Services Québec's workforce training measure (MFOR) can fund up to 40% of eligible training expenses, and up to 65% when the training is made necessary by a new technology meant to increase productivity, according to its official guide. Eligibility is confirmed with the Services Québec office in your area, before the training.",
+  },
+  {
+    q: 'Is the training given in Montreal?',
+    a: "Yes. FournIA gives its training in person in Montreal, Laval and on the North Shore, at your business, or by video call anywhere in Quebec.",
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/formation-ia-entreprise/"
+  image="/images/simon-fournier-client.webp"
+  imageAlt="Simon Fournier explains a system to a participant"
+  path="/en/ai-training"
+  title="Corporate AI training in Montreal | FournIA"
+  description="AI training for businesses in Montreal, Laval and the North Shore, without jargon: in a group, one on one, or to train your in-house AI expert."
+  h1="AI explained simply, then put to work in your team."
+  lead="We explain AI in plain words to people who know nothing about it, then put it to work on your real tasks. In person in Montreal, Laval and the North Shore, or by video call."
+  serviceName="Corporate AI training"
+  serviceType="Artificial intelligence training for teams"
+  areaServed={['Montreal', 'Laval', "Montreal's North Shore", 'Quebec']}
+  faq={faq}
+  updated="2026-11-18"
+  essentiel={[
+    { t: 'Who it is for', d: 'Teams starting out with AI, or using it without shared rules.' },
+    { t: 'Format', d: 'In a group, one on one, or to train your in-house expert.' },
+    { t: 'Length', d: 'A 3.5 to 5 hour session for a group.' },
+  ]}
+>
+  <h2>Three formats</h2>
+  <ul class="blocs">
+    <li><strong>In a group</strong><p>The whole team at once, at your office or by video, on your real tasks.</p></li>
+    <li><strong>One on one</strong><p>An owner or employee who moves at their own pace, on their own files.</p></li>
+    <li><strong>Train your in-house AI expert</strong><p>One person on your team learns in depth: the tools, best practices, Law 25 and small automations. They become the reference and train the others.</p></li>
+  </ul>
+
+  <h2>What the training covers</h2>
+  <ul>
+    <li><strong>How AI works</strong>, with examples from your day-to-day, and why it sometimes makes up answers.</li>
+    <li><strong>The right tools</strong>: ChatGPT, Copilot, Claude or Gemini, depending on your tasks, with the privacy settings to turn on.</li>
+    <li><strong>Writing a request that gets a good result</strong>, shown on your tasks, without personal information.</li>
+    <li><strong>Checking an answer</strong> and knowing when not to use AI.</li>
+    <li><strong>Law 25 day to day</strong>: what you give an AI tool, and what you never give it.</li>
+  </ul>
+
+  <h2>How it works</h2>
+  <ol class="etapes">
+    <li><strong>A preparation meeting</strong> with management: we choose the tasks and tools to cover.</li>
+    <li><strong>The training</strong>: demos on your tasks, guided practice, then a usage policy drafted together.</li>
+    <li><strong>The deliverables</strong>, handed to the team so they can redo every step on their own.</li>
+  </ol>
+
+  <h2>What the team keeps</h2>
+  <ul>
+    <li><strong>Three uses per participant</strong>, with the exact text to reuse.</li>
+    <li><strong>A cheat sheet of requests</strong> ready to use, written for your tasks.</li>
+    <li><strong>A one-page usage policy</strong>, ready to adopt.</li>
+    <li><strong>A guide to the tools</strong> and their privacy settings.</li>
+    <li><strong>The tutorials</strong> from the demos.</li>
+  </ul>
+
+  <h2>Funding</h2>
+  <p>According to the <a href={MFOR} target="_blank" rel="noopener">official guide of the workforce training measure</a> (MFOR, business component, Services Québec, updated 2023-06-28, in French), funding can reach 40% of eligible training expenses, and 65% when the training is made necessary by a new technology meant to increase productivity. Eligibility is confirmed with the Services Québec office in your area, before the training.</p>
+  <p>When FournIA builds a system for you, training is always part of the delivery. See <a href="/en/ai-support/">full AI support</a> and <a href="/en/custom-systems/">custom systems</a>.</p>
+</ServicePage>

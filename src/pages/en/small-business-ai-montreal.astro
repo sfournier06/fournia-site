@@ -1,0 +1,75 @@
+---
+// Version anglaise de /ia-petite-entreprise-montreal/. Traduction fidèle.
+import ServicePage from '../../layouts/ServicePage.astro';
+
+const faq = [
+  {
+    q: 'How can a small business in Montreal get started with AI?',
+    a: 'With a single task that costs time every week and follows clear rules: following up with clients, answering incoming requests, preparing quotes, filing documents. We put a number on the time it takes, automate it, train the team, then move on to the next one.',
+  },
+  {
+    q: 'What is the difference between AI support, training and implementation?',
+    a: 'Training teaches the team to use AI. Implementation delivers a system that does the task, supervised by the team (an automation or an AI agent connected to its software). Support covers both, from the assessment to the follow-up after delivery. At FournIA, an implementation always comes with training.',
+  },
+  {
+    q: 'Is AI affordable for a business with fewer than 20 employees?',
+    a: 'Yes, as long as you aim right. A small business does best starting with one or two tasks that cost it hours every week, handed to a reliable system. The gain shows quickly because the task is already measured.',
+  },
+  {
+    q: 'Does FournIA come to Montreal?',
+    a: 'Yes. FournIA is based in Blainville and meets Montreal businesses in person, at their offices, for the assessment, the delivery and the training. The rest of the work can be done by video call.',
+  },
+  {
+    q: 'What about Quebec privacy law (Law 25) for a small business?',
+    a: 'Law 25 governs the personal information held by private businesses in Quebec. At FournIA, a project that touches personal information goes through a written Law 25 review before the build.',
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/ia-petite-entreprise-montreal/"
+  image="/images/secteurs/montreal.webp"
+  imageAlt="A Montreal shop owner at the counter"
+  path="/en/small-business-ai-montreal"
+  title="AI agency for small businesses in Montreal | FournIA"
+  description="AI support, training and implementation for small businesses in Montreal. One task at a time, your team trained, Law 25 reviewed."
+  h1="Artificial intelligence for small businesses in Montreal"
+  lead="FournIA supports Montreal small businesses from A to Z with AI: we find the task that costs you the most time, set up the system that does it under your supervision, and train your team to use it. In person at your office, or by video call."
+  serviceName="AI for small businesses in Montreal"
+  serviceType="AI support, training and implementation"
+  areaServed={['Montreal', 'Laval', "Montreal's North Shore"]}
+  faq={faq}
+  updated="2026-11-18"
+>
+  <h2>Three services, one thread</h2>
+  <table>
+    <thead><tr><th>Service</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td><strong><a href="/en/ai-support/">Full support</a></strong></td><td>The whole business reviewed from A to Z, over 6 months to a year: process review, automation one project at a time, team training at every step.</td></tr>
+      <tr><td><strong><a href="/en/custom-systems/">Custom systems</a></strong></td><td>One specific problem, one system that solves it, built, tested and set up in the software you already use. Delivered once.</td></tr>
+      <tr><td><strong><a href="/en/ai-training/">Training</a></strong></td><td>AI explained in plain words, in a group, one on one, or to train your in-house expert. With a one-page usage policy.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>An AI agency that comes to Montreal</h2>
+  <p>FournIA is based in Blainville and meets Montreal businesses at their offices, for the assessment, the delivery and the training. You talk to the person who designs your systems, from the first call to the follow-up.</p>
+
+  <h2>Built for small businesses</h2>
+  <p>Most businesses with 5 to 50 employees have no IT department and no time to learn a new platform. They have a few tasks that come back every day and eat up hours: follow-ups, quotes, requests that arrive by email or text, order entry. FournIA starts with the most costly one, automates it, then moves on to the next. One measurable project at a time.</p>
+
+  <h2>What it looks like in practice</h2>
+  <ul>
+    <li><strong>Automatic client follow-ups</strong>, by text or email, with the replies sorted for you.</li>
+    <li><strong>Quotes prepared by AI</strong> from the request, with your prices calculated from your price list, approved by a person before they go out.</li>
+    <li><strong>Orders turned into work documents</strong>, without copying from one software to another.</li>
+    <li><strong>A team that uses AI properly</strong>, with shared rules to protect client data.</li>
+  </ul>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>A free 30-minute discovery call</strong>, to see if AI solves a real pain point for you.</li>
+    <li><strong>A paid assessment</strong> at your office in Montreal or by video: the targeted process, step by step, with its cost in time.</li>
+    <li><strong>Implementation</strong> of the system, with your documents and access, and a Law 25 review.</li>
+    <li><strong>Delivery and training</strong> on site, then follow-up.</li>
+  </ol>
+</ServicePage>

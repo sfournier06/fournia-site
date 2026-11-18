@@ -525,19 +525,19 @@ export const en = {
     // Les pages de services n'existent qu'en français : pas de lien en anglais.
     offres: [
       { titre: 'Custom systems', texte: 'One specific problem, one system that solves it. Set up in your tools, delivered once, at a fixed price.',
-        pour: '<b>For you if</b> one specific task costs you hours every week.', image: '/images/services/systemes.webp', lien: null,
+        pour: '<b>For you if</b> one specific task costs you hours every week.', image: '/images/services/systemes.webp', lien: { href: '/en/custom-systems/', label: 'See custom systems →' },
         detail: { voir: 'See how it works →',
           intro: 'One task that costs you hours, one system that takes it over. Built into the tools you already use, your team trained on it, delivered once at a fixed price. It belongs to you.',
           points: [['Who it is for', 'Businesses that already know which task slows them down: follow-ups, quotes, missed calls, documents.'], ['What you get', 'A system set up in your tools, and your team trained to use it.'], ['Price', 'Fixed, known before we start. Delivered once.']],
           etapes: ['Free assessment: 30 minutes to pick the task that costs you the most.', 'A detailed game plan: what the system does, with which tools, and what changes for your team.', 'We build it, test it with your team, train everyone, and stay available after delivery.'] } },
       { titre: 'Full support', texte: 'Your whole business, from A to Z, over 6 to 12 months. A plan, then one project at a time.',
-        pour: '<b>For you if</b> you want a partner for the whole transition.', image: '/images/services/accompagnement.webp', lien: null,
+        pour: '<b>For you if</b> you want a partner for the whole transition.', image: '/images/services/accompagnement.webp', lien: { href: '/en/ai-support/', label: 'See full support →' },
         detail: { voir: 'See how it works →',
           intro: 'Over 6 months to a year, we map your processes, automate what costs you time one project at a time, and train your team at every step.',
           points: [['Who it is for', 'Businesses that want to rethink the whole company, not just one task.'], ['What you get', 'A clear plan, systems in place, a trained team.'], ['Length', '6 months to a year, one project at a time.']],
           etapes: ['Month 1: assessment of your processes and a plan, in order of what saves the most time.', 'Months 2 to 3: the first system goes live and your team is trained on it.', 'Then one project at a time, with a review together every month.'] } },
       { titre: 'Training', texte: 'AI explained in plain words. In a group, one on one, or to train your in-house expert.',
-        pour: '<b>For you if</b> your team needs to understand AI first.', image: '/images/simon-fournier-client.webp', lien: null,
+        pour: '<b>For you if</b> your team needs to understand AI first.', image: '/images/simon-fournier-client.webp', lien: { href: '/en/ai-training/', label: 'See training →' },
         detail: { voir: 'See how it works →',
           intro: 'We explain AI in plain words to people who know nothing about it, then put it to work on your real tasks. In person in Montreal, Laval and the North Shore, or by video call.',
           points: [['Who it is for', 'Teams starting out with AI, or using it without shared rules.'], ['Format', 'In a group, one on one, or to train your in-house expert.'], ['Length', 'A 3.5 to 5 hour session for a group.']],
@@ -583,9 +583,12 @@ export const en = {
   barre: { texte: '<b>Free assessment</b> · 30 minutes', bouton: 'Book', href: '/en/diagnostic/' },
   pied: {
     description: "AI set up in your business, explained simply. Based in Blainville, on Montreal's North Shore.",
-    // Les pages SEO (services, secteurs, blogue) n'existent qu'en français : on ne les liste pas ici.
+    // Pages de service anglaises ; secteurs et blogue n'existent qu'en français.
     liens: [
-      { href: '#services', label: 'Services' },
+      { href: '/en/custom-systems/', label: 'Custom systems' },
+      { href: '/en/ai-support/', label: 'Full AI support' },
+      { href: '/en/ai-training/', label: 'AI training' },
+      { href: '/en/small-business-ai-montreal/', label: 'AI for small businesses in Montreal' },
       { href: '#processus', label: 'How it works' },
       { href: '#faq', label: 'FAQ' },
       { href: '/en/diagnostic/', label: 'Book a call' },

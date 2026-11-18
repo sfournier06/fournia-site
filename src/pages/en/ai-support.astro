@@ -1,0 +1,82 @@
+---
+// Version anglaise de /accompagnement-intelligence-artificielle/ (Accompagnement complet). Traduction fidèle.
+import ServicePage from '../../layouts/ServicePage.astro';
+
+const faq = [
+  {
+    q: 'What is full AI support?',
+    a: 'It is a project run from A to Z with your business, over 6 months to a year. FournIA reviews all your processes, draws up a plan, automates the business one piece at a time, trains your staff at every step and stays involved throughout the transition. Your business does not need in-house technical expertise.',
+  },
+  {
+    q: 'What is the difference between full support and a custom system?',
+    a: 'A custom system solves one specific problem: we build it, deliver it and train the team. Full support looks at the whole business: we automate one process after another following a plan, train the team continuously and adjust along the way.',
+  },
+  {
+    q: 'My team knows nothing about AI. Is that a problem?',
+    a: 'No. That is exactly why full support exists. We explain in plain words how AI works, what it does well and what it does badly, before touching your tools. Nobody needs technical knowledge to start.',
+  },
+  {
+    q: 'Can one person on our team be trained to become the in-house expert?',
+    a: 'Yes. Part of the support can go to training someone on your team to take over: understand the systems, adjust them and build new ones. FournIA can also build everything itself. Both approaches can be combined.',
+  },
+  {
+    q: 'How long does full support last?',
+    a: 'Usually 6 months to a year, depending on the size of the business and the number of processes to review. The initial plan sets the order of the projects and the pace of the meetings.',
+  },
+  {
+    q: 'Is the support done in person?',
+    a: "In person or remotely. Meetings take place in person on Montreal's North Shore, in Laval and in Montreal, or by video call anywhere in Quebec.",
+  },
+  {
+    q: 'How does FournIA respect Quebec privacy law (Law 25) in an AI project?',
+    a: 'Every project that touches personal information goes through a Law 25 review before the build, with special attention to data transfers outside Quebec when an AI model is used. You receive a written compliance document.',
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/accompagnement-intelligence-artificielle/"
+  image="/images/services/accompagnement.webp"
+  imageAlt="A 12-month plan displayed on a screen"
+  path="/en/ai-support"
+  title="Full AI support for Quebec small businesses | FournIA"
+  description="Full AI support for Quebec small businesses, from A to Z over 6 months to a year: process review, automation, team training and follow-up. Law 25 included."
+  h1="Your whole business moves to AI, and we are there at every step."
+  lead="Over 6 months to a year, we review your processes, automate what costs you time one project at a time, and train your team at every step."
+  serviceName="Full AI support"
+  serviceType="AI consulting and integration for businesses"
+  areaServed={['Quebec', "Montreal's North Shore", 'Laval', 'Montreal']}
+  faq={faq}
+  updated="2026-11-18"
+  essentiel={[
+    { t: 'Who it is for', d: 'Small businesses that want to rethink the whole company, not just one task.' },
+    { t: 'What you get', d: 'A clear plan, systems in place, a trained team.' },
+    { t: 'Length', d: '6 months to a year, one project at a time.' },
+  ]}
+>
+  <h2>How it works</h2>
+  <ol class="etapes">
+    <li><strong>We look at everything.</strong> We meet the team and measure the time each step of your processes takes.</li>
+    <li><strong>We hand you a plan.</strong> What to automate, in what order, and what each project saves you.</li>
+    <li><strong>We automate, one project at a time.</strong> Each system is tested with your team and set up in the software you already use.</li>
+    <li><strong>We train the team at every delivery.</strong> If you want, we also train one person to become your in-house AI expert.</li>
+    <li><strong>We stay involved.</strong> Follow-up meetings, adjustments when your needs change, and a review of what was gained.</li>
+  </ol>
+
+  <h2>Three levels, depending on how far you want to go</h2>
+  <ul class="blocs">
+    <li><strong>1. The plan</strong><p>A review of your processes, a map of your data and a prioritized plan. You then choose who carries it out.</p></li>
+    <li><strong>2. The plan and the build</strong><p>Level 1, plus building, testing and setting up the planned systems. The cost of the review is credited toward the build.</p></li>
+    <li><strong>3. The full transformation</strong><p>Level 2, plus ongoing training, monthly follow-up and improvements. This is the 6-month to one-year support.</p></li>
+  </ul>
+  <p>The price depends on the size of the business and the number of processes. We present it in person, after the review. Tools and accounts stay in your name.</p>
+
+  <h2>What sets us apart</h2>
+  <ul>
+    <li><strong>We explain before we install.</strong> Your team knows what AI does well and what it does badly, so they actually use it.</li>
+    <li><strong>Lost time decides the order.</strong> We automate what costs you the most first.</li>
+    <li><strong>A person always approves.</strong> The systems prepare, follow up and sort. You keep the decisions.</li>
+    <li><strong>Law 25 before the build.</strong> Every project that touches personal information has its written compliance document.</li>
+  </ul>
+  <p>Just one task to fix? A <a href="/en/custom-systems/">custom system</a> is simpler. Does your team need to learn first? Start with <a href="/en/ai-training/">training</a>.</p>
+</ServicePage>
