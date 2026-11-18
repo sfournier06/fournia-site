@@ -4,7 +4,9 @@
 // Pas de balisage schema « Review » sur ces avis : Google ne l'accepte pas pour ses propres avis
 // (avis « auto-promotionnels »), et le risque est une pénalité manuelle.
 //
-// Format : { auteur, note, texte, date (approx. selon Google), lien }
+// Format : { auteur, note, texte, texte_en, date (approx. selon Google), lien }
+// texte_en : traduction fidèle pour la version anglaise, toujours affichée avec la mention « Translated from French ».
+// Le texte original (texte) reste la référence et n'est jamais modifié.
 // Source : fiche Google de FournIA, lue par l'API Google Places le 2026-11-17 (5 avis, texte original en français).
 const FICHE = 'https://www.google.com/maps/place/?q=place_id:ChIJsdQghSzNcYYRYtKfR1rBPgc';
 
@@ -13,6 +15,7 @@ export const TOUS_AVIS = [
     auteur: 'Thomas Arbour',
     note: 5,
     texte: "Je recommande Simon et l’équipe de FournIA sans hésiter! Ils ont automatisé la messagerie de mon entreprise, et ça a fait une vraie différence au quotidien. Les suivis avec les clients se font maintenant beaucoup plus rapidement, et on sauve énormément de temps sur les tâches répétitives. Simon a pris le temps de bien comprendre notre fonctionnement, il a été très disponible, et il a livré une solution efficace et adaptée à nos besoins. Un service professionnel et humain. Merci, Simon!",
+    texte_en: "I recommend Simon and the FournIA team without hesitation! They automated my company's messaging, and it made a real difference day to day. Follow-ups with clients now happen much faster, and we save a huge amount of time on repetitive tasks. Simon took the time to really understand how we work, he was very available, and he delivered an effective solution adapted to our needs. A professional and human service. Thank you, Simon!",
     date: '2026-11-16',
     lien: FICHE,
     systeme: 'La réponse aux nouvelles demandes', systeme_en: 'Replying to new requests',
@@ -22,6 +25,7 @@ export const TOUS_AVIS = [
     auteur: 'Freddy Aubuchon',
     note: 5,
     texte: "Simon est un jeune génie. Il trouve des solutions pour tous. Je le recommande à 100%. I'l m'a construit une solution pour ma compagnie qui m'a sauvé énormément de temps et de maux de têtes.",
+    texte_en: 'Simon is a young genius. He finds solutions for everyone. I recommend him 100%. He built a solution for my company that saved me a huge amount of time and headaches.',
     date: '2026-11-14',
     lien: FICHE,
     systeme: 'Un agent de prospection complet', systeme_en: 'A complete outreach agent',
@@ -31,6 +35,7 @@ export const TOUS_AVIS = [
     auteur: 'Karyann Turcotte',
     note: 5,
     texte: "J’ai adoré mon expérience avec Simon! Il était vraiment à l’écoute de mes besoins et est arrivé avec plusieurs idées pour améliorer les pratiques de mon entreprise ! Je le recommande à tous !",
+    texte_en: 'I loved my experience with Simon! He really listened to my needs and came up with several ideas to improve my business practices! I recommend him to everyone!',
     date: '2026-08-20',
     lien: FICHE,
     systeme: 'Les suivis clients par texto', systeme_en: 'Client follow-ups by text message',
@@ -40,6 +45,7 @@ export const TOUS_AVIS = [
     auteur: 'Alexandre Mercier',
     note: 5,
     texte: 'Simon est excellent, il sait très bien détecter les besoins!',
+    texte_en: 'Simon is excellent, he is really good at spotting needs!',
     date: '2026-08-05',
     lien: FICHE,
     // Partenaire (agence), pas un client final : on ne nomme jamais le mandat livré pour lui.
@@ -55,6 +61,7 @@ export const TOUS_AVIS = [
     auteur: 'Stéphane Bernier',
     note: 5,
     texte: "malade, j’ai adoré mon expérience. Ma vie a changé.",
+    texte_en: 'Amazing, I loved my experience. My life has changed.',
     date: '2026-11-17',
     lien: FICHE,
     systeme: 'Les relevés de cartes de crédit, classés dans Excel', systeme_en: 'Credit card statements, sorted into Excel',

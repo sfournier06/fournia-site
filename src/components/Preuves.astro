@@ -12,7 +12,7 @@ const { lang = 'fr' } = Astro.props;
 const en = lang === 'en';
 // Textes de l'interface. Les avis restent TOUJOURS dans leur langue d'origine (jamais traduits).
 const T = en
-  ? { etiquette: 'Testimonials', titre: 'What clients say', origine: 'Reviews shown in their original language (French).',
+  ? { etiquette: 'Testimonials', titre: 'What clients say', origine: null,
       maquette: 'Internal preview: the "Example" cards are layout mockups. They will be replaced by real testimonials and reviews, with written consent. Nothing fictional is published.',
       exemple: 'Example', avisGoogle: 'Google reviews', sur5: 'out of 5', avis: 'reviews', voir: 'See the reviews on Google →', laisser: 'A FournIA client? Leave a review', note5: '5 out of 5', decimale: '.' }
   : { etiquette: 'Témoignages', titre: 'Ce que les clients en disent', origine: null,
@@ -72,7 +72,8 @@ const etoiles = '★★★★★';
                 <figure class:list={['carte-avis', { exemple: avis.length === 0 }]} aria-hidden={copie === 1 ? 'true' : undefined}>
                   {avis.length === 0 && <span class="badge">{T.exemple}</span>}
                   <p class="etoiles" aria-label={T.note5}>{etoiles}</p>
-                  <blockquote lang={en && avis.length > 0 ? 'fr' : undefined}>{a.texte}</blockquote>
+                  <blockquote lang={en && a.texte_en ? 'en' : undefined}>{en && a.texte_en ? a.texte_en : a.texte}</blockquote>
+                  {en && a.texte_en && <p class="traduit">Translated from French</p>}
                   <figcaption>
                     <strong>{a.auteur}</strong>
                     {a.systeme && <span class="systeme">{en ? (a.systeme_en || a.systeme) : a.systeme}</span>}
@@ -139,6 +140,7 @@ const etoiles = '★★★★★';
   .carte-avis figcaption strong { color: var(--white); font-size: .92rem; font-weight: 600; }
   .carte-avis figcaption .systeme { color: var(--lime); font-size: .84rem; }
   .carte-avis figcaption .secteur { color: var(--mute); font-size: .8rem; }
+  .traduit { margin: -.4rem 0 0; color: var(--mute); font-size: .74rem; font-style: italic; }
   .carte-avis figcaption .mention { color: var(--mute); font-size: .74rem; font-style: italic; opacity: .8; }
   @media (max-width: 960px) {
     .videos { grid-template-columns: 1fr 1fr; }

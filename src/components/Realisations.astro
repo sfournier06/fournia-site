@@ -9,8 +9,8 @@ const { limite, court = false, lang = 'fr' } = Astro.props;
 const en = lang === 'en';
 // Textes de l'interface. Les liens « Voir le secteur » mènent à des pages en français : cachés en anglais.
 const T = en
-  ? { aria: 'Delivered systems by sector', enCours: 'In progress', emplacement: 'Placeholder: written or video testimonial from', video: 'Watch the video testimonial', secteur: 'See the sector', prec: 'Previous example', suiv: 'Next example', avisGoogle: 'Google review', note5: '5 out of 5', resultat: 'Result', confidentiel: 'Confidential client' }
-  : { aria: 'Systèmes livrés par secteur', enCours: 'En cours', emplacement: 'Emplacement : témoignage écrit ou vidéo de', video: 'Voir le témoignage vidéo', secteur: 'Voir le secteur', prec: 'Exemple précédent', suiv: 'Exemple suivant', avisGoogle: 'avis Google', note5: '5 sur 5', resultat: 'Résultat', confidentiel: 'Client confidentiel' };
+  ? { aria: 'Delivered systems by sector', enCours: 'In progress', emplacement: 'Placeholder: written or video testimonial from', video: 'Watch the video testimonial', secteur: 'See the sector', prec: 'Previous example', suiv: 'Next example', avisGoogle: 'Google review', note5: '5 out of 5', resultat: 'Result', confidentiel: 'Confidential client', detail: 'See how it works', fermer: 'Close' }
+  : { aria: 'Systèmes livrés par secteur', enCours: 'En cours', emplacement: 'Emplacement : témoignage écrit ou vidéo de', video: 'Voir le témoignage vidéo', secteur: 'Voir le secteur', prec: 'Exemple précédent', suiv: 'Exemple suivant', avisGoogle: 'avis Google', note5: '5 sur 5', resultat: 'Résultat', confidentiel: 'Client confidentiel', detail: 'Voir comment ça marche', fermer: 'Fermer' };
 // Champ traduit s'il existe (ex. titre_en), sinon le français.
 const tr = (r, champ) => (en && r[`${champ}_en`]) || r[champ];
 const liste = typeof limite === 'number' ? REALISATIONS.slice(0, limite) : REALISATIONS;
@@ -21,10 +21,11 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
 ---
 <div class="carrousel" data-carrousel>
   <ul class="piste" id={id} tabindex="0" aria-label={T.aria}>
-    {liste.map((r) => {
+    {liste.map((r, n) => {
       const ok = autorise(r);
+      const dlg = `${id}-d${n}`;
       return (
-        <li class="carte">
+        <li class:list={['carte', { cliquable: court }]}>
           {ok && r.photo ? (
             <div class="bandeau-photo client"><img src={r.photo} alt={r.client ?? ''} loading="lazy" decoding="async" width="800" height="600" /></div>
           ) : ok && r.logo ? (
@@ -39,8 +40,9 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
               <p class="sous-secteur">{ok && r.client ? tr(r, 'secteur') : T.confidentiel}</p>
             </div>
           </div>
-          <h3>{tr(r, 'titre')}</h3>
+          <h3>{court ? <button type="button" class="ouvrir" data-dlg={dlg} aria-haspopup="dialog">{tr(r, 'titre')}</button> : tr(r, 'titre')}</h3>
           {!court && <p class="systeme">{tr(r, 'systeme')}</p>}
+          {court && <span class="voir" aria-hidden="true">{T.detail} <span>→</span></span>}
           {r.resultat_carte && (
             <div class="res">
               <p class="res-lbl">{T.resultat}</p>
@@ -53,6 +55,22 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
               <p>« {r.temoignage.texte} »</p>
               <footer>{r.temoignage.auteur}{r.temoignage.role && `, ${r.temoignage.role}`}</footer>
             </blockquote>
+          )}
+          {court && (
+            <dialog class="detail" id={dlg} aria-label={tr(r, 'titre')}>
+              <button type="button" class="fermer" data-fermer aria-label={T.fermer}>×</button>
+              <p class="secteur">{ok && r.client ? r.client : tr(r, 'secteur')}</p>
+              <p class="sous-secteur">{ok && r.client ? tr(r, 'secteur') : T.confidentiel}</p>
+              <h3>{tr(r, 'titre')}</h3>
+              <p class="systeme">{tr(r, 'systeme')}</p>
+              {r.resultat_carte && (
+                <div class="res">
+                  <p class="res-lbl">{T.resultat}</p>
+                  <p class="res-txt">{tr(r, 'resultat_carte')}</p>
+                </div>
+              )}
+              {r.lien && !en && <a class="lien" href={r.lien}>{T.secteur} <span aria-hidden="true">→</span></a>}
+            </dialog>
           )}
           {!court && <div class="liens">
             {ok && r.video && <a class="lien" href={r.video} target="_blank" rel="noopener">{T.video} <span aria-hidden="true">→</span></a>}
@@ -69,6 +87,13 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
 </div>
 
 <script>
+  // carte cliquable : ouvre la boîte de détail ; clic sur le fond ou × pour fermer
+  document.querySelectorAll('.ouvrir[data-dlg]').forEach((b) => {
+    const d = document.getElementById(b.dataset.dlg);
+    if (!d) return;
+    b.addEventListener('click', () => d.showModal());
+    d.addEventListener('click', (e) => { if (e.target === d || e.target.closest('[data-fermer]')) d.close(); });
+  });
   document.querySelectorAll('[data-carrousel]').forEach((c) => {
     const piste = c.querySelector('.piste');
     c.querySelectorAll('.fleche').forEach((b) => {
@@ -102,9 +127,30 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
   .bandeau-photo { margin: -1.5rem -1.5rem 1.4rem; height: 120px; border-radius: 14px 14px 0 0; overflow: hidden; }
   .bandeau-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .bandeau-photo.client { height: 120px; }
-  .res { padding-top: 1rem; border-top: 1px solid var(--line); }
-  .res-lbl { margin: 0 0 .3rem; color: var(--lime); font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
-  .res-txt { margin: 0; color: var(--white); font-size: 1rem; line-height: 1.45; font-weight: 500; }
+  /* le résultat ressort : bandeau lime en bas de carte, texte blanc plus gros et plus gras */
+  .res { margin: auto -1.5rem -1.5rem; padding: 1.1rem 1.5rem 1.3rem; border-top: 1px solid rgba(183,217,76,.35);
+    background: linear-gradient(180deg, rgba(183,217,76,.14), rgba(183,217,76,.06)); border-radius: 0 0 14px 14px; }
+  .res-lbl { margin: 0 0 .35rem; color: var(--lime); font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .res-txt { margin: 0; color: #fff; font-size: 1.08rem; line-height: 1.4; font-weight: 600; letter-spacing: -.005em; min-height: 5.6em; }
+  .detail .res-txt { min-height: 0; }
+  /* carte cliquable : le bouton du titre couvre toute la carte */
+  .carte.cliquable { position: relative; transition: border-color .25s, transform .3s cubic-bezier(.2,.8,.3,1); }
+  .carte.cliquable:hover { border-color: rgba(183,217,76,.45); transform: translateY(-3px); }
+  .ouvrir { all: unset; cursor: pointer; }
+  .ouvrir::after { content: ''; position: absolute; inset: 0; border-radius: 14px; }
+  .ouvrir:focus-visible::after { outline: 2px solid var(--lime); outline-offset: 2px; }
+  .voir { display: inline-flex; gap: .35rem; color: var(--mute); font-size: .85rem; margin: 0 0 1.2rem; transition: color .2s; }
+  .carte.cliquable:hover .voir { color: var(--lime); }
+  .detail { width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow: auto; padding: 2rem; border-radius: 18px;
+    border: 1px solid var(--glass-b); background: #121212; color: var(--white); }
+  .detail::backdrop { background: rgba(0,0,0,.7); backdrop-filter: blur(4px); }
+  .detail h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; margin: .8rem 0 .8rem; line-height: 1.25; min-height: 0; }
+  .detail .secteur { padding-right: 3rem; }
+  .detail .systeme { color: var(--mute); line-height: 1.6; margin: 0 0 1.4rem; }
+  .detail .res { margin: 0 0 1.2rem; border-radius: 12px; border: 1px solid rgba(183,217,76,.35); }
+  .detail .fermer { position: absolute; top: .8rem; right: .9rem; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line);
+    background: transparent; color: var(--white); font-size: 1.3rem; cursor: pointer; }
+  .detail .fermer:hover { border-color: var(--lime); color: var(--lime); }
   .temoignage p:not(.etoiles) { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .bandeau-photo.client img { object-position: 50% 45%; }
   .temoignage .etoiles { color: #f5c518; letter-spacing: .12em; font-size: .8rem; margin: 0 0 .3rem; }
@@ -112,7 +158,7 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
   .secteur { color: var(--lime); font-size: .9rem; font-weight: 500; margin: 0; }
   .sous-secteur { color: var(--mute); font-size: .82rem; margin: .1rem 0 0; }
   .statut { margin-left: auto; font-size: .75rem; color: var(--mute); border: 1px solid var(--line); border-radius: 99px; padding: .15rem .6rem; }
-  .carte h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; line-height: 1.25; letter-spacing: -.01em; color: var(--white); margin: 0 0 1.2rem; min-height: 3.75em; }
+  .carte h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; line-height: 1.25; letter-spacing: -.01em; color: var(--white); margin: 0 0 1rem; min-height: 3.75em; }
   .systeme { color: var(--mute); font-size: .98rem; line-height: 1.6; margin: 0 0 1rem; }
   .resultat { color: var(--white); font-weight: 500; margin: 0 0 1rem; }
   .temoignage { margin: 0 0 1rem; padding: 0 0 0 .9rem; border-left: 2px solid var(--lime); }

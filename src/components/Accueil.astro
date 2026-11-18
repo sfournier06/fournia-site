@@ -299,6 +299,23 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .offre .pour b { color: var(--lime); font-weight: 500; }
   .offre a { color: var(--lime); font-weight: 500; font-size: .95rem; }
   .offre a:hover { color: var(--lime-l); }
+  .offre-voir { all: unset; cursor: pointer; color: var(--lime); font-weight: 500; font-size: .95rem; }
+  .offre-voir:hover { color: var(--lime-l); }
+  .offre-voir:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; border-radius: 4px; }
+  .offre-detail { width: min(600px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow: auto; padding: 2.2rem; border-radius: 20px;
+    border: 1px solid var(--glass-b); background: #121212; color: var(--white); }
+  .offre-detail::backdrop { background: rgba(0,0,0,.7); backdrop-filter: blur(4px); }
+  .offre-detail h3 { font-size: 1.6rem; margin: 0 2.5rem .8rem 0; }
+  .offre .offre-detail a.btn-primary { color: var(--ink-950); font-weight: 600; }
+  .offre-detail .intro { color: var(--mute); line-height: 1.6; margin-bottom: 1.4rem; }
+  .offre-detail dl { display: grid; gap: .9rem; margin: 0 0 1.4rem; padding: 1.2rem; border: 1px solid var(--line); border-radius: 14px; }
+  .offre-detail dt { color: var(--lime); font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .offre-detail dd { margin: .2rem 0 0; color: var(--white); }
+  .offre-detail ol { margin: 0 0 1.6rem; padding-left: 1.2rem; display: grid; gap: .6rem; color: var(--white); line-height: 1.5; }
+  .offre-detail ol li::marker { color: var(--lime); font-weight: 600; }
+  .offre-detail .fermer { position: absolute; top: .9rem; right: 1rem; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line);
+    background: transparent; color: var(--white); font-size: 1.3rem; cursor: pointer; }
+  .offre-detail .fermer:hover { border-color: var(--lime); color: var(--lime); }
 
   /* ── ÉTAPES ──────────────────────────────────── */
   .etapes { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
@@ -787,13 +804,26 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       <p class="sec-intro reveal">{t.services.intro}</p>
     </div>
     <div class="offres reveal">
-      {t.services.offres.map((o) => (
+      {t.services.offres.map((o, i) => (
         <article class="offre">
           {o.image && <img class="offre-img" src={o.image} alt="" width="1200" height="900" loading="lazy" decoding="async" />}
           <h3>{o.titre}</h3>
           <p>{o.texte}</p>
           <p class="pour" set:html={o.pour}></p>
           {o.lien && <a href={o.lien.href}>{o.lien.label}</a>}
+          {!o.lien && o.detail && (
+            <Fragment>
+              <button type="button" class="offre-voir" data-dlg={`offre-${i}`} aria-haspopup="dialog">{o.detail.voir}</button>
+              <dialog class="offre-detail" id={`offre-${i}`} aria-label={o.titre}>
+                <button type="button" class="fermer" data-fermer aria-label="Close">×</button>
+                <h3>{o.titre}</h3>
+                <p class="intro">{o.detail.intro}</p>
+                <dl>{o.detail.points.map(([t, d]) => <div><dt>{t}</dt><dd>{d}</dd></div>)}</dl>
+                <ol>{o.detail.etapes.map((e) => <li>{e}</li>)}</ol>
+                <a class="btn btn-primary" href="#contact" data-fermer>{t.hero.cta.label} <span class="arrow">→</span></a>
+              </dialog>
+            </Fragment>
+          )}
         </article>
       ))}
     </div>
@@ -1072,6 +1102,14 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     }), { threshold: .6 });
     document.querySelectorAll('[data-compte]').forEach((el) => cio.observe(el));
   })();
+
+  // détail des services (version anglaise) : boîte de dialogue
+  document.querySelectorAll('.offre-voir[data-dlg]').forEach((b) => {
+    const d = document.getElementById(b.dataset.dlg);
+    if (!d) return;
+    b.addEventListener('click', () => d.showModal());
+    d.addEventListener('click', (e) => { if (e.target === d || e.target.closest('[data-fermer]')) d.close(); });
+  });
 
   // menu mobile
   const burger = document.getElementById('burger');
