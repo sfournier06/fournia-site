@@ -9,8 +9,8 @@ const { limite, court = false, lang = 'fr' } = Astro.props;
 const en = lang === 'en';
 // Textes de l'interface. Les liens « Voir le secteur » mènent à des pages en français : cachés en anglais.
 const T = en
-  ? { aria: 'Delivered systems by sector', enCours: 'In progress', emplacement: 'Placeholder: written or video testimonial from', video: 'Watch the video testimonial', secteur: 'See the sector', prec: 'Previous example', suiv: 'Next example', avisGoogle: 'Google review', note5: '5 out of 5', resultat: 'Result' }
-  : { aria: 'Systèmes livrés par secteur', enCours: 'En cours', emplacement: 'Emplacement : témoignage écrit ou vidéo de', video: 'Voir le témoignage vidéo', secteur: 'Voir le secteur', prec: 'Exemple précédent', suiv: 'Exemple suivant', avisGoogle: 'avis Google', note5: '5 sur 5', resultat: 'Résultat' };
+  ? { aria: 'Delivered systems by sector', enCours: 'In progress', emplacement: 'Placeholder: written or video testimonial from', video: 'Watch the video testimonial', secteur: 'See the sector', prec: 'Previous example', suiv: 'Next example', avisGoogle: 'Google review', note5: '5 out of 5', resultat: 'Result', confidentiel: 'Confidential client' }
+  : { aria: 'Systèmes livrés par secteur', enCours: 'En cours', emplacement: 'Emplacement : témoignage écrit ou vidéo de', video: 'Voir le témoignage vidéo', secteur: 'Voir le secteur', prec: 'Exemple précédent', suiv: 'Exemple suivant', avisGoogle: 'avis Google', note5: '5 sur 5', resultat: 'Résultat', confidentiel: 'Client confidentiel' };
 // Champ traduit s'il existe (ex. titre_en), sinon le français.
 const tr = (r, champ) => (en && r[`${champ}_en`]) || r[champ];
 const liste = typeof limite === 'number' ? REALISATIONS.slice(0, limite) : REALISATIONS;
@@ -36,7 +36,7 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
             {!(ok && r.logo) && !r.image && <span class="monogramme" aria-hidden="true">{initiale(ok && r.client ? r.client : tr(r, 'secteur'))}</span>}
             <div>
               <p class="secteur">{ok && r.client ? r.client : tr(r, 'secteur')}</p>
-              {ok && r.client && <p class="sous-secteur">{tr(r, 'secteur')}</p>}
+              <p class="sous-secteur">{ok && r.client ? tr(r, 'secteur') : T.confidentiel}</p>
             </div>
           </div>
           <h3>{tr(r, 'titre')}</h3>
@@ -91,16 +91,18 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
     display: flex; flex-direction: column; background: rgba(255,255,255,.02); }
   .photo { width: calc(100% + 3rem); margin: -1.5rem -1.5rem 1.2rem; height: auto; aspect-ratio: 4 / 3; object-fit: cover;
     border-radius: 14px 14px 0 0; }
-  .tete { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+  .tete { display: flex; align-items: center; gap: .8rem; margin-bottom: .7rem; }
   .monogramme { flex: none; width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center;
     background: rgba(200,255,0,.08); color: var(--lime); font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.15rem; }
-  .bandeau-logo { margin: -1.5rem -1.5rem 1.2rem; height: 88px; border-radius: 14px 14px 0 0; background: #f6f6f2;
-    display: grid; place-items: center; padding: 14px 24px; }
-  .bandeau-logo img { max-width: 70%; max-height: 58px; object-fit: contain; }
-  .bandeau-photo { margin: -1.5rem -1.5rem 1.2rem; height: 88px; border-radius: 14px 14px 0 0; overflow: hidden; }
+  /* tuile du haut : même hauteur pour logo, photo et image de secteur ; fond blanc pur pour que les logos
+     livrés sur fond blanc s'y fondent ; logos ramenés à une hauteur optique commune */
+  .bandeau-logo { margin: -1.5rem -1.5rem 1.4rem; height: 120px; border-radius: 14px 14px 0 0; background: #fff;
+    display: grid; place-items: center; padding: 0 28px; }
+  .bandeau-logo img { height: 46px; width: auto; max-width: 72%; object-fit: contain; }
+  .bandeau-photo { margin: -1.5rem -1.5rem 1.4rem; height: 120px; border-radius: 14px 14px 0 0; overflow: hidden; }
   .bandeau-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .bandeau-photo.client { height: 88px; }
-  .res { margin: .1rem 0 0; padding-top: .8rem; border-top: 1px solid var(--line); }
+  .bandeau-photo.client { height: 120px; }
+  .res { padding-top: 1rem; border-top: 1px solid var(--line); }
   .res-lbl { margin: 0 0 .3rem; color: var(--lime); font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
   .res-txt { margin: 0; color: var(--white); font-size: 1rem; line-height: 1.45; font-weight: 500; }
   .temoignage p:not(.etoiles) { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
@@ -110,7 +112,7 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
   .secteur { color: var(--lime); font-size: .9rem; font-weight: 500; margin: 0; }
   .sous-secteur { color: var(--mute); font-size: .82rem; margin: .1rem 0 0; }
   .statut { margin-left: auto; font-size: .75rem; color: var(--mute); border: 1px solid var(--line); border-radius: 99px; padding: .15rem .6rem; }
-  .carte h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; line-height: 1.25; letter-spacing: -.01em; color: var(--white); margin: 0 0 .6rem; }
+  .carte h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; line-height: 1.25; letter-spacing: -.01em; color: var(--white); margin: 0 0 1.2rem; min-height: 3.75em; }
   .systeme { color: var(--mute); font-size: .98rem; line-height: 1.6; margin: 0 0 1rem; }
   .resultat { color: var(--white); font-weight: 500; margin: 0 0 1rem; }
   .temoignage { margin: 0 0 1rem; padding: 0 0 0 .9rem; border-left: 2px solid var(--lime); }
@@ -125,7 +127,4 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
   .fleche:hover, .fleche:focus-visible { border-color: var(--lime); color: var(--lime); }
   @media (max-width: 900px) { ul.piste { grid-auto-columns: minmax(260px, 78%); } }
   @media (prefers-reduced-motion: reduce) { ul.piste { scroll-behavior: auto; } }
-  @media (max-width: 560px) {
-    ul.piste.piste { align-items: start; }
-  }
 </style>
