@@ -1,0 +1,25 @@
+---
+// Bulle de clavardage SaaS AI System (les messages arrivent dans la boîte unifiée du CRM).
+// Chargée seulement au premier geste du visiteur (défilement, toucher, clic, clavier) ou après 8 s :
+// le script pèse ~200 Ko et ralentissait l'affichage du haut de page sur mobile.
+---
+<script is:inline>
+  (function () {
+    var fait = false;
+    function charger() {
+      if (fait) return;
+      fait = true;
+      var s = document.createElement('script');
+      s.src = 'https://widgets.leadconnectorhq.com/loader.js';
+      s.async = true;
+      s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+      s.setAttribute('data-widget-id', '6ae1461330238e5401f16cde');
+      s.setAttribute('data-source', 'WEB_USER');
+      document.body.appendChild(s);
+    }
+    ['scroll', 'pointerdown', 'keydown', 'mousemove', 'touchstart'].forEach(function (e) {
+      addEventListener(e, charger, { once: true, passive: true });
+    });
+    addEventListener('load', function () { setTimeout(charger, 8000); });
+  })();
+</script>

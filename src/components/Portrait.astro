@@ -9,6 +9,8 @@ const { prioritaire = false, classe = '', alt } = Astro.props;
   {PHOTO_SIMON ? (
     <img
       src={PHOTO_SIMON}
+      srcset={`${PHOTO_SIMON.replace('.webp', '-480.webp')} 480w, ${PHOTO_SIMON} 960w`}
+      sizes="(max-width: 560px) 300px, (max-width: 960px) 360px, 440px"
       alt={alt ?? PHOTO_SIMON_ALT}
       width={PHOTO_SIMON_LARGEUR}
       height={PHOTO_SIMON_HAUTEUR}

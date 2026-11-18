@@ -124,6 +124,16 @@ const etoiles = '★★★★★';
     .piste-avis { animation: none; }
     .defile { overflow-x: auto; }
   }
+  /* téléphone : on glisse au doigt d'un avis à l'autre (plus de défilement automatique) */
+  @media (max-width: 760px), (pointer: coarse) {
+    .defile { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      -webkit-mask-image: none; mask-image: none; margin: 0 -16px; padding: .4rem 16px; scroll-padding-left: 16px; }
+    .defile::-webkit-scrollbar { display: none; }
+    .piste-avis { animation: none; }
+    .piste-avis .carte-avis { scroll-snap-align: start; width: 82vw; max-width: 340px; }
+    .piste-avis .carte-avis[aria-hidden="true"] { display: none; }
+    .piste-avis blockquote { -webkit-line-clamp: unset; display: block; }
+  }
   .note-globale { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.6rem; padding: 0 0 2rem; }
   .note-globale .g { width: 40px; height: 40px; border-radius: 50%; background: #fff; color: #4285f4; display: grid; place-items: center;
     font-family: Arial, sans-serif; font-weight: 700; font-size: 1.2rem; }

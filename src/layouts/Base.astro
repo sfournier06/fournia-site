@@ -1,4 +1,5 @@
 ---
+import ChatDiffere from '../components/ChatDiffere.astro';
 import Consentement from '../components/Consentement.astro';
 // Shell partagé du site (nav + fond + footer + design system).
 // Utilisé par les pages qui doivent matcher l'accueil (blog, articles).
@@ -134,7 +135,7 @@ import { autreLangue as cheminAutreLangue } from '../data/traductions.mjs';
     document.addEventListener('click', (e) => { if (!nav.contains(e.target)) nav.classList.remove('open'); });
   </script>
   <!-- Bulle de clavardage SaaS AI System : les messages arrivent dans la boite unifiee du CRM. -->
-  <script is:inline defer src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6ae1461330238e5401f16cde" data-source="WEB_USER"></script>
+  <ChatDiffere />
   <Consentement lang={lang} />
 </body>
 </html>

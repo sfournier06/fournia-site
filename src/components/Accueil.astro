@@ -1,4 +1,5 @@
 ---
+import ChatDiffere from './ChatDiffere.astro';
 // Gabarit unique de la page d'accueil, en français (/) et en anglais (/en/).
 // Tous les textes visibles vivent dans src/i18n/accueil.mjs : un changement de design ici s'applique
 // aux deux langues. CSS et JS inline (is:global / is:inline).
@@ -162,6 +163,9 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   }
   @media (prefers-reduced-motion: reduce) {
     .glow-1, .glow-2 { animation: none; }
+  }
+  @media (max-width: 767px) {
+    .glow-1, .glow-2 { animation: none; filter: blur(60px); }
   }
 
   /* ── NAV ─────────────────────────────────────── */
@@ -948,7 +952,8 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   // ── background réseau animé (constellation de points) ──
   (function () {
     const cv = document.getElementById('net');
-    if (!cv) return;
+    // téléphone : pas de réseau animé (il occupe le processeur en continu et ralentit le défilement)
+    if (!cv || innerWidth < 768) { if (cv) cv.remove(); return; }
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const ctx = cv.getContext('2d', { alpha: true });
     const dpr = Math.min(devicePixelRatio || 1, 1.5);
@@ -1111,7 +1116,7 @@ const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   document.addEventListener('click', (e) => { if (!nav.contains(e.target)) nav.classList.remove('open'); });
 </script>
   <!-- Bulle de clavardage SaaS AI System : les messages arrivent dans la boite unifiee du CRM. -->
-  <script is:inline defer src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6ae1461330238e5401f16cde" data-source="WEB_USER"></script>
+  <ChatDiffere />
   <Consentement lang={t.lang} />
 </body>
 </html>
