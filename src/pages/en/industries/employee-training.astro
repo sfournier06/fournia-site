@@ -1,0 +1,64 @@
+---
+// Version anglaise de /secteurs/formation-employes/. Traduction fidèle, aucune promesse ajoutée.
+import ServicePage from '../../../layouts/ServicePage.astro';
+import { ZONES } from '../../../data/entite.mjs';
+
+const zones = ZONES.map((z) => (z === 'Montréal' ? 'Montreal' : z));
+
+const faq = [
+  {
+    q: 'Who approves the training content?',
+    a: 'Your in-house expert. FournIA structures and generates; your lead approves each module before it goes live.',
+  },
+  {
+    q: 'Can the assistant make up answers?',
+    a: 'It is limited to your documents and must say so when the answer is not in them. We test it on real questions before launch.',
+  },
+  {
+    q: 'Are there grants for training?',
+    a: 'Quebec programs can cover part of the development of training content. FournIA points you in the right direction, and your accountant confirms eligibility.',
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/secteurs/formation-employes/"
+  image="/images/secteurs/formation-employes.webp"
+  imageAlt="An employee taking a training course on a tablet"
+  path="/en/industries/employee-training"
+  title="AI-powered employee training platforms | FournIA"
+  description="Turn your manuals and procedures into interactive training, with quizzes and an AI assistant that answers your employees' questions, for Quebec businesses."
+  h1="Employee training: from the manual to an interactive platform"
+  lead="Many businesses have a training manual that nobody reads all the way through. FournIA turns your manuals and procedures into short modules, with quizzes and an AI assistant that answers questions from your own documents."
+  serviceName="Employee training"
+  serviceType="Process automation for small businesses"
+  areaServed={zones}
+  faq={faq}
+  updated="2026-11-18"
+>
+  <h2>What costs time</h2>
+  <ul>
+    <li>A manual hundreds of pages long, hard for a new employee to follow.</li>
+    <li>The same questions asked of experienced employees.</li>
+    <li>No way of knowing what each employee has really understood.</li>
+    <li>Onboarding new employees that depends on who is available.</li>
+  </ul>
+
+  <h2>What FournIA can automate</h2>
+  <ul>
+    <li>Short modules drawn from your documents, approved by your expert.</li>
+    <li>Quizzes to check understanding.</li>
+    <li>An AI assistant that answers from your manuals only.</li>
+    <li>Progress tracking for each employee.</li>
+  </ul>
+  <p>You stay in control of decisions. The system prepares, you approve.</p>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>A free 30-minute discovery call.</strong></li>
+    <li><strong>An assessment</strong> of your process, from the request to delivery.</li>
+    <li><strong>The build</strong> on your tools, one automation at a time.</li>
+    <li><strong>Training</strong> for your team and follow-up.</li>
+  </ol>
+  <p>Every project that involves personal information goes through a review under Quebec's privacy law (<a href="/en/blog/law-25-ai-compliance-quebec-2026/">Law 25</a>). See also the <a href="/en/industries/">other industries</a>.</p>
+</ServicePage>

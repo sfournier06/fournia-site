@@ -2,7 +2,8 @@
 // problème. Usage : npm run build && npm run seo:check
 // Vérifie chaque page HTML : title (10-65 car.), meta description (70-170), canonical, un seul h1,
 // lang fr-CA (en-CA sous /en/), JSON-LD parsable, liens internes qui pointent vers une page existante,
-// et l'absence de tirets longs dans le texte visible (règle de voix FournIA).
+// l'absence de tirets longs dans le texte visible (règle de voix FournIA), et le bilinguisme :
+// chaque page a sa jumelle dans l'autre langue (hreflang fr-CA et en-CA), qui existe et pointe en retour.
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
@@ -50,6 +51,15 @@ for (const file of pages) {
     const h = m[1];
     if (h.startsWith('/_astro/') || h.startsWith('/brand/') || /\.(css|png|svg|jpg|webp|xml|txt)$/.test(h)) continue;
     if (!routeExists(h)) err(rel, `lien interne mort : ${h}`);
+  }
+  // bilinguisme : les deux balises hreflang, vers des pages qui existent et qui se répondent
+  const hl = Object.fromEntries([...html.matchAll(/<link rel="alternate" hreflang="([a-zA-Z-]+)" href="https:\/\/fournia\.net([^"]*)"/g)].map((m) => [m[1], m[2]]));
+  const estPrivee = /noindex/.test(html.match(/<meta name="robots" content="([^"]*)"/)?.[1] ?? '');
+  if (!hl['fr-CA'] || !hl['en-CA']) { if (!estPrivee) err(rel, 'version dans l\'autre langue manquante (hreflang fr-CA / en-CA)'); }
+  else {
+    for (const [lg, h] of [['fr-CA', hl['fr-CA']], ['en-CA', hl['en-CA']]]) if (!routeExists(h)) err(rel, `hreflang ${lg} vers une page qui n'existe pas : ${h}`);
+    const soi = rel.startsWith('/en/') ? hl['en-CA'] : hl['fr-CA'];
+    if (soi !== rel) err(rel, `hreflang de la page elle-même incorrect : ${soi}`);
   }
   const visible = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ');
   if (/—|–/.test(visible)) warn(rel, 'tiret long ou demi-cadratin dans le texte visible');

@@ -1,0 +1,67 @@
+---
+// Version anglaise de /secteurs/services-en-ligne/. Traduction fidèle, aucune promesse ajoutée.
+import ServicePage from '../../../layouts/ServicePage.astro';
+import { ZONES } from '../../../data/entite.mjs';
+
+const zones = ZONES.map((z) => (z === 'Montréal' ? 'Montreal' : z));
+
+const faq = [
+  {
+    q: 'Which online service businesses can automate their operations?',
+    a: 'Coaches, consultants, trainers and online course creators, agencies and anyone who sells their expertise remotely. What they have in common: requests that come in through several channels and a call to book before making a sale.',
+  },
+  {
+    q: 'Which tasks should I automate first?',
+    a: 'Replying to new requests (form, email, Instagram and Facebook messages), appointment booking, reminders before the call and following up with people who do not show up.',
+  },
+  {
+    q: 'What about after the sale?',
+    a: 'Onboarding the new client: contract, payment, information form and access sent automatically, then follow-up reminders at the right times.',
+  },
+  {
+    q: "Is my clients' data protected?",
+    a: "Every project goes through a review under Quebec's privacy law (Law 25). We collect the minimum information and document where it is hosted.",
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/secteurs/services-en-ligne/"
+  image="/images/secteurs/services-en-ligne.webp"
+  imageAlt="A coach on a video call"
+  path="/en/industries/online-services"
+  title="Automation for coaches and online services | FournIA"
+  description="Centralized requests, booked calls, reminders and new client onboarding: AI automation for online service businesses in Quebec."
+  h1="Automation for online services"
+  lead="When you sell your expertise remotely, every request goes through a call. FournIA automates the reply, appointment booking, reminders and new client onboarding, so you can spend your time on calls and on the work."
+  serviceName="Online services"
+  serviceType="Process automation for online service businesses"
+  areaServed={zones}
+  faq={faq}
+  updated="2026-11-18"
+>
+  <h2>What costs time</h2>
+  <ul>
+    <li><strong>Requests scattered</strong> between the form, emails and direct messages.</li>
+    <li><strong>Back-and-forth</strong> to find a time for a call.</li>
+    <li><strong>Missed appointments</strong> with no follow-up.</li>
+    <li><strong>Manual onboarding</strong> of each new client: contract, payment, access.</li>
+  </ul>
+
+  <h2>What FournIA can automate</h2>
+  <ul>
+    <li><strong>A single inbox</strong> for all requests, with a reply within minutes.</li>
+    <li><strong>A booking link</strong> connected to your real calendar.</li>
+    <li><strong>Reminders before the call</strong> and a follow-up after a no-show.</li>
+    <li><strong>New client onboarding</strong>: contract, payment and access sent on their own.</li>
+  </ul>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>A free 30-minute discovery call.</strong></li>
+    <li><strong>An assessment</strong> of the path from the request to an active client.</li>
+    <li><strong>The build</strong> on your tools.</li>
+    <li><strong>Training</strong> and follow-up.</li>
+  </ol>
+  <p>See also: <a href="/en/custom-systems/">business automation</a> and the <a href="/en/industries/">other industries</a>.</p>
+</ServicePage>

@@ -1,0 +1,74 @@
+---
+// Version anglaise de /consultant-ia-rive-nord/. Traduction fidèle, aucune promesse ajoutée.
+import ServicePage from '../../layouts/ServicePage.astro';
+import { ZONES } from '../../data/entite.mjs';
+
+const zones = ZONES.map((z) => (z === 'Montréal' ? 'Montreal' : z));
+
+const faq = [
+  {
+    q: 'Where is FournIA located?',
+    a: "FournIA is based in Blainville, on Montreal's North Shore. Meetings take place in person on the North Shore, in Laval and in Montreal, or by video call anywhere in Quebec.",
+  },
+  {
+    q: 'Which North Shore cities are served?',
+    a: 'Blainville, Sainte-Thérèse, Boisbriand, Rosemère, Mirabel, Terrebonne, Saint-Jérôme and Laval, as well as Montreal. For a business elsewhere in Quebec, the support is provided remotely.',
+  },
+  {
+    q: 'Why choose a local AI consultant?',
+    a: "Because bringing in AI relies on trust and on a good understanding of your operations. Meeting your team in person, seeing your processes on site and training your employees at your premises cuts down the back-and-forth. FournIA applies Quebec's privacy law (Law 25) to every project and helps identify the Quebec and federal assistance programs that may apply.",
+  },
+  {
+    q: 'Who is behind FournIA?',
+    a: "FournIA was founded in April 2026 in Blainville by Simon Fournier. The team designs the systems (automations, AI agents, custom applications), sets them up in the client's tools and trains the teams who use them.",
+  },
+  {
+    q: 'How do I get started?',
+    a: 'With a free 30-minute discovery call. Together, we look at whether AI solves a real pain point in your business. If it does, the next step is an audit of your processes.',
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/consultant-ia-rive-nord/"
+  image="/images/simon-fournier-travail.webp"
+  imageAlt="Simon Fournier working on a system"
+  path="/en/ai-consultant-north-shore"
+  title="Automation and AI for North Shore small businesses | FournIA"
+  description="Business automation and AI consulting in Blainville, on Montreal's North Shore, for small businesses in Laval, Mirabel, Terrebonne and Saint-Jérôme."
+  h1="Business automation and AI on Montreal's North Shore"
+  lead="FournIA is an artificial intelligence consulting firm based in Blainville. We help small businesses on the North Shore, in Laval and in Montreal automate their repetitive tasks and bring in AI, in person at their premises or by video call."
+  serviceName="AI consultant, North Shore"
+  serviceType="Artificial intelligence consulting"
+  areaServed={zones}
+  faq={faq}
+  updated="2026-11-18"
+>
+  <h2>An AI consultant near you</h2>
+  <p>FournIA is based in Blainville, on the North Shore. We can come and see how your team works, meet the people who will do the tasks, and train everyone on site on delivery day.</p>
+
+  <h2>Business automation on the North Shore</h2>
+  <p>Client follow-ups, quotes, requests that come in by email or text, order entry: these are the tasks FournIA automates for small businesses in Blainville, Laval, Mirabel, Terrebonne and the surrounding area. The system connects to your current software, your team is trained on site, and every project that involves personal information goes through a Law 25 review. The details: <a href="/en/custom-systems/">business automation</a>.</p>
+
+  <h2>Cities served</h2>
+  <ul>
+    {zones.map((v) => <li>{v}</li>)}
+  </ul>
+  <p>Elsewhere in Quebec, the support is provided by video call, with the same steps.</p>
+
+  <h2>What FournIA does for businesses in the region</h2>
+  <ul>
+    <li><strong><a href="/en/custom-systems/">Custom systems</a></strong>: one specific problem (follow-ups, quotes, orders, data between software), one system delivered once.</li>
+    <li><strong><a href="/en/ai-support/">Full support</a></strong>: the business reviewed from A to Z over 6 months to 1 year, with team training at every step.</li>
+    <li><strong><a href="/en/ai-training/">AI training</a></strong>: AI explained in plain words, in a group, one-on-one or to train your in-house expert.</li>
+  </ul>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>A free 30-minute discovery call</strong>, by phone or video.</li>
+    <li><strong>An audit of your processes</strong>, preferably in person at your premises.</li>
+    <li><strong>The build</strong> of the systems, using your documents and your access.</li>
+    <li><strong>Delivery and training</strong> on site or by video call, depending on the size of the team.</li>
+  </ol>
+  <p>Every project that involves personal information goes through a review under Quebec's privacy law (<a href="/en/blog/law-25-ai-compliance-quebec-2026/">Law 25</a>) before the build.</p>
+</ServicePage>

@@ -7,6 +7,7 @@ const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
+    seoTitle: z.string().optional(),
     description: z.string(),
     slug: z.string().optional(),
     pubDate: z.coerce.date(),
@@ -22,4 +23,23 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+// Blogue anglais : mêmes champs ; `fr` = id (nom de fichier) de l'article français traduit.
+const blogEn = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog-en' }),
+  schema: z.object({
+    title: z.string(),
+    seoTitle: z.string().optional(),
+    description: z.string(),
+    fr: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    author: z.string().default('Simon Fournier'),
+    publisher: z.string().default('FournIA'),
+    heroImage: z.string().optional(),
+    heroAlt: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
+  }),
+});
+
+export const collections = { blog, blogEn };

@@ -1,5 +1,6 @@
 ---
 title: "Par où commencer avec l'IA quand on est une PME au Québec en 2026 ?"
+seoTitle: "Par où commencer avec l'IA quand on est une PME"
 description: "Pour démarrer l'IA en PME québécoise: une seule tâche répétitive, un outil existant, mesurer le temps gagné, puis élargir. Pas de gros budget ni d'équipe technique."
 slug: "par-ou-commencer-ia-pme-quebec-2026"
 pubDate: 2026-06-10

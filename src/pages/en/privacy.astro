@@ -1,0 +1,176 @@
+---
+// Version anglaise de /confidentialite/ (politique de confidentialité, Loi 25). Traduction fidèle.
+// La version française prévaut en cas de divergence (mention en haut de page).
+// Note : baseline conforme Loi 25, pas un avis juridique. À faire réviser si besoin.
+import Base from '../../layouts/Base.astro';
+
+const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
+const canonical = `${siteUrl}/en/privacy/`;
+const maj = 'November 4, 2026';
+---
+<Base
+  title="Privacy policy | FournIA"
+  description="How FournIA collects, uses and protects your personal information, in compliance with Quebec's privacy law (Law 25)."
+  canonical={canonical}
+  lang="en"
+>
+  <main>
+    <article class="post">
+      <div class="wrap-narrow">
+        <nav class="crumbs"><a href="/en/">Home</a> <span>/</span> Privacy</nav>
+        <h1>Privacy policy</h1>
+        <p class="meta">Last updated: {maj}</p>
+        <p class="traduction">This is a translation. In case of discrepancy, the <a href="/confidentialite/" hreflang="fr-CA" lang="fr">French version</a> prevails.</p>
+        <div class="prose">
+          <p>
+            FournIA (Simon Fournier, a business registered in Quebec, NEQ 2282026550) cares about
+            protecting your personal information. This policy explains what information we collect,
+            why, who it is shared with and what rights you have, in accordance with Quebec's privacy
+            law (Law 25) (An Act to modernize legislative provisions as regards the protection of
+            personal information).
+          </p>
+
+          <h2>Person in charge of the protection of personal information</h2>
+          <p>
+            Simon Fournier is the person in charge of the protection of personal information at
+            FournIA. For any question or request: <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>.
+          </p>
+
+          <h2>Information we collect</h2>
+          <ul>
+            <li><strong>When you book a call</strong> (through the SaaS AI System calendar): your name, your email address, and any information you give us about your business and your needs.</li>
+            <li><strong>When you fill out a form</strong> (on the site or in a Meta ad): the contact details and answers you enter.</li>
+            <li><strong>When you browse the site</strong>: technical data (pages viewed, device, source of the visit) through cookies and measurement tools, including the Meta pixel and Google Analytics.</li>
+          </ul>
+          <p>We only collect what is needed to answer you and prepare a possible engagement. We do not ask for sensitive information.</p>
+
+          <h2>Why we use it</h2>
+          <ul>
+            <li>To communicate with you, schedule and hold the discovery call or the assessment.</li>
+            <li>To understand your needs and prepare a recommendation or a proposal.</li>
+            <li>To measure the performance of our ads and improve the site.</li>
+          </ul>
+          <p>We do not use your information for any other purpose without your consent.</p>
+
+          <h2>Cookies, Meta pixel, Google Analytics and visit tracking</h2>
+          <p>
+            The site uses cookies and the Meta pixel (Facebook, Instagram) to measure the
+            effectiveness of our ads and show relevant content. <strong>These tools stay turned off
+            until you accept them</strong> in the consent banner shown on your first visit. You can
+            change your mind at any time with the "Manage cookies" link at the bottom of every page,
+            delete cookies in your browser, and manage your ad preferences directly in your Meta
+            account. Refusing cookies does not prevent you from booking a call.
+          </p>
+          <p>
+            The site also uses a tracking script from our customer relationship management platform,
+            SaaS AI System. It measures pages viewed and forms filled out. If you send us your contact
+            details through a form, your visits may be linked to your file so that we can better
+            answer your request. This tracking only turns on if you accept cookies. The chat bubble,
+            however, is always available: the messages you write there reach us in the same platform.
+          </p>
+          <p>
+            We also use Google Analytics to measure traffic to the site: pages viewed, where visits
+            come from, type of device, clicks on the booking button and forms sent. We do not send it
+            your name or your email. Like the other measurement tools, Google Analytics only turns on
+            if you accept cookies.
+          </p>
+          <p>
+            The first replies in the chat bubble are written by an artificial intelligence assistant,
+            based on the public content of this site. It can answer your general questions and book a
+            discovery call. It makes no decision about you: Simon Fournier reads the conversations and
+            takes over as soon as you ask. Your messages are processed by the SaaS AI System platform,
+            in the United States.
+          </p>
+
+          <h2>Sharing and transfers outside Quebec</h2>
+          <p>
+            We never sell your information. We use providers based outside Quebec to run our tools.
+            By submitting your information, you understand that it may be processed outside Quebec,
+            under the agreements of these providers:
+          </p>
+          <ul>
+            <li><strong>Meta</strong> (ads, pixel): United States.</li>
+            <li><strong>Google</strong> (Google Analytics, traffic measurement): United States.</li>
+            <li><strong>Calendly</strong> (old appointment booking links, being phased out): United States.</li>
+            <li><strong>HubSpot</strong> (customer relationship management): United States.</li>
+            <li><strong>SaaS AI System</strong> (customer relationship management, appointment booking, site visit tracking, chat): United States.</li>
+            <li><strong>Google</strong> (email, calendar): United States.</li>
+            <li><strong>Netlify</strong> (site hosting): United States.</li>
+            <li><strong>Twilio</strong> (sending text messages / SMS): United States.</li>
+          </ul>
+          <p>We limit the information sent to these tools to what is strictly necessary.</p>
+
+          <h2>Text messaging (SMS)</h2>
+          <p>
+            If you consent to receive text messages from FournIA or from a FournIA client (for
+            example follow-up reminders from your advisor), the following terms apply:
+          </p>
+          <ul>
+            <li>We do not sell or share your mobile phone numbers or your SMS opt-in data with third
+              parties for marketing or promotional purposes.</li>
+            <li>Message frequency varies: usually a few messages per year (follow-up reminders and one follow-up message), depending on your file.</li>
+            <li>Message and data rates may apply.</li>
+            <li>You can unsubscribe at any time by replying STOP, and get help by replying AIDE
+              (French for "help").</li>
+            <li>Messages are delivered through our provider Twilio (United States).</li>
+          </ul>
+
+          <h2>Retention</h2>
+          <p>
+            We keep your information for as long as needed to follow up on your request and, where
+            applicable, for the length of our business relationship. When it is no longer required,
+            we delete or anonymize it.
+          </p>
+
+          <h2>Security</h2>
+          <p>
+            We take reasonable measures to protect your information against loss and unauthorized
+            access. Your information is never stored in plain text in a public code repository.
+          </p>
+
+          <h2>Your rights</h2>
+          <p>
+            You can at any time request access to your information, its correction or its deletion,
+            and withdraw your consent. Write to us at
+            <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a> and we will follow up
+            within the time limits set by law. If you are not satisfied, you can file a complaint
+            with the Commission d'accès à l'information du Québec (CAI).
+          </p>
+
+          <h2>Changes</h2>
+          <p>
+            We may update this policy. The date of the last update appears at the top of the page.
+          </p>
+
+          <h2>Contact us</h2>
+          <p>
+            FournIA, Simon Fournier<br />
+            <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a><br />
+            <a href="tel:+15148632973">514 863 2973</a>
+          </p>
+        </div>
+      </div>
+    </article>
+  </main>
+</Base>
+
+<style>
+  main { position: relative; z-index: 1; }
+  .post { padding: 8.5rem 0 4rem; }
+  .wrap-narrow { width: min(760px, 92vw); margin: 0 auto; }
+  .crumbs { font-size: .85rem; color: var(--mute-d); margin-bottom: 1.4rem; }
+  .crumbs a:hover { color: var(--lime); }
+  .crumbs span { margin: 0 .4rem; }
+  .post h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.08; letter-spacing: -.02em; font-weight: 700; margin-bottom: 1rem; }
+  .meta { color: var(--mute-d); font-size: .92rem; margin-bottom: 2rem; }
+  .prose { color: var(--mute); font-size: 1.06rem; line-height: 1.75; }
+  .prose :global(h2) { font-family: 'Space Grotesk', sans-serif; color: var(--white); font-size: 1.5rem; line-height: 1.2; letter-spacing: -.01em; margin: 2.4rem 0 .9rem; }
+  .prose :global(p) { margin-bottom: 1.2rem; }
+  .prose :global(ul) { margin: 0 0 1.2rem 1.3rem; }
+  .prose :global(li) { margin-bottom: .5rem; }
+  .prose :global(a) { color: var(--lime); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(183,217,76,.4); }
+  .prose :global(a:hover) { text-decoration-color: var(--lime); }
+  .prose :global(strong) { color: var(--white); font-weight: 600; }
+  .traduction { color: var(--mute-d); font-size: .9rem; font-style: italic; margin: -1.2rem 0 2rem; }
+  .traduction a { color: var(--lime); text-decoration: underline; text-underline-offset: 2px; }
+</style>

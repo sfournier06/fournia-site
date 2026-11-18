@@ -1,0 +1,121 @@
+---
+import Consentement from '../../../components/Consentement.astro';
+// Ad angle page (Meta), English version. No form: the button leads to the diagnostic.
+// noindex: campaign page, no organic SEO for now.
+import '../../../styles/global.css';
+
+const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
+const pageUrl = 'https://fournia.net/en/offer/missed-calls/';
+---
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Missed call: automatic response | FournIA</title>
+<meta name="description" content="Your phone rings while you're on a job site. A system calls back or replies for you. Free 30-minute diagnostic.">
+<link rel="canonical" href={pageUrl} />
+<link rel="alternate" hreflang="fr-CA" href="https://fournia.net/offre/appel-manque/" />
+<link rel="alternate" hreflang="en-CA" href="https://fournia.net/en/offer/missed-calls/" />
+<link rel="alternate" hreflang="x-default" href="https://fournia.net/offre/appel-manque/" />
+<meta property="og:title" content="Missed call: automatic response | FournIA">
+<meta property="og:description" content="Your phone rings while you're on a job site. A system calls back or replies for you. Free 30-minute diagnostic.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_CA">
+<meta property="og:url" content={pageUrl}>
+<meta property="og:image" content={`${siteUrl}/brand/fournia-lockup-horizontal-dark.png`}>
+<link rel="icon" type="image/svg+xml" href="/brand/fournia-favicon.svg">
+<link rel="icon" type="image/png" href="/brand/fournia-icon-512.png">
+<link rel="apple-touch-icon" href="/brand/fournia-icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Syne:wght@800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Syne:wght@800&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Syne:wght@800&family=Inter:wght@400;500;600&display=swap"></noscript>
+
+<style>
+  html, body { min-height: 100vh; overflow-x: hidden; max-width: 100%; }
+  .bg-soft { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .bg-soft .halo { position: absolute; top: -18vh; left: 50%; transform: translateX(-50%); width: 70vw; height: 70vw; max-width: 900px; max-height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(183,217,76,.10), transparent 65%); }
+  .bg-soft .grid-lines { position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse 75% 55% at 50% 0%, #000 20%, transparent 70%); opacity: .5; }
+
+  .shell { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 2.4rem 1rem 3rem; max-width: 100%; }
+  .brand { display: flex; align-items: center; gap: .6rem; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.35rem; letter-spacing: -.03em; margin-bottom: 2rem; }
+  .brand .mark { width: 1.7em; height: 1.7em; display: inline-flex; }
+  .brand .mark svg { width: 100%; height: 100%; }
+  .brand .ia { color: var(--lime); }
+
+  .card { width: 100%; max-width: min(640px, 100%); background: #141414; border: 1px solid var(--glass-b); border-radius: 22px; padding: 2.4rem; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+  @media (max-width: 560px) { .card { padding: 1.7rem 1.2rem; } }
+
+  .eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--lime); margin-bottom: 1.2rem; }
+  h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.7rem, 5vw, 2.3rem); line-height: 1.1; letter-spacing: -.02em; font-weight: 700; margin-bottom: 1rem; overflow-wrap: break-word; }
+  .lead { color: var(--mute); font-size: 1.02rem; margin-bottom: 1.4rem; }
+  .points { list-style: none; display: grid; gap: .6rem; margin-bottom: 1.6rem; padding: 1rem 1.1rem; background: var(--glass); border: 1px solid var(--glass-b); border-radius: 14px; }
+  .points li { display: flex; align-items: flex-start; gap: .6rem; font-size: .92rem; color: var(--white); line-height: 1.4; }
+  .points li::before { content: ''; flex: none; width: 6px; height: 6px; margin-top: .5rem; border-radius: 50%; background: var(--lime); }
+  .points-title { font-size: .85rem; color: var(--mute-d); margin-bottom: .4rem; }
+
+  .action-line { color: var(--white); font-size: .96rem; margin-bottom: .8rem; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; font-family: 'Space Grotesk'; font-weight: 600; font-size: 1rem; padding: 1rem 1.5rem; border-radius: 100px; border: none; background: var(--lime); color: var(--ink-950); box-shadow: 0 6px 22px rgba(183,217,76,.22); width: 100%; max-width: 100%; text-align: center; }
+  .btn:hover { background: var(--lime-l); }
+  .btn .arrow { transition: transform .25s; }
+  .btn:hover .arrow { transform: translateX(4px); }
+
+  .vsl { margin-top: 2rem; }
+  .vsl-title { font-size: .85rem; color: var(--mute-d); margin-bottom: .6rem; }
+  .vsl-box { width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; background: rgba(255,255,255,.03); border: 1px dashed var(--glass-b); display: grid; place-items: center; color: var(--mute); font-size: .92rem; padding: 1rem; text-align: center; }
+
+  .foot { position: relative; z-index: 1; margin-top: 2rem; text-align: center; color: var(--mute-d); font-size: .82rem; }
+  .foot a { color: var(--mute); } .foot a:hover { color: var(--lime); }
+  .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--lime); }
+</style>
+</head>
+<body>
+
+<div class="bg-soft">
+  <div class="grid-lines"></div>
+  <div class="halo"></div>
+</div>
+
+<div class="shell">
+  <a href="/en/" class="brand"><span class="mark" set:html={`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs><filter id="fglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <g fill="none" stroke="#b7d94c" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M50 16 L79 33 L79 67 L50 84 L21 67 L21 33 Z" stroke-width="3"/>
+    <path d="M50 50 L50 16 M50 50 L79 67 M50 50 L21 67" stroke-width="2.2" opacity="0.9"/>
+  </g>
+  <g fill="#b7d94c"><circle cx="50" cy="16" r="4.6"/><circle cx="79" cy="33" r="4.6"/><circle cx="79" cy="67" r="4.6"/><circle cx="50" cy="84" r="4.6"/><circle cx="21" cy="67" r="4.6"/><circle cx="21" cy="33" r="4.6"/></g>
+  <circle cx="50" cy="50" r="7" fill="#c9e86b" filter="url(#fglow)"/>
+</svg>`}></span><span>Fourn<span class="ia">IA</span></span></a>
+
+  <main class="card">
+    <span class="eyebrow">Free AI diagnostic</span>
+    <h1>Your phone rings while you're on a job site. Who answers?</h1>
+    <p class="lead">If nobody answers within the hour, some of your calls go to a competitor. We set up a system that calls back or replies for you, in the tools you already use.</p>
+
+    <p class="points-title">What the diagnostic shows you:</p>
+    <ul class="points">
+      <li>Who answers calls when you're on a job site</li>
+      <li>How many requests go to someone else while they wait</li>
+      <li>Which tool you already use can call back for you</li>
+    </ul>
+
+    <a href="/en/diagnostic/" class="btn">Book your free 30-minute diagnostic <span class="arrow">&#8594;</span></a>
+
+    <section class="vsl" aria-label="Intro video">
+      <p class="vsl-title">Intro video</p>
+      <!-- VSL to produce: no approved file yet. Replace this block when Simon approves the final VSL. -->
+      <div class="vsl-box">Video coming soon. In the meantime, book your diagnostic above.</div>
+    </section>
+  </main>
+
+  <div class="foot">
+    <a href="/en/">Home</a> &nbsp;·&nbsp; <a href="/en/privacy/">Privacy policy</a> &nbsp;·&nbsp; &#169; 2026 FournIA
+  </div>
+</div>
+
+<Consentement lang="en" />
+</body>
+</html>

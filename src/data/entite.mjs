@@ -115,6 +115,8 @@ export const SERVICES_EN = [
   { href: '/en/ai-support/', label: 'Full AI support' },
   { href: '/en/ai-training/', label: 'AI training for teams' },
   { href: '/en/custom-systems/', label: 'Custom automation systems' },
+  { href: '/en/ai-consultant-north-shore/', label: 'AI consultant on the North Shore' },
+  { href: '/en/industries/', label: 'Automation by industry' },
 ];
 
 export const SERVICES = [

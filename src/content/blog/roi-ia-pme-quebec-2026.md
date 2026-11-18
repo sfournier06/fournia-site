@@ -1,5 +1,6 @@
 ---
 title: "Quel est le retour sur investissement de l'IA pour une PME au Québec ?"
+seoTitle: "Le retour sur investissement de l'IA pour une PME"
 description: "ROI de l'IA pour les PME québécoises en 2026 : chiffres FCEI, BDC et ISQ, délais de rentabilisation et méthode pour choisir le bon premier projet."
 slug: "roi-ia-pme-quebec-2026"
 pubDate: 2026-06-10
@@ -79,7 +80,7 @@ Les projets qui déçoivent souvent : les chatbots externes mal cadrés, les tab
 
 Choisir mal coûte cher. Choisir bien fait gagner 12 mois.
 
-FournIA accompagne les PME québécoises dans l'identification du projet à plus fort ROI. Un audit IA (entre 100 $ et 500 $) permet de cibler l'automatisation qui se rentabilise le plus vite, en cartographiant les processus actuels, en chiffrant le coût caché de chaque tâche manuelle, et en validant la faisabilité technique avant tout engagement de build.
+FournIA accompagne les PME québécoises dans l'identification du projet à plus fort ROI. Le diagnostic gratuit de 30 minutes permet de cibler l'automatisation qui se rentabilise le plus vite ; ensuite, on cartographie les processus actuels, on chiffre le coût caché de chaque tâche manuelle et on valide la faisabilité technique avant tout engagement de build.
 
 Trois questions à se poser avant tout projet :
 

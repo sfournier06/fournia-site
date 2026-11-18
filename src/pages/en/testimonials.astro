@@ -1,0 +1,156 @@
+---
+// Version anglaise de /temoignages/. Traduction fidèle de l'interface.
+// Avis Google : texte_en affiché avec la mention « Translated from French » (l'original reste dans src/data/avis.mjs).
+// Témoignages écrits : aucune traduction n'existe dans src/data/temoignages.mjs, ils restent en français (lang="fr").
+// Tant qu'aucune preuve n'existe, la page reste en noindex et montre seulement les systèmes livrés.
+import Base from '../../layouts/Base.astro';
+import Realisations from '../../components/Realisations.astro';
+import { SITE } from '../../data/entite.mjs';
+import { AVIS, LIEN_FICHE_GOOGLE } from '../../data/avis.mjs';
+import { TEMOIGNAGES } from '../../data/temoignages.mjs';
+import { REALISATIONS } from '../../data/realisations.mjs';
+import { APERCU } from '../../data/apercu.mjs';
+
+const CTA = '/en/diagnostic/';
+const canonical = `${SITE}/en/testimonials/`;
+const title = 'Client testimonials and reviews | FournIA';
+const description = 'What Quebec small businesses that trusted FournIA with automation and AI have to say: Google reviews, testimonials and delivered systems.';
+
+const ok = (x) => Boolean(x && x.consentement && x.consentement.date);
+const avis = AVIS.filter((a) => a && a.texte && a.auteur);
+const ecrits = TEMOIGNAGES.filter((t) => t && t.citation && t.nom && ok(t));
+const videos = [
+  ...TEMOIGNAGES.filter((t) => ok(t) && t.video).map((t) => ({ nom: t.entreprise || t.nom, lien: t.video })),
+  ...REALISATIONS.filter((r) => ok(r) && r.video).map((r) => ({ nom: r.client, lien: r.video })),
+];
+const vide = avis.length === 0 && ecrits.length === 0 && videos.length === 0;
+const nommes = REALISATIONS.filter((r) => r.client);
+const etoiles = (n) => '★'.repeat(n) + '☆'.repeat(5 - n);
+---
+<Base title={title} description={description} canonical={canonical} lang="en">
+  {vide && !APERCU && <meta slot="head" name="robots" content="noindex, follow" />}
+  <main>
+    <article class="svc">
+      <div class="wrap-a">
+        <div class="crumbs"><a href="/en/">Home</a> <span>/</span> Testimonials</div>
+        <h1>What our clients say</h1>
+        <p class="lead">Quebec small businesses that handed their repetitive tasks to FournIA. Their words, not ours.</p>
+        {APERCU && <p class="apercu">Internal preview: the dotted frames are placeholders. They get filled with real reviews and testimonials once written consent is received. None of this is online.</p>}
+
+        {(avis.length > 0 || APERCU) && (
+          <section aria-labelledby="t-avis">
+            <div class="entete">
+              <h2 id="t-avis">Google reviews</h2>
+              {LIEN_FICHE_GOOGLE && <a class="lien" href={LIEN_FICHE_GOOGLE} target="_blank" rel="noopener">See all reviews on Google →</a>}
+            </div>
+            <div class="grille">
+              {avis.length > 0
+                ? avis.map((a) => (
+                    <figure class="carte">
+                      <p class="etoiles" aria-label={`${a.note} out of 5`}>{etoiles(a.note)}</p>
+                      <blockquote lang={a.texte_en ? 'en' : 'fr'}>{a.texte_en || a.texte}</blockquote>
+                      {a.texte_en && <p class="traduit">Translated from French</p>}
+                      <figcaption><strong>{a.auteur}</strong>{a.systeme && <span class="sys">{a.systeme_en || a.systeme}</span>}{a.secteur && <span>{a.secteur_en || a.secteur}</span>}{a.mention && <span><em>{a.mention_en || a.mention}</em></span>}{a.lien && <a href={a.lien} target="_blank" rel="noopener">Google review</a>}</figcaption>
+                    </figure>
+                  ))
+                : [1, 2, 3].map(() => (
+                    <figure class="carte emplacement">
+                      <p class="etoiles" aria-hidden="true">★★★★★</p>
+                      <p>Placeholder: a Google review copied word for word, with its link.</p>
+                    </figure>
+                  ))}
+            </div>
+          </section>
+        )}
+
+        {(ecrits.length > 0 || APERCU) && (
+          <section aria-labelledby="t-ecrits">
+            <h2 id="t-ecrits">Testimonials</h2>
+            <div class="grille">
+              {ecrits.length > 0
+                ? ecrits.map((t) => (
+                    <figure class="carte">
+                      {t.logo && <div class="logo"><img src={t.logo} alt={t.entreprise ?? ''} loading="lazy" /></div>}
+                      <blockquote lang="fr">« {t.citation} »</blockquote>
+                      <p class="traduit">In French, as written by the client</p>
+                      <figcaption><strong>{t.nom}</strong><span>{[t.role, t.entreprise].filter(Boolean).join(', ')}</span></figcaption>
+                    </figure>
+                  ))
+                : nommes.map((r) => (
+                    <figure class="carte emplacement">
+                      {r.logo ? <div class="logo"><img src={r.logo} alt={r.client} loading="lazy" /></div> : <p class="nom">{r.client}</p>}
+                      <p>Placeholder: {r.client}'s testimonial, in their own words, approved in writing.</p>
+                    </figure>
+                  ))}
+            </div>
+          </section>
+        )}
+
+        {(videos.length > 0 || APERCU) && (
+          <section aria-labelledby="t-videos">
+            <h2 id="t-videos">Video testimonials</h2>
+            <div class="grille videos">
+              {videos.length > 0
+                ? videos.map((v) => (
+                    <a class="carte video" href={v.lien} target="_blank" rel="noopener">
+                      <span class="play" aria-hidden="true">▶</span>
+                      <strong>{v.nom}</strong>
+                      <span>Watch the video</span>
+                    </a>
+                  ))
+                : [1, 2, 3].map(() => (
+                    <div class="carte video emplacement">
+                      <span class="play" aria-hidden="true">▶</span>
+                      <span>Placeholder: 30 to 60 second video, posted on your account</span>
+                    </div>
+                  ))}
+            </div>
+          </section>
+        )}
+
+        <section aria-labelledby="t-systemes">
+          <h2 id="t-systemes">The systems we have delivered</h2>
+          <Realisations lang="en" />
+        </section>
+
+        <div class="fin">
+          <p>Your business could be next.</p>
+          <a class="btn btn-primary" href={CTA}>Book my free assessment <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </article>
+  </main>
+</Base>
+
+<style>
+  .svc { padding: 8.5rem 0 4rem; position: relative; z-index: 1; }
+  .wrap-a { width: min(1100px, 92vw); margin: 0 auto; }
+  .crumbs { font-size: .85rem; color: var(--mute); margin-bottom: 1.4rem; }
+  .crumbs a:hover { color: var(--lime); }
+  .crumbs span { margin: 0 .4rem; }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -.03em; font-weight: 700; margin-bottom: 1.2rem; }
+  .lead { color: var(--mute); font-size: 1.15rem; line-height: 1.6; max-width: 40rem; margin-bottom: 2rem; }
+  .apercu { border: 1px solid var(--lime); color: var(--lime); border-radius: 12px; padding: .9rem 1.1rem; font-size: .92rem; margin-bottom: 1rem; }
+  section { margin-top: 3.5rem; }
+  h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); letter-spacing: -.02em; margin-bottom: 1.4rem; }
+  .entete { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+  .lien { color: var(--lime); font-size: .92rem; }
+  .grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+  .carte { margin: 0; padding: 1.5rem; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.02);
+    display: flex; flex-direction: column; gap: .8rem; }
+  .carte.emplacement { border-style: dashed; color: var(--mute); font-size: .92rem; }
+  .etoiles { color: #f5c518; letter-spacing: .15em; margin: 0; }
+  blockquote { color: var(--white); line-height: 1.6; margin: 0; }
+  figcaption { display: flex; flex-direction: column; gap: .15rem; font-size: .9rem; color: var(--mute); }
+  figcaption strong { color: var(--white); font-family: 'Space Grotesk', sans-serif; }
+  figcaption .sys { color: var(--lime); }
+  .logo { background: #fff; border-radius: 10px; height: 84px; display: grid; place-items: center; padding: 10px 18px; }
+  .logo img { max-width: 100%; max-height: 62px; object-fit: contain; }
+  .nom { color: var(--white); font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; margin: 0; }
+  .videos .video { aspect-ratio: 9 / 12; justify-content: center; align-items: center; text-align: center; text-decoration: none; color: var(--mute); }
+  .play { width: 56px; height: 56px; border-radius: 99px; display: grid; place-items: center; background: var(--lime); color: #0a0a0a; font-size: 1.2rem; }
+  a.video:hover { border-color: var(--lime); }
+  .fin { margin-top: 4rem; padding: 2.4rem; border: 1px solid var(--line); border-radius: 18px; text-align: center; }
+  .fin p { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; margin-bottom: 1.2rem; }
+  .traduit { margin: -.4rem 0 0; color: var(--mute); font-size: .78rem; font-style: italic; }
+</style>

@@ -4,14 +4,25 @@
 import Base from './Base.astro';
 import { publisherLd } from '../data/entite.mjs';
 
-const { id, title, description, pubDate, updatedDate, author, publisher, heroImage, heroAlt, tags, faq } = Astro.props;
+const { id, title, description, pubDate, updatedDate, author, publisher, heroImage, heroAlt, tags, faq, lang = 'fr', imagesDe, seoTitle } = Astro.props;
+// Titre de l'onglet et de Google : seoTitle (court) s'il existe, suffixe « | FournIA » seulement s'il tient en 65 caractères.
+const titreSeo = seoTitle ?? title;
+const titrePage = `${titreSeo} | FournIA`.length <= 65 ? `${titreSeo} | FournIA` : titreSeo;
+const en = lang === 'en';
+// imagesDe : en anglais, les images restent dans le dossier de l'article français
+const dossierImages = imagesDe ?? id;
+const L = en
+  ? { accueil: 'Home', home: '/', blog: 'Blog', blogHref: '/en/blog/', par: 'by', cta: '/en/diagnostic/', ctaT: 'Is a manual process costing you time?',
+      ctaP: 'A free 30-minute discovery call to see if AI can help. No commitment.', ctaB: 'Book a call', locale: 'en-CA' }
+  : { accueil: 'Accueil', home: '/', blog: 'Blogue', blogHref: '/blog/', par: 'par', cta: '/diagnostic/', ctaT: 'Un processus manuel vous coûte du temps ?',
+      ctaP: "Un appel découverte gratuit de 30 minutes pour voir si l'IA peut vous aider. Sans engagement.", ctaB: 'Réserver un appel', locale: 'fr-CA' };
 
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
-const canonical = `${siteUrl}/blog/${id}/`;
+const canonical = en ? `${siteUrl}/en/blog/${id}/` : `${siteUrl}/blog/${id}/`;
 const published = (pubDate instanceof Date ? pubDate : new Date(pubDate)).toISOString();
 const modified = (updatedDate ? (updatedDate instanceof Date ? updatedDate : new Date(updatedDate)) : (pubDate instanceof Date ? pubDate : new Date(pubDate))).toISOString();
-const heroSrc = heroImage ? heroImage.replace('./', `/blog/${id}/`) : null;
-const fmtDate = (d) => new Date(d).toLocaleDateString('fr-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+const heroSrc = heroImage ? heroImage.replace('./', `/blog/${dossierImages}/`) : null;
+const fmtDate = (d) => new Date(d).toLocaleDateString(L.locale, { year: 'numeric', month: 'long', day: 'numeric' });
 
 const organization = publisherLd;
 const articleLd = {
@@ -19,7 +30,7 @@ const articleLd = {
   '@type': 'Article',
   headline: title,
   description,
-  inLanguage: 'fr-CA',
+  inLanguage: L.locale,
   datePublished: published,
   dateModified: modified,
   author: { '@type': 'Person', '@id': `${siteUrl}/#simon-fournier`, name: author ?? 'Simon Fournier' },
@@ -43,13 +54,13 @@ const breadcrumbLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${siteUrl}/` },
-    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blog/` },
+    { '@type': 'ListItem', position: 1, name: L.accueil, item: `${siteUrl}${en ? '/en/' : '/'}` },
+    { '@type': 'ListItem', position: 2, name: L.blog, item: `${siteUrl}${L.blogHref}` },
     { '@type': 'ListItem', position: 3, name: title, item: canonical },
   ],
 };
 ---
-<Base title={`${title} | FournIA`} description={description} canonical={canonical} ogType="article">
+<Base title={titrePage} description={description} canonical={canonical} ogType="article" lang={lang}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleLd)} />
   {faqLd && <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqLd)} />}
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbLd)} />
@@ -57,17 +68,17 @@ const breadcrumbLd = {
   <main>
     <article class="post">
       <div class="wrap-narrow">
-        <div class="crumbs reveal"><a href="/">Accueil</a> <span>/</span> <a href="/blog">Blogue</a></div>
+        <div class="crumbs reveal"><a href={en ? "/en/" : "/"}>{L.accueil}</a> <span>/</span> <a href={L.blogHref}>{L.blog}</a></div>
         {tags?.[0] && <span class="post-tag reveal">{tags[0]}</span>}
         <h1 class="reveal" data-d="1">{title}</h1>
-        <p class="meta reveal" data-d="2"><time datetime={published}>{fmtDate(pubDate)}</time> · par {author ?? 'Simon Fournier'}</p>
+        <p class="meta reveal" data-d="2"><time datetime={published}>{fmtDate(pubDate)}</time> · {L.par} {author ?? 'Simon Fournier'}</p>
         {heroSrc && <img class="hero reveal" data-d="3" src={heroSrc} alt={heroAlt ?? title} />}
         <div class="prose reveal" data-d="3"><slot /></div>
 
         <div class="post-cta">
-          <h3>Un processus manuel vous coûte du temps ?</h3>
-          <p>Un appel découverte gratuit de 30 minutes pour voir si l'IA peut vous aider. Sans engagement.</p>
-          <a class="btn btn-primary" href="/diagnostic/">Réserver un appel <span class="arrow">→</span></a>
+          <h3>{L.ctaT}</h3>
+          <p>{L.ctaP}</p>
+          <a class="btn btn-primary" href={L.cta}>{L.ctaB} <span class="arrow">→</span></a>
         </div>
       </div>
     </article>
@@ -95,6 +106,10 @@ const breadcrumbLd = {
   .prose :global(p) { margin-bottom: 1.2rem; }
   .prose :global(ul), .prose :global(ol) { margin: 0 0 1.2rem 1.3rem; }
   .prose :global(li) { margin-bottom: .5rem; }
+  /* tableaux larges : défilement horizontal dans le tableau, jamais dans la page (mobile) */
+  .prose :global(table) { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; margin: 0 0 1.4rem; font-size: .95rem; }
+  .prose :global(th), .prose :global(td) { padding: .55rem .8rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .prose :global(th) { color: var(--white); white-space: nowrap; }
   .prose :global(a) { color: var(--lime); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(183,217,76,.4); }
   .prose :global(a:hover) { text-decoration-color: var(--lime); }
   .prose :global(strong) { color: var(--white); font-weight: 600; }

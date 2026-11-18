@@ -1,0 +1,67 @@
+---
+// Version anglaise de /secteurs/traiteurs/. Traduction fidèle, aucune promesse ajoutée.
+import ServicePage from '../../../layouts/ServicePage.astro';
+import { ZONES } from '../../../data/entite.mjs';
+
+const zones = ZONES.map((z) => (z === 'Montréal' ? 'Montreal' : z));
+
+const faq = [
+  {
+    q: 'Which tasks can a caterer automate?',
+    a: 'Preparing service offers from menus and prices, production plans drawn from orders, comparing supplier invoices with agreed prices and following up on quotes.',
+  },
+  {
+    q: 'Can AI calculate my prices?',
+    a: 'The calculations stay in code that applies your exact rules (price per person, service fees, taxes). AI is used to understand the request and to write. This separation prevents errors from made-up prices.',
+  },
+  {
+    q: 'Has FournIA worked with a caterer before?',
+    a: 'Yes. For a Montreal corporate caterer, FournIA built a service offer generator in its branding, a production planning tool and a supplier price analysis.',
+  },
+  {
+    q: 'Does it integrate with Shopify or my management software?',
+    a: 'Often, yes. We first check what your software allows us to read or write, then build around it. Nothing is promised before access is confirmed.',
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/secteurs/traiteurs/"
+  image="/images/secteurs/traiteurs.webp"
+  imageAlt="A corporate caterer's kitchen"
+  path="/en/industries/caterers"
+  title="Automation for caterers and food services | FournIA"
+  description="Service offers in minutes, automatic production plans, verified supplier invoices: AI automation for caterers in Quebec."
+  h1="Automation for caterers"
+  lead="Between quotes, production plans and supplier invoices, a caterer spends hours on tasks that repeat. FournIA automates those tasks using your menus, your prices and your tools, for corporate and event caterers in Quebec."
+  serviceName="Caterers"
+  serviceType="Process automation for caterers"
+  areaServed={zones}
+  faq={faq}
+  updated="2026-11-18"
+>
+  <h2>What costs time for a caterer</h2>
+  <ul>
+    <li><strong>Service offers built by hand</strong>, line by line, with the risk of a pricing error.</li>
+    <li><strong>Production plans copied over</strong> from orders, every day.</li>
+    <li><strong>Supplier invoices never compared</strong> with negotiated prices.</li>
+    <li><strong>Quotes sent without any follow-up.</strong></li>
+  </ul>
+
+  <h2>What FournIA can automate</h2>
+  <ul>
+    <li><strong>A service offer generator</strong> that starts from the client's request and produces a document in your branding, with your real prices.</li>
+    <li><strong>Production plans</strong> generated from orders, ready for the kitchen.</li>
+    <li><strong>Supplier invoice checks</strong> against your price lists, with the gaps highlighted.</li>
+    <li><strong>Automatic quote follow-ups</strong> until the client replies.</li>
+  </ul>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>A free 30-minute discovery call.</strong></li>
+    <li><strong>An assessment</strong> based on real examples: offers, orders, invoices.</li>
+    <li><strong>The build</strong> and calibration on your documents.</li>
+    <li><strong>Training</strong> for the team and a pilot on real requests.</li>
+  </ol>
+  <p>See also: <a href="/en/custom-systems/">business automation</a> and the <a href="/en/industries/">other industries</a>.</p>
+</ServicePage>

@@ -110,13 +110,13 @@ Un prix de consultant IA est justifié quand trois conditions sont réunies.
 
 **Le mandat inclut la formation et la conformité Loi 25.** Un consultant IA sérieux intègre la conformité Loi 25 (protection des renseignements personnels, encadrée par la Commission d'accès à l'information du Québec) dans son mandat, surtout si le projet traite des données clients. Ce n'est pas un disclaimer : c'est une étape concrète qui protège la PME.
 
-FournIA pratique une grille transparente : audit entre 100 $ et 500 $, implantation entre 500 $ et 15 000 $ selon la complexité, accompagnement mensuel entre 300 $ et 1 500 $. La formation de l'équipe et le passage par le checkpoint Loi 25 sont toujours inclus dans le mandat d'implantation.
+Chez FournIA, chaque projet a un prix fixe, connu avant de commencer et présenté en personne, après un diagnostic gratuit de 30 minutes. La formation de l'équipe et la vérification Loi 25 sont toujours incluses dans le mandat d'implantation.
 
 ## Ce qu'il faut retenir avant de signer
 
 Avant de signer avec un consultant IA au Québec, vérifier trois éléments : la grille de prix est-elle écrite, la subvention DEC-IRIA est-elle prise en compte, et la formation de l'équipe est-elle incluse. Une PME qui répond non à l'un des trois paie probablement trop cher pour ce qu'elle reçoit.
 
-Pour discuter d'un projet IA concret avec une grille de prix transparente, l'audit FournIA (100 $ à 500 $) est conçu comme un point de départ sans engagement : un diagnostic, une recommandation chiffrée et une feuille de route. Contact : [fournia.net](https://fournia.net).
+Pour discuter d'un projet IA concret, le diagnostic gratuit de 30 minutes de FournIA est un point de départ sans engagement : on regarde la tâche qui vous coûte le plus et on vous dit si l'IA peut vraiment vous aider. [Réserver mon diagnostic](/diagnostic/).
 
 ## FAQ
 

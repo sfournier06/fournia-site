@@ -1,0 +1,67 @@
+---
+// Version anglaise de /secteurs/conseillers-financiers/. Traduction fidèle, aucune promesse ajoutée.
+import ServicePage from '../../../layouts/ServicePage.astro';
+import { ZONES } from '../../../data/entite.mjs';
+
+const zones = ZONES.map((z) => (z === 'Montréal' ? 'Montreal' : z));
+
+const faq = [
+  {
+    q: 'Which tasks can a financial advisor automate?',
+    a: 'Client follow-ups every 6 or 12 months, following up with prospects who never signed, replying to missed calls, appointment booking and reminders the day before.',
+  },
+  {
+    q: 'Do the messages stay personal?',
+    a: "Yes. Each message carries the client's first name and your name, comes from your business number and stops as soon as the person replies. You pick up the conversation yourself.",
+  },
+  {
+    q: 'What about client data privacy?',
+    a: "Every project goes through a review under Quebec's privacy law (Law 25): minimal data, consent, documented hosting and no financial information sent to an AI tool unless necessary.",
+  },
+  {
+    q: 'Has FournIA worked with advisors before?',
+    a: 'Yes. FournIA set up automatic text follow-ups for a financial security advisor in Quebec, with managed replies and appointment booking.',
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/secteurs/conseillers-financiers/"
+  image="/secteurs/conseillere.webp"
+  imageAlt="A financial advisor's office"
+  path="/en/industries/financial-advisors"
+  title="Automation for financial and insurance advisors | FournIA"
+  description="Client follow-ups every 6 months, prospects followed up, missed calls returned: AI automation for financial and insurance advisors in Quebec, Law 25 compliant."
+  h1="Automation for financial and insurance advisors"
+  lead="An advisor lives off relationships, but 6-month follow-ups and prospects to contact again often come after everything else. FournIA automates those follow-ups so that every client and every prospect gets the right message at the right time, from your number and in your name."
+  serviceName="Financial advisors"
+  serviceType="Client follow-up automation for financial advisors"
+  areaServed={zones}
+  faq={faq}
+  updated="2026-11-18"
+>
+  <h2>What costs an advisor time</h2>
+  <ul>
+    <li><strong>Clients who have not heard from you in a year</strong>, even though regular follow-up is where referrals come from.</li>
+    <li><strong>Dozens of prospects never followed up</strong> after a first meeting.</li>
+    <li><strong>Calls missed</strong> during a meeting, never returned.</li>
+    <li><strong>A half-filled CRM</strong> that no longer tells you who to contact.</li>
+  </ul>
+
+  <h2>What FournIA can automate</h2>
+  <ul>
+    <li><strong>An automatic follow-up every 6 or 12 months</strong> for each client, with appointment booking.</li>
+    <li><strong>Prospect follow-ups</strong> that stop as soon as they reply.</li>
+    <li><strong>A text after a missed call</strong>.</li>
+    <li><strong>An organized CRM</strong> built from your calendar and your contacts.</li>
+  </ul>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>A free 30-minute discovery call.</strong></li>
+    <li><strong>A Law 25 review</strong> before touching your data.</li>
+    <li><strong>The build</strong> and registration of your sending number.</li>
+    <li><strong>Training</strong> and fine-tuning of the messages with you.</li>
+  </ol>
+  <p>See also: <a href="/en/custom-systems/">business automation</a> and the <a href="/en/industries/">other industries</a>.</p>
+</ServicePage>

@@ -1,8 +1,31 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { autreLangue } from './src/data/traductions.mjs';
+
+const SITE = 'https://fournia.net';
 
 // Site officiel FournIA. Le `site` sert au sitemap, aux URLs canoniques et au JSON-LD.
+// Plan du site bilingue : chaque page déclare sa jumelle dans l'autre langue (table src/data/traductions.mjs).
 export default defineConfig({
-  site: 'https://fournia.net',
-  integrations: [sitemap()],
+  site: SITE,
+  integrations: [
+    sitemap({
+      // pages privées ou internes : jamais dans le plan du site
+      filter: (page) => !/\/(avis|reviews)\/$/.test(page),
+      serialize(item) {
+        const chemin = item.url.replace(SITE, '');
+        const autre = autreLangue(chemin);
+        if (autre) {
+          const en = chemin.startsWith('/en/');
+          const fr = en ? autre : chemin;
+          const enChemin = en ? chemin : autre;
+          item.links = [
+            { lang: 'fr-CA', url: `${SITE}${fr}` },
+            { lang: 'en-CA', url: `${SITE}${enChemin}` },
+          ];
+        }
+        return item;
+      },
+    }),
+  ],
 });

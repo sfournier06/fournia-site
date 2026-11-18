@@ -462,8 +462,8 @@ export const en = {
     liens: [
       { href: '#services', label: 'Services' },
       { href: '#exemples', label: 'Our work' },
-      { href: '#preuves', label: 'Reviews' },
-      { href: '#apropos', label: 'About' },
+      { href: '/en/about/', label: 'About' },
+      { href: '/en/blog/', label: 'Blog' },
     ],
     cta: { href: '/en/diagnostic/', label: 'Book a call' },
     menuAria: 'Open menu',
@@ -506,7 +506,7 @@ export const en = {
     etiquette: 'Our work',
     titre: 'Systems already delivered, sector by sector',
     // Les pages de secteurs n'existent qu'en français.
-    tous: null,
+    tous: { href: '/en/industries/', label: 'See all industries →' },
   },
   processus: {
     photoAlt: 'Simon Fournier explains a system to a small business owner',
@@ -554,7 +554,7 @@ export const en = {
       'The tools and accounts stay in your name.',
     ],
     partenaire: '<b>Official partner of the Montréal Black Vees</b> · junior hockey',
-    lien: null,
+    lien: { href: '/en/about/', label: 'Our story and our vision →' },
   },
   faq: {
     etiquette: 'Frequently asked questions',
@@ -583,16 +583,17 @@ export const en = {
   barre: { texte: '<b>Free assessment</b> · 30 minutes', bouton: 'Book', href: '/en/diagnostic/' },
   pied: {
     description: "AI set up in your business, explained simply. Based in Blainville, on Montreal's North Shore.",
-    // Pages de service anglaises ; secteurs et blogue n'existent qu'en français.
     liens: [
-      { href: '/en/custom-systems/', label: 'Custom systems' },
-      { href: '/en/ai-support/', label: 'Full AI support' },
-      { href: '/en/ai-training/', label: 'AI training' },
+      { href: '/en/about/', label: 'About' },
+      { href: '/en/testimonials/', label: 'Testimonials' },
       { href: '/en/small-business-ai-montreal/', label: 'AI for small businesses in Montreal' },
-      { href: '#processus', label: 'How it works' },
-      { href: '#faq', label: 'FAQ' },
+      { href: '/en/ai-support/', label: 'Full AI support' },
+      { href: '/en/ai-training/', label: 'AI training for teams' },
+      { href: '/en/custom-systems/', label: 'Custom automation systems' },
+      { href: '/en/ai-consultant-north-shore/', label: 'AI consultant on the North Shore' },
+      { href: '/en/industries/', label: 'Automation by industry' },
+      { href: '/en/blog/', label: 'Blog' },
       { href: '/en/diagnostic/', label: 'Book a call' },
-      { href: '/', label: 'Site en français', lang: 'fr' },
     ],
     droits: '© 2026 FournIA. All rights reserved.',
     temoins: 'Manage cookies',

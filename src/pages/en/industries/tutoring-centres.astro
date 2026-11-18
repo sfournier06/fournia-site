@@ -1,0 +1,67 @@
+---
+// Version anglaise de /secteurs/centres-de-tutorat/. Traduction fidèle, aucune promesse ajoutée.
+import ServicePage from '../../../layouts/ServicePage.astro';
+import { ZONES } from '../../../data/entite.mjs';
+
+const zones = ZONES.map((z) => (z === 'Montréal' ? 'Montreal' : z));
+
+const faq = [
+  {
+    q: 'Which tasks can a tutoring centre automate?',
+    a: 'Instant replies to parents who send a request, offering available time slots, session reminders and follow-ups with families who have not confirmed yet.',
+  },
+  {
+    q: 'Why does response speed matter so much?',
+    a: 'A parent looking for a tutor often contacts several centres at the same time. The one that replies first with a concrete time slot has a head start.',
+  },
+  {
+    q: 'Has FournIA worked with a tutoring centre before?',
+    a: 'Yes. For an academic support centre, FournIA built a system that replies to new requests within minutes and offers time slots based on real availability.',
+  },
+  {
+    q: "Is students' data protected?",
+    a: "Every project goes through a review under Quebec's privacy law (Law 25). We collect the minimum information, and information about minor students receives particular attention.",
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/secteurs/centres-de-tutorat/"
+  image="/images/secteurs/centres-de-tutorat.webp"
+  imageAlt="A tutoring session"
+  path="/en/industries/tutoring-centres"
+  title="Automation for tutoring and homework help centres | FournIA"
+  description="Replies to parents within minutes, time slots offered automatically, session reminders: AI automation for tutoring centres in Quebec."
+  h1="Automation for tutoring centres"
+  lead="A parent looking for help for their child wants a quick answer. FournIA automates request replies, scheduling suggestions and session reminders, so your team can spend its time with students."
+  serviceName="Tutoring centres"
+  serviceType="Process automation for tutoring centres"
+  areaServed={zones}
+  faq={faq}
+  updated="2026-11-18"
+>
+  <h2>What costs time in a tutoring centre</h2>
+  <ul>
+    <li><strong>Requests from parents that wait</strong> several hours for a reply.</li>
+    <li><strong>Back-and-forth</strong> to find a time slot that suits both the student and the tutor.</li>
+    <li><strong>Sessions forgotten</strong> for lack of a reminder.</li>
+    <li><strong>Interested families</strong> who never confirm.</li>
+  </ul>
+
+  <h2>What FournIA can automate</h2>
+  <ul>
+    <li><strong>A reply within minutes</strong> to every new request.</li>
+    <li><strong>Time slots offered</strong> based on the tutors' real availability.</li>
+    <li><strong>Session reminders</strong> to parents.</li>
+    <li><strong>Follow-ups</strong> with families who have not confirmed.</li>
+  </ul>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>A free 30-minute discovery call.</strong></li>
+    <li><strong>An assessment</strong> of the path from the request to the first session.</li>
+    <li><strong>The build</strong> on your calendar and your tools.</li>
+    <li><strong>Training</strong> for the team and follow-up.</li>
+  </ol>
+  <p>See also: <a href="/en/custom-systems/">business automation</a> and the <a href="/en/industries/">other industries</a>.</p>
+</ServicePage>

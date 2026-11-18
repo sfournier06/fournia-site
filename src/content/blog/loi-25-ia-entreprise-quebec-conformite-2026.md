@@ -1,5 +1,6 @@
 ---
 title: "Comment respecter la Loi 25 quand on utilise l'IA dans son entreprise au Québec ?"
+seoTitle: "Loi 25 et IA : comment respecter la loi au Québec"
 description: "La Loi 25 ne bloque pas l'IA. Voici 4 gestes concrets à poser avant de brancher un outil IA sur les données de vos clients au Québec."
 slug: "loi-25-ia-entreprise-quebec-conformite-2026"
 pubDate: 2026-07-09

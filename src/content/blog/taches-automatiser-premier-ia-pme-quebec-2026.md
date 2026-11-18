@@ -1,5 +1,6 @@
 ---
 title: "Quelles tâches une PME devrait automatiser en premier avec l'IA ?"
+seoTitle: "Quelles tâches automatiser en premier avec l'IA ?"
 description: "Les premières tâches à automatiser avec l'IA dans une PME québécoise : relances clients, tri des demandes entrantes et extraction de données documentaires."
 slug: "taches-automatiser-premier-ia-pme-quebec-2026"
 pubDate: 2026-06-23
@@ -109,7 +110,7 @@ La meilleure première étape est un audit court qui identifie les deux ou trois
 
 FournIA accompagne les PME québécoises (Rive-Nord de Montréal et grand Québec) sur cette priorisation puis sur la construction et l'implantation des workflows (N8N, agents Claude API, apps sur mesure), avec formation incluse et revue Loi 25. L'audit IA se situe entre 100 $ et 500 $ selon la portée et permet d'arriver à un plan d'action concret.
 
-Pour démarrer : [prendre rendez-vous pour un audit IA](https://fournia.net).
+Pour démarrer : [réserver un diagnostic gratuit](/diagnostic/).
 
 ## FAQ
 

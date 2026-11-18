@@ -1,0 +1,65 @@
+---
+// Version anglaise de /secteurs/courtiers-immobiliers/. Traduction fidèle, aucune promesse ajoutée.
+import ServicePage from '../../../layouts/ServicePage.astro';
+import { ZONES } from '../../../data/entite.mjs';
+
+const zones = ZONES.map((z) => (z === 'Montréal' ? 'Montreal' : z));
+
+const faq = [
+  {
+    q: 'Which tasks can a real estate broker automate?',
+    a: 'The first reply to prospects, booking showings, follow-ups after showings, following up with prospects and regular contact with past clients.',
+  },
+  {
+    q: 'Do the messages stay in my name?',
+    a: 'Yes. Messages go out from your accounts, in your name, and stop as soon as the person replies. You pick up the conversation.',
+  },
+  {
+    q: 'What about brokerage and privacy rules?',
+    a: "Messages comply with Quebec's privacy law (Law 25) and Canada's Anti-Spam Legislation. Listing content and advice remain your professional responsibility.",
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/secteurs/courtiers-immobiliers/"
+  image="/images/secteurs/courtiers-immobiliers.webp"
+  imageAlt="A real estate broker's car between two showings"
+  path="/en/industries/real-estate-brokers"
+  title="Automation for real estate brokers | FournIA"
+  description="Fast replies to prospects, scheduled showings, follow-ups after showings and timely client contact: AI automation for real estate brokers in Quebec."
+  h1="Automation for real estate brokers"
+  lead="A prospect who writes about a property often contacts several brokers. FournIA automates the first reply, appointment booking and follow-ups, so you can spend your time on showings and negotiations."
+  serviceName="Real estate brokers"
+  serviceType="Process automation for small businesses"
+  areaServed={zones}
+  faq={faq}
+  updated="2026-11-18"
+>
+  <h2>What costs time</h2>
+  <ul>
+    <li>Requests received in the evening and on weekends, handled the next day.</li>
+    <li>Back-and-forth to set up a showing.</li>
+    <li>Potential buyers and sellers never followed up.</li>
+    <li>Past clients forgotten, even though they are the best source of referrals.</li>
+  </ul>
+
+  <h2>What FournIA can automate</h2>
+  <ul>
+    <li>A first reply within minutes, at any hour.</li>
+    <li>Booking showings in your calendar.</li>
+    <li>An automatic follow-up after each showing.</li>
+    <li>Prospect follow-ups based on their timeline.</li>
+    <li>A message to past clients on the dates that matter.</li>
+  </ul>
+  <p>You stay in control of decisions. The system prepares, you approve.</p>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>A free 30-minute discovery call.</strong></li>
+    <li><strong>An assessment</strong> of your process, from the request to delivery.</li>
+    <li><strong>The build</strong> on your tools, one automation at a time.</li>
+    <li><strong>Training</strong> for your team and follow-up.</li>
+  </ol>
+  <p>Every project that involves personal information goes through a review under Quebec's privacy law (<a href="/en/blog/law-25-ai-compliance-quebec-2026/">Law 25</a>). See also the <a href="/en/industries/">other industries</a>.</p>
+</ServicePage>

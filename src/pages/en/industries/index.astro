@@ -1,0 +1,48 @@
+---
+// Version anglaise de /secteurs/. La liste des secteurs est traduite ici (entite.mjs reste en français).
+import ServicePage from '../../../layouts/ServicePage.astro';
+import { ZONES } from '../../../data/entite.mjs';
+
+const zones = ZONES.map((z) => (z === 'Montréal' ? 'Montreal' : z));
+
+const SECTEURS_EN = [
+  { href: '/en/industries/heat-pumps-hvac/', label: 'Heat pumps and air conditioning', resume: 'request replies, missed calls, quote follow-ups and maintenance reminders.' },
+  { href: '/en/industries/events/', label: 'Events and rentals', resume: 'centralized requests, fast estimates, tracked deposits and Google reviews after the event.' },
+  { href: '/en/industries/caterers/', label: 'Caterers', resume: 'service offers, production plans and supplier invoice checks.' },
+  { href: '/en/industries/financial-advisors/', label: 'Financial and insurance advisors', resume: 'client follow-ups every 6 months, prospect follow-ups and missed calls.' },
+  { href: '/en/industries/online-services/', label: 'Online services', resume: 'centralized requests, booked calls, reminders and new client onboarding.' },
+  { href: '/en/industries/tutoring-centres/', label: 'Tutoring centres', resume: 'fast replies to parents, offered time slots and session reminders.' },
+  { href: '/en/industries/renovation-construction/', label: 'Renovation and construction', resume: 'quote requests, booked visits, follow-ups and job site updates.' },
+  { href: '/en/industries/real-estate-brokers/', label: 'Real estate brokers', resume: 'fast replies to prospects, scheduled showings and follow-ups after showings.' },
+  { href: '/en/industries/aesthetic-clinics/', label: 'Aesthetic and care clinics', resume: 'bookings, reminders, fewer no-shows and follow-ups for the next treatment.' },
+  { href: '/en/industries/accounting-firms/', label: 'Accounting firms', resume: 'document collection, client follow-ups and scheduled appointments.' },
+  { href: '/en/industries/marketing-agencies/', label: 'Marketing agencies', resume: 'white-label automations for your clients and for your own operations.' },
+  { href: '/en/industries/employee-training/', label: 'Employee training', resume: 'manuals turned into modules, quizzes and an AI assistant on your documents.' },
+];
+
+const faq = [
+  {
+    q: 'My industry is not on the list. Can FournIA help me?',
+    a: 'Probably. The same needs come up in most service businesses: replying quickly to requests, following up on quotes, keeping track of clients and eliminating double data entry. The discovery call is there to check exactly that.',
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/secteurs/"
+  path="/en/industries"
+  title="AI automation by industry | FournIA"
+  description="How automation and AI help Quebec service businesses, industry by industry: HVAC, renovation, events, caterers, advisors, clinics, accountants and more."
+  h1="AI automation, industry by industry"
+  lead="Every industry loses time in different places. Here, for each one, are the tasks that cost the most and what FournIA can automate."
+  serviceName="Industries"
+  serviceType="Process automation for small businesses"
+  areaServed={zones}
+  faq={faq}
+  updated="2026-11-18"
+>
+  <h2>The industries</h2>
+  <ul>
+    {SECTEURS_EN.map((s) => <li><strong><a href={s.href}>{s.label}</a></strong>: {s.resume}</li>)}
+  </ul>
+</ServicePage>

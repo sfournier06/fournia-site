@@ -4,12 +4,13 @@
 // consentement écrit daté. Sans lui : carte anonyme (secteur + système).
 import { REALISATIONS } from '../data/realisations.mjs';
 import { APERCU } from '../data/apercu.mjs';
+import { enAnglais } from '../data/traductions.mjs';
 
 const { limite, court = false, lang = 'fr' } = Astro.props;
 const en = lang === 'en';
-// Textes de l'interface. Les liens « Voir le secteur » mènent à des pages en français : cachés en anglais.
+// Textes de l'interface. En anglais, le lien « Voir le secteur » mène à la page anglaise du secteur (enAnglais).
 const T = en
-  ? { aria: 'Delivered systems by sector', enCours: 'In progress', emplacement: 'Placeholder: written or video testimonial from', video: 'Watch the video testimonial', secteur: 'See the sector', prec: 'Previous example', suiv: 'Next example', avisGoogle: 'Google review', note5: '5 out of 5', resultat: 'Result', confidentiel: 'Confidential client', detail: 'See how it works', fermer: 'Close' }
+  ? { aria: 'Delivered systems by sector', enCours: 'In progress', emplacement: 'Placeholder: written or video testimonial from', video: 'Watch the video testimonial', secteur: 'See the industry', prec: 'Previous example', suiv: 'Next example', avisGoogle: 'Google review', note5: '5 out of 5', resultat: 'Result', confidentiel: 'Confidential client', detail: 'See how it works', fermer: 'Close' }
   : { aria: 'Systèmes livrés par secteur', enCours: 'En cours', emplacement: 'Emplacement : témoignage écrit ou vidéo de', video: 'Voir le témoignage vidéo', secteur: 'Voir le secteur', prec: 'Exemple précédent', suiv: 'Exemple suivant', avisGoogle: 'avis Google', note5: '5 sur 5', resultat: 'Résultat', confidentiel: 'Client confidentiel', detail: 'Voir comment ça marche', fermer: 'Fermer' };
 // Champ traduit s'il existe (ex. titre_en), sinon le français.
 const tr = (r, champ) => (en && r[`${champ}_en`]) || r[champ];
@@ -28,7 +29,7 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
         <li class:list={['carte', { cliquable: court }]}>
           {ok && r.photo ? (
             <div class="bandeau-photo client"><img src={r.photo} alt={r.client ?? ''} loading="lazy" decoding="async" width="800" height="600" /></div>
-          ) : ok && r.logo ? (
+          ) : ok && r.logo && !(r.prefereImage && r.image) ? (
             <div class="bandeau-logo"><img src={r.logo} alt={r.client ?? ''} loading="lazy" decoding="async" /></div>
           ) : r.image ? (
             <div class="bandeau-photo"><img src={r.image} alt="" loading="lazy" decoding="async" width="800" height="600" /></div>
@@ -73,13 +74,13 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
                   <p class="res-txt">{tr(r, 'resultat_carte')}</p>
                 </div>
               )}
-              {r.lien && !en && <a class="lien" href={r.lien}>{T.secteur} <span aria-hidden="true">→</span></a>}
+              {r.lien && <a class="lien" href={en ? enAnglais(r.lien) : r.lien}>{T.secteur} <span aria-hidden="true">→</span></a>}
               </div>
             </dialog>
           )}
           {!court && <div class="liens">
             {ok && r.video && <a class="lien" href={r.video} target="_blank" rel="noopener">{T.video} <span aria-hidden="true">→</span></a>}
-            {r.lien && !en && <a class="lien" href={r.lien}>{T.secteur} <span aria-hidden="true">→</span></a>}
+            {r.lien && <a class="lien" href={en ? enAnglais(r.lien) : r.lien}>{T.secteur} <span aria-hidden="true">→</span></a>}
           </div>}
         </li>
       );

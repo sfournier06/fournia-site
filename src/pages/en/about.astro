@@ -1,0 +1,189 @@
+---
+// Version anglaise de /a-propos/. Traduction fidèle : aucun fait, chiffre ni promesse ajouté.
+// Ne contient que des faits établis (voir fournia-aios/context/work.md). Aucun client nommé.
+import Base from '../../layouts/Base.astro';
+import { REALISATIONS } from '../../data/realisations.mjs';
+import { SITE, ZONES, organisationLd } from '../../data/entite.mjs';
+
+const CTA = '/en/diagnostic/';
+const canonical = `${SITE}/en/about/`;
+// « 100+ automatisations » : chiffre donné par Simon le 2026-11-16. Secteurs : tirés de src/data/realisations.mjs.
+const nbSecteurs = new Set(REALISATIONS.map((r) => r.secteur)).size;
+const zones = ZONES.map((z) => (z === 'Montréal' ? 'Montreal' : z));
+const title = 'About FournIA and Simon Fournier | FournIA';
+const description = 'FournIA makes AI simple and useful for Quebec small businesses. Founded in 2026 in Blainville by Simon Fournier: the vision, the team and how we work.';
+const aboutLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'en-CA',
+  about: { '@id': `${SITE}/#fournia` },
+  mainEntity: { '@id': `${SITE}/#simon-fournier` },
+};
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/en/` },
+    { '@type': 'ListItem', position: 2, name: 'About', item: canonical },
+  ],
+};
+---
+<Base title={title} description={description} canonical={canonical} lang="en">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(aboutLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(organisationLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbLd)} />
+  <main>
+    <article class="svc">
+      <div class="wrap-a">
+        <div class="crumbs"><a href="/en/">Home</a> <span>/</span> About</div>
+
+        <div class="intro">
+          <div>
+            <p class="etiquette">About FournIA</p>
+            <h1>We make AI simple and useful for Quebec small businesses.</h1>
+            <p class="lead">FournIA sets up systems in small businesses that handle repetitive tasks for them, and trains the teams who use them. The company was founded in April 2026 in Blainville, on Montreal's North Shore.</p>
+            <a class="btn btn-primary" href={CTA}>Book the free assessment <span class="arrow">→</span></a>
+          </div>
+          <div class="photo">
+            <img src="/images/simon-fournier-portrait.webp" alt="Simon Fournier, founder of FournIA" width="960" height="1200" fetchpriority="high" />
+            <p class="legende"><strong>Simon Fournier</strong><span>Founder of FournIA</span></p>
+          </div>
+        </div>
+
+        <ul class="chiffres">
+          <li><strong>100+</strong><span>automations built</span></li>
+          <li><strong>{nbSecteurs}</strong><span>industries</span></li>
+          <li><strong>Included</strong><span>training for your team, with every delivery</span></li>
+        </ul>
+
+        <section class="bloc histoire">
+          <p class="etiquette">Our story</p>
+          <h2>It all started with a caterer retyping orders by hand.</h2>
+          <div class="deux">
+            <p>In April 2026, Simon Fournier launched FournIA in Blainville. The first project: a corporate caterer in Montreal whose team spent hours retyping orders and putting together service proposals. Once the first system was in place, the same client asked for a second one, then a third.</p>
+            <p>The lesson quickly became clear: small businesses are not short on ideas for AI, they are short on someone who actually sets it up, in their tools, and trains their people. Since then, the team has built more than 100 automations across {nbSecteurs} industries, from catering to equipment rental to financial advisors.</p>
+          </div>
+        </section>
+
+        <section class="bloc vision">
+          <p class="etiquette">Our vision</p>
+          <h2>To become the go-to name in AI for Quebec small businesses.</h2>
+          <div class="deux">
+            <p>Most small business owners know that AI is going to change the way they work. What holds them back is not knowing where to start, and the fear of getting it wrong with their data or their team.</p>
+            <p>Our job is to take that weight off: look at how the business really works, set up what pays off first, and train people until they are comfortable. One business at a time, with results we can measure.</p>
+          </div>
+        </section>
+
+        <section class="bloc equipe">
+          <p class="etiquette">The team</p>
+          <h2>A team that designs, builds and trains</h2>
+          <div class="cartes">
+            <article>
+              <h3>Simon Fournier</h3>
+              <p class="role">Founder</p>
+              <p>He founded FournIA and sets its direction: the vision, the method and the standard every delivery has to meet.</p>
+            </article>
+            <article>
+              <h3>Design and development</h3>
+              <p class="role">The build team</p>
+              <p>They build the systems, connect them to your tools and test them before delivery. Every project has a dedicated lead.</p>
+            </article>
+            <article>
+              <h3>Business network</h3>
+              <p class="role">Partners</p>
+              <p>Agencies, consultants and local entrepreneurs we work with, who introduce us to the small businesses they support.</p>
+            </article>
+          </div>
+        </section>
+
+
+        <div class="prose">
+          <h2>What FournIA does</h2>
+          <ul>
+            <li><strong><a href="/en/custom-systems/">Custom systems</a></strong>: one specific problem (follow-ups, quotes, incoming requests, orders), one system connected to the software you already use.</li>
+            <li><strong><a href="/en/ai-support/">Full support</a></strong>: the whole business, from assessment to follow-up, over 6 months to a year.</li>
+            <li><strong><a href="/en/ai-training/">AI training for teams</a></strong>: your team learns to use AI on its real tasks.</li>
+          </ul>
+
+          <h2>How we work</h2>
+          <ul>
+            <li><strong>The assessment comes first.</strong> We measure the time each step of the process takes. That number decides what we automate first.</li>
+            <li><strong>Setup and training go together.</strong> Every system delivered comes with training for the team that uses it.</li>
+            <li><strong>Quebec's privacy law (Law 25) on every project.</strong> A project that touches personal information goes through a written review before the build.</li>
+          </ul>
+
+          <h2>Where FournIA works</h2>
+          <p>In person in {zones.join(', ')}. Elsewhere in Quebec, by video call.</p>
+
+          <h2>How to reach FournIA</h2>
+          <p>Email: <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a> · Phone: <a href="tel:+15148632973">514 863 2973</a> · <a href="https://www.linkedin.com/in/simon-fournier-432a95419/" target="_blank" rel="noopener">Simon Fournier on LinkedIn</a></p>
+        </div>
+      </div>
+
+      <div class="wrap-a">
+        <div class="post-cta">
+          <h3>Is a task costing you hours every week?</h3>
+          <p>Start with a free 30-minute assessment.</p>
+          <a class="btn btn-primary" href={CTA}>Book the assessment <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </article>
+  </main>
+</Base>
+
+<style>
+  main { position: relative; z-index: 1; }
+  .svc { padding: 8.5rem 0 4rem; }
+  .wrap-a { width: min(1100px, 92vw); margin: 0 auto; }
+  .crumbs { font-size: .85rem; color: var(--mute); margin-bottom: 1.4rem; }
+  .crumbs a:hover { color: var(--lime); }
+  .crumbs span { margin: 0 .4rem; }
+  .etiquette { color: var(--lime); font-family: 'Space Grotesk', sans-serif; font-size: .92rem; font-weight: 500; margin-bottom: 1rem; }
+  .intro { display: grid; grid-template-columns: 1.15fr .85fr; gap: 4rem; align-items: center; }
+  .photo img { width: 100%; height: auto; border-radius: 22px; display: block; border: 1px solid var(--line); }
+  .chiffres { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 4rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .chiffres li { padding: 1.8rem 1.4rem; display: flex; flex-direction: column; gap: .3rem; }
+  .chiffres li + li { border-left: 1px solid var(--line); }
+  .chiffres strong { font-family: 'Space Grotesk', sans-serif; font-size: 2.6rem; font-weight: 600; color: var(--white); letter-spacing: -.03em; line-height: 1; }
+  .chiffres span { color: var(--mute); font-size: .95rem; }
+  .bloc { margin-top: 5.5rem; }
+  .bloc h2 { font-family: 'Space Grotesk', sans-serif; color: var(--white); font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.1; letter-spacing: -.03em; font-weight: 600; max-width: 22ch; margin-bottom: 1.6rem; }
+  .bloc p { color: var(--mute); font-size: 1.06rem; line-height: 1.75; }
+  .bloc p.etiquette { color: var(--lime); font-size: .92rem; line-height: 1.4; margin-bottom: 1rem; }
+  .deux { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .cartes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .cartes article { padding: 1.7rem; border-radius: 18px; border: 1px solid var(--line); background: rgba(255,255,255,.02); }
+  .cartes h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 500; color: var(--white); }
+  .cartes .role { color: var(--lime); font-size: .88rem; margin: .2rem 0 .9rem; }
+  .cartes p:not(.role) { font-size: .98rem; line-height: 1.65; }
+  .humain { display: grid; grid-template-columns: .8fr 1.2fr; gap: 4rem; align-items: center; }
+  .humain-photo img { width: 100%; height: auto; border-radius: 22px; display: block; border: 1px solid var(--line); }
+  .humain p + p { margin-top: 1rem; }
+  .citation { color: var(--white) !important; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem !important; line-height: 1.5 !important; border-left: 2px solid var(--lime); padding-left: 1.1rem; margin-top: 1.8rem !important; }
+  .svc h1 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); line-height: 1.05; letter-spacing: -.035em; font-weight: 600; margin-bottom: 1.2rem; }
+  .lead { color: var(--mute); font-size: 1.15rem; line-height: 1.65; margin-bottom: 1.8rem; max-width: 36rem; }
+  .photo { width: 100%; }
+  .legende { margin-top: .9rem; display: flex; flex-direction: column; }
+  .legende strong { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; }
+  .legende span { color: var(--mute); font-size: .9rem; }
+  .prose { color: var(--mute); font-size: 1.06rem; line-height: 1.75; margin-top: 3.5rem; max-width: 46rem; }
+  .prose :global(h2) { font-family: 'Space Grotesk', sans-serif; color: var(--white); font-size: 1.6rem; line-height: 1.2; letter-spacing: -.01em; margin: 2.4rem 0 .9rem; }
+  .prose :global(p) { margin-bottom: 1.1rem; }
+  .prose :global(ul) { margin: 0 0 1.2rem 1.3rem; }
+  .prose :global(li) { margin-bottom: .5rem; }
+  .prose :global(a) { color: var(--lime); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(183,217,76,.4); }
+  .prose :global(strong) { color: var(--white); font-weight: 600; }
+  .post-cta { margin-top: 3.5rem; padding: 2.2rem; border-radius: 22px; background: linear-gradient(160deg, rgba(183,217,76,.10), rgba(20,20,20,.55)); border: 1px solid var(--glass-b); }
+  .post-cta h3 { font-size: 1.4rem; margin-bottom: .6rem; color: var(--white); }
+  .post-cta p { color: var(--mute); margin-bottom: 1.4rem; }
+  @media (max-width: 760px) {
+    .intro, .deux, .cartes, .humain { grid-template-columns: 1fr; gap: 2rem; }
+    .photo { max-width: 320px; }
+    .chiffres { grid-template-columns: 1fr; }
+    .chiffres li + li { border-left: none; border-top: 1px solid var(--line); }
+  }
+</style>

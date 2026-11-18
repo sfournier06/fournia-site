@@ -32,7 +32,7 @@ const T = en ? {
   envoyer: 'See if I qualify', consent: 'By sending, you agree that FournIA may contact you about your request. No newsletter, no resale.',
   okTitle: 'It is a fit. Book your call.', okSub: '30 minutes, no commitment.', book: 'Book my call',
   noTitle: 'Not a fit for now.', noSub: 'The assessment is for small businesses with a team and a concrete need. We have your details: if that changes, write to us.',
-  confid: 'Privacy policy (in French)',
+  confid: 'Privacy policy',
 } : {
   html: 'fr-CA', path: '/diagnostic/', locale: 'fr_CA',
   title: 'Diagnostic IA gratuit pour PME québécoises | FournIA',
@@ -80,6 +80,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 <link rel="canonical" href={`${siteUrl}${T.path}`} />
 <link rel="alternate" hreflang="fr-CA" href={`${siteUrl}/diagnostic/`} />
 <link rel="alternate" hreflang="en-CA" href={`${siteUrl}/en/diagnostic/`} />
+<link rel="alternate" hreflang="x-default" href={`${siteUrl}/diagnostic/`} />
 <meta property="og:title" content={T.title}>
 <meta property="og:description" content={T.ogdesc}>
 <meta property="og:type" content="website">
@@ -250,7 +251,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
   </div>
 
   <div class="foot">
-    <a href="/confidentialite">{T.confid}</a> &nbsp;·&nbsp; &#169; 2026 FournIA
+    <a href={en ? "/en/privacy/" : "/confidentialite/"}>{T.confid}</a> &nbsp;·&nbsp; &#169; 2026 FournIA
   </div>
 </div>
 

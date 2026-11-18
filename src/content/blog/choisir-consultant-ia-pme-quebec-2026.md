@@ -1,5 +1,6 @@
 ---
 title: "Comment choisir un bon consultant en IA pour une PME au Québec ?"
+seoTitle: "Choisir un consultant en IA pour une PME au Québec"
 description: "Guide pour PME québécoises : 5 critères, questions à poser, red flags, subvention IRIA et Loi 25 pour bien choisir un consultant en intelligence artificielle."
 slug: "choisir-consultant-ia-pme-quebec-2026"
 pubDate: 2026-07-14
@@ -85,7 +86,7 @@ Un consultant sérieux vous explique comment il gère ce risque : dépersonnalis
 
 ## Par où commencer
 
-Le meilleur premier pas n'est pas de choisir un outil, c'est de faire mesurer votre vraie douleur. Un audit payant qui examine vos processus vous dit quelle automatisation aura le meilleur retour, et vous montre comment le consultant travaille avant de vous engager pour un plus gros mandat. Pour un point de départ concret avec un consultant IA basé au Québec, [demandez un audit IA à FournIA](https://fournia.net).
+Le meilleur premier pas n'est pas de choisir un outil, c'est de faire mesurer votre vraie douleur. Un audit payant qui examine vos processus vous dit quelle automatisation aura le meilleur retour, et vous montre comment le consultant travaille avant de vous engager pour un plus gros mandat. Pour un point de départ concret avec un consultant IA basé au Québec, [réservez un diagnostic gratuit avec FournIA](/diagnostic/).
 
 ## FAQ
 

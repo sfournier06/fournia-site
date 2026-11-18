@@ -1,5 +1,6 @@
 ---
 title: "Comment former ses employés à l'IA dans une PME au Québec ?"
+seoTitle: "Former ses employés à l'IA dans une PME au Québec"
 description: "Former ses employés à l'IA en un bloc de quelques heures: les vraies tâches, 3 usages par personne et une règle d'usage d'une page."
 slug: "former-employes-ia-pme-quebec-2026"
 pubDate: 2026-11-09

@@ -1,0 +1,16 @@
+---
+// Articles du blogue en anglais (src/content/blog-en). Images reprises du dossier de l'article français.
+import { getCollection, render } from 'astro:content';
+import BlogPost from '../../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blogEn');
+  return posts.map((post) => ({ params: { slug: post.id }, props: post }));
+}
+
+const post = Astro.props;
+const { Content } = await render(post);
+---
+<BlogPost id={post.id} {...post.data} lang="en" imagesDe={post.data.fr}>
+  <Content />
+</BlogPost>

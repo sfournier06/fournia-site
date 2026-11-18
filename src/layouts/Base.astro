@@ -17,12 +17,15 @@ const L = en
   : { services: 'Services', real: 'Réalisations', apropos: 'À propos', blog: 'Blogue', cta: 'Réserver un appel', menu: 'Ouvrir le menu', accueil: '/',
       desc: 'On automatise les tâches répétitives des PME du Québec. Basé à Blainville, Rive-Nord de Montréal.',
       temoignages: 'Témoignages', droits: '© 2026 FournIA. Tous droits réservés.', temoins: 'Gérer les témoins' };
-const autreLangue = alt ?? (en ? '/' : '/en/');
-const frPath = en ? alt : canonical?.replace(siteUrl, '');
-const enPath = en ? canonical?.replace(siteUrl, '') : alt;
+const cheminActuel = canonical ? canonical.replace(siteUrl, '') : null;
+const altTrouve = alt ?? (cheminActuel ? cheminAutreLangue(cheminActuel) : null);
+const autreLangue = altTrouve ?? (en ? '/' : '/en/');
+const frPath = en ? altTrouve : cheminActuel;
+const enPath = en ? cheminActuel : altTrouve;
 // Monogramme officiel (references/brand/assets/fournia-monogram.svg, copié dans public/brand/).
 const markSvg = '<img src="/brand/fournia-monogram.svg" alt="" width="40" height="40" />';
 import Reseaux from '../components/Reseaux.astro';
+import { autreLangue as cheminAutreLangue } from '../data/traductions.mjs';
 ---
 <!doctype html>
 <html lang={en ? "en-CA" : "fr-CA"}>
@@ -36,8 +39,9 @@ import Reseaux from '../components/Reseaux.astro';
   <title>{title}</title>
   {description && <meta name="description" content={description} />}
   {canonical && <link rel="canonical" href={canonical} />}
-  {alt && frPath && <link rel="alternate" hreflang="fr-CA" href={`${siteUrl}${frPath}`} />}
-  {alt && enPath && <link rel="alternate" hreflang="en-CA" href={`${siteUrl}${enPath}`} />}
+  {altTrouve && frPath && <link rel="alternate" hreflang="fr-CA" href={`${siteUrl}${frPath}`} />}
+  {altTrouve && enPath && <link rel="alternate" hreflang="en-CA" href={`${siteUrl}${enPath}`} />}
+  {altTrouve && frPath && <link rel="alternate" hreflang="x-default" href={`${siteUrl}${frPath}`} />}
   <meta property="og:type" content={ogType} />
   <meta property="og:title" content={title} />
   {description && <meta property="og:description" content={description} />}
@@ -67,8 +71,8 @@ import Reseaux from '../components/Reseaux.astro';
       <ul class="nav-links">
         <li><a href={`${L.accueil}#services`}>{L.services}</a></li>
         <li><a href={`${L.accueil}#exemples`}>{L.real}</a></li>
-        <li><a href={en ? '/en/#apropos' : '/a-propos/'}>{L.apropos}</a></li>
-        {!en && <li><a href="/blog">{L.blog}</a></li>}
+        <li><a href={en ? '/en/about/' : '/a-propos/'}>{L.apropos}</a></li>
+        <li><a href={en ? '/en/blog/' : '/blog/'}>{L.blog}</a></li>
         <li><a href={autreLangue} class="lien-langue" lang={en ? 'fr' : 'en'} hreflang={en ? 'fr-CA' : 'en-CA'} aria-label={en ? 'Version française' : 'English version'}>{en ? 'FR' : 'EN'}</a></li>
       </ul>
       <a href={cta} class="btn btn-primary cta-nav">{L.cta} <span class="arrow">→</span></a>
@@ -94,8 +98,10 @@ import Reseaux from '../components/Reseaux.astro';
         <div class="foot-contact">
           {en ? (
             <Fragment>
+              <a href="/en/about/">{L.apropos}</a>
+              <a href="/en/testimonials/">{L.temoignages}</a>
               {SERVICES_EN.map((sv) => <a href={sv.href}>{sv.label}</a>)}
-              <a href="/en/#preuves">{L.temoignages}</a>
+              <a href="/en/blog/">{L.blog}</a>
               <a href={cta}>{L.cta}</a>
             </Fragment>
           ) : (

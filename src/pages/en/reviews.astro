@@ -1,0 +1,93 @@
+---
+// Version anglaise de /avis/ (page du lien de la bio Instagram). Traduction fidèle de l'interface.
+// Avis : texte_en affiché avec la mention « Translated from French » (l'original reste dans src/data/avis.mjs).
+// Règles : aucun filtrage des clients avant le lien d'avis (interdit par Google), pas de balisage « Review ».
+// Page en noindex, comme la version française : elle double /en/testimonials/.
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../data/entite.mjs';
+import { AVIS, LIEN_FICHE_GOOGLE, LIEN_LAISSER_AVIS } from '../../data/avis.mjs';
+
+const canonical = `${SITE}/en/reviews/`;
+const moyenne = AVIS.length ? (AVIS.reduce((t, a) => t + a.note, 0) / AVIS.length).toFixed(1) : null;
+const diagnostic = '/en/diagnostic/?utm_source=instagram&utm_medium=bio&utm_campaign=page-avis';
+---
+<Base title="Client reviews | FournIA" description="What FournIA clients have to say, and the link to leave your own Google review." canonical={canonical} lang="en">
+  <meta slot="head" name="robots" content="noindex, follow" />
+  <main class="page-avis">
+    <div class="col">
+      <header class="tete">
+        <img class="mono" src="/brand/fournia-monogram.svg" alt="" width="56" height="56" />
+        <h1>What our clients say</h1>
+        {moyenne && (
+          <a class="note" href={LIEN_FICHE_GOOGLE} target="_blank" rel="noopener">
+            <span class="g" aria-hidden="true">G</span>
+            <span class="etoiles" aria-hidden="true">★★★★★</span>
+            <span><b>{moyenne}</b> on Google · {AVIS.length} reviews</span>
+          </a>
+        )}
+      </header>
+
+      <section class="client" aria-labelledby="t-client">
+        <h2 id="t-client">Are you a FournIA client?</h2>
+        <p>Your review helps other small businesses take the leap. It takes 30 seconds.</p>
+        <a class="btn btn-primary large" href={LIEN_LAISSER_AVIS} target="_blank" rel="noopener">Leave a Google review <span class="arrow">→</span></a>
+      </section>
+
+      <ul class="liste">
+        {AVIS.map((a) => (
+          <li>
+            <figure>
+              <p class="etoiles" aria-label="5 out of 5">★★★★★</p>
+              <blockquote lang={a.texte_en ? 'en' : 'fr'}>{a.texte_en || a.texte}</blockquote>
+              {a.texte_en && <p class="traduit">Translated from French</p>}
+              <figcaption>
+                <strong>{a.auteur}</strong>
+                {a.systeme && <span class="sys">{a.systeme_en || a.systeme}</span>}
+                {a.secteur && <span>{a.secteur_en || a.secteur}</span>}
+                {a.mention && <span class="mention">{a.mention_en || a.mention}</span>}
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+      <a class="voir" href={LIEN_FICHE_GOOGLE} target="_blank" rel="noopener">See all reviews on Google →</a>
+
+      <section class="suite" aria-labelledby="t-suite">
+        <h2 id="t-suite">Save 5 to 20 hours a week. <span>Without hiring.</span></h2>
+        <p>30 minutes, no commitment. We look at the task that costs you the most time.</p>
+        <a class="btn btn-primary large" href={diagnostic}>Book my free assessment <span class="arrow">→</span></a>
+        <a class="site" href="/en/">Visit fournia.net</a>
+      </section>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .page-avis { padding: 7.5rem 0 4rem; position: relative; z-index: 1; }
+  .col { width: min(560px, calc(100% - 32px)); margin: 0 auto; display: flex; flex-direction: column; gap: 1.6rem; }
+  .tete { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+  .mono { width: 56px; height: 56px; }
+  h1 { font-size: clamp(1.9rem, 6vw, 2.6rem); line-height: 1.1; letter-spacing: -.03em; margin: 0; }
+  .note { display: inline-flex; align-items: center; gap: .6rem; padding: .55rem 1rem; border-radius: 100px; border: 1px solid var(--line);
+    background: rgba(255,255,255,.03); color: var(--mute); font-size: .9rem; text-decoration: none; }
+  .note b { color: var(--white); }
+  .g { width: 22px; height: 22px; border-radius: 50%; background: #fff; color: #4285f4; display: grid; place-items: center; font: 700 .8rem Arial, sans-serif; }
+  .etoiles { color: #f5c518; letter-spacing: .12em; }
+  .client { text-align: center; padding: 1.6rem; border-radius: 20px; border: 1px solid rgba(183,217,76,.35); background: rgba(183,217,76,.06); }
+  .client h2, .suite h2 { font-size: 1.3rem; margin: 0 0 .5rem; letter-spacing: -.02em; }
+  .client p, .suite p { color: var(--mute); margin: 0 0 1.2rem; line-height: 1.55; }
+  .large { width: 100%; justify-content: center; padding: 1rem 1.4rem; font-size: 1rem; }
+  .liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1rem; }
+  figure { margin: 0; padding: 1.4rem; border-radius: 16px; border: 1px solid var(--line); background: rgba(255,255,255,.02); }
+  figure .etoiles { font-size: .9rem; margin: 0 0 .7rem; }
+  blockquote { margin: 0 0 1rem; color: var(--white); line-height: 1.6; }
+  figcaption { display: flex; flex-direction: column; gap: .2rem; padding-top: .9rem; border-top: 1px solid var(--line); color: var(--mute); font-size: .82rem; }
+  figcaption strong { color: var(--white); font-size: .95rem; }
+  figcaption .sys { color: var(--lime); font-size: .86rem; }
+  figcaption .mention { font-style: italic; font-size: .76rem; }
+  .voir { text-align: center; color: var(--lime); font-size: .92rem; margin-top: -.4rem; }
+  .suite { text-align: center; padding-top: 1.6rem; border-top: 1px solid var(--line); }
+  .suite h2 span { color: var(--lime); display: block; }
+  .site { display: inline-block; margin-top: 1rem; color: var(--mute); font-size: .88rem; }
+  .traduit { margin: -.6rem 0 .9rem; color: var(--mute); font-size: .74rem; font-style: italic; }
+</style>

@@ -1,5 +1,6 @@
 ---
 title: "C'est quoi N8N et à quoi ça sert pour une PME au Québec ?"
+seoTitle: "N8N : c'est quoi et à quoi ça sert pour une PME ?"
 description: "N8N connecte les logiciels d'une PME et fait circuler l'info sans intervention manuelle. Prix, self-hosted, Loi 25 et cas d'usage concrets."
 slug: "n8n-cest-quoi-automatisation-pme-quebec-2026"
 pubDate: 2026-07-21
@@ -25,7 +26,7 @@ faq:
   - q: "Est-ce que N8N remplace un employé ou juste un outil SaaS ?"
     a: "N8N ne remplace pas un employé au complet : il automatise des tâches répétitives et le transfert d'information entre logiciels. Il élimine la saisie manuelle et les relances oubliées, mais le jugement, la relation client et les décisions restent humains. C'est un moteur qui fait rouler des processus, pas un remplacement de poste."
   - q: "Dois-je engager un consultant pour installer et configurer N8N ?"
-    a: "Pour une PME, oui dans la plupart des cas. N8N est plus technique que les outils grand public, et l'hébergement propre demande une configuration serveur. Un consultant le déploie une fois selon vos processus, puis les workflows roulent sans abonnement mensuel par tâche. FournIA utilise N8N comme moteur principal d'automatisation pour ses clients PME au Québec."
+    a: "Pour une PME, oui dans la plupart des cas. N8N est plus technique que les outils grand public, et l'hébergement propre demande une configuration serveur. Un consultant le déploie une fois selon vos processus, puis les workflows roulent sans abonnement mensuel par tâche. FournIA travaille avec N8N quand c'est le bon outil pour le client, ou en code quand le projet le demande."
 ---
 
 N8N est l'outil d'automatisation que les consultants IA sérieux utilisent quand Zapier devient trop cher ou trop limité. C'est une plateforme qui connecte les logiciels d'une PME entre eux (CRM, Gmail, Shopify, comptabilité) et fait circuler l'information sans intervention manuelle. La différence principale : N8N peut s'installer directement sur votre propre serveur, ce qui veut dire que vos données ne quittent jamais votre infrastructure. C'est un avantage direct pour la conformité à la Loi 25 quand vos workflows touchent des données clients.
@@ -97,10 +98,6 @@ Attention : si votre workflow appelle une API d'IA à l'étranger (Claude, ChatG
 
 Pour une PME, oui dans la plupart des cas. N8N est plus technique que les outils grand public, et l'hébergement propre demande une configuration serveur qu'un proprio n'a généralement pas le temps de gérer.
 
-Un consultant déploie N8N une fois, le configure selon vos processus réels, puis les workflows roulent sans abonnement mensuel par tâche. C'est la logique que FournIA applique : N8N est le moteur principal d'automatisation de ses mandats pour des PME québécoises, installé une fois et branché sur les outils que le client utilise déjà.
+Un consultant déploie N8N une fois, le configure selon vos processus réels, puis les workflows roulent sans abonnement mensuel par tâche. C'est la logique que FournIA applique dans ses mandats pour des PME québécoises : une automatisation installée une fois et branchée sur les outils que le client utilise déjà, avec N8N ou en code selon le projet.
 
-Si vous vous demandez quelle automatisation apporterait le plus de valeur dans votre entreprise, un audit IA (100 $ à 500 $) permet de cibler le bon premier chantier avant d'investir. Vous pouvez en discuter sur [fournia.net](https://fournia.net).
-
-## FAQ
-
-Les questions et réponses ci-dessus alimentent le JSON-LD FAQPage généré au build.
+Si vous vous demandez quelle automatisation apporterait le plus de valeur dans votre entreprise, un diagnostic gratuit de 30 minutes permet de cibler le bon premier chantier avant d'investir : [réserver mon diagnostic](/diagnostic/).

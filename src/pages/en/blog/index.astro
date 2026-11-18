@@ -1,0 +1,101 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+
+// Version anglaise du blogue. Bibliothèque publique profonde : liste TOUS les posts, du plus récent au plus ancien.
+const posts = (await getCollection('blogEn')).sort(
+  (a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+);
+const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
+
+const fmtDate = (d) =>
+  new Date(d).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+const heroOf = (post) =>
+  post.data.heroImage ? post.data.heroImage.replace('./', `/blog/${post.data.fr}/`) : null;
+---
+<Base
+  title="Blog | FournIA"
+  description="FournIA articles on AI and automation for Quebec small businesses: costs, ROI, tools, Law 25."
+  lang="en"
+  canonical={`${siteUrl}/en/blog/`}
+>
+  <main>
+    <section class="blog-head">
+      <div class="wrap">
+        <div class="eyebrow reveal">FournIA Blog</div>
+        <h1 class="blog-title reveal" data-d="1">AI for Quebec small businesses,<br><span class="accent">explained simply.</span></h1>
+        <p class="blog-sub reveal" data-d="2">Clear, concrete answers on costs, ROI, tools and Quebec's Law 25. No jargon, no gimmicks.</p>
+      </div>
+    </section>
+
+    <section class="blog-list">
+      <div class="wrap">
+        {posts.length === 0 ? (
+          <p class="empty">The first articles are coming soon.</p>
+        ) : (
+          <div class="blog-grid">
+            {posts.map((post, i) => (
+              <a class="post-card reveal" data-d={String((i % 3) + 1)} href={`/en/blog/${post.id}/`}>
+                <div class="thumb">
+                  {heroOf(post)
+                    ? <img src={heroOf(post)} alt={post.data.heroAlt ?? post.data.title} loading="lazy" />
+                    : <div class="thumb-fallback"><span>Fourn<span class="ia">IA</span></span></div>}
+                </div>
+                <div class="card-body">
+                  {post.data.tags?.[0] && <span class="post-tag">{post.data.tags[0]}</span>}
+                  <h2 class="post-title">{post.data.title}</h2>
+                  <p class="post-desc">{post.data.description}</p>
+                  <div class="card-foot">
+                    <time datetime={new Date(post.data.pubDate).toISOString()}>{fmtDate(post.data.pubDate)}</time>
+                    <span class="read">Read the article <span class="arrow">→</span></span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  main { position: relative; z-index: 1; }
+  .blog-head { padding: 9rem 0 2rem; }
+  .blog-title { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 700; line-height: 1.02; letter-spacing: -.03em; margin: 1.4rem 0 1.4rem; }
+  .blog-title .accent { color: var(--lime); }
+  .blog-sub { color: var(--mute); font-size: 1.12rem; max-width: 620px; }
+
+  .blog-list { padding: 2rem 0 5rem; }
+  .empty { color: var(--mute); }
+
+  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
+
+  .post-card {
+    display: flex; flex-direction: column; overflow: hidden;
+    border-radius: 22px; background: var(--glass); border: 1px solid var(--line);
+    backdrop-filter: blur(10px); transition: transform .35s cubic-bezier(.2,.8,.3,1), border-color .35s, background .35s;
+  }
+  .post-card:hover { transform: translateY(-8px); border-color: rgba(183,217,76,.35); background: rgba(183,217,76,.04); }
+
+  .thumb { aspect-ratio: 16 / 9; overflow: hidden; background: var(--ink-850); border-bottom: 1px solid var(--line); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+  .post-card:hover .thumb img { transform: scale(1.05); }
+  .thumb-fallback { width: 100%; height: 100%; display: grid; place-items: center;
+    background: linear-gradient(160deg, rgba(183,217,76,.14), rgba(20,20,20,.5)); }
+  .thumb-fallback span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.6rem; letter-spacing: -.03em; color: var(--white); }
+  .thumb-fallback .ia { color: var(--lime); }
+
+  .card-body { padding: 1.6rem 1.5rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
+  .post-tag { align-self: flex-start; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--lime); background: rgba(183,217,76,.1); padding: .3rem .8rem; border-radius: 100px; margin-bottom: .9rem; }
+  .post-title { font-size: 1.28rem; line-height: 1.25; letter-spacing: -.01em; margin-bottom: .7rem; }
+  .post-desc { color: var(--mute); font-size: .95rem; margin-bottom: 1.4rem; flex: 1; }
+  .card-foot { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--line); }
+  .card-foot time { color: var(--mute-d); font-size: .82rem; }
+  .read { display: inline-flex; align-items: center; gap: .4rem; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: .86rem; color: var(--lime); }
+  .read .arrow { transition: transform .25s; }
+  .post-card:hover .read .arrow { transform: translateX(4px); }
+
+  @media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr; } .blog-head { padding-top: 7rem; } }
+  @media (min-width: 901px) and (max-width: 1100px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>

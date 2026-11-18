@@ -13,13 +13,13 @@
 // loi-25-artefact.md (données de navigation seulement, aucune identité).
 const { lang = 'fr' } = Astro.props;
 const T = lang === 'en'
-  ? { aria: 'Cookies', texte: "We use cookies to measure visits to the site and how well our ads work. Nothing is turned on without your consent.", plus: 'Learn more (in French)', non: 'Decline', oui: 'Accept' }
+  ? { aria: 'Cookies', texte: "We use cookies to measure visits to the site and how well our ads work. Nothing is turned on without your consent.", plus: 'Learn more', non: 'Decline', oui: 'Accept' }
   : { aria: 'Témoins', texte: "On utilise des témoins pour mesurer les visites du site et l'efficacité de nos publicités. Rien n'est activé sans votre accord.", plus: 'En savoir plus', non: 'Refuser', oui: 'Accepter' };
 const FB_PIXEL_ID = '2092349601673992';
 const pixelInit = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${FB_PIXEL_ID}');fbq('track','PageView');`;
 ---
 <div id="consentement" class="consentement" role="dialog" aria-live="polite" aria-label={T.aria} hidden>
-  <p>{T.texte} <a href="/confidentialite">{T.plus}</a></p>
+  <p>{T.texte} <a href={lang === 'en' ? '/en/privacy/' : '/confidentialite/'}>{T.plus}</a></p>
   <div class="consentement-btns">
     <button type="button" data-choix="non">{T.non}</button>
     <button type="button" data-choix="oui" class="ok">{T.oui}</button>

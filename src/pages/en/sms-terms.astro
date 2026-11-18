@@ -1,0 +1,107 @@
+---
+// Version anglaise de /sms-conditions/ (conditions du service SMS, A2P 10DLC). Traduction fidèle.
+// La version française prévaut en cas de divergence (mention en haut de page).
+// Note : baseline, pas un avis juridique.
+import Base from '../../layouts/Base.astro';
+
+const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
+const canonical = `${siteUrl}/en/sms-terms/`;
+const maj = 'July 4, 2026';
+---
+<Base
+  title="SMS service terms | FournIA"
+  description="Terms of FournIA's text messaging (SMS) service: consent, message frequency, unsubscribing and charges."
+  canonical={canonical}
+  lang="en"
+>
+  <main>
+    <article class="post">
+      <div class="wrap-narrow">
+        <nav class="crumbs"><a href="/en/">Home</a> <span>/</span> SMS terms</nav>
+        <h1>Text messaging (SMS) service terms</h1>
+        <p class="meta">Last updated: {maj}</p>
+        <p class="traduction">This is a translation. In case of discrepancy, the <a href="/sms-conditions/" hreflang="fr-CA" lang="fr">French version</a> prevails.</p>
+        <div class="prose">
+          <p>
+            These terms govern the text messaging (SMS) service offered by FournIA (Simon Fournier,
+            a business registered in Quebec, NEQ 2282026550), including the reminders and follow-ups
+            that FournIA sends on behalf of its clients (for example an advisor) to their own clients.
+          </p>
+
+          <h2>Program and purpose</h2>
+          <p>
+            The messages are follow-up reminders and service notices (for example: investment
+            follow-up, insurance review) sent to existing clients. They are not promotional or
+            marketing messages.
+          </p>
+
+          <h2>Consent (opt-in)</h2>
+          <p>
+            Consent is collected <strong>verbally</strong>. When a client engages the services of
+            their advisor (for example Karyann Turcotte, financial security advisor), or during a
+            follow-up meeting or call, the advisor asks permission to send follow-up reminders by text
+            message to the client's cell phone number, and tells them they can unsubscribe at any time
+            by replying STOP.
+          </p>
+          <p>
+            Wording used (in French): « Est-ce que je peux t'envoyer tes rappels de suivi par texto?
+            Tu peux te désabonner en tout temps en répondant STOP. » (In English: "Can I send you your
+            follow-up reminders by text? You can unsubscribe at any time by replying STOP.") The
+            client agrees out loud, and the advisor records the name, cell phone number, consent and
+            date in the client's file. This is not a sign-up through a website or a keyword. No
+            purchase or account creation depends on this consent.
+          </p>
+
+          <h2>Frequency and charges</h2>
+          <p>
+            Message frequency varies: usually a few messages per year (follow-up reminders and one follow-up message), depending on your file. <strong>Message and data rates may
+            apply</strong> depending on your mobile plan.
+          </p>
+
+          <h2>Unsubscribing and help</h2>
+          <p>
+            Reply <strong>STOP</strong> at any time to stop receiving messages. Reply
+            <strong>AIDE</strong> (French for "help") for assistance, or write to us at
+            <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>.
+          </p>
+
+          <h2>Privacy</h2>
+          <p>
+            We do not sell or share your mobile phone numbers or your SMS opt-in data with third
+            parties for marketing purposes. Details are in our
+            <a href="/en/privacy/">privacy policy</a>. Messages are delivered through our provider
+            Twilio (United States).
+          </p>
+
+          <h2>Contact us</h2>
+          <p>
+            FournIA, Simon Fournier<br />
+            <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a><br />
+            <a href="tel:+15148632973">514 863 2973</a>
+          </p>
+        </div>
+      </div>
+    </article>
+  </main>
+</Base>
+
+<style>
+  main { position: relative; z-index: 1; }
+  .post { padding: 8.5rem 0 4rem; }
+  .wrap-narrow { width: min(760px, 92vw); margin: 0 auto; }
+  .crumbs { font-size: .85rem; color: var(--mute-d); margin-bottom: 1.4rem; }
+  .crumbs a:hover { color: var(--lime); }
+  .crumbs span { margin: 0 .4rem; }
+  .post h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.08; letter-spacing: -.02em; font-weight: 700; margin-bottom: 1rem; }
+  .meta { color: var(--mute-d); font-size: .92rem; margin-bottom: 2rem; }
+  .prose { color: var(--mute); font-size: 1.06rem; line-height: 1.75; }
+  .prose :global(h2) { font-family: 'Space Grotesk', sans-serif; color: var(--white); font-size: 1.5rem; line-height: 1.2; letter-spacing: -.01em; margin: 2.4rem 0 .9rem; }
+  .prose :global(p) { margin-bottom: 1.2rem; }
+  .prose :global(ul) { margin: 0 0 1.2rem 1.3rem; }
+  .prose :global(li) { margin-bottom: .5rem; }
+  .prose :global(a) { color: var(--lime); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(183,217,76,.4); }
+  .prose :global(a:hover) { text-decoration-color: var(--lime); }
+  .prose :global(strong) { color: var(--white); font-weight: 600; }
+  .traduction { color: var(--mute-d); font-size: .9rem; font-style: italic; margin: -1.2rem 0 2rem; }
+  .traduction a { color: var(--lime); text-decoration: underline; text-underline-offset: 2px; }
+</style>

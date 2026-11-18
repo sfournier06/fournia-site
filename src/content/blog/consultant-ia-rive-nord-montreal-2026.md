@@ -1,5 +1,6 @@
 ---
 title: "Consultant IA sur la Rive-Nord de Montréal : à qui s'adresser en 2026 ?"
+seoTitle: "Consultant IA sur la Rive-Nord de Montréal en 2026"
 description: "Consultant IA sur la Rive-Nord de Montréal : qui construit, qui finance avec l'IRIA de DEC, qui encadre la Loi 25. La carte des rôles pour une PME en 2026."
 slug: "consultant-ia-rive-nord-montreal-2026"
 pubDate: 2026-11-04
@@ -101,7 +102,7 @@ Trois gestes, dans cet ordre :
 2. **Faire cartographier ce processus** par un consultant, idéalement sur place.
 3. **Vérifier l'admissibilité à l'IRIA** et déposer la demande avant de signer quoi que ce soit.
 
-Une PME de la Rive-Nord qui veut faire le point sur son premier projet d'IA peut [écrire à FournIA](https://fournia.net/#contact) pour une première conversation.
+Une PME de la Rive-Nord qui veut faire le point sur son premier projet d'IA peut [réserver un diagnostic gratuit avec FournIA](/diagnostic/) pour une première conversation.
 
 ## FAQ
 

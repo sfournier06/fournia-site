@@ -1,0 +1,64 @@
+---
+// Version anglaise de /secteurs/agences-marketing/. Traduction fidèle, aucune promesse ajoutée.
+import ServicePage from '../../../layouts/ServicePage.astro';
+import { ZONES } from '../../../data/entite.mjs';
+
+const zones = ZONES.map((z) => (z === 'Montréal' ? 'Montreal' : z));
+
+const faq = [
+  {
+    q: 'How does white label work?',
+    a: 'You sell to your client under your brand, and FournIA builds and implements behind you, at a fixed price per project. You keep the relationship and set your margin.',
+  },
+  {
+    q: 'Has FournIA worked with agencies before?',
+    a: "Yes. FournIA delivered a subcontracted project for an automation agency, under the agency's brand.",
+  },
+  {
+    q: "What about the privacy of the agency's clients?",
+    a: "Every project goes through a review under Quebec's privacy law (Law 25), and FournIA never solicits a partner agency's clients.",
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/secteurs/agences-marketing/"
+  image="/images/secteurs/agences-marketing.webp"
+  imageAlt="A marketing agency's workspace"
+  path="/en/industries/marketing-agencies"
+  title="White-label automation and AI for marketing agencies | FournIA"
+  description="Add automation and AI agents to your offer without hiring: FournIA builds under your brand (white label) for marketing agencies in Quebec."
+  h1="Automation and AI for marketing agencies"
+  lead="Your clients ask you for AI and automations, but that is not your core business. FournIA builds under white label, behind your agency, and also automates your own operations."
+  serviceName="Marketing agencies"
+  serviceType="Process automation for small businesses"
+  areaServed={zones}
+  faq={faq}
+  updated="2026-11-18"
+>
+  <h2>What costs time</h2>
+  <ul>
+    <li>Clients who generate leads with your campaigns, then leave them unanswered.</li>
+    <li>AI requests the team cannot deliver.</li>
+    <li>Results reports built by hand every month.</li>
+    <li>Information handoffs between tools that get lost.</li>
+  </ul>
+
+  <h2>What FournIA can automate</h2>
+  <ul>
+    <li>Replying to and following up with the leads your campaigns generate, at your clients' businesses.</li>
+    <li>AI agents delivered under your brand.</li>
+    <li>Client reports generated automatically.</li>
+    <li>Handoffs between your team and your tools.</li>
+  </ul>
+  <p>You stay in control of decisions. The system prepares, you approve.</p>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>A free 30-minute discovery call.</strong></li>
+    <li><strong>An assessment</strong> of your process, from the request to delivery.</li>
+    <li><strong>The build</strong> on your tools, one automation at a time.</li>
+    <li><strong>Training</strong> for your team and follow-up.</li>
+  </ol>
+  <p>Every project that involves personal information goes through a review under Quebec's privacy law (<a href="/en/blog/law-25-ai-compliance-quebec-2026/">Law 25</a>). See also the <a href="/en/industries/">other industries</a>.</p>
+</ServicePage>

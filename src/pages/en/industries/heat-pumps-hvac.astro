@@ -1,0 +1,70 @@
+---
+// Version anglaise de /secteurs/thermopompes-climatisation/. Traduction fidèle, aucune promesse ajoutée.
+import ServicePage from '../../../layouts/ServicePage.astro';
+import { ZONES } from '../../../data/entite.mjs';
+
+const zones = ZONES.map((z) => (z === 'Montréal' ? 'Montreal' : z));
+
+const faq = [
+  {
+    q: 'Which tasks can a heat pump contractor automate?',
+    a: 'The most profitable ones are replying to quote requests, calling back missed calls, following up on unanswered quotes, booking site visits and sending annual maintenance reminders. These are repetitive tasks that overflow in peak season.',
+  },
+  {
+    q: 'Does AI replace my estimator?',
+    a: 'No. The price of an installation depends on a site visit and your judgment. The automation handles what happens before and after: acknowledging the request, asking the right questions, booking the visit, sending the quote you approved and following up.',
+  },
+  {
+    q: 'Does it work with my current software?',
+    a: 'In most cases, yes. We start from your tools (email, calendar, invoicing software or CRM) and connect them. We check access to your software before promising anything.',
+  },
+  {
+    q: 'Is texting clients legal?',
+    a: "Yes, with the right rules: client consent, identification of the business and an unsubscribe option (Canada's Anti-Spam Legislation), plus registration of the sending number. FournIA takes care of it and applies Quebec's privacy law (Law 25) to your clients' data.",
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/secteurs/thermopompes-climatisation/"
+  image="/images/secteurs/thermopompes-climatisation.webp"
+  imageAlt="Heat pump installation"
+  path="/en/industries/heat-pumps-hvac"
+  title="Automation for heat pump and HVAC contractors | FournIA"
+  description="Faster quotes, missed calls returned, annual maintenance followed up: AI automation for heat pump and HVAC contractors in Laval and the North Shore."
+  h1="Automation for heat pump and air conditioning contractors"
+  lead="In peak season, requests come in faster than you can answer them. Whoever calls back first often wins the contract. FournIA automates request replies, quote follow-ups and maintenance reminders for HVAC contractors in Laval, Montreal's North Shore and Montreal."
+  serviceName="Heat pumps and air conditioning"
+  serviceType="Process automation for HVAC contractors"
+  areaServed={zones}
+  faq={faq}
+  updated="2026-11-18"
+>
+  <h2>What costs time in a heat pump business</h2>
+  <ul>
+    <li><strong>Missed calls while the crew is on a job site.</strong> The client calls the next competitor.</li>
+    <li><strong>Quote requests that wait a day or two</strong> before anyone answers.</li>
+    <li><strong>Quotes sent and never followed up.</strong> Some of those clients were ready to sign.</li>
+    <li><strong>Annual maintenance reminders done by hand</strong>, or not done at all, even though it is recurring revenue.</li>
+    <li><strong>The same questions</strong> about grants, timelines and models, repeated with every client.</li>
+  </ul>
+
+  <h2>What FournIA can automate</h2>
+  <ul>
+    <li><strong>Instant replies to requests</strong> from your website, email and social media, with qualifying questions (type of home, current system, timeline).</li>
+    <li><strong>An automatic text after a missed call</strong>, offering a time to call back or book the visit.</li>
+    <li><strong>Appointment booking</strong> directly in your calendar, with a reminder the day before.</li>
+    <li><strong>Quote follow-ups</strong> at set intervals, stopped as soon as the client replies.</li>
+    <li><strong>Annual maintenance reminders</strong> sent on the right date, client by client.</li>
+  </ul>
+  <p>You stay in control of prices and decisions. The system prepares, you approve.</p>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>A free 30-minute discovery call</strong> to spot where you are losing contracts.</li>
+    <li><strong>An assessment</strong> of your full path, from the client's call to the installation.</li>
+    <li><strong>The build</strong> on your tools, one automation at a time.</li>
+    <li><strong>Training</strong> for your team and follow-up after launch.</li>
+  </ol>
+  <p>See also: <a href="/en/custom-systems/">business automation</a> and the <a href="/en/industries/">other industries</a>.</p>
+</ServicePage>

@@ -1,0 +1,68 @@
+---
+// Version anglaise de /secteurs/evenementiel/. Traduction fidèle, aucune promesse ajoutée.
+import ServicePage from '../../../layouts/ServicePage.astro';
+import { ZONES } from '../../../data/entite.mjs';
+
+const zones = ZONES.map((z) => (z === 'Montréal' ? 'Montreal' : z));
+
+const faq = [
+  {
+    q: 'Which tasks can an event business automate?',
+    a: 'Receiving requests from everywhere (email, Messenger, Instagram, website), standard estimates based on your price grid, appointment booking, deposit tracking and the thank-you email after the event with a review request.',
+  },
+  {
+    q: 'Can an AI agent reply to my clients for me?',
+    a: 'Yes, according to your rules. It can answer simple questions on its own and prepare a draft for the rest. Special prices, discounts, complaints and large events always come back to you.',
+  },
+  {
+    q: 'Has FournIA worked in the events industry before?',
+    a: 'Yes. For a Montreal sound equipment rental company, FournIA built the intake of its multichannel requests and an automatic follow-up after each event, with a satisfaction survey and a Google review request.',
+  },
+  {
+    q: 'How do I get more Google reviews after an event?',
+    a: 'By asking at the right time, systematically. An email goes out after the event with a short survey: satisfied clients are directed to your Google listing, the others to you, so you can fix the problem before it becomes public.',
+  },
+];
+---
+<ServicePage
+  lang="en"
+  alt="/secteurs/evenementiel/"
+  image="/images/secteurs/evenementiel.webp"
+  imageAlt="Setting up an event"
+  path="/en/industries/events"
+  title="Automation for event and rental businesses | FournIA"
+  description="Centralized requests, fast estimates, tracked deposits and Google reviews after every event: AI automation for events and equipment rental in Quebec."
+  h1="Automation for event businesses"
+  lead="Requests come in by email, Messenger, Instagram and the website, often in the evening and on weekends. FournIA centralizes those requests, speeds up estimates and automates the follow-up before and after each event, for rental, sound and event planning businesses."
+  serviceName="Events and rentals"
+  serviceType="Process automation for event businesses"
+  areaServed={zones}
+  faq={faq}
+  updated="2026-11-18"
+>
+  <h2>What costs time in the events industry</h2>
+  <ul>
+    <li><strong>Requests scattered</strong> across five inboxes, some of them left unanswered.</li>
+    <li><strong>Estimates redone by hand</strong> for each request, even though most follow the same grid.</li>
+    <li><strong>Deposits to track</strong> before each date, without forgetting anyone.</li>
+    <li><strong>A forgotten after-event</strong>: no thank-you, no review request, no follow-up for next time.</li>
+  </ul>
+
+  <h2>What FournIA can automate</h2>
+  <ul>
+    <li><strong>A single intake</strong> for all your requests, with a first reply within minutes.</li>
+    <li><strong>Standard estimates</strong> drawn from your price grid, sent after your approval.</li>
+    <li><strong>Appointment booking</strong> in your real calendar for the confirmation call.</li>
+    <li><strong>Deposit and invoice tracking</strong>, without chasing a client who has already paid.</li>
+    <li><strong>The after-event email</strong> with a satisfaction survey and a link to your Google reviews.</li>
+  </ul>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>A free 30-minute discovery call.</strong></li>
+    <li><strong>An assessment</strong> of the full path, from the request to the client's review.</li>
+    <li><strong>The build</strong> channel by channel, starting with the one that loses the most requests.</li>
+    <li><strong>Training</strong> and regular follow-up.</li>
+  </ol>
+  <p>See also: <a href="/en/custom-systems/">business automation</a> and the <a href="/en/industries/">other industries</a>.</p>
+</ServicePage>
