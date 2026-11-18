@@ -48,7 +48,7 @@ const etoiles = (n) => '★'.repeat(n) + '☆'.repeat(5 - n);
                     <figure class="carte">
                       <p class="etoiles" aria-label={`${a.note} sur 5`}>{etoiles(a.note)}</p>
                       <blockquote>{a.texte}</blockquote>
-                      <figcaption><strong>{a.auteur}</strong>{a.systeme && <span class="sys">{a.systeme}</span>}{a.secteur && <span>{a.secteur}</span>}{a.lien && <a href={a.lien} target="_blank" rel="noopener">Avis Google</a>}</figcaption>
+                      <figcaption><strong>{a.auteur}</strong>{a.systeme && <span class="sys">{a.systeme}</span>}{a.secteur && <span>{a.secteur}</span>}{a.mention && <span><em>{a.mention}</em></span>}{a.lien && <a href={a.lien} target="_blank" rel="noopener">Avis Google</a>}</figcaption>
                     </figure>
                   ))
                 : [1, 2, 3].map(() => (

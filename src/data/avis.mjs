@@ -47,15 +47,19 @@ export const TOUS_AVIS = [
     secteur: "Agence d'automatisation", secteur_en: 'Automation agency',
   },
   {
-    // Publié sur Google depuis le compte de Charles-Alexandre Bernier, partenaire d'affaires de FournIA
-    // (à commission). Affiché sous le nom que Google montre, avec le lien d'affaires dit en clair :
-    // un avis de partenaire ne se présente jamais comme un avis de client.
-    auteur: 'Charles-Alexandre Bernier',
+    // Écrit par Stéphane Bernier (Pubsphere, client) selon Simon (2026-11-18), mais publié sur Google depuis le
+    // compte de Charles-Alexandre Bernier, partenaire d'affaires de FournIA. Sur Google, le nom affiché est donc
+    // celui de Charles-Alexandre : la carte le dit en clair (champ `note`) pour qu'un visiteur qui compare avec
+    // Google ne croie pas à un faux avis. À retirer quand Stéphane le republie de son propre compte.
+    auteur: 'Stéphane Bernier',
     note: 5,
     texte: "malade, j’ai adoré mon expérience. Ma vie a changé.",
     date: '2026-11-17',
     lien: FICHE,
-    systeme: "Partenaire d'affaires de FournIA", systeme_en: 'FournIA business partner',
+    systeme: 'Les relevés de cartes de crédit, classés dans Excel', systeme_en: 'Credit card statements, sorted into Excel',
+    secteur: "Fabricant de kiosques d'exposition", secteur_en: 'Trade show booth maker',
+    mention: 'Publié sur Google depuis le compte de Charles-Alexandre Bernier',
+    mention_en: 'Posted on Google from the account of Charles-Alexandre Bernier',
   },
 ];
 

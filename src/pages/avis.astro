@@ -44,6 +44,7 @@ const diagnostic = '/diagnostic/?utm_source=instagram&utm_medium=bio&utm_campaig
                 <strong>{a.auteur}</strong>
                 {a.systeme && <span class="sys">{a.systeme}</span>}
                 {a.secteur && <span>{a.secteur}</span>}
+                {a.mention && <span class="mention">{a.mention}</span>}
               </figcaption>
             </figure>
           </li>
@@ -83,6 +84,7 @@ const diagnostic = '/diagnostic/?utm_source=instagram&utm_medium=bio&utm_campaig
   figcaption { display: flex; flex-direction: column; gap: .2rem; padding-top: .9rem; border-top: 1px solid var(--line); color: var(--mute); font-size: .82rem; }
   figcaption strong { color: var(--white); font-size: .95rem; }
   figcaption .sys { color: var(--lime); font-size: .86rem; }
+  figcaption .mention { font-style: italic; font-size: .76rem; }
   .voir { text-align: center; color: var(--lime); font-size: .92rem; margin-top: -.4rem; }
   .suite { text-align: center; padding-top: 1.6rem; border-top: 1px solid var(--line); }
   .suite h2 span { color: var(--lime); display: block; }

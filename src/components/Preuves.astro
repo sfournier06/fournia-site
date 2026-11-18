@@ -77,6 +77,7 @@ const etoiles = '★★★★★';
                     <strong>{a.auteur}</strong>
                     {a.systeme && <span class="systeme">{en ? (a.systeme_en || a.systeme) : a.systeme}</span>}
                     {a.secteur && <span class="secteur">{en ? (a.secteur_en || a.secteur) : a.secteur}</span>}
+                    {a.mention && <span class="mention">{en ? (a.mention_en || a.mention) : a.mention}</span>}
                   </figcaption>
                 </figure>
               )))}
@@ -138,6 +139,7 @@ const etoiles = '★★★★★';
   .carte-avis figcaption strong { color: var(--white); font-size: .92rem; font-weight: 600; }
   .carte-avis figcaption .systeme { color: var(--lime); font-size: .84rem; }
   .carte-avis figcaption .secteur { color: var(--mute); font-size: .8rem; }
+  .carte-avis figcaption .mention { color: var(--mute); font-size: .74rem; font-style: italic; opacity: .8; }
   @media (max-width: 960px) {
     .videos { grid-template-columns: 1fr 1fr; }
   }
