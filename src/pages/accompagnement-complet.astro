@@ -334,7 +334,7 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .lp h3 { font-size: 1.2rem; font-weight: 600; color: var(--white); letter-spacing: -.01em; }
 
   /* Pastilles de revue : discrètes, à retirer avant la mise en ligne */
-  .pastille { display: inline-flex; align-items: center; vertical-align: middle; font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 500; line-height: 1.3; letter-spacing: .01em;
+  .pastille { display: inline-flex; align-items: center; vertical-align: middle; font-family: 'Inter', 'Inter Repli', sans-serif; font-size: .72rem; font-weight: 500; line-height: 1.3; letter-spacing: .01em;
     color: #e7b65a; border: 1px dashed rgba(231,182,90,.7); border-radius: 6px; padding: .12rem .45rem; margin: 0 .25rem; }
   .lp .note-revue { font-size: .85rem; line-height: 1.5; color: #c4b48c; margin: -.5rem 0 1.6rem; }
   .lp .note-revue .pastille { margin-left: 0; }
@@ -346,7 +346,7 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .preuve-haut strong { color: var(--white); }
   .preuve-haut > * { vertical-align: middle; }
   .preuve-haut .etoiles-w { margin: 0 .45rem 0 .35rem; }
-  .g { width: 1.45rem; height: 1.45rem; border-radius: 50%; display: inline-grid; place-items: center; background: #fff; color: #4285f4; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: .82rem; }
+  .g { width: 1.45rem; height: 1.45rem; border-radius: 50%; display: inline-grid; place-items: center; background: #fff; color: #4285f4; font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-weight: 700; font-size: .82rem; }
   .etoiles-w { display: inline-flex; }
   .lp :global(.etoiles) { width: 5.1rem; height: 1rem; fill: var(--lime); display: block; }
   .lp .interpelle { font-size: 1.15rem; line-height: 1.5; font-weight: 500; color: var(--texte); margin-bottom: 1.1rem; }
@@ -386,13 +386,13 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .h3-mots { margin-bottom: 1.2rem; }
   .citations { display: grid; gap: 1rem; }
   .citations blockquote { position: relative; padding: 1.3rem 1.4rem 1.2rem 3.4rem; border-radius: 16px; background: rgba(255,255,255,.028); border: 1px solid var(--line); }
-  .citations blockquote::before { content: '«'; position: absolute; left: 1.1rem; top: .7rem; font-family: 'Space Grotesk', sans-serif; font-size: 2.4rem; line-height: 1; color: var(--lime); }
+  .citations blockquote::before { content: '«'; position: absolute; left: 1.1rem; top: .7rem; font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: 2.4rem; line-height: 1; color: var(--lime); }
   .lp .citations blockquote p { font-size: 1.12rem; line-height: 1.65; color: var(--texte); margin: 0; }
   .citations .pastille { margin: .7rem 0 0; }
 
   .etapes { list-style: none; margin: 2.2rem 0 2.2rem; padding: 0; counter-reset: etape; }
   .lp .etapes li { counter-increment: etape; position: relative; padding: 0 0 1.4rem 3.3rem; margin: 0; }
-  .etapes li::before { content: counter(etape); position: absolute; left: 0; top: .1rem; width: 2.15rem; height: 2.15rem; border-radius: 50%; border: 1px solid rgba(183,217,76,.55); background: var(--ink-950); color: var(--lime); font-family: 'Space Grotesk', sans-serif; font-size: .95rem; font-weight: 600; display: grid; place-items: center; z-index: 1; }
+  .etapes li::before { content: counter(etape); position: absolute; left: 0; top: .1rem; width: 2.15rem; height: 2.15rem; border-radius: 50%; border: 1px solid rgba(183,217,76,.55); background: var(--ink-950); color: var(--lime); font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: .95rem; font-weight: 600; display: grid; place-items: center; z-index: 1; }
   .etapes li::after { content: ''; position: absolute; left: 1.07rem; top: 2.3rem; bottom: .25rem; width: 1px; background: rgba(183,217,76,.22); }
   .etapes li:last-child::after { display: none; }
   .bloc-alt .etapes li::before { background: var(--fond-alt); }
@@ -409,7 +409,7 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .carte-avis { margin: 0; padding: 1.7rem 1.7rem 1.4rem; border-radius: 18px; background: #161714; border: 1px solid var(--glass-b); display: flex; flex-direction: column; gap: 1rem; box-shadow: 0 18px 40px rgba(0,0,0,.35); }
   .carte-avis blockquote { font-size: 1.08rem; line-height: 1.65; color: var(--texte); flex: 1; }
   .carte-avis figcaption { font-size: .9rem; color: var(--texte-2); display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .55rem; }
-  .carte-avis figcaption strong { color: var(--white); font-family: 'Space Grotesk', sans-serif; }
+  .carte-avis figcaption strong { color: var(--white); font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; }
   .carte-avis figcaption .pastille { margin: 0; }
   .lp .note-bas { margin: 1.2rem 0 0; }
 
@@ -417,12 +417,12 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .realisations { list-style: none; margin: 0; padding: 0; }
   .lp .realisations li { display: grid; grid-template-columns: minmax(180px, 260px) 1fr; gap: 1.8rem; padding: 1.25rem 0; border-top: 1px solid var(--line); color: var(--texte); }
   .realisations li:last-child { border-bottom: 1px solid var(--line); }
-  .realisations strong { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; color: var(--white); display: flex; flex-direction: column; }
-  .realisations .secteur { color: var(--texte-2); font-weight: 400; font-family: 'Inter', sans-serif; font-size: .92rem; }
+  .realisations strong { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: 1.1rem; color: var(--white); display: flex; flex-direction: column; }
+  .realisations .secteur { color: var(--texte-2); font-weight: 400; font-family: 'Inter', 'Inter Repli', sans-serif; font-size: .92rem; }
 
   .offre { margin: 0 0 2rem; padding: 2.1rem 2.1rem 1.2rem; border-radius: 22px; border: 1px solid var(--glass-b);
     background: radial-gradient(120% 120% at 0% 0%, rgba(183,217,76,.1), transparent 55%), #121311; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
-  .lp .offre-titre { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--white); letter-spacing: -.02em; margin-bottom: .6rem; }
+  .lp .offre-titre { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--white); letter-spacing: -.02em; margin-bottom: .6rem; }
   .wm { font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: -.03em; }
   .wm span { color: var(--lime); }
 
@@ -430,24 +430,24 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .bonus-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
   .bonus { padding: 1.8rem 1.7rem 1.5rem; border-radius: 18px; border: 1px solid var(--glass-b); background: #171815; box-shadow: 0 18px 40px rgba(0,0,0,.35); display: flex; flex-direction: column; }
   .bonus-num { width: 2.3rem; height: 2.3rem; border-radius: 50%; display: grid; place-items: center; margin-bottom: 1.1rem;
-    background: rgba(183,217,76,.12); border: 1px solid rgba(183,217,76,.5); color: var(--lime); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1rem; }
+    background: rgba(183,217,76,.12); border: 1px solid rgba(183,217,76,.5); color: var(--lime); font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-weight: 700; font-size: 1rem; }
   .lp .bonus h3 { font-size: 1.22rem; line-height: 1.3; margin-bottom: .7rem; }
   .lp .bonus p { font-size: 1.05rem; line-height: 1.65; margin: 0; }
 
-  .lp .rarete { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 5.6vw, 3.1rem); line-height: 1.1; font-weight: 700; letter-spacing: -.03em; color: var(--white); margin-bottom: 1.4rem; }
+  .lp .rarete { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: clamp(2rem, 5.6vw, 3.1rem); line-height: 1.1; font-weight: 700; letter-spacing: -.03em; color: var(--white); margin-bottom: 1.4rem; }
   .rarete em { font-style: normal; color: var(--lime); }
 
   .garantie { display: grid; grid-template-columns: 3.4rem 1fr; gap: 1.4rem; align-items: start; padding: 2.1rem; border-radius: 22px;
     border: 1px solid rgba(183,217,76,.5); background: linear-gradient(160deg, rgba(183,217,76,.09), rgba(183,217,76,.015)); margin-bottom: 1.3rem;
     box-shadow: 0 24px 60px rgba(0,0,0,.4); }
   .bouclier { width: 3.4rem; height: 3.4rem; color: var(--lime); }
-  .lp .garantie-titre { font-family: 'Space Grotesk', sans-serif; font-size: 1.45rem; line-height: 1.25; font-weight: 700; letter-spacing: -.02em; color: var(--white); margin-bottom: .7rem; }
+  .lp .garantie-titre { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: 1.45rem; line-height: 1.25; font-weight: 700; letter-spacing: -.02em; color: var(--white); margin-bottom: .7rem; }
   .lp .garantie p:last-child { margin-bottom: 0; color: var(--texte); }
   .lp .petit { font-size: .9rem; line-height: 1.6; color: #adafa7; }
 
   .faq details { border-top: 1px solid var(--line); }
   .faq details:last-child { border-bottom: 1px solid var(--line); }
-  .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.3rem 0; font-family: 'Space Grotesk', sans-serif; font-size: 1.16rem; font-weight: 600; color: var(--white); transition: color .2s; }
+  .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.3rem 0; font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: 1.16rem; font-weight: 600; color: var(--white); transition: color .2s; }
   .faq summary::-webkit-details-marker { display: none; }
   .faq summary:hover { color: var(--lime-l); }
   .plus { position: relative; flex: none; width: 1.7rem; height: 1.7rem; border-radius: 50%; border: 1px solid var(--glass-b); }
@@ -457,12 +457,20 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .lp .faq details p { padding: 0 2.8rem 1.4rem 0; margin: 0; }
 
   .bloc-ps { padding-bottom: 6.5rem; }
+  /* Performance mobile (audit Lighthouse du 2026-11-20) : sur cette page longue, le halo flou animé, la grille
+     animée et le grain en mélange plein écran coûtaient plusieurs secondes de rendu sur téléphone. On garde le
+     décor, figé et sans flou coûteux. */
+  :global(.bg-fx .glow-1), :global(.bg-fx .grid-lines) { animation: none; }
+  @media (max-width: 760px) {
+    :global(.bg-fx .glow-1) { filter: none; opacity: .5; }
+    :global(.bg-fx .grain) { display: none; }
+  }
   /* Pied minimal (Base minimal) : confidentialité et témoins seulement */
   :global(.foot-minimal) { padding: 1.8rem 0 2.2rem; margin-top: 0; }
   :global(.foot-minimal .foot-bottom) { margin-top: 0; padding-top: 0; border-top: none; }
   .ps { padding: 2.6rem; border-radius: 24px; border: 1px solid var(--glass-b); background: radial-gradient(110% 130% at 100% 0%, rgba(183,217,76,.11), transparent 55%), #121311; box-shadow: 0 30px 70px rgba(0,0,0,.45); }
   .lp .ps p { font-size: 1.24rem; line-height: 1.6; color: var(--texte); margin-bottom: 1.6rem; }
-  .ps-tag { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--lime); margin-right: .25rem; }
+  .ps-tag { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-weight: 700; color: var(--lime); margin-right: .25rem; }
 
   @media (max-width: 760px) {
     .hero { padding: 7.2rem 0 3.6rem; }
