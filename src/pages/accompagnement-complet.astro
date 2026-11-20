@@ -41,6 +41,14 @@ const offre = [
   'Tous les outils et les comptes restent à ton nom.',
 ];
 
+// Logos des clients déjà affichés sous consentement dans le bandeau des réalisations (src/data/realisations.mjs).
+const logosClients = [
+  { src: '/clients/mini/avecplaisirs.webp' },
+  { src: '/clients/mini/pubsphere.webp' },
+  { src: '/clients/mini/arbour.webp' },
+  { src: '/clients/mini/seniortech.webp' },
+];
+
 const bonus = [
   { t: 'Ton dossier Loi 25, écrit', d: "Pour chaque système qu'on bâtit, un document dit quelles données il touche, où elles vont et qui y a accès. Si un client te pose la question, la réponse est déjà écrite." },
   { t: "La politique d'usage de l'IA de ton équipe", d: "Une page claire : ce que ton équipe peut faire avec l'IA, ce qu'elle ne fait jamais, comme y coller les données d'un client, et à qui demander en cas de doute. Prête à afficher." },
@@ -61,41 +69,45 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
 ---
 <Base title="Accompagnement complet en automatisation | FournIA" description="On sort les tâches répétitives de ta semaine, un chantier à la fois, dans tes outils actuels. Diagnostic gratuit de 30 minutes." canonical="https://fournia.net/accompagnement-complet/" minimal>
   <meta slot="head" name="robots" content="noindex, nofollow" />
+  <link slot="head" rel="preload" href="/images/simon-fournier-flou.webp" as="image" fetchpriority="high" />
+  <link slot="head" rel="preload" href="/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin />
 
   <main class="lp">
     <!-- Au-dessus du pli : étapes 1 à 3, vidéo, bouton, preuve. Sans animation (LCP). -->
     <header class="hero">
-      <div class="col col-hero">
-        <p class="brouillon">Brouillon de revue · les pastilles pointillées sont à trancher ou à vérifier</p>
-
-        <!-- Étape 1 : la preuve d'abord, puis la personne visée -->
-        <p class="preuve-haut">
-          <span class="g" aria-hidden="true">G</span>
-          <span class="etoiles-w" set:html={etoiles}></span>
-          <span><strong>5,0</strong> sur Google <span class="pastille">[N] avis · à vérifier</span> · entreprises du Québec accompagnées depuis Blainville</span>
-        </p>
-        <p class="interpelle">Propriétaire de PME au Québec : ton téléphone, tes soumissions et tes relances reposent encore sur toi ?</p>
+      <div class="hero-fond" aria-hidden="true"><img src="/images/simon-fournier-flou.webp" alt="" width="480" height="600" fetchpriority="high" /></div>
+      <div class="hero-contenu">
+        <!-- Étape 1 : la preuve d'abord -->
+        <div class="preuve-barre">
+          <span class="preuve-note"><span class="etoiles-w" set:html={etoiles}></span><span><strong>5,0</strong> sur Google</span><span class="pastille">[N] avis · à vérifier</span></span>
+          <span class="logos" role="img" aria-label="Ils nous font confiance : AvecPlaisirs, Pubsphere, Arbour Aide Académique, SeniorTech">
+            {logosClients.map((l) => <span class="logo-rond"><img src={l.src} alt="" width="40" height="40" decoding="async" /></span>)}
+          </span>
+        </div>
 
         <!-- Étape 2 : la grosse promesse -->
-        <h1>Récupère <em>tes soirées</em>&nbsp;: ton premier système roule 30&nbsp;jours après tes accès.</h1>
+        <h1 class="titre-geant">Récupère <em>tes soirées</em></h1>
 
-        <!-- Étape 3 : sous-titre (le reste de la promesse), ouvrir une boucle -->
-        <p class="sous-titre">On bâtit un chantier d'automatisation à la fois, dans tes outils actuels, et chaque système est garanti 30&nbsp;jours. Tu gardes les décisions, et il y a une raison précise pour laquelle tout ce que tu as essayé jusqu'ici n'a pas tenu.</p>
+        <!-- Étape 3 : sous-titre -->
+        <p class="sous-titre">On automatise les tâches répétitives de ta PME, un système à la fois. Ton premier système roule 30&nbsp;jours après tes accès, et il est garanti 30&nbsp;jours.</p>
 
+        <a class="btn btn-primary btn-geant" href={CTA}>Réserve ton diagnostic gratuit <span class="arrow">→</span></a>
+        <p class="mini-cta">30 minutes · gratuit · sans engagement</p>
+      </div>
+    </header>
+
+    <!-- Le VSL, juste sous le haut de page -->
+    <section class="bloc-vsl">
+      <div class="col col-hero">
         <figure class="vsl" aria-label="Vidéo de présentation, à venir">
           <div class="vsl-ecran">
             <img class="vsl-mono" src="/brand/fournia-monogram.svg" alt="" width="120" height="120" />
             <span class="play" aria-hidden="true"></span>
           </div>
-          <figcaption>Vidéo à venir. En attendant, réserve ton diagnostic ci-dessous.</figcaption>
+          <figcaption>Vidéo à venir.</figcaption>
         </figure>
-
-        <div class="cta-bloc">
-          <a class="btn btn-primary btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
-          <p class="sous-cta"><span class="etoiles-w" set:html={etoiles}></span> 5,0 sur Google <span class="pastille">[N] avis · à vérifier</span></p>
-        </div>
       </div>
-    </header>
+    </section>
 
     <!-- Étape 4 : l'intrigue -->
     <section class="bloc">
@@ -208,7 +220,7 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
             {offre.map((o) => <li><span set:html={coche}></span><span>{o}</span></li>)}
           </ul>
         </div>
-        <p class="grand">Et si, au diagnostic, on voit qu'un seul système suffit, on te le dit. On te bâtit ce système-là, sans t'en vendre plus.</p>
+        <p class="grand">Et si, au diagnostic, on voit qu'un seul système suffit, on te le dit. On te bâtit ce système-là, sans rien te vendre de plus.</p>
       </div>
     </section>
 
@@ -311,22 +323,26 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     <section class="bloc bloc-ps">
       <div class="col reveal">
         <div class="ps">
-          <p><span class="ps-tag">P.S.</span> Si t'as descendu direct ici, l'essentiel tient en quatre points&nbsp;:</p>
+          <p><span class="ps-tag">P.S.</span> Si tu es descendu directement ici, l'essentiel tient en quatre points&nbsp;:</p>
           <ul class="liste-coches ps-points">
-            <li><span set:html={coche}></span><span>On sort les tâches répétitives de ta semaine, un système à la fois, dans les outils que t'as déjà.</span></li>
+            <li><span set:html={coche}></span><span>On sort les tâches répétitives de ta semaine, un système à la fois, dans les outils que tu as déjà.</span></li>
             <li><span set:html={coche}></span><span>Ton premier système roule 30&nbsp;jours après tes accès, et chaque système est garanti 30&nbsp;jours.</span></li>
             <li><span set:html={coche}></span><span>Tout commence par un diagnostic gratuit de 30&nbsp;minutes. Tu repars avec tes 3 plus grosses pertes de temps, chiffrées en heures, dans un diagnostic écrit qui est à toi.</span></li>
             <li><span set:html={coche}></span><span>Nos équipes nous limitent à 3&nbsp;accompagnements par mois.</span></li>
           </ul>
-          <p>Si tu fais rien, dans un an, tu vas avoir la même semaine, avec les mêmes appels manqués pis les mêmes soirées à rattraper.</p>
-          <p>Clique sur le bouton, réponds à 3 questions, pis si c'est pour toi, choisis ton heure.</p>
+          <p>Si tu ne fais rien, dans un an, tu auras la même semaine, avec les mêmes appels manqués et les mêmes soirées à rattraper.</p>
+          <p>Clique sur le bouton, réponds à 3 questions et, si c'est pour toi, choisis ton heure.</p>
           <a class="btn btn-primary btn-xl" href={CTA}>Réserve ton diagnostic gratuit <span class="arrow">→</span></a>
         </div>
-        <p class="pps"><span class="ps-tag">P.P.S.</span> Pas sûr que c'est pour une entreprise de ta taille&nbsp;? C'est exactement à ça que sert le diagnostic&nbsp;: si un seul système suffit chez vous, on te le dit, pis on te bâtit celui-là, sans t'en vendre plus.</p>
+        <p class="pps"><span class="ps-tag">P.P.S.</span> Pas sûr que c'est pour une entreprise de ta taille&nbsp;? C'est exactement à ça que sert le diagnostic&nbsp;: si un seul système suffit chez vous, on te le dit et on te bâtit celui-là, sans rien te vendre de plus.</p>
       </div>
     </section>
   </main>
 </Base>
+
+<style is:global>
+  @font-face { font-family: 'Anton'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/anton-latin.woff2') format('woff2'); }
+</style>
 
 <style>
   .lp { position: relative; z-index: 1; --texte: #eceee7; --texte-2: #c9cbc3; --fond-alt: #131411; }
@@ -347,22 +363,34 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     color: #e7b65a; border: 1px dashed rgba(231,182,90,.7); border-radius: 6px; padding: .12rem .45rem; margin: 0 .25rem; }
   .lp .note-revue { font-size: .85rem; line-height: 1.5; color: #c4b48c; margin: -.5rem 0 1.6rem; }
   .lp .note-revue .pastille { margin-left: 0; }
-  .lp .brouillon { display: inline-block; font-size: .78rem; line-height: 1.4; color: #c4b48c; border: 1px dashed rgba(231,182,90,.45); border-radius: 100px; padding: .3rem .85rem; margin-bottom: 1.8rem; }
 
-  /* ── Haut de page ── */
-  .hero { padding: 8.4rem 0 4.6rem; }
-  .lp .preuve-haut { display: block; font-size: .9rem; line-height: 1.5; color: var(--texte-2); margin-bottom: 1.4rem; }
-  .preuve-haut strong { color: var(--white); }
-  .preuve-haut > * { vertical-align: middle; }
-  .preuve-haut .etoiles-w { margin: 0 .45rem 0 .35rem; }
-  .g { width: 1.45rem; height: 1.45rem; border-radius: 50%; display: inline-grid; place-items: center; background: #fff; color: #4285f4; font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-weight: 700; font-size: .82rem; }
+  /* ── Haut de page (style King Kong) ── */
+  .hero { position: relative; isolation: isolate; overflow: hidden; text-align: center; padding: 7.6rem 0 4.4rem; border-bottom: 1px solid var(--line); }
+  .hero-fond { position: absolute; inset: 0; z-index: -1; }
+  .hero-fond img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; transform: scale(1.15); display: block; }
+  .hero-fond::after { content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(11,11,12,.66), rgba(11,11,12,.76) 62%, #0b0b0c), radial-gradient(70% 60% at 50% 40%, rgba(183,217,76,.08), transparent 70%); }
+  .hero-contenu { width: min(980px, 90vw); margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+
+  .preuve-barre { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .7rem 1.2rem; margin-bottom: 2rem;
+    padding: .55rem 1rem; border-radius: 100px; background: rgba(11,11,12,.45); border: 1px solid var(--glass-b); }
+  .preuve-note { display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .45rem; font-size: .92rem; color: var(--texte); }
+  .preuve-note strong { color: var(--white); }
   .etoiles-w { display: inline-flex; }
   .lp :global(.etoiles) { width: 5.1rem; height: 1rem; fill: var(--lime); display: block; }
-  .lp .interpelle { font-size: 1.15rem; line-height: 1.5; font-weight: 500; color: var(--texte); margin-bottom: 1.1rem; }
-  .hero h1 { font-size: clamp(2.1rem, 5.2vw, 3.3rem); line-height: 1.07; letter-spacing: -.035em; font-weight: 700; color: var(--white); margin-bottom: 1.2rem; text-wrap: balance; }
-  .hero h1 em { font-style: normal; color: var(--lime); }
-  .lp .sous-titre { font-size: 1.22rem; line-height: 1.6; color: var(--texte); margin-bottom: 2.2rem; }
+  .logos { display: inline-flex; align-items: center; }
+  .logo-rond { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #fff; border: 2px solid #0b0b0c; display: grid; place-items: center; overflow: hidden; margin-left: -.55rem; box-shadow: 0 4px 10px rgba(0,0,0,.35); }
+  .logo-rond:first-child { margin-left: 0; }
+  .logo-rond img { width: 78%; height: 78%; object-fit: contain; }
 
+  .titre-geant { font-family: 'Anton', 'Arial Narrow', sans-serif; font-weight: 400; text-transform: uppercase; color: var(--white);
+    font-size: clamp(3.6rem, 13.5vw, 8.4rem); line-height: 1.1; letter-spacing: .01em; margin: 0 0 1.3rem; padding-top: .08em; text-wrap: balance; }
+  .titre-geant em { font-style: normal; color: var(--lime); }
+  .lp .sous-titre { font-size: 1.3rem; line-height: 1.55; color: var(--texte); max-width: 40rem; margin: 0 auto 2rem; text-wrap: balance; }
+  .btn-geant { font-size: 1.12rem; padding: 1.15rem 2.6rem; justify-content: center; box-shadow: 0 10px 34px rgba(183,217,76,.32); }
+  .lp .mini-cta { font-size: .9rem; color: #a9aba3; margin: .9rem 0 0; letter-spacing: .01em; }
+
+  .bloc-vsl { padding: 3.4rem 0 4.6rem; }
   .vsl { margin: 0 0 2.2rem; }
   .vsl-ecran { position: relative; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; border: 1px solid var(--glass-b);
     background:
@@ -474,6 +502,8 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     :global(.bg-fx .glow-1) { filter: none; opacity: .5; }
     :global(.bg-fx .grain) { display: none; }
   }
+  /* Lien du bandeau de consentement : souligné pour se distinguer du texte (audit d'accessibilité) */
+  :global(#consentement a) { text-decoration: underline; text-underline-offset: 2px; }
   /* Pied minimal (Base minimal) : confidentialité et témoins seulement */
   :global(.foot-minimal) { padding: 1.8rem 0 2.2rem; margin-top: 0; }
   :global(.foot-minimal .foot-bottom) { margin-top: 0; padding-top: 0; border-top: none; }
@@ -485,7 +515,12 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .ps-tag { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-weight: 700; color: var(--lime); margin-right: .25rem; }
 
   @media (max-width: 760px) {
-    .hero { padding: 7.2rem 0 3.6rem; }
+    .hero { padding: 6.4rem 0 3rem; }
+    .preuve-barre { border-radius: 18px; gap: .55rem .9rem; margin-bottom: 1.4rem; padding: .6rem .8rem; }
+    .titre-geant { margin-bottom: 1rem; }
+    .lp .sous-titre { font-size: 1.06rem; margin-bottom: 1.5rem; }
+    .btn-geant { width: 100%; padding: 1.05rem 1.2rem; }
+    .bloc-vsl { padding: 2.4rem 0 3.4rem; }
     .bloc { padding: 4.2rem 0; }
     .btn-xl { width: 100%; padding: 1rem 1.2rem; }
     .cta-bloc { align-items: stretch; }
