@@ -11,7 +11,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       // pages privées ou internes : jamais dans le plan du site
-      filter: (page) => !/\/(avis|reviews)\/$/.test(page),
+      filter: (page) => !/\/(avis|reviews)\/$/.test(page) && !/\/accompagnement-complet\/$/.test(page),
       serialize(item) {
         const chemin = item.url.replace(SITE, '');
         const autre = autreLangue(chemin);
