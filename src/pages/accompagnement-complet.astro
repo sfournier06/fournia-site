@@ -144,9 +144,9 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
         </ul>
         <h3 class="h3-mots">Dans les mots de propriétaires qu'on a rencontrés</h3>
         <div class="citations">
-          <blockquote><p>J'oublie de faire des suivis avec les gens. J'ai des prospects, puis je me dis : je vais y penser. Puis j'oublie.</p><span class="pastille">attribution Revoir · à vérifier</span></blockquote>
-          <blockquote><p>J'ai besoin d'aide demain, parce qu'aujourd'hui j'ai de la difficulté à rentrer un contrat ou une facture.</p></blockquote>
-          <blockquote><p>J'ai payé quelqu'un, et il me dit tout le temps : j'ai un rendez-vous dans trois semaines.</p><span class="pastille">citation retouchée · à vérifier</span></blockquote>
+          <blockquote><p>« J'oublie de faire des suivis avec les gens. J'ai des prospects, puis je me dis : je vais y penser. Puis j'oublie. »</p><span class="pastille">attribution Revoir · à vérifier</span></blockquote>
+          <blockquote><p>« J'ai besoin d'aide demain, parce qu'aujourd'hui j'ai de la difficulté à rentrer un contrat ou une facture. »</p></blockquote>
+          <blockquote><p>« J'ai payé quelqu'un, et il me dit tout le temps : j'ai un rendez-vous dans trois semaines. »</p><span class="pastille">citation retouchée · à vérifier</span></blockquote>
         </div>
       </div>
     </section>
@@ -252,6 +252,13 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
           ))}
         </div>
         <p class="note-revue note-bas"><span class="pastille">cartes 2 et 3 : gabarits à bâtir avant la mise en ligne</span></p>
+        <figure class="preuve-doc preuve-doc-bonus">
+          <div class="preuve-page">
+            <img src="/preuves/exemple-loi25-p1.webp" alt="Page 1 d'un dossier Loi 25 FournIA : le flux de données et les portes de conformité avec leur statut (exemple pour un client fictif)" width="900" height="1165" loading="lazy" decoding="async" />
+            <span class="preuve-badge">Exemple · données fictives</span>
+          </div>
+          <figcaption>Ton dossier Loi 25, pour chaque système : quelles données, où elles vont, et ce qui est vérifié avant la livraison.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -266,6 +273,13 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
           <li><span set:html={coche}></span><span><strong>L'ordre pour les régler</strong> : maintenant, ensuite, plus tard.</span></li>
         </ul>
         <p>Le tout dans un diagnostic écrit de 2 pages, envoyé dans les 48 heures. Il est à toi.</p>
+        <figure class="preuve-doc">
+          <div class="preuve-page">
+            <img src="/preuves/exemple-diagnostic-p1.webp" alt="Page 1 d'un diagnostic écrit FournIA : ce que le client a dit, et le tableau des tâches avec le temps par semaine (exemple pour une entreprise fictive)" width="900" height="1165" loading="lazy" decoding="async" />
+            <span class="preuve-badge">Exemple · données fictives</span>
+          </div>
+          <figcaption>Ton diagnostic écrit ressemble à ça : tes tâches, tes heures par semaine, et par où commencer.</figcaption>
+        </figure>
 
         <h2 class="h2-suite">Gratuit, sans engagement</h2>
         <p class="grand"><strong>Le diagnostic est gratuit, sans engagement.</strong></p>
@@ -288,7 +302,6 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
       <div class="col reveal">
         <h2>Notre garantie</h2>
         <div class="garantie">
-          <svg class="bouclier" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4l16 6v12c0 10-6.8 18.4-16 22-9.2-3.6-16-12-16-22V10z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M16.5 24.5l5 5 10-11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <div>
             <p class="garantie-titre">Chaque système livré est garanti 30 jours.</p>
             <p>Si un bogue l'empêche de faire ce qui était prévu au contrat, on le corrige sans frais. Si on n'arrive pas à le corriger dans les 10 jours ouvrables après ton signalement écrit, tu es remboursé au complet pour ce système.</p>
@@ -309,6 +322,10 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
           <li><strong>On se parle 30 minutes.</strong> On regarde où ton temps part et par quoi commencer.</li>
           <li><strong>Tu reçois ton diagnostic écrit dans les 48 heures.</strong> Il est à toi, que tu travailles avec nous ou non.</li>
         </ol>
+        <figure class="preuve-capture">
+          <div class="capture-vide"><span class="pastille">capture à fournir par Simon : un système livré, sur données fictives</span></div>
+          <figcaption>Le tableau de suivi des relances d'un système livré : chaque soumission, sa relance et son statut, au même endroit. <span class="pastille">légende proposée</span></figcaption>
+        </figure>
         <div class="cta-bloc">
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
           <p class="sous-cta"><span class="etoiles-w" set:html={etoiles}></span> 5,0 sur Google <span class="pastille">[N] avis · à vérifier</span></p>
@@ -431,13 +448,11 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .h2-suite { margin-top: 4rem; }
 
   .scenes { list-style: none; margin: 0 0 3.4rem; padding: 0; }
-  .lp .scenes li { font-size: 1.28rem; line-height: 1.5; color: var(--texte); padding: 1.15rem 0 1.15rem 2rem; border-bottom: 1px solid var(--line); position: relative; }
+  .lp .scenes li { font-size: 1.28rem; line-height: 1.5; color: var(--texte); padding: 1.15rem 0; border-bottom: 1px solid var(--line); }
   .scenes li:first-child { border-top: 1px solid var(--line); }
-  .scenes li::before { content: ''; position: absolute; left: .2rem; top: 1.9rem; width: 8px; height: 8px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 4px rgba(183,217,76,.14); }
   .h3-mots { margin-bottom: 1.2rem; }
   .citations { display: grid; gap: 1rem; }
-  .citations blockquote { position: relative; padding: 1.3rem 1.4rem 1.2rem 3.4rem; border-radius: 16px; background: rgba(255,255,255,.028); border: 1px solid var(--line); }
-  .citations blockquote::before { content: '«'; position: absolute; left: 1.1rem; top: .7rem; font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: 2.4rem; line-height: 1; color: var(--lime); }
+  .citations blockquote { position: relative; padding: 1.3rem 1.4rem 1.2rem; border-radius: 16px; background: rgba(255,255,255,.028); border: 1px solid var(--line); }
   .lp .citations blockquote p { font-size: 1.12rem; line-height: 1.65; color: var(--texte); margin: 0; }
   .citations .pastille { margin: .7rem 0 0; }
 
@@ -488,10 +503,9 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .lp .rarete { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: clamp(2rem, 5.6vw, 3.1rem); line-height: 1.1; font-weight: 700; letter-spacing: -.03em; color: var(--white); margin-bottom: 1.4rem; }
   .rarete em { font-style: normal; color: var(--lime); }
 
-  .garantie { display: grid; grid-template-columns: 3.4rem 1fr; gap: 1.4rem; align-items: start; padding: 2.1rem; border-radius: 22px;
+  .garantie { padding: 2.1rem; border-radius: 22px;
     border: 1px solid rgba(183,217,76,.5); background: linear-gradient(160deg, rgba(183,217,76,.09), rgba(183,217,76,.015)); margin-bottom: 1.3rem;
     box-shadow: 0 24px 60px rgba(0,0,0,.4); }
-  .bouclier { width: 3.4rem; height: 3.4rem; color: var(--lime); }
   .lp .garantie-titre { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: 1.45rem; line-height: 1.25; font-weight: 700; letter-spacing: -.02em; color: var(--white); margin-bottom: .7rem; }
   .lp .garantie p:last-child { margin-bottom: 0; color: var(--texte); }
   .lp .petit { font-size: .9rem; line-height: 1.6; color: #adafa7; }
@@ -518,6 +532,16 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   }
   /* Lien du bandeau de consentement : souligné pour se distinguer du texte (audit d'accessibilité) */
   :global(#consentement a) { text-decoration: underline; text-underline-offset: 2px; }
+  /* Images de preuve (formule Suby, étape 7 : chaque image rapproche de la conversion) */
+  .preuve-doc { margin: 2.2rem 0 0; }
+  .preuve-doc-bonus { max-width: 680px; margin: 2.6rem auto 0; }
+  .preuve-page { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 14px; background: #fff; border: 1px solid var(--glass-b); box-shadow: 0 26px 60px rgba(0,0,0,.5); }
+  .preuve-page img { width: 100%; height: auto; display: block; }
+  .preuve-page::after { content: ''; position: absolute; inset: auto 0 0 0; height: 30%; background: linear-gradient(180deg, rgba(255,255,255,0), #fff); }
+  .preuve-badge { position: absolute; bottom: .8rem; left: .8rem; z-index: 1; font-size: .75rem; font-weight: 700; letter-spacing: .02em; color: #0b0b0c; background: #f3d36b; border-radius: 6px; padding: .25rem .55rem; }
+  .preuve-doc figcaption, .preuve-capture figcaption { font-size: 1rem; line-height: 1.6; color: var(--texte); margin-top: .9rem; }
+  .preuve-capture { margin: 0 0 2.2rem; }
+  .capture-vide { aspect-ratio: 16 / 9; border-radius: 14px; border: 1px dashed rgba(231,182,90,.55); background: rgba(255,255,255,.02); display: grid; place-items: center; padding: 1rem; text-align: center; }
   /* Pied minimal (Base minimal) : confidentialité et témoins seulement */
   :global(.foot-minimal) { padding: 1.8rem 0 2.2rem; margin-top: 0; }
   :global(.foot-minimal .foot-bottom) { margin-top: 0; padding-top: 0; border-top: none; }
@@ -548,6 +572,5 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     .lp .realisations li { grid-template-columns: 1fr; gap: .35rem; }
     .lp .scenes li { font-size: 1.18rem; }
     .offre, .garantie, .ps { padding: 1.6rem; }
-    .garantie { grid-template-columns: 1fr; gap: .9rem; }
   }
 </style>
