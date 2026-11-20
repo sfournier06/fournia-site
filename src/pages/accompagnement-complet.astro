@@ -41,6 +41,12 @@ const offre = [
   'Tous les outils et les comptes restent à ton nom.',
 ];
 
+const bonus = [
+  { t: 'Ton dossier Loi 25, écrit', d: "Pour chaque système qu'on bâtit, un document dit quelles données il touche, où elles vont et qui y a accès. Si un client te pose la question, la réponse est déjà écrite." },
+  { t: "La politique d'usage de l'IA de ton équipe", d: "Une page claire : ce que ton équipe peut faire avec l'IA, ce qu'elle ne fait jamais, comme y coller les données d'un client, et à qui demander en cas de doute. Prête à afficher." },
+  { t: "L'aide-mémoire de demandes prêtes à l'emploi", d: 'Les demandes à copier-coller pour les tâches de ton équipe : courriels, soumissions, résumés. Écrites pour ton métier, utilisables dès le premier jour.' },
+];
+
 // FAQ : réponses reprises de la page /accompagnement-intelligence-artificielle/ (mises au « tu »).
 const faq = [
   { q: "Mon équipe ne connaît rien à l'IA. Est-ce un problème ?", a: "Non. C'est justement pour ça que l'accompagnement existe. On explique en mots simples comment l'IA fonctionne, ce qu'elle fait bien et ce qu'elle fait mal, avant de toucher à tes outils. Personne n'a besoin de connaissances techniques au départ." },
@@ -53,7 +59,7 @@ const etoile = '<path d="M10 1.6l2.47 5.3 5.8.68-4.3 3.96 1.15 5.73L10 14.4l-5.1
 const etoiles = '<svg class="etoiles" viewBox="0 0 100 20" aria-hidden="true">' + [0, 1, 2, 3, 4].map((i) => '<g transform="translate(' + i * 20 + ' 0)">' + etoile + '</g>').join('') + '</svg>';
 const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 ---
-<Base title="Accompagnement complet en automatisation | FournIA" description="On sort les tâches répétitives de ta semaine, un chantier à la fois, dans tes outils actuels. Diagnostic gratuit de 30 minutes." canonical="https://fournia.net/accompagnement-complet/">
+<Base title="Accompagnement complet en automatisation | FournIA" description="On sort les tâches répétitives de ta semaine, un chantier à la fois, dans tes outils actuels. Diagnostic gratuit de 30 minutes." canonical="https://fournia.net/accompagnement-complet/" minimal>
   <meta slot="head" name="robots" content="noindex, nofollow" />
 
   <main class="lp">
@@ -71,11 +77,11 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
         <p class="interpelle">Propriétaire de PME au Québec : ton téléphone, tes soumissions et tes relances reposent encore sur toi ?</p>
 
         <!-- Étape 2 : la grosse promesse -->
-        <h1>On aide les propriétaires de PME du Québec à sortir les <em>tâches répétitives</em> de leur semaine <span class="pastille pastille-h1">[délai]</span> grâce à un chantier d'automatisation à la fois, bâti dans leurs outils actuels, avec chaque système garanti 30&nbsp;jours.</h1>
-        <p class="note-revue"><span class="pastille">délai à trancher</span> A : « en 30 jours après les accès » · B : « plan complet en 48 heures »</p>
+        <h1>On sort les <em>tâches répétitives</em> de ta semaine. Un système à la fois.</h1>
 
-        <!-- Étape 3 : sous-titre, ouvrir une boucle -->
-        <p class="sous-titre">Tu gardes les décisions. On s'occupe du reste, un système après l'autre. Et il y a une raison précise pour laquelle tout ce que tu as essayé jusqu'ici n'a pas tenu.</p>
+        <!-- Étape 3 : sous-titre (le reste de la promesse), ouvrir une boucle -->
+        <p class="sous-titre">On bâtit un chantier d'automatisation à la fois, dans tes outils actuels, <span class="pastille">[délai]</span> et chaque système est garanti 30&nbsp;jours. Tu gardes les décisions, et il y a une raison précise pour laquelle tout ce que tu as essayé jusqu'ici n'a pas tenu.</p>
+        <p class="note-revue"><span class="pastille">délai à trancher</span> A : « en 30 jours après les accès » · B : « plan complet en 48 heures »</p>
 
         <figure class="vsl" aria-label="Vidéo de présentation, à venir">
           <div class="vsl-ecran">
@@ -210,26 +216,18 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     <!-- Étape 11 : les bonus -->
     <section class="bloc bloc-alt">
       <div class="col-large reveal">
-        <h2>Les bonus</h2>
-        <p class="note-revue"><span class="pastille">à trancher</span> garder l'option A ou l'option B.</p>
+        <h2>En plus, quand tu commences l'accompagnement</h2>
+        <p class="bonus-intro">Ces trois documents sont inclus dès ton premier mois. Ils sont à toi.</p>
         <div class="bonus-grille">
-          <div class="bonus">
-            <p class="bonus-titre">Option A</p>
-            <ol>
-              <li><strong>Le rapport des 3 fuites, en 48 heures.</strong> Un PDF de 2 pages : tes 3 plus grosses pertes de temps, chiffrées en heures, et l'ordre pour les régler. Tu le gardes, même si tu ne fais rien avec nous.</li>
-              <li><strong>La politique d'usage de l'IA d'une page</strong>, rédigée pour ton équipe, prête à adopter.</li>
-              <li><strong>Le document de conformité Loi 25</strong> de chaque système, écrit, pour ton dossier.</li>
-            </ol>
-          </div>
-          <div class="bonus">
-            <p class="bonus-titre">Option B</p>
-            <ol>
-              <li><strong>Le rapport des 3 fuites, en 48 heures.</strong></li>
-              <li><strong>L'aide-mémoire de demandes prêtes à l'emploi</strong>, écrit pour les tâches de ton équipe.</li>
-              <li><strong>La formation d'une personne de ton équipe</strong> qui devient la référence IA à l'interne.</li>
-            </ol>
-          </div>
+          {bonus.map((x, i) => (
+            <article class="bonus">
+              <span class="bonus-num" aria-hidden="true">{i + 1}</span>
+              <h3>{x.t}</h3>
+              <p>{x.d}</p>
+            </article>
+          ))}
         </div>
+        <p class="note-revue note-bas"><span class="pastille">cartes 2 et 3 : gabarits à bâtir avant la mise en ligne</span></p>
       </div>
     </section>
 
@@ -355,7 +353,6 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .lp .interpelle { font-size: 1.15rem; line-height: 1.5; font-weight: 500; color: var(--texte); margin-bottom: 1.1rem; }
   .hero h1 { font-size: clamp(2.1rem, 5.2vw, 3.3rem); line-height: 1.07; letter-spacing: -.035em; font-weight: 700; color: var(--white); margin-bottom: 1.2rem; text-wrap: balance; }
   .hero h1 em { font-style: normal; color: var(--lime); }
-  .pastille-h1 { font-size: .38em; letter-spacing: 0; padding: .2em .5em; transform: translateY(-.25em); }
   .lp .sous-titre { font-size: 1.22rem; line-height: 1.6; color: var(--texte); margin-bottom: 2.2rem; }
 
   .vsl { margin: 0 0 2.2rem; }
@@ -430,12 +427,13 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .wm { font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: -.03em; }
   .wm span { color: var(--lime); }
 
-  .bonus-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-  .bonus { padding: 1.8rem 1.8rem 1rem; border-radius: 18px; border: 1px solid var(--glass-b); background: #151613; }
-  .lp .bonus-titre { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--white); margin-bottom: .9rem; }
-  .bonus ol { margin: 0; padding-left: 1.3rem; }
-  .lp .bonus li { margin-bottom: 1rem; font-size: 1.06rem; padding-left: .3rem; }
-  .bonus li::marker { color: var(--lime); font-family: 'Space Grotesk', sans-serif; font-weight: 600; }
+  .lp .bonus-intro { font-size: 1.2rem; color: var(--texte); margin: -.4rem 0 2rem; }
+  .bonus-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .bonus { padding: 1.8rem 1.7rem 1.5rem; border-radius: 18px; border: 1px solid var(--glass-b); background: #171815; box-shadow: 0 18px 40px rgba(0,0,0,.35); display: flex; flex-direction: column; }
+  .bonus-num { width: 2.3rem; height: 2.3rem; border-radius: 50%; display: grid; place-items: center; margin-bottom: 1.1rem;
+    background: rgba(183,217,76,.12); border: 1px solid rgba(183,217,76,.5); color: var(--lime); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1rem; }
+  .lp .bonus h3 { font-size: 1.22rem; line-height: 1.3; margin-bottom: .7rem; }
+  .lp .bonus p { font-size: 1.05rem; line-height: 1.65; margin: 0; }
 
   .lp .rarete { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 5.6vw, 3.1rem); line-height: 1.1; font-weight: 700; letter-spacing: -.03em; color: var(--white); margin-bottom: 1.4rem; }
   .rarete em { font-style: normal; color: var(--lime); }
@@ -460,6 +458,9 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .lp .faq details p { padding: 0 2.8rem 1.4rem 0; margin: 0; }
 
   .bloc-ps { padding-bottom: 6.5rem; }
+  /* Pied minimal (Base minimal) : confidentialité et témoins seulement */
+  :global(.foot-minimal) { padding: 1.8rem 0 2.2rem; margin-top: 0; }
+  :global(.foot-minimal .foot-bottom) { margin-top: 0; padding-top: 0; border-top: none; }
   .ps { padding: 2.6rem; border-radius: 24px; border: 1px solid var(--glass-b); background: radial-gradient(110% 130% at 100% 0%, rgba(183,217,76,.11), transparent 55%), #121311; box-shadow: 0 30px 70px rgba(0,0,0,.45); }
   .lp .ps p { font-size: 1.24rem; line-height: 1.6; color: var(--texte); margin-bottom: 1.6rem; }
   .ps-tag { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--lime); margin-right: .25rem; }

@@ -7,7 +7,8 @@ import '../styles/global.css';
 import { GOOGLE_VERIFICATION, BING_VERIFICATION, SERVICES, SERVICES_EN } from '../data/entite.mjs';
 
 // lang : 'fr' (défaut) ou 'en'. alt : chemin de la même page dans l'autre langue (hreflang + bouton FR | EN).
-const { title, description, canonical, ogType = 'website', lang = 'fr', alt } = Astro.props;
+// minimal : page d'atterrissage sans issue (pas de menu, pas de pied à liens, logo non cliquable).
+const { title, description, canonical, ogType = 'website', lang = 'fr', alt, minimal = false } = Astro.props;
 const en = lang === 'en';
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 const cta = en ? '/en/diagnostic/' : '/diagnostic/';
@@ -66,60 +67,74 @@ import { autreLangue as cheminAutreLangue } from '../data/traductions.mjs';
     <div class="grain"></div>
   </div>
 
-  <nav id="nav">
-    <div class="nav-inner">
-      <a href={L.accueil} class="logo" aria-label="FournIA"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
-      <ul class="nav-links">
-        <li><a href={`${L.accueil}#services`}>{L.services}</a></li>
-        <li><a href={`${L.accueil}#exemples`}>{L.real}</a></li>
-        <li><a href={en ? '/en/about/' : '/a-propos/'}>{L.apropos}</a></li>
-        <li><a href={en ? '/en/blog/' : '/blog/'}>{L.blog}</a></li>
-        <li><a href={autreLangue} class="lien-langue" lang={en ? 'fr' : 'en'} hreflang={en ? 'fr-CA' : 'en-CA'} aria-label={en ? 'Version française' : 'English version'}>{en ? 'FR' : 'EN'}</a></li>
-      </ul>
-      <a href={cta} class="btn btn-primary cta-nav">{L.cta} <span class="arrow">→</span></a>
-      <button type="button" class="hamburger" id="burger" aria-label={L.menu} aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
-  </nav>
+  {minimal ? (
+    <nav id="nav" class="nav-minimal">
+      <div class="nav-inner">
+        <span class="logo" aria-label="FournIA"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></span>
+      </div>
+    </nav>
+  ) : (
+    <nav id="nav">
+      <div class="nav-inner">
+        <a href={L.accueil} class="logo" aria-label="FournIA"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
+        <ul class="nav-links">
+          <li><a href={`${L.accueil}#services`}>{L.services}</a></li>
+          <li><a href={`${L.accueil}#exemples`}>{L.real}</a></li>
+          <li><a href={en ? '/en/about/' : '/a-propos/'}>{L.apropos}</a></li>
+          <li><a href={en ? '/en/blog/' : '/blog/'}>{L.blog}</a></li>
+          <li><a href={autreLangue} class="lien-langue" lang={en ? 'fr' : 'en'} hreflang={en ? 'fr-CA' : 'en-CA'} aria-label={en ? 'Version française' : 'English version'}>{en ? 'FR' : 'EN'}</a></li>
+        </ul>
+        <a href={cta} class="btn btn-primary cta-nav">{L.cta} <span class="arrow">→</span></a>
+        <button type="button" class="hamburger" id="burger" aria-label={L.menu} aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  )}
 
   <slot />
 
-  <footer>
-    <div class="wrap">
-      <div class="foot-grid">
-        <div>
-          <a href={L.accueil} class="logo" style="font-size:1.5rem"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
-          <p style="color:var(--mute); margin-top:1rem; max-width:280px; font-size:.92rem;">{L.desc}</p>
-          <Reseaux lang={lang} />
+  {minimal ? (
+    <footer class="foot-minimal">
+      <div class="wrap foot-bottom">{L.droits} · <a href={en ? "/en/privacy/" : "/confidentialite/"}>{en ? "Privacy policy" : "Politique de confidentialité"}</a> · <a href="#" onclick="window.fourniaTemoins&&fourniaTemoins();return false">{L.temoins}</a></div>
+    </footer>
+  ) : (
+    <footer>
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <a href={L.accueil} class="logo" style="font-size:1.5rem"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
+            <p style="color:var(--mute); margin-top:1rem; max-width:280px; font-size:.92rem;">{L.desc}</p>
+            <Reseaux lang={lang} />
+          </div>
+          <div class="foot-contact">
+            <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>
+            <a href="tel:+15148632973">514 863 2973</a>
+            <a href="/">fournia.net</a>
+          </div>
+          <div class="foot-contact">
+            {en ? (
+              <Fragment>
+                <a href="/en/about/">{L.apropos}</a>
+                <a href="/en/testimonials/">{L.temoignages}</a>
+                {SERVICES_EN.map((sv) => <a href={sv.href}>{sv.label}</a>)}
+                <a href="/en/blog/">{L.blog}</a>
+                <a href={cta}>{L.cta}</a>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <a href="/a-propos/">À propos</a>
+                <a href="/temoignages/">Témoignages</a>
+                {SERVICES.map((sv) => <a href={sv.href}>{sv.label}</a>)}
+                <a href="/#processus">Processus</a>
+                <a href="/blog">Blogue</a>
+                <a href={cta}>Réserver un appel</a>
+              </Fragment>
+            )}
+          </div>
         </div>
-        <div class="foot-contact">
-          <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>
-          <a href="tel:+15148632973">514 863 2973</a>
-          <a href="/">fournia.net</a>
-        </div>
-        <div class="foot-contact">
-          {en ? (
-            <Fragment>
-              <a href="/en/about/">{L.apropos}</a>
-              <a href="/en/testimonials/">{L.temoignages}</a>
-              {SERVICES_EN.map((sv) => <a href={sv.href}>{sv.label}</a>)}
-              <a href="/en/blog/">{L.blog}</a>
-              <a href={cta}>{L.cta}</a>
-            </Fragment>
-          ) : (
-            <Fragment>
-              <a href="/a-propos/">À propos</a>
-              <a href="/temoignages/">Témoignages</a>
-              {SERVICES.map((sv) => <a href={sv.href}>{sv.label}</a>)}
-              <a href="/#processus">Processus</a>
-              <a href="/blog">Blogue</a>
-              <a href={cta}>Réserver un appel</a>
-            </Fragment>
-          )}
-        </div>
+        <div class="foot-bottom">{L.droits} · <a href="#" onclick="window.fourniaTemoins&&fourniaTemoins();return false">{L.temoins}</a></div>
       </div>
-      <div class="foot-bottom">{L.droits} · <a href="#" onclick="window.fourniaTemoins&&fourniaTemoins();return false">{L.temoins}</a></div>
-    </div>
-  </footer>
+    </footer>
+  )}
 
   <script is:inline>
     const nav = document.getElementById('nav');
@@ -135,7 +150,7 @@ import { autreLangue as cheminAutreLangue } from '../data/traductions.mjs';
     document.addEventListener('click', (e) => { if (!nav.contains(e.target)) nav.classList.remove('open'); });
   </script>
   <!-- Bulle de clavardage SaaS AI System : les messages arrivent dans la boite unifiee du CRM. -->
-  <ChatDiffere />
+  {!minimal && <ChatDiffere />}
   <Consentement lang={lang} />
 </body>
 </html>
