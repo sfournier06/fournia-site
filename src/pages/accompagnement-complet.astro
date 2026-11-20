@@ -10,27 +10,30 @@ import VslPlayer from '../components/VslPlayer.astro';
 const CTA = '/diagnostic/';
 const ctaTexte = 'Réclame ton diagnostic gratuit de 30 minutes';
 
-const avis = [
-  { auteur: 'Thomas Arbour', texte: "Ils ont automatisé la messagerie de mon entreprise […] Les suivis avec les clients se font maintenant beaucoup plus rapidement, et on sauve énormément de temps sur les tâches répétitives." },
-  { auteur: 'Freddy Aubuchon', texte: "Il trouve des solutions pour tous. Je le recommande à 100%. Il m'a construit une solution pour ma compagnie qui m'a sauvé énormément de temps et de maux de têtes." },
-  { auteur: 'Karyann Turcotte', texte: "J'ai adoré mon expérience avec Simon! Il était vraiment à l'écoute de mes besoins et est arrivé avec plusieurs idées pour améliorer les pratiques de mon entreprise ! Je le recommande à tous !" },
-  { auteur: 'Stéphane Bernier', texte: "Malade, j'ai adoré mon expérience." },
-];
+
+// Avis Google nommés : NE PAS afficher tant que le oui écrit de chaque auteur n'est pas archivé
+// (règle de Simon, 19 nov.). En attendant, la page montre le bloc sans nom (5,0 sur Google · [N] avis).
+// const avis = [
+//   { auteur: 'Thomas Arbour', texte: "Ils ont automatisé la messagerie de mon entreprise […] Les suivis avec les clients se font maintenant beaucoup plus rapidement, et on sauve énormément de temps sur les tâches répétitives." },
+//   { auteur: 'Freddy Aubuchon', texte: "Il trouve des solutions pour tous. Je le recommande à 100%. Il m'a construit une solution pour ma compagnie qui m'a sauvé énormément de temps et de maux de têtes." },
+//   { auteur: 'Karyann Turcotte', texte: "J'ai adoré mon expérience avec Simon! Il était vraiment à l'écoute de mes besoins et est arrivé avec plusieurs idées pour améliorer les pratiques de mon entreprise ! Je le recommande à tous !" },
+// ];
 
 const realisations = [
   { client: 'AvecPlaisirs', secteur: 'traiteur corporatif', texte: "Les 6 documents de production d'une journée sortent d'un clic. Plus rien à retaper." },
   { client: 'Pubsphere', texte: "Fini la saisie à la main : chaque transaction est lue, il ne reste qu'à réviser." },
-  { client: 'Karyann Turcotte', texte: 'Ses 100 clients suivis automatiquement par texto, sans écrire un seul message.', verifier: '« 100 » · à vérifier' },
+  { client: 'Karyann Turcotte', texte: 'Ses clients suivis automatiquement par texto, sans écrire un seul message.' },
   { client: 'Arbour Aide Académique', texte: 'Chaque parent reçoit une réponse en quelques minutes, avec de vraies plages libres.' },
 ];
 
 const benefices = [
-  'Les appels manqués reçoivent une réponse, même quand tu es occupé.',
+  'Les appels manqués reçoivent une réponse, même quand tu es sur un chantier.',
   'Tes soumissions sont relancées au bon moment, sans que tu y penses.',
-  'Tu ne retapes plus la même information deux fois.',
-  'Tes anciens clients entendent parler de toi. Tu peux approuver avant que ça parte.',
+  "Tu ne recopies plus la même information d'un logiciel à l'autre.",
+  'Chaque nouvelle demande arrive au même endroit, classée : nouvelle, ou déjà entamée.',
+  'Tes anciens clients entendent parler de toi. Tu approuves avant que ça parte.',
   "Ton équipe sait se servir de l'IA, et sait où elle se trompe.",
-  'Tu gardes les décisions. Les systèmes préparent, relancent et trient.',
+  "Tu gardes les décisions. L'IA prépare. Toi, tu décides.",
 ];
 
 const offre = [
@@ -38,11 +41,40 @@ const offre = [
   'Les systèmes bâtis, testés et installés dans tes outils actuels, un chantier à la fois.',
   'La formation de ton équipe à chaque livraison.',
   'Une rencontre aux deux semaines, en personne ou en visio.',
+  'Un seul interlocuteur, du début à la fin.',
   'Les ajustements quand tes besoins changent, et un bilan de ce qui a été gagné.',
-  'Tous les outils et les comptes restent à ton nom.',
 ];
 
-// Logos des clients déjà affichés sous consentement dans le bandeau des réalisations (src/data/realisations.mjs).
+const pourQui = [
+  'Tu diriges une PME de services au Québec, avec une équipe.',
+  'Les mêmes tâches reviennent chaque semaine : appels, soumissions, relances, saisie.',
+  "Tu sais ce qu'il faudrait faire. C'est le temps qui manque.",
+  'Tu prends les décisions, ou la personne qui les prend sera au diagnostic.',
+  'Tu peux donner une rencontre aux deux semaines.',
+];
+const pasPourQui = [
+  'Tu cherches un outil à brancher ce soir, sans regarder comment ton équipe travaille.',
+  "Tu veux tout automatiser d'un coup, en une semaine.",
+  'Tu veux qu\'on te garantisse un chiffre de ventes. Notre garantie porte sur une chose : chaque système livré fait ce qui est prévu au contrat.',
+  "L'IA t'intéresse par curiosité, sans tâche précise qui te coûte du temps.",
+  'Tu travailles seul, sans employés. Un système précis te servira mieux qu\'un accompagnement complet.',
+];
+
+const rencontre = [
+  { t: 'Ce qui a avancé.', d: "On te le montre à l'écran, en fonctionnement." },
+  { t: 'Ce qui accroche.', d: "Ce que ton équipe a remarqué, et ce qu'on corrige." },
+  { t: "Ce qu'on a besoin que tu décides.", d: 'Par exemple : quels messages partent seuls, et lesquels passent par toi.' },
+  { t: 'La prochaine étape, avec une date.', d: 'Tu la reçois par écrit après la rencontre.' },
+];
+
+const exigences = [
+  'Une personne qui conçoit tes systèmes et que tu peux joindre, du début à la fin.',
+  'Un document Loi 25 écrit pour chaque système qui touche des renseignements personnels.',
+  'La formation de ton équipe à chaque livraison.',
+  "Le droit d'approuver un message avant qu'il parte.",
+  'Une garantie écrite, avec ses conditions.',
+];
+
 const logosClients = [
   { src: '/clients/mini/avecplaisirs.webp' },
   { src: '/clients/mini/pubsphere.webp' },
@@ -58,22 +90,42 @@ const murLogos = [
 ];
 
 const bonus = [
-  { t: 'Ton dossier Loi 25, écrit', d: "Pour chaque système qu'on bâtit, un document dit quelles données il touche, où elles vont et qui y a accès. Si un client te pose la question, la réponse est déjà écrite." },
-  { t: "La politique d'usage de l'IA de ton équipe", d: "Une page claire : ce que ton équipe peut faire avec l'IA, ce qu'elle ne fait jamais, comme y coller les données d'un client, et à qui demander en cas de doute. Prête à afficher." },
-  { t: "L'aide-mémoire de demandes prêtes à l'emploi", d: 'Les demandes à copier-coller pour les tâches de ton équipe : courriels, soumissions, résumés. Écrites pour ton métier, utilisables dès le premier jour.' },
+  { t: 'Ton dossier Loi 25, écrit', d: "Pour chaque système qu'on bâtit, un document dit quelles données il touche, où elles vont et qui y a accès. Si un client te demande où vont ses données, la réponse est écrite pour ce système.", petit: "Ce document décrit les systèmes qu'on bâtit. Il ne remplace pas l'avis d'un juriste." },
+  { t: "La politique d'usage de l'IA de ton équipe", d: "Une page claire : ce que ton équipe peut faire avec l'IA, ce qu'elle ne fait jamais (par exemple coller les données d'un client dans un outil public), et à qui demander en cas de doute. Prête à afficher." },
+  { t: "L'aide-mémoire de demandes prêtes à l'emploi", d: 'Les demandes à copier-coller pour les tâches de ton équipe : courriels, soumissions, résumés. Écrites pour ton métier, utilisables dès le premier jour.' },
 ];
 
-// FAQ : réponses reprises de la page /accompagnement-intelligence-artificielle/ (mises au « tu »).
 const faq = [
-  { q: "Mon équipe ne connaît rien à l'IA. Est-ce un problème ?", a: "Non. C'est justement pour ça que l'accompagnement existe. On explique en mots simples comment l'IA fonctionne, ce qu'elle fait bien et ce qu'elle fait mal, avant de toucher à tes outils. Personne n'a besoin de connaissances techniques au départ." },
-  { q: 'Combien de temps dure un accompagnement complet ?', a: "Généralement de 6 mois à 1 an, selon la taille de l'entreprise et le nombre de processus à revoir. Le plan du début fixe l'ordre des chantiers et le rythme des rencontres." },
-  { q: "L'accompagnement se fait-il en personne ?", a: 'En personne ou à distance. Les rencontres se font en personne sur la Rive-Nord de Montréal, à Laval et à Montréal, ou par visioconférence partout au Québec.' },
-  { q: 'Comment FournIA respecte-t-elle la Loi 25 ?', a: "Chaque projet qui touche des renseignements personnels passe par une vérification Loi 25 avant la construction, avec une attention particulière au transfert de données hors Québec quand un modèle d'IA est utilisé. Tu reçois un document de conformité écrit." },
+  { q: "Mon équipe ne connaît rien à l'IA. Est-ce un problème ?", a: ["Non. L'accompagnement existe pour ça. On explique en mots simples comment l'IA fonctionne, ce qu'elle fait bien et ce qu'elle fait mal, avant de toucher à tes outils. Personne n'a besoin de connaissances techniques au départ."] },
+  { q: 'Comment se passent les 30 minutes du diagnostic ?', a: ["Tu me racontes comment une demande passe chez vous, du premier appel jusqu'à la facture. Je te pose des questions précises sur le temps que prend chaque étape. Dans les 48 heures, tu reçois ton diagnostic écrit. Si tu veux aller plus loin ensuite, on te présente l'accompagnement dans une autre rencontre."] },
+  { q: 'Combien de temps dure un accompagnement complet ?', a: ["Ça dépend de la taille de l'entreprise et du nombre de processus à revoir. Le plan du début fixe l'ordre des chantiers et la durée prévue."] },
+  { q: 'Est-ce que je m\'engage pour longtemps ?', a: ["Le diagnostic ne t'engage à rien. Pour l'accompagnement, la durée minimale est écrite au contrat, et on te la présente avec ton plan, avant que tu signes."], revue: 'à trancher : écrire ou non la durée minimale' },
+  { q: 'Est-ce que je dois changer de logiciels ?', a: ["En général, non. On part des outils que tu utilises déjà. On propose un nouvel outil seulement quand le tien ne peut pas faire le lien."] },
+  { q: 'À qui appartiennent les systèmes ?', a: ["Tes données restent à toi. Pour chaque système, ton dossier écrit nomme les comptes et les services qu'il utilise, et à qui ils appartiennent."], revue: 'à confirmer par Simon' },
+  { q: 'Est-ce que des messages vont partir à mes clients sans que je le sache ?', a: ["Seulement si tu le décides. Pour chaque système, tu choisis quels messages partent seuls et lesquels tu approuves avant l'envoi. Tu peux changer d'idée quand tu veux."] },
+  { q: "L'accompagnement se fait-il en personne ?", a: ['En personne ou à distance. Les rencontres se font en personne sur la Rive-Nord de Montréal, à Laval et à Montréal, ou par visioconférence partout au Québec.'] },
+  { q: 'Comment FournIA respecte-t-elle la Loi 25 ?', a: ["Chaque projet qui touche des renseignements personnels passe par une vérification Loi 25 avant la construction, avec une attention particulière au transfert de données hors Québec quand un modèle d'IA est utilisé. Tu reçois un document écrit : quelles données le système touche, où elles vont et qui y a accès."], petit: "Ce document décrit les systèmes qu'on bâtit. Il ne remplace pas l'avis d'un juriste." },
+  { q: "Pourquoi le prix n'est pas sur la page ?", a: ["Chaque accompagnement suit un plan différent : le nombre de chantiers, tes outils, la taille de ton équipe. On te présente le prix en personne, avec ce plan devant toi. Le diagnostic, lui, est gratuit."] },
 ];
+
+// Les 7 objections : questions dans la voix du prospect, réponses en paragraphes courts.
+const objections = [
+  { q: '« C\'est trop cher pour une PME. »', a: ["On commence par un seul chantier : celui qui te coûte le plus, mesuré au diagnostic.", "Le prix dépend de ton plan. On te le présente en personne, avec ce plan devant toi, et seulement si tu veux aller plus loin.", 'Et si un seul système suffit chez vous, on te le dit.'], revue: 'à trancher : ajouter la phrase sur les subventions' },
+  { q: "« Je n'ai pas le temps pour ça. »", a: ['De ton côté, au total : 30 minutes pour le diagnostic. Deux rencontres d\'environ une heure pour démarrer. Ensuite, une rencontre aux deux semaines.', 'Le reste est notre travail : bâtir, tester, installer, former.', 'Ton calendrier est plein ce mois-ci ? Fais le diagnostic maintenant. Ton plan écrit sera prêt le jour où tu voudras commencer.'] },
+  { q: '« Mon équipe va avoir peur. »', a: ["On le prévoit dès le départ. Ton équipe teste chaque système avec nous avant qu'il roule. On la forme à chaque livraison, en mots simples : ce que l'IA fait bien, ce qu'elle fait mal, et quoi faire quand elle se trompe.", "La politique d'usage de l'IA dit clairement ce qui est permis. Et les messages importants passent par une personne avant de partir, aussi longtemps que tu le veux."] },
+  { q: "« J'ai déjà essayé un outil. Ça n'a pas marché. »", a: ["Chez les PME que je rencontre, un outil installé sans regarder comment l'équipe travaille finit souvent par dormir. On fait l'étape d'avant : on suit ton travail d'une étape à l'autre, puis on choisit.", "Si l'outil que tu paies déjà peut faire le travail, on part de lui. On en propose un nouveau seulement quand le tien ne peut pas."] },
+  { q: '« Mes données vont aller où ? »', citation: { t: '« […] Je suis un peu parano sur ça. »', qui: 'Un gestionnaire, en rencontre' }, a: ['Tu as raison de poser la question. Avant de bâtir un système qui touche des renseignements personnels, on passe une vérification Loi 25. Tu reçois un document écrit : quelles données le système touche, où elles vont, et qui y a accès.', "On porte une attention particulière aux données qui sortiraient du Québec quand un modèle d'IA est utilisé."] },
+  { q: '« Je peux le faire moi-même avec ChatGPT. »', a: ['Pour une partie, oui. Ton diagnostic écrit te dit même ce que tu peux faire toi-même, sans nous.', "ChatGPT répond quand tu lui écris. Un système part seul quand une demande arrive : il relance à la bonne date et range l'information au bon endroit, même quand tu es sur un chantier.", 'Reste à savoir qui va le bâtir, le tester et le garder à jour. Si c\'est toi, ça se fera le soir.'] },
+  { q: "« Ce n'est pas pour une entreprise de ma taille. »", a: ["C'est à ça que sert le diagnostic. On mesure tes tâches en heures par mois. Si un seul système suffit chez vous, on te le dit, et on te bâtit celui-là, sans rien te vendre de plus. Si l'automatisation ne vaut pas la peine chez vous, on te le dit aussi."] },
+];
+
+const delai = '<span class="pastille">[délai : 14 ou 30 jours, à trancher]</span>';
+const mecanisme = '<span class="pastille">[mécanisme : nom à trancher]</span>';
 
 const etoile = '<path d="M10 1.6l2.47 5.3 5.8.68-4.3 3.96 1.15 5.73L10 14.4l-5.12 2.87 1.15-5.73-4.3-3.96 5.8-.68z"/>';
 const etoiles = '<svg class="etoiles" viewBox="0 0 100 20" aria-hidden="true">' + [0, 1, 2, 3, 4].map((i) => '<g transform="translate(' + i * 20 + ' 0)">' + etoile + '</g>').join('') + '</svg>';
 const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 5.5l9 9M14.5 5.5l-9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
 ---
 <Base title="Accompagnement complet en automatisation | FournIA" description="On sort les tâches répétitives de ta semaine, un chantier à la fois, dans tes outils actuels. Diagnostic gratuit de 30 minutes." canonical="https://fournia.net/accompagnement-complet/" minimal>
   <meta slot="head" name="robots" content="noindex, nofollow" />
@@ -81,25 +133,26 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   <link slot="head" rel="preload" href="/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin />
 
   <main class="lp">
-    <!-- Au-dessus du pli : étapes 1 à 3, vidéo, bouton, preuve. Sans animation (LCP). -->
+    <!-- Au-dessus du pli : étapes 1 à 3, bouton, preuve. Sans animation (LCP). -->
     <header class="hero">
       <div class="hero-fond" aria-hidden="true"><img src="/images/simon-fournier-flou.webp" alt="" width="480" height="600" fetchpriority="high" /></div>
       <div class="hero-contenu">
-        <!-- Étape 1 : la preuve d'abord -->
+        <!-- Étape 1 : la preuve d'abord, puis la personne visée -->
         <div class="preuve-barre">
           <span class="preuve-note"><span class="etoiles-w" set:html={etoiles}></span><span><strong>5,0</strong> sur Google</span><span class="pastille">[N] avis · à vérifier</span></span>
           <span class="logos" role="img" aria-label="Ils nous font confiance : AvecPlaisirs, Pubsphere, Arbour Aide Académique, SeniorTech">
             {logosClients.map((l) => <span class="logo-rond"><img src={l.src} alt="" width="40" height="40" decoding="async" /></span>)}
           </span>
         </div>
+        <p class="interpelle">Propriétaire d'une PME de services au Québec : tes appels, tes soumissions et tes relances passent encore tous par toi&nbsp;? <span class="pastille">à trancher</span></p>
 
-        <!-- Étape 2 : la grosse promesse -->
+        <!-- Étape 2 : la grosse promesse (titre définitif à trancher par Simon) -->
         <h1 class="titre-geant">Récupère <em>tes soirées</em></h1>
 
-        <!-- Étape 3 : sous-titre -->
-        <p class="sous-titre">On automatise les tâches répétitives de ta PME, un système à la fois. Ton premier système roule 30&nbsp;jours après tes accès, et il est garanti 30&nbsp;jours.</p>
+        <!-- Étape 3 : sous-titre, ouvrir une boucle -->
+        <p class="sous-titre">On automatise les tâches répétitives de ta PME, un système à la fois, dans les outils que tu as déjà. Ton premier système roule <Fragment set:html={delai} /> après tes accès, et chaque système est garanti 30&nbsp;jours. Et il y a une raison précise pour laquelle ton dernier outil dort.</p>
 
-        <a class="btn btn-primary btn-cta btn-geant" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+        <a class="btn btn-primary btn-cta btn-geant" href={CTA} data-cta-haut>{ctaTexte} <span class="arrow">→</span></a>
         <p class="note-cta"><span class="etoiles-w" set:html={etoiles}></span><span class="pastille">5,0 · à vérifier</span> sur Google · <span class="pastille">[N] avis · à vérifier</span></p>
         <p class="mini-cta">Ton plan écrit en 48&nbsp;h · sans engagement</p>
         <p class="rarete-cta">Nos équipes nous limitent à 3&nbsp;accompagnements par mois.</p>
@@ -125,28 +178,31 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     <!-- Étape 4 : l'intrigue -->
     <section class="bloc">
       <div class="col reveal">
-        <h2>Pourquoi ça ne se règle jamais</h2>
-        <p class="grand">Tu as peut-être déjà acheté un outil. Peut-être même payé quelqu'un pour te l'installer.</p>
-        <p class="grand">Trois semaines plus tard, tu étais revenu à tes vieilles habitudes.</p>
-        <p>Ta discipline n'a rien à voir là-dedans. Il y a une étape que presque personne ne fait avant d'installer quoi que ce soit. On te la montre plus bas.</p>
+        <h2>Pourquoi ton dernier outil dort</h2>
+        <p class="grand">Tu as peut-être déjà acheté un outil. Peut-être même payé quelqu'un pour l'installer.</p>
+        <p class="grand">Trois semaines plus tard, l'outil dormait. Et tu étais revenu à tes vieilles habitudes.</p>
+        <p>Il manquait une étape. D'après ce que je vois chez les PME que je rencontre, presque personne ne la fait avant d'installer un outil.</p>
+        <p>On te la montre plus bas.</p>
       </div>
     </section>
 
     <!-- Étape 5 : le problème -->
     <section class="bloc bloc-alt">
       <div class="col reveal">
-        <h2>Ton téléphone, tes soumissions, tes relances</h2>
+        <h2>Les appels, les soumissions et les relances reposent encore sur toi</h2>
         <ul class="scenes">
-          <li>Ton téléphone sonne pendant que tu es sur un chantier. Le client tombe sur ta boîte vocale.</li>
-          <li>Ta soumission est partie il y a cinq jours. Personne ne l'a relancée.</li>
-          <li>Le soir, tu retapes dans un logiciel ce que tu as déjà écrit dans un autre.</li>
-          <li>Tu as une liste d'anciens clients. Tu te dis que tu vas les rappeler. Tu ne les rappelles pas.</li>
+          <li>Ton téléphone sonne pendant que tu es sur un chantier. Le client tombe sur ta boîte vocale. Il appelle le suivant sur la liste.</li>
+          <li>Ta soumission dort depuis cinq jours. Personne ne l'a relancée.</li>
+          <li>Le soir, tu recopies dans un logiciel ce que tu as déjà écrit dans un autre.</li>
+          <li>Tes courriels attendent le seul matin libre de ta semaine.</li>
+          <li>Tes anciens clients te connaissent déjà. Tu te dis que tu vas les rappeler. Tu ne les rappelles pas.</li>
         </ul>
-        <h3 class="h3-mots">Dans les mots de propriétaires qu'on a rencontrés</h3>
+        <p class="grand chute">Mises ensemble, ces tâches prennent tes soirées.</p>
+        <h3 class="h3-mots">Dans les mots de gens d'affaires qu'on a rencontrés</h3>
         <div class="citations">
-          <blockquote><p>« J'oublie de faire des suivis avec les gens. J'ai des prospects, puis je me dis : je vais y penser. Puis j'oublie. »</p><span class="pastille">attribution Revoir · à vérifier</span></blockquote>
-          <blockquote><p>« J'ai besoin d'aide demain, parce qu'aujourd'hui j'ai de la difficulté à rentrer un contrat ou une facture. »</p></blockquote>
-          <blockquote><p>« J'ai payé quelqu'un, et il me dit tout le temps : j'ai un rendez-vous dans trois semaines. »</p><span class="pastille">citation retouchée · à vérifier</span></blockquote>
+          <blockquote><p>« J'ai perdu beaucoup de contrats de service parce que ils me montrent comme si tous mes messages ont été lus. »</p><cite>Propriétaire, plusieurs entreprises de services</cite></blockquote>
+          <blockquote><p>« Mais en ce moment, ce qui me gruge mon temps, c'est la paperasse avec les autres agents. »</p><cite>Conseiller financier, chef d'équipe</cite></blockquote>
+          <blockquote><p>« Je veux pas en échapper une […] »</p><cite>Propriétaire, plusieurs entreprises de services</cite></blockquote>
         </div>
       </div>
     </section>
@@ -154,79 +210,210 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     <!-- Étape 6 : la solution -->
     <section class="bloc">
       <div class="col reveal">
-        <h2>Ce qu'on fait à la place</h2>
-        <p class="grand">L'étape que presque personne ne fait : <strong>regarder comment ton travail se fait vraiment, avant de choisir un outil.</strong></p>
+        <h2>On regarde ton travail avant de choisir l'outil</h2>
+        <p class="grand">L'étape qui manquait : <strong>suivre ton travail d'une étape à l'autre, avant de choisir un outil.</strong></p>
         <p>On mesure le temps que prend chaque étape. On trouve ce qui te coûte le plus. On commence par là.</p>
         <p>Ensuite, on bâtit le système dans les outils que tu utilises déjà. On le teste avec ton équipe. On la forme. Puis on passe au chantier suivant.</p>
-        <p>Un chantier à la fois. Une rencontre aux deux semaines. Un plan clair pour la suite de ton entreprise.</p>
+        <p>On appelle ça <Fragment set:html={mecanisme} /> : un chantier à la fois, une rencontre aux deux semaines, et un plan clair pour la suite.</p>
         <ol class="etapes">
-          <li><strong>On regarde tout.</strong> On rencontre l'équipe et on mesure le temps de chaque étape.</li>
+          <li><strong>On regarde tout.</strong> On rencontre ton équipe et on mesure le temps de chaque étape.</li>
           <li><strong>On te remet un plan.</strong> Quoi automatiser, dans quel ordre.</li>
           <li><strong>On automatise, un chantier à la fois.</strong> Testé avec ton équipe, installé dans tes logiciels.</li>
-          <li><strong>On forme l'équipe à chaque livraison.</strong></li>
-          <li><strong>On reste là.</strong> Suivi, ajustements, bilan de ce qui a été gagné.</li>
+          <li><strong>On forme ton équipe à chaque livraison.</strong></li>
+          <li><strong>On reste là.</strong> Suivi, ajustements, et un bilan de ce qui a été gagné.</li>
         </ol>
-        <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+      </div>
+    </section>
+
+    <!-- Étape 6a : pour qui, pas pour qui -->
+    <section class="bloc bloc-alt">
+      <div class="col-large reveal">
+        <h2>Fait pour les PME de services qui débordent</h2>
+        <div class="pour-qui">
+          <div class="pq-carte pq-oui">
+            <h3>C'est pour toi si :</h3>
+            <ul class="liste-coches">
+              {pourQui.map((x) => <li><span set:html={coche}></span><span>{x}</span></li>)}
+            </ul>
+          </div>
+          <div class="pq-carte pq-non">
+            <h3>Ce n'est pas pour toi si…</h3>
+            <ul class="liste-non">
+              {pasPourQui.map((x) => <li><span set:html={croix}></span><span>{x}</span></li>)}
+            </ul>
+          </div>
+        </div>
+        <div class="centre">
+          <p class="grand">Pas certain de quel côté tu es&nbsp;? C'est à ça que sert le diagnostic.</p>
+          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Étape 6b : les 30 premiers jours -->
+    <section class="bloc">
+      <div class="col-large reveal">
+        <h2>Tes 30 premiers jours, semaine par semaine</h2>
+        <p class="intro-large">Avant de commencer, il y a le diagnostic : 30 minutes ensemble, puis ton plan écrit en 48 heures. Si tu veux aller plus loin, on te présente l'accompagnement en personne, avec ce plan devant toi.</p>
+        <ol class="semaines">
+          <li>
+            <span class="sem-num">Semaine 1</span>
+            <h3>On comprend ton travail.</h3>
+            <p>Le jour où tu commences, tu reçois un courriel avec le parcours et des plages pour la première rencontre. Pendant cette rencontre d'une heure, on suit ton premier chantier d'une étape à l'autre : qui fait quoi, dans quel logiciel, en combien de temps. On écrit ce qui fait partie du chantier, et ce qui n'en fait pas partie.</p>
+          </li>
+          <li>
+            <span class="sem-num">Semaine 2</span>
+            <h3>On prend les accès, ensemble.</h3>
+            <p>Une deuxième rencontre d'environ une heure, écran partagé. On crée les comptes avec toi, un à la fois. À la fin, on a tout ce qu'il faut et la construction commence. Ton délai de <Fragment set:html={delai} /> se compte à partir de ce jour-là. Avant de bâtir, le chantier passe la vérification Loi 25.</p>
+          </li>
+          <li>
+            <span class="sem-num">Semaines 3 et 4</span>
+            <h3>On bâtit, tu suis.</h3>
+            <p>On construit le système dans tes outils. À la rencontre aux deux semaines, tu vois où on en est et tu tranches les questions ouvertes. Au cours du premier mois, tu reçois aussi la politique d'usage de l'IA de ton équipe et l'aide-mémoire de demandes.</p>
+          </li>
+          <li>
+            <span class="sem-num">Fin du premier mois</span>
+            <p class="variante"><span class="pastille">si 14 jours</span> <strong>La livraison.</strong> On teste le système avec ton équipe, on l'installe et on forme les personnes qui vont s'en servir. Sa garantie de 30 jours commence.</p>
+            <p class="variante"><span class="pastille">si 30 jours</span> <strong>La construction continue.</strong> La livraison arrive environ deux semaines plus tard, avec les tests, l'installation et la formation de ton équipe. Sa garantie de 30 jours commence ce jour-là.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Étape 6c : chaque rencontre -->
+    <section class="bloc bloc-alt">
+      <div class="col reveal">
+        <h2>Aux deux semaines, une rencontre qui fait avancer ton chantier</h2>
+        <p>En personne sur la Rive-Nord, à Laval et à Montréal, ou en visio partout au Québec. Chaque rencontre suit le même ordre :</p>
+        <ol class="etapes">
+          {rencontre.map((r) => <li><strong>{r.t}</strong> {r.d}</li>)}
+        </ol>
+        <p>Quand un chantier est livré, la rencontre suivante fait le bilan : ce que le système fait, ce qu'il te fait gagner, et quel chantier passe ensuite.</p>
+        <p>Entre deux rencontres, tu sais à qui écrire.</p>
       </div>
     </section>
 
     <!-- Étape 7 : les références -->
-    <section class="bloc bloc-alt">
+    <section class="bloc">
       <div class="col qui reveal">
-        <Portrait classe="qui-photo" />
+        <figure class="qui-fig">
+          <Portrait classe="qui-photo" />
+          <figcaption>Simon Fournier, fondateur de FournIA. C'est lui que tu rencontres au diagnostic.</figcaption>
+        </figure>
         <div>
-          <h2>Qui est derrière FournIA</h2>
+          <h2>Un seul interlocuteur, du diagnostic au dernier système</h2>
           <p>Je m'appelle Simon Fournier. J'ai lancé FournIA à Blainville en avril 2026.</p>
-          <p>C'est moi qui conçois chaque système, et je suis ton interlocuteur du début à la fin. Je forme aussi les équipes qui les utilisent.</p>
-          <p>Depuis 2025, j'ai construit 100+ automatisations chez 10+ entreprises. <span class="pastille">chiffre à vérifier</span></p>
-          <p>Chaque projet qui touche des renseignements personnels passe une vérification Loi 25, la loi québécoise sur la vie privée. Tu reçois un document de conformité écrit.</p>
-          <p>Les rencontres se font en personne sur la Rive-Nord, à Laval et à Montréal, ou en visio partout au Québec.</p>
+          <p>Je conçois chaque système, et je suis ton interlocuteur du début à la fin. Je forme aussi les équipes qui les utilisent.</p>
+          <p>Chaque projet qui touche des renseignements personnels passe une vérification Loi 25, la loi québécoise sur la protection des renseignements personnels. Tu reçois un document écrit : quelles données le système touche, où elles vont et qui y a accès.</p>
         </div>
       </div>
     </section>
 
     <!-- Étape 8 : les bénéfices -->
-    <section class="bloc">
+    <section class="bloc bloc-alt">
       <div class="col reveal">
-        <h2>Ce que ça change dans ta semaine</h2>
+        <h2>Ce qui change dans ta semaine, chantier par chantier</h2>
+        <p>Selon les chantiers que tu choisis :</p>
         <ul class="liste-coches">
           {benefices.map((b) => <li><span set:html={coche}></span><span>{b}</span></li>)}
         </ul>
+        <div class="consigne">
+          <p>Un chef d'équipe nous a donné sa consigne en rencontre. C'est aussi la nôtre :</p>
+          <blockquote>« OK, on fait ça simple. Tu sais, ça a pas besoin d'être compliqué, faut juste que ça fonctionne bien. »</blockquote>
+        </div>
       </div>
     </section>
 
     <!-- Étape 9 : la preuve -->
-    <section class="bloc bloc-alt">
+    <section class="bloc">
       <div class="col-large reveal">
-        <h2>Ce que nos clients en disent</h2>
+        <h2>Des systèmes qui roulent déjà chez des PME d'ici</h2>
+        <h3 class="h3-real">Ce que nos clients en disent sur Google</h3>
+        <div class="note-google">
+          <span class="etoiles-w" set:html={etoiles}></span>
+          <span><strong>5,0</strong> sur Google · <span class="pastille">[N] avis · à vérifier</span></span>
+          <span class="pastille">avis nommés affichés après les oui écrits</span>
+        </div>
+        {/* Cartes d'avis nommées, à réactiver quand les oui écrits sont archivés (et décommenter `avis` plus haut) :
         <div class="avis-grille">
           {avis.map((a) => (
             <figure class="carte-avis">
               <span class="etoiles-w" set:html={etoiles}></span>
               <blockquote>« {a.texte} »</blockquote>
-              <figcaption><strong>{a.auteur}</strong><span>Avis Google</span><span class="pastille">oui écrit à obtenir</span></figcaption>
+              <figcaption><strong>{a.auteur}</strong><span>Avis Google</span></figcaption>
             </figure>
           ))}
         </div>
-        <p class="note-revue note-bas"><span class="pastille">à trancher</span> l'avis d'Alexandre Mercier (partenaire) est retiré par défaut.</p>
+        */}
 
-        <h3 class="h3-real">Des systèmes qui roulent chez nos clients</h3>
+        <h3 class="h3-real">Ce que nos systèmes font chez eux</h3>
         <ul class="realisations">
           {realisations.map((r) => (
             <li>
               <strong>{r.client}{r.secteur && <span class="secteur">{r.secteur}</span>}</strong>
-              <span>{r.texte}{r.verifier && <span class="pastille">{r.verifier}</span>}</span>
+              <span>{r.texte}</span>
             </li>
           ))}
         </ul>
+        <p class="note-revue note-bas"><span class="pastille">noms et logos : trace écrite de l'accord à obtenir</span></p>
+        <div class="centre"><a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
+      </div>
+    </section>
+
+    <!-- Étape 9a : toi-même, une embauche ou une firme -->
+    <section class="bloc bloc-alt">
+      <div class="col-large reveal">
+        <h2>Toi-même, une embauche ou une firme : ce que chacune te demande</h2>
+        <div class="options-3">
+          <article class="opt">
+            <h3>Le faire toi-même</h3>
+            <p>C'est possible pour une partie, et ton diagnostic écrit te dit laquelle. Le reste demande des heures que tu n'as pas. Une propriétaire rencontrée cet automne l'a résumé en une phrase :</p>
+            <blockquote>« C'est toutes des choses que je sais qu'il faut faire, mais. »</blockquote>
+          </article>
+          <article class="opt">
+            <h3>Embaucher quelqu'un</h3>
+            <p>Il faut trouver la bonne personne, lui apprendre ton métier et les outils, puis la gérer. Pendant ce temps, tes tâches attendent. Et si elle part, ce qu'elle a bâti peut partir avec elle.</p>
+          </article>
+          <article class="opt">
+            <h3>Une firme qui installe et repart</h3>
+            <p>La même propriétaire, sur son fournisseur précédent :</p>
+            <blockquote>« […] si j'ai payé quelqu'un […] Il me dit tout le temps genre j'ai un rendez-vous dans trois semaines, je sais pas, dans trois semaines, j'ai besoin d'ouvrir mon CRM, c'est maintenant. »</blockquote>
+          </article>
+        </div>
+        <div class="exiger">
+          <h3>Ce que tu devrais exiger, peu importe avec qui tu travailles</h3>
+          <ul class="liste-coches">
+            {exigences.map((x) => <li><span set:html={coche}></span><span>{x}</span></li>)}
+          </ul>
+          <p class="grand">Avec FournIA, tu as les cinq. Et on ne s'arrête pas au premier système : on passe au chantier suivant, aux deux semaines, jusqu'au bout de ton plan.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Étape 9b : les 7 objections -->
+    <section class="bloc">
+      <div class="col reveal">
+        <h2>Les 7 raisons de remettre ça à plus tard, et nos réponses</h2>
+        <div class="faq objections">
+          {objections.map((o) => (
+            <details>
+              <summary>{o.q}<span class="plus" aria-hidden="true"></span></summary>
+              <div class="reponse">
+                {o.citation && <blockquote class="cit-obj">{o.citation.t}<cite>{o.citation.qui}</cite></blockquote>}
+                {o.a.map((p) => <p>{p}</p>)}
+                {o.revue && <p class="note-revue"><span class="pastille">{o.revue}</span></p>}
+              </div>
+            </details>
+          ))}
+        </div>
         <div class="centre"><a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
       </div>
     </section>
 
     <!-- Étape 10 : l'offre -->
-    <section class="bloc">
+    <section class="bloc bloc-alt">
       <div class="col reveal">
-        <h2>Ce que tu obtiens</h2>
+        <h2>L'accompagnement complet : un plan, un système à la fois, ton équipe formée</h2>
         <div class="offre">
           <p class="offre-titre">L'accompagnement complet <span class="wm">Fourn<span>IA</span></span></p>
           <ul class="liste-coches">
@@ -238,16 +425,17 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 11 : les bonus -->
-    <section class="bloc bloc-alt">
+    <section class="bloc">
       <div class="col-large reveal">
-        <h2>En plus, quand tu commences l'accompagnement</h2>
-        <p class="bonus-intro">Ces trois documents sont inclus dès ton premier mois. Ils sont à toi.</p>
+        <h2>En plus : trois documents qui restent à toi</h2>
+        <p class="bonus-intro">Ces trois documents sont inclus dès ton premier mois.</p>
         <div class="bonus-grille">
           {bonus.map((x, i) => (
             <article class="bonus">
               <span class="bonus-num" aria-hidden="true">{i + 1}</span>
               <h3>{x.t}</h3>
               <p>{x.d}</p>
+              {x.petit && <p class="petit bonus-petit">{x.petit}</p>}
             </article>
           ))}
         </div>
@@ -262,59 +450,56 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
       </div>
     </section>
 
-    <!-- Étapes 12 et 13 : ce que tu repars avec, gratuit -->
-    <section class="bloc">
+    <!-- Étapes 12 et 13 : le diagnostic gratuit -->
+    <section class="bloc bloc-alt">
       <div class="col reveal">
-        <h2>Ce que tu repars avec</h2>
+        <h2>Le diagnostic gratuit : en 30 minutes, tes 3 plus grosses pertes de temps, chiffrées</h2>
         <p>Après 30 minutes, tu repars avec :</p>
         <ul class="liste-coches">
-          <li><span set:html={coche}></span><span><strong>Tes 3 plus grosses pertes de temps</strong>, nommées et chiffrées en heures par semaine.</span></li>
+          <li><span set:html={coche}></span><span><strong>Tes 3 plus grosses pertes de temps</strong>, nommées et chiffrées en heures par mois.</span></li>
           <li><span set:html={coche}></span><span><strong>Pour chacune, la solution en mots simples</strong>, et ce que tu peux faire toi-même, sans nous.</span></li>
           <li><span set:html={coche}></span><span><strong>L'ordre pour les régler</strong> : maintenant, ensuite, plus tard.</span></li>
         </ul>
         <p>Le tout dans un diagnostic écrit de 2 pages, envoyé dans les 48 heures. Il est à toi.</p>
         <figure class="preuve-doc">
           <div class="preuve-page">
-            <img src="/preuves/exemple-diagnostic-p1.webp" alt="Page 1 d'un diagnostic écrit FournIA : ce que le client a dit, et le tableau des tâches avec le temps par semaine (exemple pour une entreprise fictive)" width="900" height="1165" loading="lazy" decoding="async" />
+            <img src="/preuves/exemple-diagnostic-p1.webp" alt="Page 1 d'un diagnostic écrit FournIA : ce que le client a dit, et le tableau des tâches avec le temps passé (exemple pour une entreprise fictive)" width="900" height="1165" loading="lazy" decoding="async" />
             <span class="preuve-badge">Exemple · données fictives</span>
           </div>
-          <figcaption>Ton diagnostic écrit ressemble à ça : tes tâches, tes heures par semaine, et par où commencer.</figcaption>
+          <figcaption>Ton diagnostic écrit ressemble à ça : tes tâches, tes heures par mois, et par où commencer.</figcaption>
         </figure>
 
-        <h2 class="h2-suite">Gratuit, sans engagement</h2>
-        <p class="grand"><strong>Le diagnostic est gratuit, sans engagement.</strong></p>
-        <p>Si tu veux aller plus loin après, on te présente l'accompagnement en personne, avec le plan devant toi. Si tu ne veux pas, tu gardes ton diagnostic écrit.</p>
+        <h2 class="h2-suite">Il ne t'engage à rien</h2>
+        <p>Si tu veux aller plus loin après, on te présente l'accompagnement en personne, avec le plan devant toi. Sinon, tu gardes ton diagnostic écrit.</p>
         <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
       </div>
     </section>
 
     <!-- Étape 14 : rareté réelle -->
-    <section class="bloc bloc-alt">
+    <section class="bloc">
       <div class="col reveal">
-        <h2>Pourquoi les places sont limitées</h2>
+        <h2>Trois accompagnements par mois, pour bien livrer chacun</h2>
         <p class="rarete">Nos équipes nous limitent à <em>3&nbsp;accompagnements par mois.</em></p>
+        <p>Chaque accompagnement demande un chantier actif et une rencontre aux deux semaines. On en prend autant qu'on peut en livrer.</p>
         <p>Quand c'est complet, on t'inscrit pour le mois suivant, et on peut quand même te bâtir un système précis en attendant.</p>
       </div>
     </section>
 
     <!-- Étape 15 : la garantie -->
-    <section class="bloc">
+    <section class="bloc bloc-alt">
       <div class="col reveal">
-        <h2>Notre garantie</h2>
+        <h2>Chaque système livré est garanti 30 jours, par écrit</h2>
         <div class="garantie">
-          <div>
-            <p class="garantie-titre">Chaque système livré est garanti 30 jours.</p>
-            <p>Si un bogue l'empêche de faire ce qui était prévu au contrat, on le corrige sans frais. Si on n'arrive pas à le corriger dans les 10 jours ouvrables après ton signalement écrit, tu es remboursé au complet pour ce système.</p>
-          </div>
+          <p>Si un bogue l'empêche de faire ce qui était prévu au contrat, on le corrige sans frais. Si on n'arrive pas à le corriger dans les 10 jours ouvrables après ton signalement écrit, tu es remboursé au complet pour ce système.</p>
         </div>
-        <p class="petit">La garantie ne s'applique pas quand le problème vient d'une obligation du client non remplie (accès, informations), d'un changement ou d'un refus d'un service tiers (par exemple Meta, Instagram, Stripe, OpenAI), ou d'un retrait de contenu pour une question de droits d'auteur.</p>
+        <p class="petit">La garantie couvre les 30 jours suivant la livraison. Le remboursement se fait sur demande écrite ; tu cesses alors d'utiliser ce système et on le retire. La garantie ne s'applique pas quand le problème vient d'une obligation du client non remplie (accès, informations), d'un changement ou d'un refus d'un service tiers (par exemple Meta, Instagram, Stripe, OpenAI), ou d'un retrait de contenu pour une question de droits d'auteur.</p>
       </div>
     </section>
 
     <!-- Étape 16 : l'appel à l'action, étape par étape -->
-    <section class="bloc bloc-alt">
+    <section class="bloc">
       <div class="col reveal">
-        <h2>Comment ça marche, étape par étape</h2>
+        <h2>Ton diagnostic en 5 étapes, à partir d'un clic</h2>
         <ol class="etapes">
           <li><strong>Tu cliques sur le bouton</strong> ci-dessous.</li>
           <li><strong>Tu réponds à 3 questions.</strong></li>
@@ -323,26 +508,29 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
           <li><strong>Tu reçois ton diagnostic écrit dans les 48 heures.</strong> Il est à toi, que tu travailles avec nous ou non.</li>
         </ol>
         <figure class="preuve-capture">
-          <div class="capture-vide"><span class="pastille">capture à fournir par Simon : un système livré, sur données fictives</span></div>
+          <div class="capture-vide"><span class="pastille">capture à fournir par Simon : un système livré, sur données fictives (sans capture, ce bloc sort)</span></div>
           <figcaption>Le tableau de suivi des relances d'un système livré : chaque soumission, sa relance et son statut, au même endroit. <span class="pastille">légende proposée</span></figcaption>
         </figure>
         <div class="cta-bloc">
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
-          <p class="sous-cta"><span class="etoiles-w" set:html={etoiles}></span> 5,0 sur Google <span class="pastille">[N] avis · à vérifier</span></p>
+          <p class="sous-cta"><span class="etoiles-w" set:html={etoiles}></span> 5,0 sur Google · <span class="pastille">[N] avis · à vérifier</span></p>
         </div>
       </div>
     </section>
 
-    <!-- Questions fréquentes (reprises de la page Accompagnement) -->
-    <section class="bloc">
+    <!-- Étape 16a : questions fréquentes -->
+    <section class="bloc bloc-alt">
       <div class="col reveal">
-        <h2>Questions fréquentes</h2>
-        <p class="note-revue"><span class="pastille">à valider</span> réponses reprises de la page Accompagnement, mises au « tu ».</p>
+        <h2>Ton équipe, tes logiciels, tes données : tes dernières questions</h2>
         <div class="faq">
           {faq.map((f) => (
             <details>
               <summary>{f.q}<span class="plus" aria-hidden="true"></span></summary>
-              <p>{f.a}</p>
+              <div class="reponse">
+                {f.a.map((p) => <p>{p}</p>)}
+                {f.petit && <p class="petit">{f.petit}</p>}
+                {f.revue && <p class="note-revue"><span class="pastille">{f.revue}</span></p>}
+              </div>
             </details>
           ))}
         </div>
@@ -356,8 +544,8 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
           <p><span class="ps-tag">P.S.</span> Si tu es descendu directement ici, l'essentiel tient en quatre points&nbsp;:</p>
           <ul class="liste-coches ps-points">
             <li><span set:html={coche}></span><span>On sort les tâches répétitives de ta semaine, un système à la fois, dans les outils que tu as déjà.</span></li>
-            <li><span set:html={coche}></span><span>Ton premier système roule 30&nbsp;jours après tes accès, et chaque système est garanti 30&nbsp;jours.</span></li>
-            <li><span set:html={coche}></span><span>Tout commence par un diagnostic gratuit de 30&nbsp;minutes. Tu repars avec tes 3 plus grosses pertes de temps, chiffrées en heures, dans un diagnostic écrit qui est à toi.</span></li>
+            <li><span set:html={coche}></span><span>Ton premier système roule <Fragment set:html={delai} /> après tes accès, et chaque système est garanti 30&nbsp;jours.</span></li>
+            <li><span set:html={coche}></span><span>Tout commence par un diagnostic gratuit de 30&nbsp;minutes. Tu repars avec tes 3 plus grosses pertes de temps, chiffrées en heures par mois, dans un diagnostic écrit qui est à toi.</span></li>
             <li><span set:html={coche}></span><span>Nos équipes nous limitent à 3&nbsp;accompagnements par mois.</span></li>
           </ul>
           <p>Si tu ne fais rien, dans un an, tu auras la même semaine, avec les mêmes appels manqués et les mêmes soirées à rattraper.</p>
@@ -366,10 +554,41 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
           <p class="note-cta note-cta-ps"><span class="etoiles-w" set:html={etoiles}></span><span class="pastille">5,0 · à vérifier</span> sur Google · <span class="pastille">[N] avis · à vérifier</span></p>
           <p class="mini-cta mini-cta-ps">Ton plan écrit en 48&nbsp;h · sans engagement</p>
         </div>
-        <p class="pps"><span class="ps-tag">P.P.S.</span> Pas sûr que c'est pour une entreprise de ta taille&nbsp;? C'est exactement à ça que sert le diagnostic&nbsp;: si un seul système suffit chez vous, on te le dit et on te bâtit celui-là, sans rien te vendre de plus.</p>
+        <p class="pps"><span class="ps-tag">P.P.S.</span> Pas sûr que ce soit pour une entreprise de ta taille&nbsp;? C'est à ça que sert le diagnostic&nbsp;: si un seul système suffit chez vous, on te le dit et on te bâtit celui-là, sans rien te vendre de plus.</p>
       </div>
     </section>
+
+    <!-- Barre d'action fixe, mobile seulement : apparaît quand le bouton du haut sort de l'écran,
+         se cache quand un autre bouton est visible. -->
+    <div class="barre-cta" data-barre-cta aria-hidden="true">
+      <a class="btn btn-primary btn-cta" href={CTA} tabindex="-1">{ctaTexte} <span class="arrow">→</span></a>
+    </div>
   </main>
+
+  <script>
+    // Barre d'action mobile : visible quand le bouton du haut est sorti de l'écran et qu'aucun autre bouton n'est visible.
+    const barre = document.querySelector<HTMLElement>('[data-barre-cta]');
+    const haut = document.querySelector('[data-cta-haut]');
+    if (barre && haut && 'IntersectionObserver' in window) {
+      const lien = barre.querySelector('a');
+      const visibles = new Set<Element>();
+      let hautPasse = false;
+      const maj = () => {
+        const montrer = hautPasse && visibles.size === 0;
+        barre.classList.toggle('visible', montrer);
+        barre.setAttribute('aria-hidden', montrer ? 'false' : 'true');
+        lien?.setAttribute('tabindex', montrer ? '0' : '-1');
+      };
+      const io = new IntersectionObserver((entrees) => {
+        for (const e of entrees) {
+          if (e.target === haut) hautPasse = !e.isIntersecting && e.boundingClientRect.top < 0;
+          if (e.isIntersecting) visibles.add(e.target); else visibles.delete(e.target);
+        }
+        maj();
+      });
+      document.querySelectorAll('main .btn-cta:not(.barre-cta .btn-cta)').forEach((b) => io.observe(b));
+    }
+  </script>
 </Base>
 
 <style is:global>
@@ -391,7 +610,7 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .lp h3 { font-size: 1.2rem; font-weight: 600; color: var(--white); letter-spacing: -.01em; }
 
   /* Pastilles de revue : discrètes, à retirer avant la mise en ligne */
-  .pastille { display: inline-flex; align-items: center; vertical-align: middle; font-family: 'Inter', 'Inter Repli', sans-serif; font-size: .72rem; font-weight: 500; line-height: 1.3; letter-spacing: .01em;
+  :global(.pastille) { display: inline-flex; align-items: center; vertical-align: middle; font-family: 'Inter', 'Inter Repli', sans-serif; font-size: .72rem; font-weight: 500; line-height: 1.3; letter-spacing: .01em;
     color: #e7b65a; border: 1px dashed rgba(231,182,90,.7); border-radius: 6px; padding: .12rem .45rem; margin: 0 .25rem; }
   .lp .note-revue { font-size: .85rem; line-height: 1.5; color: #c4b48c; margin: -.5rem 0 1.6rem; }
   .lp .note-revue .pastille { margin-left: 0; }
@@ -542,6 +761,67 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   .preuve-doc figcaption, .preuve-capture figcaption { font-size: 1rem; line-height: 1.6; color: var(--texte); margin-top: .9rem; }
   .preuve-capture { margin: 0 0 2.2rem; }
   .capture-vide { aspect-ratio: 16 / 9; border-radius: 14px; border: 1px dashed rgba(231,182,90,.55); background: rgba(255,255,255,.02); display: grid; place-items: center; padding: 1rem; text-align: center; }
+
+  /* ── Page A longue : nouvelles sections ── */
+  .lp .interpelle { font-size: 1.05rem; line-height: 1.5; font-weight: 500; color: var(--texte); max-width: 40rem; margin: 0 auto 1.2rem; }
+  .lp .chute { margin-top: 1.6rem; }
+  .citations cite, .cit-obj cite { display: block; font-style: normal; font-size: .85rem; color: #a9aba3; margin-top: .55rem; }
+  .intro-large { max-width: 46rem; }
+
+  .pour-qui { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 2.4rem; }
+  .pq-carte { padding: 1.8rem 1.8rem 1rem; border-radius: 18px; border: 1px solid var(--glass-b); background: #171815; }
+  .pq-oui { border-color: rgba(183,217,76,.4); }
+  .lp .pq-carte h3 { font-size: 1.25rem; margin-bottom: .6rem; }
+  .liste-non { list-style: none; margin: 0 0 1.4rem; padding: 0; }
+  .lp .liste-non li { display: grid; grid-template-columns: 1.5rem 1fr; gap: .85rem; padding: .95rem 0; border-bottom: 1px solid var(--line); color: var(--texte-2); }
+  .liste-non li:last-child { border-bottom: none; }
+  .lp :global(.croix) { width: 1.25rem; height: 1.25rem; color: #b98a7c; margin-top: .3rem; display: block; }
+
+  .semaines { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .semaines > li { position: relative; padding: 1.5rem 1.4rem 1.2rem; border-radius: 18px; border: 1px solid var(--glass-b); background: #151613; }
+  .semaines > li::before { content: ''; position: absolute; left: 1.4rem; right: 1.4rem; top: 0; height: 2px; background: var(--lime); opacity: .7; border-radius: 2px; }
+  .sem-num { display: inline-block; font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--lime); margin-bottom: .6rem; }
+  .lp .semaines h3 { font-size: 1.12rem; margin-bottom: .5rem; }
+  .lp .semaines p { font-size: 1rem; line-height: 1.6; margin-bottom: .7rem; }
+  .lp .variante { padding-top: .6rem; border-top: 1px dashed var(--line); }
+  .lp .variante .pastille { margin-left: 0; }
+
+  .qui-fig { margin: 0; }
+  .qui-fig figcaption { font-size: .88rem; line-height: 1.5; color: #a9aba3; margin-top: .7rem; }
+
+  .consigne { margin-top: 2rem; padding: 1.5rem 1.6rem; border-radius: 16px; background: rgba(255,255,255,.028); border: 1px solid var(--line); }
+  .lp .consigne p { margin-bottom: .7rem; }
+  .consigne blockquote { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: 1.25rem; line-height: 1.45; font-weight: 600; color: var(--white); }
+
+  .note-google { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; font-size: 1.05rem; color: var(--texte); padding: 1.2rem 1.4rem; border-radius: 16px; border: 1px solid var(--glass-b); background: #151613; }
+
+  .options-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .opt { padding: 1.7rem 1.6rem 1.3rem; border-radius: 18px; border: 1px solid var(--glass-b); background: #171815; display: flex; flex-direction: column; }
+  .lp .opt h3 { font-size: 1.2rem; margin-bottom: .7rem; }
+  .lp .opt p { font-size: 1.04rem; line-height: 1.65; }
+  .opt blockquote { margin-top: auto; padding-top: .9rem; border-top: 1px solid var(--line); font-size: 1rem; line-height: 1.6; color: var(--texte); font-style: italic; }
+  .exiger { margin-top: 2.6rem; max-width: 46rem; }
+  .lp .exiger h3 { font-size: 1.35rem; margin-bottom: .6rem; }
+
+  .faq .reponse { padding: 0 2.8rem 1.3rem 0; }
+  .lp .faq .reponse p { padding: 0; margin: 0 0 .8rem; }
+  .cit-obj { font-size: 1.05rem; color: var(--texte); font-style: italic; margin: 0 0 1rem; padding: .9rem 1.1rem; border-radius: 12px; background: rgba(255,255,255,.028); border: 1px solid var(--line); }
+  .lp .bonus-petit { margin-top: .8rem; }
+
+  /* Barre d'action fixe, mobile seulement */
+  .barre-cta { display: none; }
+  @media (max-width: 760px) {
+    .barre-cta { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; padding: .55rem .75rem calc(.55rem + env(safe-area-inset-bottom));
+      background: rgba(11,11,12,.92); border-top: 1px solid var(--glass-b); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      transform: translateY(110%); transition: transform .35s cubic-bezier(.16,1,.3,1); }
+    .barre-cta.visible { transform: none; }
+    .barre-cta .btn { width: 100%; justify-content: center; padding: .8rem 1rem; }
+    .lp .barre-cta .btn-cta { font-size: 1.02rem; }
+    .pour-qui, .options-3 { grid-template-columns: 1fr; }
+    .semaines { grid-template-columns: 1fr; }
+    .faq .reponse { padding-right: 0; }
+  }
+
   /* Pied minimal (Base minimal) : confidentialité et témoins seulement */
   :global(.foot-minimal) { padding: 1.8rem 0 2.2rem; margin-top: 0; }
   :global(.foot-minimal .foot-bottom) { margin-top: 0; padding-top: 0; border-top: none; }
@@ -556,7 +836,14 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     .hero { padding: 6.4rem 0 3rem; }
     .preuve-barre { border-radius: 18px; gap: .55rem .9rem; margin-bottom: 1.4rem; padding: .6rem .8rem; }
     .titre-geant { margin-bottom: 1rem; }
-    .lp .sous-titre { font-size: 1.06rem; margin-bottom: 1.5rem; }
+    .lp .sous-titre { font-size: 1rem; line-height: 1.5; margin-bottom: 1.2rem; }
+    .lp .interpelle { font-size: .92rem; margin-bottom: .8rem; }
+    .titre-geant { font-size: 3.3rem; margin-bottom: .7rem; }
+    .preuve-barre { padding: .45rem .7rem; gap: .35rem .7rem; margin-bottom: 1rem; }
+    .preuve-note { font-size: .82rem; gap: .35rem; }
+    .lp .preuve-note .pastille { font-size: .66rem; }
+    .logo-rond { width: 1.9rem; height: 1.9rem; }
+    .hero { padding-top: 6rem; }
     .btn-geant { width: 100%; padding: 1.05rem 1.2rem; }
     .lp .btn-cta { font-size: 1.15rem; }
     .mur-logos { margin-top: 1.8rem; padding-top: 1.3rem; }
