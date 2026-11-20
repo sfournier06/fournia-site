@@ -311,9 +311,18 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     <section class="bloc bloc-ps">
       <div class="col reveal">
         <div class="ps">
-          <p><span class="ps-tag">P.S.</span> Si tu ne retiens qu'une chose : tant que rien ne change, les mêmes tâches te prennent les mêmes heures, chaque semaine. Le diagnostic prend 30 minutes, il est gratuit, sans engagement, et ton diagnostic écrit est à toi même si tu ne fais rien avec nous.</p>
-          <a class="btn btn-primary btn-xl" href={CTA}>Réserve ton diagnostic <span class="arrow">→</span></a>
+          <p><span class="ps-tag">P.S.</span> Si t'as descendu direct ici, l'essentiel tient en quatre points&nbsp;:</p>
+          <ul class="liste-coches ps-points">
+            <li><span set:html={coche}></span><span>On sort les tâches répétitives de ta semaine, un système à la fois, dans les outils que t'as déjà.</span></li>
+            <li><span set:html={coche}></span><span>Ton premier système roule 30&nbsp;jours après tes accès, et chaque système est garanti 30&nbsp;jours.</span></li>
+            <li><span set:html={coche}></span><span>Tout commence par un diagnostic gratuit de 30&nbsp;minutes. Tu repars avec tes 3 plus grosses pertes de temps, chiffrées en heures, dans un diagnostic écrit qui est à toi.</span></li>
+            <li><span set:html={coche}></span><span>Nos équipes nous limitent à 3&nbsp;accompagnements par mois.</span></li>
+          </ul>
+          <p>Si tu fais rien, dans un an, tu vas avoir la même semaine, avec les mêmes appels manqués pis les mêmes soirées à rattraper.</p>
+          <p>Clique sur le bouton, réponds à 3 questions, pis si c'est pour toi, choisis ton heure.</p>
+          <a class="btn btn-primary btn-xl" href={CTA}>Réserve ton diagnostic gratuit <span class="arrow">→</span></a>
         </div>
+        <p class="pps"><span class="ps-tag">P.P.S.</span> Pas sûr que c'est pour une entreprise de ta taille&nbsp;? C'est exactement à ça que sert le diagnostic&nbsp;: si un seul système suffit chez vous, on te le dit, pis on te bâtit celui-là, sans t'en vendre plus.</p>
       </div>
     </section>
   </main>
@@ -470,6 +479,9 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
   :global(.foot-minimal .foot-bottom) { margin-top: 0; padding-top: 0; border-top: none; }
   .ps { padding: 2.6rem; border-radius: 24px; border: 1px solid var(--glass-b); background: radial-gradient(110% 130% at 100% 0%, rgba(183,217,76,.11), transparent 55%), #121311; box-shadow: 0 30px 70px rgba(0,0,0,.45); }
   .lp .ps p { font-size: 1.24rem; line-height: 1.6; color: var(--texte); margin-bottom: 1.6rem; }
+  .lp .ps-points { margin: -.4rem 0 1.6rem; }
+  .lp .ps-points li { font-size: 1.12rem; padding: .75rem 0; }
+  .lp .pps { font-size: 1rem; line-height: 1.65; color: var(--texte-2); margin: 1.6rem .4rem 0; }
   .ps-tag { font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-weight: 700; color: var(--lime); margin-right: .25rem; }
 
   @media (max-width: 760px) {
