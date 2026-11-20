@@ -8,7 +8,7 @@ import Portrait from '../components/Portrait.astro';
 import VslPlayer from '../components/VslPlayer.astro';
 
 const CTA = '/diagnostic/';
-const ctaTexte = 'Réserve ton diagnostic gratuit de 30 minutes';
+const ctaTexte = 'Réclame ton diagnostic gratuit de 30 minutes';
 
 const avis = [
   { auteur: 'Thomas Arbour', texte: "Ils ont automatisé la messagerie de mon entreprise […] Les suivis avec les clients se font maintenant beaucoup plus rapidement, et on sauve énormément de temps sur les tâches répétitives." },
@@ -48,6 +48,13 @@ const logosClients = [
   { src: '/clients/mini/pubsphere.webp' },
   { src: '/clients/mini/arbour.webp' },
   { src: '/clients/mini/seniortech.webp' },
+];
+
+const murLogos = [
+  { nom: 'AvecPlaisirs', src: '/clients/mono/avecplaisirs.webp', l: 320, h: 101 },
+  { nom: 'Pubsphere', src: '/clients/mono/pubsphere.webp', l: 276, h: 44 },
+  { nom: 'Arbour Aide Académique', src: '/clients/mono/arbour.webp', l: 320, h: 148 },
+  { nom: 'SeniorTech', src: '/clients/mono/seniortech.webp', l: 320, h: 82 },
 ];
 
 const bonus = [
@@ -92,8 +99,19 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
         <!-- Étape 3 : sous-titre -->
         <p class="sous-titre">On automatise les tâches répétitives de ta PME, un système à la fois. Ton premier système roule 30&nbsp;jours après tes accès, et il est garanti 30&nbsp;jours.</p>
 
-        <a class="btn btn-primary btn-geant" href={CTA}>Réserve ton diagnostic gratuit <span class="arrow">→</span></a>
-        <p class="mini-cta">30 minutes · gratuit · sans engagement</p>
+        <a class="btn btn-primary btn-cta btn-geant" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+        <p class="note-cta"><span class="etoiles-w" set:html={etoiles}></span><span class="pastille">5,0 · à vérifier</span> sur Google · <span class="pastille">[N] avis · à vérifier</span></p>
+        <p class="mini-cta">Ton plan écrit en 48&nbsp;h · sans engagement</p>
+        <p class="rarete-cta">Nos équipes nous limitent à 3&nbsp;accompagnements par mois.</p>
+
+        <!-- Mur de logos : seulement les logos déjà affichés sur le site (bandeau des réalisations), version blanche -->
+        <div class="mur-logos">
+          <p class="mur-titre">Des entreprises du Québec qui nous font confiance</p>
+          <ul class="mur-grille">
+            {murLogos.map((l) => <li><img src={l.src} alt={l.nom} width={l.l} height={l.h} loading="lazy" decoding="async" /></li>)}
+          </ul>
+          <p class="mur-note"><span class="pastille">accord de chaque client à confirmer</span></p>
+        </div>
       </div>
     </header>
 
@@ -148,7 +166,7 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
           <li><strong>On forme l'équipe à chaque livraison.</strong></li>
           <li><strong>On reste là.</strong> Suivi, ajustements, bilan de ce qui a été gagné.</li>
         </ol>
-        <a class="btn btn-primary btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+        <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
       </div>
     </section>
 
@@ -201,7 +219,7 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
             </li>
           ))}
         </ul>
-        <div class="centre"><a class="btn btn-primary btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
+        <div class="centre"><a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
       </div>
     </section>
 
@@ -252,7 +270,7 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
         <h2 class="h2-suite">Gratuit, sans engagement</h2>
         <p class="grand"><strong>Le diagnostic est gratuit, sans engagement.</strong></p>
         <p>Si tu veux aller plus loin après, on te présente l'accompagnement en personne, avec le plan devant toi. Si tu ne veux pas, tu gardes ton diagnostic écrit.</p>
-        <a class="btn btn-primary btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+        <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
       </div>
     </section>
 
@@ -292,7 +310,7 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
           <li><strong>Tu reçois ton diagnostic écrit dans les 48 heures.</strong> Il est à toi, que tu travailles avec nous ou non.</li>
         </ol>
         <div class="cta-bloc">
-          <a class="btn btn-primary btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
           <p class="sous-cta"><span class="etoiles-w" set:html={etoiles}></span> 5,0 sur Google <span class="pastille">[N] avis · à vérifier</span></p>
         </div>
       </div>
@@ -327,7 +345,9 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
           </ul>
           <p>Si tu ne fais rien, dans un an, tu auras la même semaine, avec les mêmes appels manqués et les mêmes soirées à rattraper.</p>
           <p>Clique sur le bouton, réponds à 3 questions et, si c'est pour toi, choisis ton heure.</p>
-          <a class="btn btn-primary btn-xl" href={CTA}>Réserve ton diagnostic gratuit <span class="arrow">→</span></a>
+          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+          <p class="note-cta note-cta-ps"><span class="etoiles-w" set:html={etoiles}></span><span class="pastille">5,0 · à vérifier</span> sur Google · <span class="pastille">[N] avis · à vérifier</span></p>
+          <p class="mini-cta mini-cta-ps">Ton plan écrit en 48&nbsp;h · sans engagement</p>
         </div>
         <p class="pps"><span class="ps-tag">P.P.S.</span> Pas sûr que c'est pour une entreprise de ta taille&nbsp;? C'est exactement à ça que sert le diagnostic&nbsp;: si un seul système suffit chez vous, on te le dit et on te bâtit celui-là, sans rien te vendre de plus.</p>
       </div>
@@ -382,8 +402,22 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     font-size: clamp(3.6rem, 13.5vw, 8.4rem); line-height: 1.1; letter-spacing: .01em; margin: 0 0 1.3rem; padding-top: .08em; text-wrap: balance; }
   .titre-geant em { font-style: normal; color: var(--lime); }
   .lp .sous-titre { font-size: 1.3rem; line-height: 1.55; color: var(--texte); max-width: 40rem; margin: 0 auto 2rem; text-wrap: balance; }
+  /* Boutons d'appel : texte gras et condensé, même voix que le titre du haut de page */
+  .lp .btn-cta { font-family: 'Anton', 'Arial Narrow', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: .03em; font-size: 1.3rem; line-height: 1.2; text-wrap: balance; }
   .btn-geant { font-size: 1.12rem; padding: 1.15rem 2.6rem; justify-content: center; box-shadow: 0 10px 34px rgba(183,217,76,.32); }
-  .lp .mini-cta { font-size: .9rem; color: #a9aba3; margin: .9rem 0 0; letter-spacing: .01em; }
+  .lp .note-cta { display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .4rem; font-size: .92rem; color: var(--texte); margin: 1rem 0 0; }
+  .lp .mini-cta { font-size: .9rem; color: #a9aba3; margin: .35rem 0 0; letter-spacing: .01em; }
+  .lp .rarete-cta { font-size: .85rem; color: #a9aba3; margin: .35rem 0 0; }
+  .lp .note-cta-ps { display: flex; justify-content: flex-start; }
+  .lp .mini-cta-ps { margin-bottom: 0; }
+
+  .mur-logos { width: 100%; margin-top: 2.6rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
+  .lp .mur-titre { font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #a9aba3; margin: 0 0 1.3rem; }
+  .mur-grille { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.2rem 3rem; }
+  .mur-grille li { margin: 0; }
+  .mur-grille img { height: 34px; width: auto; max-width: 150px; object-fit: contain; opacity: .7; transition: opacity .25s; display: block; }
+  .mur-grille img:hover { opacity: 1; }
+  .lp .mur-note { margin: 1rem 0 0; }
 
   .bloc-vsl { padding: 3.4rem 0 4.6rem; }
   .btn-xl { font-size: 1.02rem; padding: 1.05rem 1.9rem; justify-content: center; text-align: center; margin-top: .6rem; }
@@ -500,6 +534,10 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     .titre-geant { margin-bottom: 1rem; }
     .lp .sous-titre { font-size: 1.06rem; margin-bottom: 1.5rem; }
     .btn-geant { width: 100%; padding: 1.05rem 1.2rem; }
+    .lp .btn-cta { font-size: 1.15rem; }
+    .mur-logos { margin-top: 1.8rem; padding-top: 1.3rem; }
+    .mur-grille { flex-wrap: nowrap; gap: 1.1rem; justify-content: space-between; }
+    .mur-grille img { height: 24px; max-width: 76px; }
     .bloc-vsl { padding: 2.4rem 0 3.4rem; }
     .bloc { padding: 4.2rem 0; }
     .btn-xl { width: 100%; padding: 1rem 1.2rem; }
