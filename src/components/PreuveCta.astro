@@ -3,7 +3,7 @@
 // l'action, montre visuellement la preuve »). UNE preuve à la fois, assez grande pour être lue : une preuve
 // qu'on ne peut pas lire a l'air fausse. Seulement du réel :
 // - loi25    : extrait de l'exemple de dossier Loi 25 (entreprise fictive, marqué comme tel) ;
-// - google   : la note Google (5,0, 5 avis, confirmé par Simon le 2026-11-20) ;
+// La note Google n'apparaît qu'une fois, en haut de page (décision de Simon, 2026-11-20 : 5 avis, c'est le début).
 // L'écran du traiteur est retiré : pas d'accord écrit du client pour l'écran (Simon, 2026-11-20).
 // - diag     : extrait de l'exemple de diagnostic écrit (entreprise fictive, marqué comme tel) ;
 // - garantie : les termes exacts de la garantie (page, étape 15).
@@ -17,17 +17,6 @@ const { type = 'diag' } = Astro.props;
       <span class="pc-badge">Exemple · données fictives</span>
     </div>
     <figcaption>Ton dossier Loi 25 ressemble à ça : quelles données chaque système touche, où elles vont, et qui y a accès.</figcaption>
-  </figure>
-)}
-{type === 'google' && (
-  <figure class="preuve-cta pc-garantie">
-    <span class="pc-bouclier" aria-hidden="true">
-      <svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.6l2.47 5.3 5.8.68-4.3 3.96 1.15 5.73L10 14.4l-5.12 2.87 1.15-5.73-4.3-3.96 5.8-.68z"/></svg>
-    </span>
-    <div>
-      <p class="pc-g-titre">5,0 sur Google, 5 avis</p>
-      <p class="pc-g-texte">Les avis sont publics, sur la fiche Google de FournIA.</p>
-    </div>
   </figure>
 )}
 {type === 'diag' && (

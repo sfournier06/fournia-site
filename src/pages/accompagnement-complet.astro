@@ -183,6 +183,10 @@ const delai = '30&nbsp;jours';
 // Mécanisme nommé (2026-11-20) : change ici, partout d'un coup.
 const mecanisme = '<strong>la méthode des 3 fuites</strong>';
 
+const icBouclier = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l7.5 3v6c0 4.6-3.2 8.4-7.5 10-4.3-1.6-7.5-5.4-7.5-10v-6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 12.2l2.4 2.4 4.6-5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const icDoc = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3v4h4M10 12h5M10 16h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+const icHorloge = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+const icLieu = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0113 0c0 5-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
 const etoile = '<path d="M10 1.6l2.47 5.3 5.8.68-4.3 3.96 1.15 5.73L10 14.4l-5.12 2.87 1.15-5.73-4.3-3.96 5.8-.68z"/>';
 const etoiles = '<svg class="etoiles" viewBox="0 0 100 20" aria-hidden="true">' + [0, 1, 2, 3, 4].map((i) => '<g transform="translate(' + i * 20 + ' 0)">' + etoile + '</g>').join('') + '</svg>';
 const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -203,6 +207,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         <!-- Étape 1 : la preuve d'abord, puis la personne visée -->
         <div class="preuve-barre">
           <span class="preuve-note"><span class="etoiles-w" set:html={etoiles}></span><span><strong>5,0</strong> sur Google · 5 avis</span></span>
+          <span class="client-logo"><span class="logo-rond"><img src="/clients/mini/avecplaisirs.webp" alt="" width="40" height="40" decoding="async" /></span><span>Client : AvecPlaisirs</span></span>
         </div>
         <p class="interpelle">Propriétaire d'une PME de services au Québec : tes appels, tes soumissions et tes relances passent encore tous par toi&nbsp;?</p>
 
@@ -235,8 +240,12 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         <div class="hero-vsl"><VslPlayer /></div>
 
         <a class="btn btn-primary btn-cta btn-geant" href={CTA} data-cta-haut>{ctaTexte} <span class="arrow">→</span></a>
-        <p class="note-cta"><span class="etoiles-w" set:html={etoiles}></span>5,0 sur Google · 5 avis</p>
-        <p class="mini-cta">Ton plan écrit en 48&nbsp;h · sans engagement</p>
+        <ul class="badges-confiance" aria-label="Nos engagements">
+          <li><span set:html={icBouclier}></span>Garantie 30&nbsp;jours par système</li>
+          <li><span set:html={icDoc}></span>Dossier Loi&nbsp;25 écrit</li>
+          <li><span set:html={icHorloge}></span>Plan écrit en 48&nbsp;h, sans engagement</li>
+          <li><span set:html={icLieu}></span>Basé à Blainville, Québec</li>
+        </ul>
         <p class="rarete-cta">Nos équipes nous limitent à 3&nbsp;accompagnements par mois.</p>
 
       </div>
@@ -317,7 +326,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         </ol>
         <div class="encart-gratuit">
           <p><strong>Les étapes 1 et 2 sont gratuites.</strong> C'est le diagnostic. Tu gardes ton plan écrit, même si on ne travaille jamais ensemble.</p>
-          <PreuveCta type="google" />
+          <PreuveCta type="garantie" />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
         </div>
       </div>
@@ -426,11 +435,6 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     <section class="bloc">
       <div class="col-large reveal">
         <h2>Des systèmes qui roulent déjà chez des PME d'ici</h2>
-        <h3 class="h3-real">Ce que nos clients en disent sur Google</h3>
-        <div class="note-google">
-          <span class="etoiles-w" set:html={etoiles}></span>
-          <span><strong>5,0</strong> sur Google · 5 avis</span>
-        </div>
         {/* Cartes d'avis nommées, à réactiver quand les oui écrits sont archivés (et décommenter `avis` plus haut) :
         <div class="avis-grille">
           {avis.map((a) => (
@@ -486,7 +490,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
             </details>
           ))}
         </div>
-        <div class="centre"><PreuveCta type="garantie" />
+        <div class="centre"><PreuveCta type="loi25" />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
       </div>
     </section>
@@ -588,9 +592,8 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
           <li><strong>Tu reçois ton diagnostic écrit dans les 48 heures.</strong> Il est à toi, que tu travailles avec nous ou non.</li>
         </ol>
         <div class="cta-bloc">
-          <PreuveCta type="loi25" />
+          <PreuveCta type="diag" />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
-          <p class="sous-cta"><span class="etoiles-w" set:html={etoiles}></span> 5,0 sur Google · 5 avis</p>
         </div>
       </div>
     </section>
@@ -636,9 +639,8 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
           </ul>
           <p>Si tu ne fais rien, dans un an, tu auras la même semaine, avec les mêmes demandes qui attendent ta réponse et les mêmes soirées à rattraper.</p>
           <p>Clique sur le bouton, réponds à 3 questions et, si c'est pour toi, choisis ton heure.</p>
-          <PreuveCta type="diag" />
+          <PreuveCta type="garantie" />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
-          <p class="note-cta note-cta-ps"><span class="etoiles-w" set:html={etoiles}></span>5,0 sur Google · 5 avis</p>
           <p class="mini-cta mini-cta-ps">Ton plan écrit en 48&nbsp;h · sans engagement</p>
         </div>
         <p class="pps"><span class="ps-tag">P.P.S.</span> Pas sûr que ce soit pour une entreprise de ta taille&nbsp;? C'est à ça que sert le diagnostic&nbsp;: si un seul système suffit chez vous, on te le dit et on te bâtit celui-là, sans rien te vendre de plus.</p>
@@ -986,4 +988,16 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
   .faq-titre { font-size: 1.15rem; margin: 0 0 .4rem; color: var(--lime); }
   @media (max-width: 900px) { .essais { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 640px) { .essais { grid-template-columns: 1fr; } .compare li { grid-template-columns: 1fr; } .cmp-apres { border-left: 0; border-top: 1px solid rgba(183,217,76,.25); } }
+
+  /* Rangée de badges de confiance sous le bouton du haut (faits vérifiables seulement) */
+  .badges-confiance { list-style: none; margin: 1rem 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem .6rem; }
+  .badges-confiance li { display: inline-flex; align-items: center; gap: .45rem; font-size: .84rem; font-weight: 500; color: #e3e4de; padding: .38rem .75rem .38rem .55rem; border-radius: 100px;
+    border: 1px solid rgba(255,255,255,.12); background: rgba(11,11,12,.45); }
+  .badges-confiance li :global(svg) { width: 17px; height: 17px; color: var(--lime); flex: none; }
+  .client-logo { display: inline-flex; align-items: center; gap: .5rem; font-size: .88rem; color: var(--texte); }
+  .client-logo .logo-rond { width: 2rem; height: 2rem; margin-left: 0; }
+  @media (max-width: 560px) {
+    .badges-confiance { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; width: 100%; }
+    .badges-confiance li { font-size: .74rem; padding: .4rem .55rem; border-radius: 10px; justify-content: flex-start; text-align: left; line-height: 1.25; }
+  }
 </style>
