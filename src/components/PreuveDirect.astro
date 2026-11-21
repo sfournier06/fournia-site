@@ -1,0 +1,106 @@
+---
+// Module de preuve « en direct » de la landing (étape 14 de Sabri Suby : montrer que d'autres le font déjà).
+//
+// RÈGLE NON NÉGOCIABLE : rien de faux. Aucune réservation inventée, aucun prénom inventé, aucun compteur gonflé
+// (Loi sur la concurrence, et la crédibilité de toute la page). Le module n'affiche que deux types d'items :
+//
+// 1. RESERVATIONS : de vraies réservations de diagnostic, sans nom (secteur + région + quand). Vide tant qu'aucune
+//    source réelle ne les alimente (export de la plateforme de réservation, puis /loi25 avant de les afficher).
+//    Affichées seulement quand il y en a au moins SEUIL_RESERVATIONS dans les 30 derniers jours.
+// 2. LIVRAISONS : des systèmes réellement livrés, décrits par secteur, sans nom de client. Textes repris de
+//    src/data/realisations.mjs (vérifiés) ; mois de livraison tirés de fournia-aios context/clients.md.
+//
+// Comportement : apparaît 12 s après l'arrivée, seulement quand le bandeau de consentement est fermé, une carte
+// à la fois (7 s), une pause de 18 s, 4 cartes au plus par visite ; le bouton × arrête tout pour la visite.
+// Rien n'est envoyé nulle part. Aucun script tiers.
+
+const SEUIL_RESERVATIONS = 3;
+
+// Remplir seulement avec de vraies réservations : { secteur: 'Entreprise de rénovation', region: 'Laval', quand: 'il y a 2 jours' }
+const RESERVATIONS: { secteur: string; region: string; quand: string }[] = [];
+
+const LIVRAISONS = [
+  { secteur: 'Traiteur corporatif', quand: 'livré entre juillet et septembre 2026', texte: "Les 6 documents de production d'une journée sortent d'un clic." },
+  { secteur: "Centre d'aide académique", quand: 'livré en août 2026', texte: 'Chaque parent reçoit une réponse en quelques minutes, avec de vraies plages libres.' },
+  { secteur: 'Conseillère en sécurité financière', quand: 'livré en août 2026', texte: 'Chaque client reçoit son suivi au bon moment, les réponses sont gérées.' },
+  { secteur: "Fabricant de kiosques d'exposition", quand: 'système livré', texte: 'Chaque dépense lue et classée, une personne révise avant Excel.' },
+];
+
+const items = [
+  ...(RESERVATIONS.length >= SEUIL_RESERVATIONS
+    ? RESERVATIONS.map((r) => ({ type: 'reservation', titre: `${r.secteur} · ${r.region}`, texte: 'a réservé son diagnostic gratuit', quand: r.quand }))
+    : []),
+  ...LIVRAISONS.map((l) => ({ type: 'livraison', titre: l.secteur, texte: l.texte, quand: l.quand })),
+];
+---
+{items.length > 0 && (
+  <aside class="preuve-direct" data-preuve-direct data-items={JSON.stringify(items)} aria-label="Systèmes livrés récemment" hidden>
+    <span class="pd-pastille" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M4.5 10.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <div class="pd-corps">
+      <p class="pd-titre"></p>
+      <p class="pd-texte"></p>
+      <p class="pd-quand"></p>
+    </div>
+    <button type="button" class="pd-fermer" aria-label="Fermer">×</button>
+  </aside>
+)}
+
+<script>
+  const boite = document.querySelector<HTMLElement>('[data-preuve-direct]');
+  if (boite) {
+    const items = JSON.parse(boite.dataset.items || '[]') as { type: string; titre: string; texte: string; quand: string }[];
+    const titre = boite.querySelector<HTMLElement>('.pd-titre')!;
+    const texte = boite.querySelector<HTMLElement>('.pd-texte')!;
+    const quand = boite.querySelector<HTMLElement>('.pd-quand')!;
+    let arrete = false;
+    try { arrete = sessionStorage.getItem('fournia-preuve-direct') === 'off'; } catch (e) {}
+    let i = 0;
+    let montres = 0;
+    const consentementOuvert = () => { const c = document.getElementById('consentement'); return !!c && !c.hidden; };
+    const montrer = () => {
+      if (arrete || montres >= 4) return;
+      if (consentementOuvert()) { setTimeout(montrer, 4000); return; }
+      const it = items[i % items.length];
+      i++; montres++;
+      titre.textContent = it.titre;
+      texte.textContent = it.texte;
+      quand.textContent = it.quand;
+      boite.dataset.type = it.type;
+      boite.hidden = false;
+      requestAnimationFrame(() => boite.classList.add('visible'));
+      setTimeout(() => {
+        boite.classList.remove('visible');
+        setTimeout(() => { boite.hidden = true; setTimeout(montrer, 18000); }, 400);
+      }, 7000);
+    };
+    boite.querySelector('.pd-fermer')!.addEventListener('click', () => {
+      arrete = true;
+      boite.classList.remove('visible');
+      setTimeout(() => { boite.hidden = true; }, 400);
+      try { sessionStorage.setItem('fournia-preuve-direct', 'off'); } catch (e) {}
+    });
+    if (!arrete) setTimeout(montrer, 12000);
+  }
+</script>
+
+<style>
+  .preuve-direct { position: fixed; left: 1rem; bottom: 1rem; z-index: 80; display: flex; align-items: flex-start; gap: .75rem; width: min(360px, calc(100vw - 2rem));
+    padding: .85rem 2.2rem .85rem .85rem; border-radius: 14px; background: rgba(18,19,17,.96); border: 1px solid rgba(183,217,76,.28);
+    box-shadow: 0 18px 40px rgba(0,0,0,.5); opacity: 0; transform: translateY(12px); transition: opacity .35s ease, transform .35s cubic-bezier(.16,1,.3,1); }
+  .preuve-direct[hidden] { display: none; }
+  .preuve-direct.visible { opacity: 1; transform: none; }
+  .pd-pastille { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: rgba(183,217,76,.14); color: var(--lime); }
+  .pd-pastille svg { width: 16px; height: 16px; }
+  .pd-corps p { margin: 0; }
+  .pd-titre { font-size: .9rem; font-weight: 700; color: #fff; line-height: 1.3; }
+  .pd-texte { font-size: .85rem; color: #d4d6ce; line-height: 1.4; margin-top: .15rem !important; }
+  .pd-quand { font-size: .74rem; color: var(--lime); margin-top: .3rem !important; letter-spacing: .01em; }
+  .pd-fermer { position: absolute; top: .35rem; right: .45rem; width: 28px; height: 28px; border: 0; background: transparent; color: #9a9c95; font-size: 1.2rem; line-height: 1; cursor: pointer; border-radius: 6px; }
+  .pd-fermer:hover { color: #fff; }
+  .pd-fermer:focus-visible { outline: 2px solid var(--lime); }
+  /* Mobile : au-dessus de la barre d'action fixe */
+  @media (max-width: 760px) {
+    .preuve-direct { left: .6rem; right: .6rem; width: auto; bottom: calc(76px + env(safe-area-inset-bottom)); }
+  }
+  @media (prefers-reduced-motion: reduce) { .preuve-direct { transition: none; transform: none; } }
+</style>

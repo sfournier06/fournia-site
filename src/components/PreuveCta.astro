@@ -1,0 +1,63 @@
+---
+// Bande de preuve juste au-dessus d'un bouton d'appel (étape 9 de Sabri Suby : « juste au-dessus de chaque
+// appel à l'action, montre visuellement la preuve »). Trois petites preuves, qui tournent selon `v` pour ne pas
+// répéter la même bande à chaque bouton. Seulement des preuves réelles :
+// - l'écran d'un système livré (données fictives, accord du client à confirmer : même condition que la grande capture) ;
+// - l'exemple de diagnostic écrit (exemple, données fictives, marqué comme tel) ;
+// - la note Google (nombre d'avis à vérifier) ;
+// - la garantie écrite (termes de la page, étape 15) ;
+// - les logos (accord de chaque client à confirmer, même condition que le mur de logos).
+const { v = 0 } = Astro.props;
+
+const etoile = '<path d="M10 1.6l2.47 5.3 5.8.68-4.3 3.96 1.15 5.73L10 14.4l-5.12 2.87 1.15-5.73-4.3-3.96 5.8-.68z"/>';
+const etoiles = '<svg class="pc-etoiles" viewBox="0 0 100 20" aria-hidden="true">' + [0, 1, 2, 3, 4].map((i) => '<g transform="translate(' + i * 20 + ' 0)">' + etoile + '</g>').join('') + '</svg>';
+
+const preuves = [
+  { cle: 'ecran', img: '/preuves/mini-ecran.webp', titre: 'Un vrai système livré', sous: 'Plan de production d\'un traiteur' },
+  { cle: 'diag', img: '/preuves/mini-diag.webp', titre: 'Ton diagnostic écrit', sous: 'En 48 h, il est à toi (exemple)' },
+  { cle: 'google', titre: '5,0 sur Google', sous: '[N] avis', etoiles: true },
+  { cle: 'garantie', titre: 'Garanti 30 jours', sous: 'Chaque système livré, par écrit', bouclier: true },
+  { cle: 'logos', titre: 'Des PME du Québec', sous: 'Traiteur, tutorat, services financiers', logos: true },
+];
+const choix = [0, 1, 2, 3, 4].map((k) => preuves[(v + k) % preuves.length]).slice(0, 3);
+const logos = ['/clients/mini/avecplaisirs.webp', '/clients/mini/arbour.webp', '/clients/mini/pubsphere.webp'];
+---
+<ul class="preuve-cta" aria-label="Preuves">
+  {choix.map((p) => (
+    <li>
+      {p.img && <img class="pc-img" src={p.img} alt="" width="56" height="56" loading="lazy" decoding="async" />}
+      {p.etoiles && <span class="pc-icone" set:html={etoiles}></span>}
+      {p.bouclier && (
+        <span class="pc-icone pc-bouclier" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2.5l7.5 3v6c0 4.6-3.2 8.4-7.5 10-4.3-1.6-7.5-5.4-7.5-10v-6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 12.2l2.4 2.4 4.6-5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      )}
+      {p.logos && <span class="pc-logos" aria-hidden="true">{logos.map((l) => <img src={l} alt="" width="22" height="22" loading="lazy" decoding="async" />)}</span>}
+      <span class="pc-txt"><strong>{p.titre}</strong><span>{p.cle === 'google' ? <span class="pastille">[N] avis · à vérifier</span> : p.sous}</span></span>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .preuve-cta { list-style: none; margin: 0 auto 1.1rem; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; max-width: 46rem; }
+  .preuve-cta li { display: flex; align-items: center; gap: .6rem; padding: .45rem .8rem .45rem .45rem; border-radius: 12px; border: 1px solid var(--line, rgba(255,255,255,.09));
+    background: rgba(255,255,255,.025); text-align: left; }
+  .pc-img { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; display: block; border: 1px solid rgba(255,255,255,.12); }
+  .pc-icone { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 8px; background: rgba(183,217,76,.08); color: var(--lime); }
+  .pc-icone :global(.pc-etoiles) { width: 40px; height: 8px; fill: var(--lime); }
+  .pc-bouclier svg { width: 24px; height: 24px; }
+  .pc-logos { display: flex; width: 44px; height: 44px; align-items: center; justify-content: center; }
+  .pc-logos img { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 2px solid #111; margin-left: -8px; object-fit: contain; }
+  .pc-logos img:first-child { margin-left: 0; }
+  .pc-txt { display: flex; flex-direction: column; line-height: 1.25; }
+  .pc-txt strong { font-size: .86rem; color: #fff; font-weight: 600; }
+  .pc-txt > span { font-size: .76rem; color: #a9aba3; }
+  /* Mobile : les 3 preuves sur une seule rangée, en colonnes, sans sous-titre (la bande reste basse) */
+  @media (max-width: 560px) {
+    .preuve-cta { flex-wrap: nowrap; gap: .4rem; }
+    .preuve-cta li { flex: 1 1 0; min-width: 0; flex-direction: column; text-align: center; gap: .35rem; padding: .55rem .35rem; }
+    .pc-txt strong { font-size: .74rem; }
+    .pc-txt > span { display: none; }
+    .pc-img, .pc-icone, .pc-logos { width: 36px; height: 36px; }
+  }
+</style>

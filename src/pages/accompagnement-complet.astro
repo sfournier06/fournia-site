@@ -6,6 +6,8 @@
 import Base from '../layouts/Base.astro';
 import Portrait from '../components/Portrait.astro';
 import VslPlayer from '../components/VslPlayer.astro';
+import PreuveCta from '../components/PreuveCta.astro';
+import PreuveDirect from '../components/PreuveDirect.astro';
 
 const CTA = '/diagnostic/';
 const ctaTexte = 'Réclame ton diagnostic gratuit de 30 minutes';
@@ -252,6 +254,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         </ol>
         <div class="encart-gratuit">
           <p><strong>Les étapes 1 et 2 sont gratuites.</strong> C'est le diagnostic. Tu gardes ton plan écrit, même si on ne travaille jamais ensemble.</p>
+          <PreuveCta v={0} />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
         </div>
       </div>
@@ -277,6 +280,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         </div>
         <div class="centre">
           <p class="grand">Pas certain de quel côté tu es&nbsp;? C'est à ça que sert le diagnostic.</p>
+          <PreuveCta v={1} />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
         </div>
       </div>
@@ -405,7 +409,8 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
             <figcaption>Le tableau de suivi des relances : chaque soumission, sa relance et son statut, au même endroit. <span class="pastille">légende proposée</span></figcaption>
           </figure>
         </div>
-        <div class="centre"><a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
+        <div class="centre"><PreuveCta v={2} />
+          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
       </div>
     </section>
 
@@ -455,7 +460,8 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
             </details>
           ))}
         </div>
-        <div class="centre"><a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
+        <div class="centre"><PreuveCta v={3} />
+          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
       </div>
     </section>
 
@@ -480,7 +486,8 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
 
         <h2 class="h2-suite">Il ne t'engage à rien</h2>
         <p>Si tu veux aller plus loin après, on te présente l'accompagnement en personne, avec le plan devant toi. Sinon, tu gardes ton diagnostic écrit, avec ce que tu peux faire toi-même.</p>
-        <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+        <PreuveCta v={4} />
+          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
       </div>
     </section>
 
@@ -557,6 +564,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
           <li><strong>Tu reçois ton diagnostic écrit dans les 48 heures.</strong> Il est à toi, que tu travailles avec nous ou non.</li>
         </ol>
         <div class="cta-bloc">
+          <PreuveCta v={5} />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
           <p class="sous-cta"><span class="etoiles-w" set:html={etoiles}></span> 5,0 sur Google · <span class="pastille">[N] avis · à vérifier</span></p>
         </div>
@@ -595,6 +603,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
           </ul>
           <p>Si tu ne fais rien, dans un an, tu auras la même semaine, avec les mêmes appels manqués et les mêmes soirées à rattraper.</p>
           <p>Clique sur le bouton, réponds à 3 questions et, si c'est pour toi, choisis ton heure.</p>
+          <PreuveCta v={6} />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
           <p class="note-cta note-cta-ps"><span class="etoiles-w" set:html={etoiles}></span><span class="pastille">5,0 · à vérifier</span> sur Google · <span class="pastille">[N] avis · à vérifier</span></p>
           <p class="mini-cta mini-cta-ps">Ton plan écrit en 48&nbsp;h · sans engagement</p>
@@ -605,6 +614,8 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
 
     <!-- Barre d'action fixe, mobile seulement : apparaît quand le bouton du haut sort de l'écran,
          se cache quand un autre bouton est visible. -->
+    <PreuveDirect />
+
     <div class="barre-cta" data-barre-cta aria-hidden="true">
       <a class="btn btn-primary btn-cta" href={CTA} tabindex="-1">{ctaTexte} <span class="arrow">→</span></a>
     </div>
