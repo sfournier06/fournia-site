@@ -1,8 +1,7 @@
 ---
 // Landing longue de l'accompagnement complet (trafic froid Meta), formule Sabri Suby en 17 étapes.
 // Copie : fournia-aios/marketing/publicites/landings-completes.md (page A), reprise telle quelle.
-// BROUILLON DE REVUE : les pastilles pointillées ambre sont à trancher ou à vérifier par Simon avant
-// la mise en ligne. noindex et exclue du sitemap (astro.config.mjs) tant qu'elle n'est pas approuvée.
+// Version finale du 2026-11-20 (décisions de Simon). noindex et exclue du sitemap (astro.config.mjs).
 import Base from '../layouts/Base.astro';
 import Portrait from '../components/Portrait.astro';
 import VslPlayer from '../components/VslPlayer.astro';
@@ -26,7 +25,7 @@ const realisations = [
   { client: 'AvecPlaisirs', secteur: 'traiteur corporatif', texte: "Les 6 documents de production d'une journée sortent d'un clic." },
   { client: "Fabricant de kiosques d'exposition", texte: "Fini la saisie à la main : chaque transaction est lue, il ne reste qu'à réviser." },
   { client: 'Conseillère en sécurité financière', texte: 'Ses clients suivis automatiquement par texto, sans écrire un seul message.' },
-  { client: "Centre d'aide académique", texte: 'Chaque parent reçoit une réponse automatique, avec de vraies plages libres.' },
+  { client: "Centre de tutorat", texte: 'Chaque parent reçoit une réponse automatique, avec de vraies plages libres.' },
 ];
 
 const benefices = [
@@ -78,20 +77,7 @@ const exigences = [
   'Une garantie écrite, avec ses conditions.',
 ];
 
-const logosClients = [
-  { src: '/clients/mini/avecplaisirs.webp' },
-  { src: '/clients/mini/pubsphere.webp' },
-  { src: '/clients/mini/arbour.webp' },
-  { src: '/clients/mini/seniortech.webp' },
-];
 
-// Versions à 72 px de haut (2x l'affichage de 34 px), compressées : public/clients/mono-72/.
-const murLogos = [
-  { nom: 'AvecPlaisirs', src: '/clients/mono-72/avecplaisirs.webp', l: 228, h: 72 },
-  { nom: 'Pubsphere', src: '/clients/mono-72/pubsphere.webp', l: 276, h: 44 },
-  { nom: 'Arbour Aide Académique', src: '/clients/mono-72/arbour.webp', l: 156, h: 72 },
-  { nom: 'SeniorTech', src: '/clients/mono-72/seniortech.webp', l: 281, h: 72 },
-];
 
 const bonus = [
   { t: 'Ton dossier Loi 25, écrit', d: "Pour chaque système qu'on bâtit, un document dit quelles données il touche, où elles vont et qui y a accès. Si un client te demande où vont ses données, la réponse est écrite pour ce système.", petit: "Ce document décrit les systèmes qu'on bâtit. Il ne remplace pas l'avis d'un juriste." },
@@ -103,7 +89,7 @@ const bonus = [
 // Panneau du mécanisme (étape 10 de Suby) : 1) ce que le prospect a déjà essayé et pourquoi ça a échoué,
 // 2) ce que fait la méthode à la place, 3) le nom. Texte : fournia-aios marketing/publicites/landing-etapes-9-a-14.md.
 // Les citations sont sans nom (banque de verbatim, statut sûr).
-const dejaEssaye = [{"t": "Le logiciel tout-en-un", "d": "Tu as vu la démo. Un seul endroit pour tes clients, tes soumissions et tes relances : tout avait l'air simple. Tu as pris l'abonnement. Ensuite, il a fallu le configurer, entrer tes clients et convaincre ton équipe de changer ses habitudes. Ses concepteurs l'ont pensé pour toutes sortes d'entreprises. Personne n'a suivi le chemin d'une demande chez vous, de l'appel jusqu'à la facture. Ton équipe est revenue à ses façons de faire, et l'abonnement passe encore sur ta carte chaque mois."}, {"t": "ChatGPT, seul", "d": "Tu l'as essayé. Il a écrit un courriel en quelques secondes, et tu t'es dit : enfin. Le lendemain, il fallait lui redonner le contexte : tes prix, tes clients, ta façon de parler. Il connaît tout Internet, et rien de ton entreprise. Et il attend que tu lui écrives. Il ne voit pas l'appel manqué pendant que tu es chez un client, ni la soumission qui dort depuis cinq jours. C'est encore à toi d'y penser."}, {"t": "Le pigiste ou la firme qui installe, puis disparaît", "d": "Tu as payé quelqu'un pour tout monter. Il connaissait son affaire, et le système avait l'air bien. Puis tu as eu une question, et il fallait attendre qu'il se libère. Personne n'avait formé ton équipe : au premier accroc, elle revenait à l'ancienne méthode. Une propriétaire de plusieurs entreprises de services nous l'a raconté ainsi :", "citation": {"t": "« Là, j'ai juste abandonné le gars parce que j'étais comme ça. Il est super fin et tout son système est cool. »", "qui": "Propriétaire, plusieurs entreprises de services"}}, {"t": "Embaucher quelqu'un", "d": "Tu as pensé à engager une adjointe ou un adjoint. Il faut d'abord trouver la bonne personne, puis lui apprendre ton métier, tes clients et tes logiciels. Pendant ce temps, les tâches attendent. Une fois en poste, elle recopie et relance à la main, à ta place. Les tâches restent manuelles : elles ont seulement changé de bureau. Et si elle part, ce qu'elle savait part avec elle."}, {"t": "Le faire toi-même, le soir", "d": "Tu as regardé des vidéos, ouvert un compte d'automatisation, essayé de relier ta boîte courriel à ton calendrier. Ça avançait. Puis un client a appelé, et la soirée était finie. La semaine suivante, tu ne savais plus où tu étais rendu. La même propriétaire nous l'a dit en une phrase :", "citation": {"t": "« Je suis pas capable de l'appliquer mais je sais que c'est là. Faut que j'aille, je sais. »", "qui": "Propriétaire, plusieurs entreprises de services"}}, {"t": "La formation sur l'IA", "d": "Tu as suivi un webinaire ou un cours en ligne. Tu as appris ce que l'IA peut faire. Le lundi matin, tes tâches étaient encore là, et le temps pour appliquer ce que tu avais appris n'existait toujours pas. Quand on a offert à cette même propriétaire de lui montrer comment tout brancher elle-même, elle a répondu :", "citation": {"t": "« […] j'ai pas besoin d'apprendre plus que j'ai besoin c'est de déléguer des tâches. »", "qui": "Propriétaire, plusieurs entreprises de services"}}];
+const dejaEssaye = [{"t": "Le logiciel tout-en-un", "d": "Tu as vu la démo. Un seul endroit pour tes clients, tes soumissions et tes relances : tout avait l'air simple. Tu as pris l'abonnement. Ensuite, il a fallu le configurer, entrer tes clients et convaincre ton équipe de changer ses habitudes. Ses concepteurs l'ont pensé pour toutes sortes d'entreprises. Personne n'a suivi le chemin d'une demande chez vous, de l'appel jusqu'à la facture. Ton équipe est revenue à ses façons de faire, et l'abonnement passe encore sur ta carte chaque mois."}, {"t": "ChatGPT, seul", "d": "Tu l'as essayé. Il a écrit un courriel en quelques secondes, et tu t'es dit : enfin. Le lendemain, il fallait lui redonner le contexte : tes prix, tes clients, ta façon de parler. Il connaît tout Internet, et rien de ton entreprise. Et il attend que tu lui écrives. Il ne voit pas la demande qui arrive pendant que tu es chez un client, ni la soumission qui dort depuis cinq jours. C'est encore à toi d'y penser."}, {"t": "Le pigiste ou la firme qui installe, puis disparaît", "d": "Tu as payé quelqu'un pour tout monter. Il connaissait son affaire, et le système avait l'air bien. Puis tu as eu une question, et il fallait attendre qu'il se libère. Personne n'avait formé ton équipe : au premier accroc, elle revenait à l'ancienne méthode. Une propriétaire de plusieurs entreprises de services nous l'a raconté ainsi :", "citation": {"t": "« Là, j'ai juste abandonné le gars parce que j'étais comme ça. Il est super fin et tout son système est cool. »", "qui": "Propriétaire, plusieurs entreprises de services"}}, {"t": "Embaucher quelqu'un", "d": "Tu as pensé à engager une adjointe ou un adjoint. Il faut d'abord trouver la bonne personne, puis lui apprendre ton métier, tes clients et tes logiciels. Pendant ce temps, les tâches attendent. Une fois en poste, elle recopie et relance à la main, à ta place. Les tâches restent manuelles : elles ont seulement changé de bureau. Et si elle part, ce qu'elle savait part avec elle."}, {"t": "Le faire toi-même, le soir", "d": "Tu as regardé des vidéos, ouvert un compte d'automatisation, essayé de relier ta boîte courriel à ton calendrier. Ça avançait. Puis un client a appelé, et la soirée était finie. La semaine suivante, tu ne savais plus où tu étais rendu. La même propriétaire nous l'a dit en une phrase :", "citation": {"t": "« Je suis pas capable de l'appliquer mais je sais que c'est là. Faut que j'aille, je sais. »", "qui": "Propriétaire, plusieurs entreprises de services"}}, {"t": "La formation sur l'IA", "d": "Tu as suivi un webinaire ou un cours en ligne. Tu as appris ce que l'IA peut faire. Le lundi matin, tes tâches étaient encore là, et le temps pour appliquer ce que tu avais appris n'existait toujours pas. Quand on a offert à cette même propriétaire de lui montrer comment tout brancher elle-même, elle a répondu :", "citation": {"t": "« […] j'ai pas besoin d'apprendre plus que j'ai besoin c'est de déléguer des tâches. »", "qui": "Propriétaire, plusieurs entreprises de services"}}];
 const ceQuiAManque = [{"t": "Le logiciel tout-en-un", "manque": "Personne n'a regardé comment ton équipe travaille avant de le configurer.", "methode": "On suit le chemin d'une demande chez vous et on chiffre chaque fuite en heures par mois. On choisit l'outil ensuite, en partant de ceux que tu paies déjà."}, {"t": "ChatGPT, seul", "manque": "Il ne connaît pas ton entreprise, et il attend que tu lui écrives.", "methode": "On bâtit le système avec tes vrais messages et tes règles. Il se déclenche quand une demande arrive. Tu choisis ce qui passe par toi avant l'envoi."}, {"t": "Le pigiste qui disparaît", "manque": "Personne à joindre après la livraison, et une équipe jamais formée.", "methode": "Un seul interlocuteur du début à la fin et une rencontre aux deux semaines. On teste chaque système avec ton équipe, puis on la forme. Chaque système livré est garanti 30 jours, par écrit."}, {"t": "L'embauche", "manque": "Les tâches restent manuelles, et le savoir repose sur une seule personne.", "methode": "La partie qui se répète roule seule, peu importe qui est en poste. On forme les personnes qui s'en servent, à chaque livraison."}, {"t": "Le soir, toi-même", "manque": "Ton temps, pris sur tes soirées.", "methode": "De ton côté : 30 minutes pour le diagnostic, deux rencontres d'environ une heure pour démarrer, puis une rencontre aux deux semaines et la formation à chaque livraison. On bâtit, on teste et on installe."}, {"t": "La formation", "manque": "Tu sais quoi faire, sans le temps de le faire.", "methode": "On fait le travail. La formation porte sur le système livré chez vous, celui que ton équipe va utiliser."}];
 
 const faqGroupes = [
@@ -117,7 +103,7 @@ const faqGroupes = [
     { q: 'Comment se passent les 30 minutes du diagnostic ?', a: ["Tu me racontes comment une demande passe chez vous, du premier appel jusqu'à la facture. Je te pose des questions précises sur le temps que prend chaque étape. Dans les 48 heures, tu reçois ton diagnostic écrit. Si tu veux aller plus loin ensuite, on te présente l'accompagnement dans une autre rencontre."] },
   ] },
   { titre: "Après le diagnostic", items: [
-    {q: "Est-ce que je peux faire faire le travail par quelqu'un d'autre avec mon diagnostic ?", a: ["Oui. Il est à toi. Tu peux t'en servir toi-même, le donner à un employé ou à une autre firme."]},
+    {q: "Est-ce que je peux faire faire le travail par quelqu'un d'autre avec mon diagnostic ?", a: ["Oui. Il est à toi. Tu peux l'utiliser toi-même, le donner à un employé ou à une autre firme."]},
     {q: "Si je ne donne pas suite, vas-tu me relancer sans arrêt ?", a: ["On fait un suivi. Si tu nous dis non, on s'arrête là. Tes coordonnées servent seulement à ta demande : pas d'infolettre, aucune revente."]},
     {q: "J'ai reçu mon diagnostic. Qu'est-ce qui se passe ensuite ?", a: ["Le courriel qui l'accompagne te propose une courte rencontre pour regarder ensemble la première étape de ton plan. Tu acceptes si tu veux. Sinon, ton diagnostic reste à toi."]},
     {q: "Est-ce que je peux commencer par un seul système, sans l'accompagnement ?", a: ["Oui. Si ton diagnostic montre une seule grosse fuite, ou si tu préfères avancer une étape à la fois, on te propose le système qui la bouche. Un suivi mensuel est offert ensuite, si tu le veux."]},
@@ -128,7 +114,7 @@ const faqGroupes = [
     {q: "Mon site web ou mon CRM est fait par une autre firme. Ça pose problème ?", a: ["Non. On travaille avec elle : on s'entend sur ce que chacun fait et sur la façon de brancher les systèmes. On l'a déjà fait chez un client en location d'équipement événementiel."]},
     {q: "Que se passe-t-il quand mon plan est terminé ?", a: ["On fait le bilan de ce qui a été gagné. Ensuite, tu choisis : arrêter, garder un suivi pour l'entretien de tes systèmes, ou ouvrir un nouveau chantier."]},
     {q: "Mes employés doivent-ils venir aux rencontres aux deux semaines ?", a: ["Pas obligatoirement. La rencontre se fait avec toi, ou avec la personne qui prend les décisions. Les personnes qui vont se servir d'un système le testent avec nous et sont formées à sa livraison."]},
-    { q: 'Combien de temps dure un accompagnement complet ?', a: ["Ça dépend de la taille de l'entreprise et du nombre de processus à revoir. Le plan du début fixe l'ordre des chantiers et la durée prévue."] },
+    { q: 'Combien de temps dure un accompagnement complet ?', a: ["Ça dépend de la taille de l'entreprise et du nombre de processus à revoir. Le plan du début fixe l'ordre des chantiers."] },
     { q: "L'accompagnement se fait-il en personne ?", a: ['En personne ou à distance. Les rencontres se font en personne sur la Rive-Nord de Montréal, à Laval et à Montréal, ou par visioconférence partout au Québec.'] },
   ] },
   { titre: "Prix, engagement et paiement", items: [
@@ -143,7 +129,7 @@ const faqGroupes = [
   { titre: "Ton équipe", items: [
     {q: "Si la personne qui utilise le système quitte, est-ce qu'on perd tout ?", a: ["Non. Le système continue de rouler : il ne dépend pas d'une seule personne."]},
     {q: "Combien de temps mon équipe devra-t-elle donner ?", a: ["Les personnes qui vont se servir d'un système le testent avec nous avant qu'il roule, puis suivent une formation à la livraison. Le reste du travail est le nôtre."]},
-    {q: "Un employé utilise déjà ChatGPT de son côté. Est-ce un problème ?", a: ["Ça demande des règles claires : ce qui est permis, ce qui ne se fait jamais (par exemple coller les données d'un client dans un outil public), et à qui demander en cas de doute. On t'aide à les écrire."]},
+    {q: "Un employé utilise déjà ChatGPT de son côté. Est-ce un problème ?", a: ["Ça demande des règles claires : ce qui est permis, ce qui ne se fait jamais (par exemple coller les données d'un client dans un outil public), et à qui demander en cas de doute."]},
     { q: "Mon équipe ne connaît rien à l'IA. Est-ce un problème ?", a: ["Non. L'accompagnement existe pour ça. On explique en mots simples comment l'IA fonctionne, ce qu'elle fait bien et ce qu'elle fait mal, avant de toucher à tes outils. Personne n'a besoin de connaissances techniques au départ."] },
     { q: 'Est-ce que des messages vont partir à mes clients sans que je le sache ?', a: ["Seulement si tu le décides. Pour chaque système, tu choisis quels messages partent seuls et lesquels tu approuves avant l'envoi. Tu peux changer d'idée quand tu veux."] },
   ] },
@@ -152,7 +138,7 @@ const faqGroupes = [
     {q: "Vas-tu voir les données de mes clients ?", a: ["Seulement celles que le système doit toucher, avec les accès qu'on crée ensemble en rencontre. Ton dossier Loi 25 nomme ces données et qui y a accès."]},
     {q: "L'IA va-t-elle apprendre avec mes données ?", a: ["Avant de brancher un outil d'IA sur tes données, on vérifie ses réglages. Quand l'outil permet au fournisseur d'entraîner ses modèles avec tes conversations, on désactive cette option, et ton dossier Loi 25 le note."]},
     {q: "Dois-je t'envoyer mes mots de passe ?", a: ["Jamais par courriel ni par texto. On crée les accès ensemble, à l'écran, pendant la deuxième rencontre."]},
-    {q: "Ce que je te dis au diagnostic, ça va où ?", a: ["On l'utilise seulement pour écrire ton diagnostic, et on le garde dans ton dossier. Tes coordonnées ne sont jamais revendues."]},
+    {q: "Ce que je te dis au diagnostic, ça va où ?", a: ["On l'utilise pour écrire ton diagnostic, et on le garde dans ton dossier. Tes coordonnées ne sont jamais revendues."]},
     { q: 'Comment FournIA respecte-t-elle la Loi 25 ?', a: ["Chaque projet qui touche des renseignements personnels passe par une vérification Loi 25 avant la construction, avec une attention particulière au transfert de données hors Québec quand un modèle d'IA est utilisé. Tu reçois un document écrit : quelles données le système touche, où elles vont et qui y a accès."], petit: "Ce document décrit les systèmes qu'on bâtit. Il ne remplace pas l'avis d'un juriste." },
   ] },
   { titre: "Tes outils et la technique", items: [
@@ -179,7 +165,7 @@ const objections = [
   { q: "« Je n'ai pas le temps pour ça. »", a: ['De ton côté : 30 minutes pour le diagnostic. Deux rencontres d\'environ une heure pour démarrer. Ensuite, une rencontre aux deux semaines, plus les tests et la formation de ton équipe à chaque livraison.', 'Le reste est notre travail : bâtir, tester, installer, former.', 'Ton calendrier est plein ce mois-ci ? Fais le diagnostic maintenant. Ton plan écrit sera prêt le jour où tu voudras commencer.'] },
   { q: '« Mon équipe va avoir peur. »', a: ["On le prévoit dès le départ. Ton équipe teste chaque système avec nous avant qu'il roule. On la forme à chaque livraison, en mots simples : ce que l'IA fait bien, ce qu'elle fait mal, et quoi faire quand elle se trompe.", "Les messages importants passent par une personne avant de partir, aussi longtemps que tu le veux."] },
   { q: "« J'ai déjà essayé un outil. Ça n'a pas marché. »", a: ["Chez les PME que je rencontre, un outil installé sans regarder comment l'équipe travaille finit souvent par dormir. On fait l'étape d'avant : on suit ton travail d'une étape à l'autre, puis on choisit.", "Si l'outil que tu paies déjà peut faire le travail, on part de lui. On en propose un nouveau seulement quand le tien ne peut pas."] },
-  { q: '« Mes données vont aller où ? »', citation: { t: '« […] Je suis un peu parano sur ça. »', qui: 'Un gestionnaire, en rencontre' }, a: ['Tu as raison de poser la question. Avant de bâtir un système qui touche des renseignements personnels, on passe une vérification Loi 25. Tu reçois un document écrit : quelles données le système touche, où elles vont, et qui y a accès.', "On porte une attention particulière aux données qui sortiraient du Québec quand un modèle d'IA est utilisé."] },
+  { q: '« Mes données vont aller où ? »', citation: { t: '« […] Je suis un peu parano sur ça. »', qui: 'Direction marketing et ventes, traiteur' }, a: ['Tu as raison de poser la question. Avant de bâtir un système qui touche des renseignements personnels, on passe une vérification Loi 25. Tu reçois un document écrit : quelles données le système touche, où elles vont, et qui y a accès.', "On porte une attention particulière aux données qui sortiraient du Québec quand un modèle d'IA est utilisé."] },
   { q: '« Je peux le faire moi-même avec ChatGPT. »', a: ['Pour une partie, oui. Ton diagnostic écrit te dit même ce que tu peux faire toi-même, sans nous.', "ChatGPT répond quand tu lui écris. Un système part seul quand une demande arrive : il relance à la bonne date et range l'information au bon endroit, même quand tu es sur un chantier.", 'Reste à savoir qui va le bâtir, le tester et le garder à jour. Si c\'est toi, ça se fera le soir.'] },
   { q: "« Ce n'est pas pour une entreprise de ma taille. »", a: ["C'est à ça que sert le diagnostic. On mesure tes tâches en heures par mois. Si un seul système suffit chez vous, on te le dit, et on te bâtit celui-là, sans rien te vendre de plus. Si l'automatisation ne vaut pas la peine chez vous, on te le dit aussi."] },
   { q: '« Je ne suis pas techno. »', citation: { t: '« Ben honnêtement, je comprends pas comment ces choses-là fonctionnent. »', qui: 'Propriétaire, plusieurs entreprises de services' }, a: ["Tu n'as pas besoin de l'être. Ton travail, c'est de nous expliquer comment une demande passe chez vous. Le nôtre, c'est de bâtir, tester et installer.", "À chaque livraison, on t'explique le système en mots simples et on forme ton équipe. Tu sais ce qu'il fait, quand il le fait, et quoi faire s'il se trompe."] },
@@ -216,11 +202,11 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
       <div class="hero-contenu">
         <!-- Étape 1 : la preuve d'abord, puis la personne visée -->
         <div class="preuve-barre">
-          <span class="preuve-note"><span class="etoiles-w" set:html={etoiles}></span><span><strong>5,0</strong> sur Google</span>5 avis</span>
+          <span class="preuve-note"><span class="etoiles-w" set:html={etoiles}></span><span><strong>5,0</strong> sur Google · 5 avis</span></span>
         </div>
         <p class="interpelle">Propriétaire d'une PME de services au Québec : tes appels, tes soumissions et tes relances passent encore tous par toi&nbsp;?</p>
 
-        <!-- Étape 2 : la grosse promesse (titre définitif à trancher par Simon) -->
+        <!-- Étape 2 : la grosse promesse (le titre change selon l'angle de la pub, ?angle=) -->
         <h1 class="titre-geant" id="titre-angle">Récupère <em>tes soirées</em></h1>
         <script is:inline>
           // Message match : chaque pub envoie ?angle=<nom> et la page reprend sa promesse. Sans paramètre
@@ -613,7 +599,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     <section class="bloc bloc-alt">
       <div class="col reveal">
         <h2>Tes questions, avant de réserver</h2>
-        <p class="intro-large">Toutes les questions qu'on nous pose, rangées par thème. Celle que tu te poses n'y est pas ? Pose-la pendant l'appel.</p>
+        <p class="intro-large">Les questions à se poser avant de réserver, rangées par thème. Celle que tu te poses n'y est pas ? Pose-la pendant l'appel.</p>
         <div class="faq-themes" role="navigation" aria-label="Thèmes de la FAQ">
           {faqGroupes.map((g, i) => <a href={`#faq-${i}`}>{g.titre}</a>)}
         </div>
@@ -648,7 +634,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
             <li><span set:html={coche}></span><span>Tout commence par un diagnostic gratuit de 30&nbsp;minutes. Dans les 48&nbsp;heures, tu reçois tes 3 fuites, chiffrées en heures par mois, dans un diagnostic écrit qui est à toi.</span></li>
             <li><span set:html={coche}></span><span>Nos équipes nous limitent à 3&nbsp;accompagnements par mois.</span></li>
           </ul>
-          <p>Si tu ne fais rien, dans un an, tu auras la même semaine, avec les mêmes appels manqués et les mêmes soirées à rattraper.</p>
+          <p>Si tu ne fais rien, dans un an, tu auras la même semaine, avec les mêmes demandes qui attendent ta réponse et les mêmes soirées à rattraper.</p>
           <p>Clique sur le bouton, réponds à 3 questions et, si c'est pour toi, choisis ton heure.</p>
           <PreuveCta type="diag" />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
