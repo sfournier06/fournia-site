@@ -118,13 +118,13 @@ const objections = [
   { q: '« Je peux le faire moi-même avec ChatGPT. »', a: ['Pour une partie, oui. Ton diagnostic écrit te dit même ce que tu peux faire toi-même, sans nous.', "ChatGPT répond quand tu lui écris. Un système part seul quand une demande arrive : il relance à la bonne date et range l'information au bon endroit, même quand tu es sur un chantier.", 'Reste à savoir qui va le bâtir, le tester et le garder à jour. Si c\'est toi, ça se fera le soir.'] },
   { q: "« Ce n'est pas pour une entreprise de ma taille. »", a: ["C'est à ça que sert le diagnostic. On mesure tes tâches en heures par mois. Si un seul système suffit chez vous, on te le dit, et on te bâtit celui-là, sans rien te vendre de plus. Si l'automatisation ne vaut pas la peine chez vous, on te le dit aussi."] },
   { q: '« Je ne suis pas techno. »', citation: { t: '« Ben honnêtement, je comprends pas comment ces choses-là fonctionnent. »', qui: 'Propriétaire, plusieurs entreprises de services' }, a: ["Tu n'as pas besoin de l'être. Ton travail, c'est de nous expliquer comment une demande passe chez vous. Le nôtre, c'est de bâtir, tester et installer.", "À chaque livraison, on t'explique le système en mots simples et on forme ton équipe. Tu sais ce qu'il fait, quand il le fait, et quoi faire s'il se trompe."] },
-  { q: '« Mon dernier fournisseur n\'était jamais disponible. »', citation: { t: "« […] il me dit tout le temps qu'il est pas disponible, qu'il est en voyage ou que quelque chose d'autre à faire. »", qui: 'Propriétaire, plusieurs entreprises de services' }, a: ['Tu as un seul interlocuteur, du début à la fin : la personne qui conçoit tes systèmes.', "La rencontre aux deux semaines est fixée d'avance. Après chaque rencontre, tu reçois la prochaine étape par écrit, avec une date.", "C'est aussi pour ça qu'on prend 3 accompagnements par mois, pas plus."] },
+  { q: '« Mon dernier fournisseur n\'était jamais disponible. »', citation: { t: "« […] il me dit tout le temps qu'il est pas disponible, qu'il est en voyage ou que quelque chose d'autre à faire. »", qui: 'Propriétaire, plusieurs entreprises de services' }, a: ['Tu as un seul interlocuteur, du début à la fin : la personne qui conçoit tes systèmes.', "La rencontre aux deux semaines est fixée d'avance. Après chaque rencontre, tu reçois la prochaine étape par écrit, avec une date.", 'Nos équipes nous limitent à 3 accompagnements par mois, pour bien livrer chacun.'], revue: "à confirmer par Simon : rencontre fixée d'avance + prochaine étape écrite et datée après chaque rencontre (aucune SOP ni contrat ne le prévoit)" },
   { q: '« Mes clients vont trouver ça robotisé. »', a: ['Les messages sont écrits avec toi, dans tes mots, et ils partent à ton nom.', "Tu choisis lesquels partent seuls et lesquels passent par toi avant l'envoi. Au début, tu peux tout approuver. Tu laisses partir seuls ceux qui te ressemblent, quand tu es prêt."] },
-  { q: '« L\'IA va remplacer mon équipe. »', a: ['On automatise des tâches précises : recopier, relancer, classer. Les décisions, les clients et les cas délicats restent à ton équipe.', 'Ton équipe teste chaque système avec nous, et elle est formée à chaque livraison. Elle sait ce que le système fait, et quand reprendre la main.'] },
-  { q: '« Si on touche à ce qui marche, tout va casser. »', a: ["Ton équipe teste chaque système avec nous, sur de vrais cas, avant qu'il roule pour vrai.", "Et chaque système livré est garanti 30 jours : si un bogue l'empêche de faire ce qui était prévu au contrat, on le corrige sans frais."] },
-  { q: '« Je ne veux pas un abonnement de plus. »', a: ['On part des logiciels que tu paies déjà. Un nouvel outil s\'ajoute seulement quand le tien ne peut pas faire le lien, et il est nommé dans ton plan avant que tu signes.'], revue: 'à confirmer : chaque outil ajouté est nommé dans le plan' },
+  { q: '« L\'IA va remplacer mon équipe. »', a: ['On automatise des tâches précises : recopier, relancer, classer. Les décisions et les cas délicats restent à ton équipe.', 'Ton équipe teste chaque système avec nous, et elle est formée à chaque livraison. Elle sait ce que le système fait, et quand reprendre la main.'] },
+  { q: '« Si on touche à ce qui marche, tout va casser. »', a: ["Ton équipe teste chaque système avec nous avant qu'il roule pour vrai.", "Et chaque système livré est garanti 30 jours : si un bogue l'empêche de faire ce qui était prévu au contrat, on le corrige sans frais."] },
+  { q: '« Je ne veux pas un abonnement de plus. »', a: ["Côté logiciels, on part de ceux que tu paies déjà. Un nouvel outil s'ajoute seulement quand le tien ne peut pas faire le lien, et jamais sans ton accord écrit.", "L'accompagnement comprend un montant mensuel. On te le présente en personne, avec ton plan et la durée minimale, avant que tu signes."], revue: "à confirmer : accord écrit avant tout outil ajouté (précédent Son'OR : Muse annoncé par texto avant la dépense) ; dire ou non le montant mensuel" },
   { q: '« Chez nous, chaque cas est différent. »', a: ["Les cas spéciaux restent à toi. On automatise la partie qui se répète d'une demande à l'autre : la réception, le classement, la relance, la saisie.", "Ce qui sort de l'ordinaire passe par une personne. C'est toi qui fixes la règle."] },
-  { q: '« Je dois en parler à mon associé. »', a: ['Invite-le au diagnostic. En 30 minutes, vous repartez tous les deux avec le même plan.', "S'il ne peut pas être là, ton plan écrit arrive dans les 48 heures. Tu le lui transmets tel quel."] },
+  { q: '« Je dois en parler à mon associé. »', a: ['Invite-le au diagnostic. En 30 minutes, vous voyez tous les deux vos 3 fuites, et le plan écrit arrive dans les 48 heures.', "S'il ne peut pas être là, tu lui transmets ton plan écrit tel quel."] },
   { q: "« Je n'y crois pas trop. »", a: ["Tu n'as pas à nous croire sur parole. Le diagnostic est gratuit, sans engagement, et tu gardes ton plan écrit même si on ne travaille jamais ensemble.", 'Si tu vas plus loin, on commence par un seul chantier, et chaque système livré est garanti 30 jours.'] },
 ];
 
@@ -181,7 +181,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         <!-- Étape 3 : sous-titre, ouvrir une boucle -->
         <p class="sous-titre st-long">En 30 minutes, on trouve les 3 fuites qui te coûtent le plus de temps. Dans les 48 heures, tu reçois ton plan écrit pour les boucher, dans les outils que tu as déjà. C'est gratuit. Et il y a une raison précise pour laquelle ton dernier outil dort.</p>
         <!-- Mobile : même promesse, plus courte, pour que la vignette du VSL arrive plus haut -->
-        <p class="sous-titre st-court">En 30 minutes, on trouve tes 3 fuites. Ton plan écrit arrive en 48 heures, gratuit. Et voici pourquoi ton dernier outil dort.</p>
+        <p class="sous-titre st-court">En 30 minutes, on trouve tes 3 fuites. Ton plan écrit arrive en 48 heures, gratuit. Et ton dernier outil dort pour une raison précise.</p>
 
         <!-- Le VSL, dans le haut de page (événement d'optimisation Meta : VSL vu à 50 %). Le bouton est juste dessous. -->
         <div class="hero-vsl"><VslPlayer /></div>
@@ -240,12 +240,12 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         <h2>La méthode des 3 fuites : on trouve où ton temps s'échappe, avant de choisir l'outil</h2>
         <p class="grand">L'étape qui manquait : <strong>suivre ton travail d'une étape à l'autre, avant de choisir un outil.</strong></p>
         <p>Une fuite, c'est un endroit où ton temps ou tes clients s'échappent chaque semaine : l'appel qui tombe sur la boîte vocale, la soumission que personne ne relance, l'information qu'on retape d'un logiciel à l'autre.</p>
-        <p>Toutes les PME en ont. On ne les bouche pas toutes en même temps. On trouve les 3 qui te coûtent le plus, on les chiffre, et on commence par la plus chère. On appelle ça <Fragment set:html={mecanisme} />.</p>
+        <p>On trouve les 3 qui te coûtent le plus, on les chiffre, et on commence par la plus chère. On appelle ça <Fragment set:html={mecanisme} />.</p>
         <ol class="etapes etapes-mecanisme">
           <li><strong>Trouver tes 3 fuites.</strong> En 30 minutes, tu me racontes comment une demande passe chez vous, du premier appel jusqu'à la facture. Je pose des questions précises sur chaque étape.</li>
           <li><strong>Les chiffrer.</strong> Dans les 48 heures, tu reçois ton diagnostic écrit : chaque fuite en heures par mois, la solution pour chacune, ce que tu peux faire toi-même, et l'ordre pour les boucher.</li>
           <li><strong>Boucher la plus chère d'abord.</strong> On bâtit le système dans les outils que tu as déjà. On le teste avec ton équipe. On la forme. Chaque système livré est garanti 30 jours.</li>
-          <li><strong>Faire le bilan, puis passer à la suivante.</strong> On regarde ce qui a été gagné, et on s'attaque à la fuite suivante. Une rencontre aux deux semaines.</li>
+          <li><strong>Faire le bilan, puis passer à la suivante.</strong> On regarde avec toi ce que tu as gagné, puis on s'attaque à la fuite suivante. Une rencontre aux deux semaines.</li>
         </ol>
         <div class="encart-gratuit">
           <p><strong>Les étapes 1 et 2 sont gratuites.</strong> C'est le diagnostic. Tu gardes ton plan écrit, même si on ne travaille jamais ensemble.</p>
@@ -386,13 +386,14 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         </ul>
         <p class="note-revue note-bas"><span class="pastille">noms et logos : trace écrite de l'accord à obtenir</span></p>
 
-        <h3 class="h3-real">Des écrans réels, pas des maquettes</h3>
-        <p class="intro-large">Ces captures viennent de systèmes qu'on a bâtis et livrés. Les données affichées sont fictives (mode démonstration), pour protéger nos clients et leurs propres clients.</p>
+        <h3 class="h3-real">Des écrans de systèmes qu'on a livrés</h3>
+        <!-- Remettre au pluriel (« Ces captures viennent de systèmes… ») quand la capture 2 est en ligne. -->
+        <p class="intro-large">Cette capture vient d'un système qu'on a bâti et livré. Les données affichées sont fictives (mode démonstration), pour protéger nos clients et leurs propres clients.</p>
         <div class="ecrans-reels">
           <figure class="ecran-reel">
             <div class="ecran-cadre">
               <img src="/preuves/systeme-production-traiteur.webp" alt="Écran réel du système de plans de production d'un traiteur corporatif, en mode démonstration : plages horaires, quantités à produire, boutons Imprimer et Terminé, et une alerte de retard" width="592" height="736" loading="lazy" decoding="async" />
-              <span class="preuve-badge">Écran réel · produits fictifs</span>
+              <span class="preuve-badge">Écran réel · données fictives</span>
             </div>
             <figcaption>Le plan de production d'un traiteur corporatif : ce qu'il faut produire à chaque heure, un bouton pour imprimer, et une alerte quand l'équipe prévue ne suffira pas. <span class="pastille">accord du client à confirmer, même sans nom</span></figcaption>
           </figure>
@@ -475,7 +476,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         </figure>
 
         <h2 class="h2-suite">Il ne t'engage à rien</h2>
-        <p>Si tu veux aller plus loin après, on te présente l'accompagnement en personne, avec le plan devant toi. Sinon, tu gardes ton diagnostic écrit et tu boucles tes fuites toi-même.</p>
+        <p>Si tu veux aller plus loin après, on te présente l'accompagnement en personne, avec le plan devant toi. Sinon, tu gardes ton diagnostic écrit, avec ce que tu peux faire toi-même.</p>
         <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
       </div>
     </section>
@@ -586,7 +587,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
           <ul class="liste-coches ps-points">
             <li><span set:html={coche}></span><span>On sort les tâches répétitives de ta semaine, un système à la fois, dans les outils que tu as déjà.</span></li>
             <li><span set:html={coche}></span><span>Ton premier système roule <Fragment set:html={delai} /> après tes accès, et chaque système est garanti 30&nbsp;jours.</span></li>
-            <li><span set:html={coche}></span><span>Tout commence par un diagnostic gratuit de 30&nbsp;minutes. Tu repars avec tes 3 plus grosses pertes de temps, chiffrées en heures par mois, dans un diagnostic écrit qui est à toi.</span></li>
+            <li><span set:html={coche}></span><span>Tout commence par un diagnostic gratuit de 30&nbsp;minutes. Tu repars avec tes 3 fuites, chiffrées en heures par mois, dans un diagnostic écrit qui est à toi.</span></li>
             <li><span set:html={coche}></span><span>Nos équipes nous limitent à 3&nbsp;accompagnements par mois.</span></li>
           </ul>
           <p>Si tu ne fais rien, dans un an, tu auras la même semaine, avec les mêmes appels manqués et les mêmes soirées à rattraper.</p>
