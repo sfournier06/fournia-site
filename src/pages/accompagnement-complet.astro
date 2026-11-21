@@ -108,7 +108,7 @@ const faq = [
   { q: "Pourquoi le prix n'est pas sur la page ?", a: ["Chaque accompagnement suit un plan différent : le nombre de chantiers, tes outils, la taille de ton équipe. On te présente le prix en personne, avec ce plan devant toi. Le diagnostic, lui, est gratuit."] },
 ];
 
-// Les 7 objections : questions dans la voix du prospect, réponses en paragraphes courts.
+// Les 16 objections : questions dans la voix du prospect, réponses en paragraphes courts.
 const objections = [
   { q: '« C\'est trop cher pour une PME. »', a: ["On commence par un seul chantier : celui qui te coûte le plus, mesuré au diagnostic.", "Le prix dépend de ton plan. On te le présente en personne, avec ce plan devant toi, et seulement si tu veux aller plus loin.", 'Et si un seul système suffit chez vous, on te le dit.'], revue: 'à trancher : ajouter la phrase sur les subventions' },
   { q: "« Je n'ai pas le temps pour ça. »", a: ['De ton côté, au total : 30 minutes pour le diagnostic. Deux rencontres d\'environ une heure pour démarrer. Ensuite, une rencontre aux deux semaines.', 'Le reste est notre travail : bâtir, tester, installer, former.', 'Ton calendrier est plein ce mois-ci ? Fais le diagnostic maintenant. Ton plan écrit sera prêt le jour où tu voudras commencer.'] },
@@ -117,6 +117,15 @@ const objections = [
   { q: '« Mes données vont aller où ? »', citation: { t: '« […] Je suis un peu parano sur ça. »', qui: 'Un gestionnaire, en rencontre' }, a: ['Tu as raison de poser la question. Avant de bâtir un système qui touche des renseignements personnels, on passe une vérification Loi 25. Tu reçois un document écrit : quelles données le système touche, où elles vont, et qui y a accès.', "On porte une attention particulière aux données qui sortiraient du Québec quand un modèle d'IA est utilisé."] },
   { q: '« Je peux le faire moi-même avec ChatGPT. »', a: ['Pour une partie, oui. Ton diagnostic écrit te dit même ce que tu peux faire toi-même, sans nous.', "ChatGPT répond quand tu lui écris. Un système part seul quand une demande arrive : il relance à la bonne date et range l'information au bon endroit, même quand tu es sur un chantier.", 'Reste à savoir qui va le bâtir, le tester et le garder à jour. Si c\'est toi, ça se fera le soir.'] },
   { q: "« Ce n'est pas pour une entreprise de ma taille. »", a: ["C'est à ça que sert le diagnostic. On mesure tes tâches en heures par mois. Si un seul système suffit chez vous, on te le dit, et on te bâtit celui-là, sans rien te vendre de plus. Si l'automatisation ne vaut pas la peine chez vous, on te le dit aussi."] },
+  { q: '« Je ne suis pas techno. »', citation: { t: '« Ben honnêtement, je comprends pas comment ces choses-là fonctionnent. »', qui: 'Propriétaire, plusieurs entreprises de services' }, a: ["Tu n'as pas besoin de l'être. Ton travail, c'est de nous expliquer comment une demande passe chez vous. Le nôtre, c'est de bâtir, tester et installer.", "À chaque livraison, on t'explique le système en mots simples et on forme ton équipe. Tu sais ce qu'il fait, quand il le fait, et quoi faire s'il se trompe."] },
+  { q: '« Mon dernier fournisseur n\'était jamais disponible. »', citation: { t: "« […] il me dit tout le temps qu'il est pas disponible, qu'il est en voyage ou que quelque chose d'autre à faire. »", qui: 'Propriétaire, plusieurs entreprises de services' }, a: ['Tu as un seul interlocuteur, du début à la fin : la personne qui conçoit tes systèmes.', "La rencontre aux deux semaines est fixée d'avance. Après chaque rencontre, tu reçois la prochaine étape par écrit, avec une date.", "C'est aussi pour ça qu'on prend 3 accompagnements par mois, pas plus."] },
+  { q: '« Mes clients vont trouver ça robotisé. »', a: ['Les messages sont écrits avec toi, dans tes mots, et ils partent à ton nom.', "Tu choisis lesquels partent seuls et lesquels passent par toi avant l'envoi. Au début, tu peux tout approuver. Tu laisses partir seuls ceux qui te ressemblent, quand tu es prêt."] },
+  { q: '« L\'IA va remplacer mon équipe. »', a: ['On automatise des tâches précises : recopier, relancer, classer. Les décisions, les clients et les cas délicats restent à ton équipe.', 'Ton équipe teste chaque système avec nous, et elle est formée à chaque livraison. Elle sait ce que le système fait, et quand reprendre la main.'] },
+  { q: '« Si on touche à ce qui marche, tout va casser. »', a: ["Ton équipe teste chaque système avec nous, sur de vrais cas, avant qu'il roule pour vrai.", "Et chaque système livré est garanti 30 jours : si un bogue l'empêche de faire ce qui était prévu au contrat, on le corrige sans frais."] },
+  { q: '« Je ne veux pas un abonnement de plus. »', a: ['On part des logiciels que tu paies déjà. Un nouvel outil s\'ajoute seulement quand le tien ne peut pas faire le lien, et il est nommé dans ton plan avant que tu signes.'], revue: 'à confirmer : chaque outil ajouté est nommé dans le plan' },
+  { q: '« Chez nous, chaque cas est différent. »', a: ["Les cas spéciaux restent à toi. On automatise la partie qui se répète d'une demande à l'autre : la réception, le classement, la relance, la saisie.", "Ce qui sort de l'ordinaire passe par une personne. C'est toi qui fixes la règle."] },
+  { q: '« Je dois en parler à mon associé. »', a: ['Invite-le au diagnostic. En 30 minutes, vous repartez tous les deux avec le même plan.', "S'il ne peut pas être là, ton plan écrit arrive dans les 48 heures. Tu le lui transmets tel quel."] },
+  { q: "« Je n'y crois pas trop. »", a: ["Tu n'as pas à nous croire sur parole. Le diagnostic est gratuit, sans engagement, et tu gardes ton plan écrit même si on ne travaille jamais ensemble.", 'Si tu vas plus loin, on commence par un seul chantier, et chaque système livré est garanti 30 jours.'] },
 ];
 
 const delai = '<span class="pastille">[délai : 14 ou 30 jours, à trancher]</span>';
@@ -147,10 +156,34 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         <p class="interpelle">Propriétaire d'une PME de services au Québec : tes appels, tes soumissions et tes relances passent encore tous par toi&nbsp;? <span class="pastille">à trancher</span></p>
 
         <!-- Étape 2 : la grosse promesse (titre définitif à trancher par Simon) -->
-        <h1 class="titre-geant">Récupère <em>tes soirées</em></h1>
+        <h1 class="titre-geant" id="titre-angle">Récupère <em>tes soirées</em></h1>
+        <script is:inline>
+          // Message match : chaque pub envoie ?angle=<nom> et la page reprend sa promesse. Sans paramètre
+          // (ou inconnu), le titre par défaut reste. Liste et règles : fournia-aios marketing/publicites/meta/setup-campagne-v2.md
+          (function () {
+            var t = {
+              soirees: 'Récupère <em>tes soirées</em>',
+              outils: "Moins d'admin, <em>sans changer d'outils</em>",
+              'appel-manque': 'Tes appels manqués reçoivent <em>une réponse</em>',
+              soumission: 'Tes soumissions relancées <em>au bon moment</em>',
+              relances: 'Tes relances partent <em>à temps</em>',
+              methode: "Pourquoi ton outil d'IA <em>dort</em>"
+            };
+            try {
+              var a = new URLSearchParams(location.search).get('angle');
+              var h = document.getElementById('titre-angle');
+              if (a && t[a] && h) { h.innerHTML = t[a]; if (a !== 'soirees') h.classList.add('titre-long'); }
+            } catch (e) {}
+          })();
+        </script>
 
         <!-- Étape 3 : sous-titre, ouvrir une boucle -->
-        <p class="sous-titre">On automatise les tâches répétitives de ta PME, un système à la fois, dans les outils que tu as déjà. Ton premier système roule <Fragment set:html={delai} /> après tes accès, et chaque système est garanti 30&nbsp;jours. Et il y a une raison précise pour laquelle ton dernier outil dort.</p>
+        <p class="sous-titre st-long">On automatise les tâches répétitives de ta PME, un système à la fois, dans les outils que tu as déjà. Ton premier système roule <Fragment set:html={delai} /> après tes accès, et chaque système est garanti 30&nbsp;jours. Et il y a une raison précise pour laquelle ton dernier outil dort.</p>
+        <!-- Mobile : même promesse, plus courte, pour que la vignette du VSL arrive plus haut -->
+        <p class="sous-titre st-court">Un système à la fois, dans les outils que tu as déjà. Le premier roule <Fragment set:html={delai} /> après tes accès, garanti 30&nbsp;jours. Et voici pourquoi ton dernier outil dort.</p>
+
+        <!-- Le VSL, dans le haut de page (événement d'optimisation Meta : VSL vu à 50 %). Le bouton est juste dessous. -->
+        <div class="hero-vsl"><VslPlayer /></div>
 
         <a class="btn btn-primary btn-cta btn-geant" href={CTA} data-cta-haut>{ctaTexte} <span class="arrow">→</span></a>
         <p class="note-cta"><span class="etoiles-w" set:html={etoiles}></span><span class="pastille">5,0 · à vérifier</span> sur Google · <span class="pastille">[N] avis · à vérifier</span></p>
@@ -167,13 +200,6 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         </div>
       </div>
     </header>
-
-    <!-- Le VSL, juste sous le haut de page -->
-    <section class="bloc-vsl">
-      <div class="col col-hero">
-        <VslPlayer />
-      </div>
-    </section>
 
     <!-- Étape 4 : l'intrigue -->
     <section class="bloc">
@@ -390,10 +416,10 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
       </div>
     </section>
 
-    <!-- Étape 9b : les 7 objections -->
+    <!-- Étape 9b : les 16 objections -->
     <section class="bloc">
       <div class="col reveal">
-        <h2>Les 7 raisons de remettre ça à plus tard, et nos réponses</h2>
+        <h2>Les 16 raisons de remettre ça à plus tard, et nos réponses</h2>
         <div class="faq objections">
           {objections.map((o) => (
             <details>
@@ -636,7 +662,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
 
   .titre-geant { font-family: 'Anton', 'Arial Narrow', sans-serif; font-weight: 400; text-transform: uppercase; color: var(--white);
     font-size: clamp(3.6rem, 13.5vw, 8.4rem); line-height: 1.1; letter-spacing: .01em; margin: 0 0 1.3rem; padding-top: .08em; text-wrap: balance; }
-  .titre-geant em { font-style: normal; color: var(--lime); }
+  .titre-geant :global(em) { font-style: normal; color: var(--lime); }
   .lp .sous-titre { font-size: 1.3rem; line-height: 1.55; color: var(--texte); max-width: 40rem; margin: 0 auto 2rem; text-wrap: balance; }
   /* Boutons d'appel : texte gras et condensé, même voix que le titre du haut de page */
   .lp .btn-cta { font-family: 'Anton', 'Arial Narrow', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: .03em; font-size: 1.3rem; line-height: 1.2; text-wrap: balance; }
@@ -655,7 +681,9 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
   .mur-grille img:hover { opacity: 1; }
   .lp .mur-note { margin: 1rem 0 0; }
 
-  .bloc-vsl { padding: 3.4rem 0 4.6rem; }
+  .hero-vsl { width: min(820px, 100%); margin: .2rem auto 1.6rem; text-align: left; }
+  .lp .st-court { display: none; }
+  .titre-geant.titre-long { font-size: clamp(2.6rem, 6.4vw, 5.2rem); }
   .btn-xl { font-size: 1.02rem; padding: 1.05rem 1.9rem; justify-content: center; text-align: center; margin-top: .6rem; }
   .cta-bloc { display: flex; flex-direction: column; align-items: flex-start; }
   .lp .sous-cta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-size: .88rem; line-height: 1.5; color: var(--texte-2); margin: .9rem 0 0; }
@@ -849,7 +877,10 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     .mur-logos { margin-top: 1.8rem; padding-top: 1.3rem; }
     .mur-grille { flex-wrap: nowrap; gap: 1.1rem; justify-content: space-between; }
     .mur-grille img { height: 24px; max-width: 76px; }
-    .bloc-vsl { padding: 2.4rem 0 3.4rem; }
+    .hero-vsl { margin: 0 auto 1.1rem; }
+    .lp .st-long { display: none; }
+    .lp .st-court { display: block; }
+    .titre-geant.titre-long { font-size: 2.35rem; }
     .bloc { padding: 4.2rem 0; }
     .btn-xl { width: 100%; padding: 1rem 1.2rem; }
     .cta-bloc { align-items: stretch; }
