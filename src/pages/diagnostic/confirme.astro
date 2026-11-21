@@ -7,6 +7,10 @@
 // et compter la réservation (événement « reservation_confirmee », envoyé seulement après le consentement).
 // noindex et exclue du plan du site.
 import Base from '../../layouts/Base.astro';
+import { PHOTO_SIMON } from '../../data/fondateur.mjs';
+// Le Loom de 2 minutes avant l'appel (script : marketing/publicites/scripts-tournage-2026-11-24.md, section 5).
+// Vide = le bloc vidéo ne s'affiche pas. Coller ici le lien de partage Loom une fois filmé.
+const LOOM_URL = '';
 ---
 <Base title="Diagnostic réservé | FournIA" description="Ton diagnostic est réservé. Voici comment te préparer pour l'appel." canonical="https://fournia.net/diagnostic/confirme/" minimal>
   <meta slot="head" name="robots" content="noindex, nofollow" />
@@ -21,6 +25,25 @@ import Base from '../../layouts/Base.astro';
         <li><strong>La liste de tes outils</strong> : ton courriel, ton calendrier, ton logiciel de facturation, ton CRM si tu en as un.</li>
       </ol>
       <p>Si quelqu'un décide avec toi, invite-le à l'appel.</p>
+      {LOOM_URL && (
+        <a class="loom" href={LOOM_URL} target="_blank" rel="noopener">
+          <span class="loom-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>
+          <span><strong>Regarde la vidéo de 2 minutes avant l'appel</strong><span>Comment l'appel va se passer, et quoi préparer.</span></span>
+        </a>
+      )}
+
+      <h2>Ce que tu vas recevoir</h2>
+      <p>Dans les 48 heures après l'appel, ton diagnostic écrit : tes 3 fuites, chiffrées en heures par mois, la solution pour chacune, ce que tu peux faire toi-même, et l'ordre pour les boucher. Il ressemble à ça :</p>
+      <figure class="apercu">
+        <img src="/preuves/extrait-diagnostic.webp" alt="Extrait d'un diagnostic écrit FournIA (exemple pour une entreprise fictive)" width="842" height="498" loading="lazy" decoding="async" />
+        <span class="badge">Exemple · données fictives</span>
+      </figure>
+
+      <h2>Qui tu vas rencontrer</h2>
+      <div class="qui">
+        <img src={PHOTO_SIMON} alt="Simon Fournier, fondateur de FournIA" width="96" height="120" loading="lazy" decoding="async" />
+        <p>Simon Fournier. J'ai lancé FournIA à Blainville en avril 2026. Je conçois chaque système, et je suis ton interlocuteur du début à la fin.</p>
+      </div>
       <h2>Ce qui se passe ensuite</h2>
       <ul class="suite">
         <li>Pendant l'appel, c'est surtout toi qui parles : on cherche ensemble les trois endroits où ton temps s'échappe.</li>
@@ -50,5 +73,16 @@ import Base from '../../layouts/Base.astro';
   .prep { margin: 1.2rem 0; padding-left: 1.3rem; display: grid; gap: .6rem; }
   .prep strong { color: #fff; }
   .suite { padding-left: 1.2rem; display: grid; gap: .5rem; }
+  .loom { display: flex; gap: .9rem; align-items: center; margin: 1.2rem 0; padding: 1rem; border-radius: 14px; border: 1px solid rgba(183,217,76,.35); background: rgba(183,217,76,.06); text-decoration: none; }
+  .loom-play { flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--lime); color: #0b0b0c; }
+  .loom-play svg { width: 20px; height: 20px; margin-left: 3px; }
+  .loom strong { display: block; color: #fff; }
+  .loom span span { font-size: .9rem; color: #c9cbc3; }
+  .apercu { position: relative; margin: 1rem 0 0; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); background: #fff; }
+  .apercu img { display: block; width: 100%; height: auto; }
+  .apercu .badge { position: absolute; bottom: .6rem; right: .6rem; font-size: .72rem; font-weight: 700; color: #0b0b0c; background: #f3d36b; border-radius: 6px; padding: .22rem .5rem; }
+  .qui { display: flex; gap: 1rem; align-items: center; }
+  .qui img { width: 72px; height: 90px; object-fit: cover; object-position: 50% 18%; border-radius: 12px; flex: none; }
+  .qui p { margin: 0; }
   @media (max-width: 560px) { .carte { padding: 1.4rem; } }
 </style>

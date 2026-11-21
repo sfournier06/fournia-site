@@ -12,10 +12,11 @@ const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 
 // Lien de booking (qualifies seulement).
 // Calendrier « Diagnostic gratuit de 30 minutes » de la plateforme (remplace Calendly le 2026-11-04).
-const { lang = 'fr' } = Astro.props;
+// tu : variante au « tu » pour la landing /accompagnement-complet/ (même ton que la page qui y mène). noindex.
+const { lang = 'fr', tu = false } = Astro.props;
 const en = lang === 'en';
 const booking = `https://liens.fournia.net/widget/booking/2Q3gAQkopvF9qtynB4Ct?lang=${en ? 'en' : 'fr'}`;
-const T = en ? {
+const T0 = en ? {
   html: 'en-CA', path: '/en/diagnostic/', locale: 'en_CA',
   title: 'Free AI assessment for Quebec small businesses | FournIA',
   desc: 'Answer 3 questions. If AI can really save you time, we book a free 30-minute assessment.',
@@ -55,6 +56,18 @@ const T = en ? {
   confid: 'Politique de confidentialité',
 };
 
+const TU = {
+  desc: "Réponds à 3 questions. Si l'IA peut vraiment te faire gagner du temps, tu réserves un diagnostic gratuit de 30 minutes.",
+  h1a: "L'IA peut-elle te faire ",
+  lead: 'FournIA automatise les tâches manuelles des PME québécoises. On conçoit, on implante, on forme ton équipe. Tu gardes le temps gagné.',
+  hint: "3 questions, puis où te joindre. Si c'est un fit, tu réserves ton appel tout de suite.",
+  vous: 'Tu es', intention: 'Où en es-tu ?',
+  consent: "En envoyant, tu acceptes que FournIA te contacte au sujet de ta demande. Pas d'infolettre, aucune revente.",
+  okTitle: "C'est un fit. Réserve ton appel.",
+  noSub: "Le diagnostic est pour les PME avec une équipe et un besoin concret. On a tes coordonnées : si ça change, écris-nous.",
+};
+const T = (!en && tu) ? { ...T0, ...TU } : T0;
+
 // Pixel Meta : inactif tant que vide. Pre-requis : /confidentialite en ligne + artefact Loi 25.
 const FB_PIXEL_ID = '2092349601673992';
 const pixelInit = FB_PIXEL_ID
@@ -78,6 +91,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{T.title}</title>
 <meta name="description" content={T.desc}>
+{tu && <meta name="robots" content="noindex, nofollow" />}
 <link rel="canonical" href={`${siteUrl}${T.path}`} />
 <link rel="alternate" hreflang="fr-CA" href={`${siteUrl}/diagnostic/`} />
 <link rel="alternate" hreflang="en-CA" href={`${siteUrl}/en/diagnostic/`} />

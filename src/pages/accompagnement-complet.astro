@@ -6,9 +6,8 @@ import Base from '../layouts/Base.astro';
 import Portrait from '../components/Portrait.astro';
 import VslPlayer from '../components/VslPlayer.astro';
 import PreuveCta from '../components/PreuveCta.astro';
-import PreuveDirect from '../components/PreuveDirect.astro';
 
-const CTA = '/diagnostic/';
+const CTA = '/diagnostic/tu/';
 const ctaTexte = 'Réclame ton diagnostic gratuit de 30 minutes';
 
 
@@ -649,8 +648,6 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
 
     <!-- Barre d'action fixe, mobile seulement : apparaît quand le bouton du haut sort de l'écran,
          se cache quand un autre bouton est visible. -->
-    <PreuveDirect />
-
     <div class="barre-cta" data-barre-cta aria-hidden="true">
       <a data-cta="9" class="btn btn-primary btn-cta" href={CTA} tabindex="-1">{ctaTexte} <span class="arrow">→</span></a>
     </div>
@@ -690,7 +687,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
       const garder = new URLSearchParams();
       ['angle', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach((k) => { const v = q.get(k); if (v) garder.set(k, v.slice(0, 120)); });
       garder.set('de', 'accompagnement-complet');
-      document.querySelectorAll<HTMLAnchorElement>('a[href="/diagnostic/"]').forEach((a) => { a.href = '/diagnostic/?' + garder.toString(); });
+      document.querySelectorAll<HTMLAnchorElement>('a[href="/diagnostic/tu/"]').forEach((a) => { a.href = '/diagnostic/tu/?' + garder.toString(); });
     } catch (e) {}
   </script>
 </Base>
