@@ -8,6 +8,9 @@ const SITE = 'https://fournia.net';
 // Plan du site bilingue : chaque page déclare sa jumelle dans l'autre langue (table src/data/traductions.mjs).
 export default defineConfig({
   site: SITE,
+  // Vitesse (2026-11-20) : le CSS de chaque page est mis directement dans le HTML (aucune feuille qui bloque
+  // l'affichage). Le CSS du site est petit (moins de 10 Ko par page).
+  build: { inlineStylesheets: 'always' },
   integrations: [
     sitemap({
       // pages privées ou internes : jamais dans le plan du site

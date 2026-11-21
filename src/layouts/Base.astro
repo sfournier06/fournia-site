@@ -25,6 +25,8 @@ const autreLangue = altTrouve ?? (en ? '/' : '/en/');
 const frPath = en ? altTrouve : cheminActuel;
 const enPath = en ? cheminActuel : altTrouve;
 // Monogramme officiel (references/brand/assets/fournia-monogram.svg, copié dans public/brand/).
+// Polices servies par le site pour les pages minimal (landing). Fichiers et licences : public/fonts/.
+const POLICES_LOCALES = "@font-face{font-family:'Inter';src:url('/fonts/inter-fr.woff2') format('woff2');font-weight:300 700;font-style:normal;font-display:swap}@font-face{font-family:'Space Grotesk';src:url('/fonts/spacegrotesk-fr.woff2') format('woff2');font-weight:300 700;font-style:normal;font-display:swap}@font-face{font-family:'Syne';src:url('/fonts/syne-logo.woff2') format('woff2');font-weight:400 800;font-style:normal;font-display:swap}";
 const markSvg = '<img src="/brand/fournia-monogram.svg" alt="" width="40" height="40" />';
 import Reseaux from '../components/Reseaux.astro';
 import { autreLangue as cheminAutreLangue } from '../data/traductions.mjs';
@@ -36,7 +38,7 @@ import { autreLangue as cheminAutreLangue } from '../data/traductions.mjs';
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script is:inline>document.documentElement.classList.add('js');</script>
   <link rel="icon" type="image/svg+xml" href="/brand/fournia-favicon.svg" />
-  <link rel="icon" type="image/png" href="/brand/fournia-icon-512.png" />
+  <link rel="icon" type="image/png" sizes="64x64" href="/brand/fournia-favicon-64.png" />
   <link rel="apple-touch-icon" href="/brand/fournia-icon-512.png" />
   <title>{title}</title>
   {description && <meta name="description" content={description} />}
@@ -53,11 +55,22 @@ import { autreLangue as cheminAutreLangue } from '../data/traductions.mjs';
   <meta property="og:image" content="https://fournia.net/brand/fournia-lockup-horizontal-dark.png" />
   {GOOGLE_VERIFICATION && <meta name="google-site-verification" content={GOOGLE_VERIFICATION} />}
   {BING_VERIFICATION && <meta name="msvalidate.01" content={BING_VERIFICATION} />}
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" /></noscript>
+  {minimal ? (
+    <>
+      {/* Landing (minimal) : polices servies par le site, en sous-ensemble français (aucune connexion à Google).
+          Fichiers et licences OFL : public/fonts/. Le reste du site garde Google Fonts. */}
+      <link rel="preload" href="/fonts/syne-logo.woff2" as="font" type="font/woff2" crossorigin />
+      <style is:inline set:html={POLICES_LOCALES}></style>
+    </>
+  ) : (
+    <>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
+      <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" /></noscript>
+    </>
+  )}
   <slot name="head" />
 </head>
 <body>

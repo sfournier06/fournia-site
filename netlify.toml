@@ -20,3 +20,30 @@
   from = "/parler"
   to = "https://liens.fournia.net/widget/booking/CTmXPv8vw5s18tRTKwFT?lang=fr&utm_source=lien-parler&utm_medium=lien-direct"
   status = 302
+
+# Cache (2026-11-20, vitesse de la landing) : les fichiers à nom haché d'Astro ne changent jamais ;
+# les polices sont versionnées par leur nom (changer le nom si le fichier change).
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/preuves/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/clients/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"

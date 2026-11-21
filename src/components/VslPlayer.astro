@@ -8,8 +8,10 @@
 const VSL_SRC = '';
 const VSL_APERCU_SRC = '';
 
-// Vignette : photo réelle de Simon (même source que le composant Portrait), cadrage serré, assombrie.
-import { PHOTO_SIMON } from '../data/fondateur.mjs';
+// Vignette : photo réelle de Simon (séance du 17 nov., simon-fournier-portrait.webp), recadrée en 16:9 sur la bande
+// visible (y 144 à 684) et compressée : 6 Ko en 640 px, 14 Ko en 960 px, au lieu de 30 Ko. Dans le haut de page : chargée tout de suite.
+const VIGNETTE_640 = '/images/vsl-vignette-640.webp';
+const VIGNETTE_960 = '/images/vsl-vignette-960.webp';
 // Durée : le VSL v9 fait environ 4 min 40 (version A) ; remplacer par la durée exacte après le montage.
 const DUREE = 'moins de 5 min';
 ---
@@ -20,7 +22,6 @@ const DUREE = 'moins de 5 min';
       class="vsl-video"
       preload="none"
       playsinline
-      poster={PHOTO_SIMON}
       {...(VSL_APERCU_SRC ? { src: VSL_APERCU_SRC, autoplay: true, muted: true, loop: true } : {})}
     >
       <!-- Sous-titres : brancher le fichier VTT quand le VSL final existe.
@@ -29,7 +30,7 @@ const DUREE = 'moins de 5 min';
     </video>
 
     <div class="vsl-vignette">
-      {!VSL_APERCU_SRC && <img class="vsl-photo" src={PHOTO_SIMON} alt="" width="960" height="1200" loading="lazy" decoding="async" />}
+      {!VSL_APERCU_SRC && <img class="vsl-photo" src={VIGNETTE_960} srcset={`${VIGNETTE_640} 640w, ${VIGNETTE_960} 960w`} sizes="(max-width: 560px) 92vw, 820px" alt="" width="960" height="540" loading="eager" fetchpriority="high" decoding="async" />}
       <div class="vsl-voile"></div>
       <!-- Le texte à gauche, le visage dégagé à droite : le regard caméra fait la confiance, rien ne le cache. -->
       <div class="vsl-texte">
@@ -96,7 +97,7 @@ const DUREE = 'moins de 5 min';
   .vsl-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #0d0e0c; }
   .vsl-vignette { position: absolute; inset: 0; display: grid; place-items: center; }
   .vsl-vignette[hidden] { display: none; }
-  .vsl-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; transform: translateX(22%) scale(1.05); }
+  .vsl-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transform: translateX(22%) scale(1.05); }
   .vsl-voile { position: absolute; inset: 0;
     background: linear-gradient(90deg, rgba(11,11,12,.88) 0%, rgba(11,11,12,.55) 55%, rgba(11,11,12,.35) 100%), linear-gradient(0deg, rgba(11,11,12,.5), transparent 45%); }
 

@@ -82,11 +82,12 @@ const logosClients = [
   { src: '/clients/mini/seniortech.webp' },
 ];
 
+// Versions à 72 px de haut (2x l'affichage de 34 px), compressées : public/clients/mono-72/.
 const murLogos = [
-  { nom: 'AvecPlaisirs', src: '/clients/mono/avecplaisirs.webp', l: 320, h: 101 },
-  { nom: 'Pubsphere', src: '/clients/mono/pubsphere.webp', l: 276, h: 44 },
-  { nom: 'Arbour Aide Académique', src: '/clients/mono/arbour.webp', l: 320, h: 148 },
-  { nom: 'SeniorTech', src: '/clients/mono/seniortech.webp', l: 320, h: 82 },
+  { nom: 'AvecPlaisirs', src: '/clients/mono-72/avecplaisirs.webp', l: 228, h: 72 },
+  { nom: 'Pubsphere', src: '/clients/mono-72/pubsphere.webp', l: 276, h: 44 },
+  { nom: 'Arbour Aide Académique', src: '/clients/mono-72/arbour.webp', l: 156, h: 72 },
+  { nom: 'SeniorTech', src: '/clients/mono-72/seniortech.webp', l: 281, h: 72 },
 ];
 
 const bonus = [
@@ -141,6 +142,8 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
   <meta slot="head" name="robots" content="noindex, nofollow" />
   <link slot="head" rel="preload" href="/images/simon-fournier-flou.webp" as="image" fetchpriority="high" />
   <link slot="head" rel="preload" href="/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <!-- Le plus gros élément du haut de page sur mobile : la vignette du VSL. Préchargée en priorité. -->
+  <link slot="head" rel="preload" as="image" href="/images/vsl-vignette-960.webp" imagesrcset="/images/vsl-vignette-640.webp 640w, /images/vsl-vignette-960.webp 960w" imagesizes="(max-width: 560px) 92vw, 820px" fetchpriority="high" />
 
   <main class="lp">
     <!-- Au-dessus du pli : étapes 1 à 3, bouton, preuve. Sans animation (LCP). -->
