@@ -1,0 +1,54 @@
+---
+// Page de confirmation après la réservation du diagnostic (étude CRO du 2026-11-20, point A3).
+// La plateforme de réservation (SaaS AI System) redirige ici après le rendez-vous pris : réglage à faire par Simon
+// dans le calendrier (« redirection après réservation » -> https://fournia.net/diagnostic/confirme/), SANS aucun
+// renseignement personnel dans l'adresse.
+// Rôle : faire arriver la personne préparée (texte repris du Loom avant l'appel, marketing/publicites/loom-avant-appel.md),
+// et compter la réservation (événement « reservation_confirmee », envoyé seulement après le consentement).
+// noindex et exclue du plan du site.
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Diagnostic réservé | FournIA" description="Ton diagnostic est réservé. Voici comment te préparer pour l'appel." canonical="https://fournia.net/diagnostic/confirme/" minimal>
+  <meta slot="head" name="robots" content="noindex, nofollow" />
+  <main class="confirme">
+    <div class="carte">
+      <span class="ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <h1>C'est réservé. On se parle bientôt.</h1>
+      <p class="lead">Pour qu'on profite au maximum de nos 30 minutes, prends deux minutes pour préparer trois choses. Pas besoin de chiffres exacts : on va les estimer ensemble.</p>
+      <ol class="prep">
+        <li><strong>Les trois tâches qui t'énervent le plus</strong> dans ta semaine.</li>
+        <li><strong>Qui les fait</strong>, et à peu près combien de temps ça prend.</li>
+        <li><strong>La liste de tes outils</strong> : ton courriel, ton calendrier, ton logiciel de facturation, ton CRM si tu en as un.</li>
+      </ol>
+      <p>Si quelqu'un décide avec toi, invite-le à l'appel.</p>
+      <h2>Ce qui se passe ensuite</h2>
+      <ul class="suite">
+        <li>Pendant l'appel, c'est surtout toi qui parles : on cherche ensemble les trois endroits où ton temps s'échappe.</li>
+        <li>Dans les 48 heures, tu reçois ton diagnostic écrit. Il est à toi, même si on ne travaille jamais ensemble.</li>
+        <li>Un empêchement ? Change l'heure avec le lien de ton courriel de confirmation.</li>
+      </ul>
+    </div>
+  </main>
+
+  <script>
+    // Compte la réservation (une fois par visite). fourniaEvent n'envoie rien sans consentement.
+    const envoyer = () => { try { if (sessionStorage.getItem('fournia-rdv-compte')) return; sessionStorage.setItem('fournia-rdv-compte', '1'); } catch (e) {}
+      (window as any).fourniaEvent?.('reservation_confirmee', { page: location.pathname }); };
+    if (document.readyState === 'complete') setTimeout(envoyer, 300); else window.addEventListener('load', () => setTimeout(envoyer, 300));
+  </script>
+</Base>
+
+<style>
+  .confirme { position: relative; z-index: 1; min-height: 100vh; display: grid; place-items: center; padding: 8rem 1rem 4rem; }
+  .carte { width: min(640px, 100%); padding: 2.2rem; border-radius: 20px; border: 1px solid var(--line); background: rgba(255,255,255,.025); }
+  .ok { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: rgba(183,217,76,.14); color: var(--lime); margin-bottom: 1.2rem; }
+  .ok svg { width: 26px; height: 26px; }
+  h1 { font-size: clamp(1.7rem, 5vw, 2.4rem); line-height: 1.15; margin: 0 0 1rem; }
+  h2 { font-size: 1.2rem; margin: 2rem 0 .8rem; }
+  .lead { font-size: 1.08rem; line-height: 1.6; color: #eceee7; }
+  p, li { line-height: 1.6; color: #c9cbc3; }
+  .prep { margin: 1.2rem 0; padding-left: 1.3rem; display: grid; gap: .6rem; }
+  .prep strong { color: #fff; }
+  .suite { padding-left: 1.2rem; display: grid; gap: .5rem; }
+  @media (max-width: 560px) { .carte { padding: 1.4rem; } }
+</style>

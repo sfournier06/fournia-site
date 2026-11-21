@@ -239,7 +239,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         <!-- Le VSL, dans le haut de page (événement d'optimisation Meta : VSL vu à 50 %). Le bouton est juste dessous. -->
         <div class="hero-vsl"><VslPlayer /></div>
 
-        <a class="btn btn-primary btn-cta btn-geant" href={CTA} data-cta-haut>{ctaTexte} <span class="arrow">→</span></a>
+        <a data-cta="1" class="btn btn-primary btn-cta btn-geant" href={CTA} data-cta-haut>{ctaTexte} <span class="arrow">→</span></a>
         <ul class="badges-confiance" aria-label="Nos engagements">
           <li><span set:html={icBouclier}></span>Garantie 30&nbsp;jours par système</li>
           <li><span set:html={icDoc}></span>Dossier Loi&nbsp;25 écrit</li>
@@ -252,7 +252,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </header>
 
     <!-- Étape 4 : l'intrigue -->
-    <section class="bloc">
+    <section id="s-l-intrigue" class="bloc">
       <div class="col reveal">
         <h2>Pourquoi ton dernier outil dort</h2>
         <p class="grand">Tu as peut-être déjà acheté un outil. Peut-être même payé quelqu'un pour l'installer.</p>
@@ -263,7 +263,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 5 : le problème -->
-    <section class="bloc bloc-alt">
+    <section id="s-le-probleme" class="bloc bloc-alt">
       <div class="col reveal">
         <h2>Les appels, les soumissions et les relances reposent encore sur toi</h2>
         <ul class="scenes">
@@ -284,7 +284,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 10 de Suby : le mécanisme, partie 1 (ce que tu as déjà essayé) et partie 2 (ce qui a manqué) -->
-    <section class="bloc">
+    <section id="s-le-mecanisme-partie-1-ce-que-tu-as-deja-" class="bloc">
       <div class="col-large reveal">
         <h2>Ce que tu as déjà essayé, et ce qui a manqué chaque fois</h2>
         <p class="intro-large">Tu as sans doute déjà essayé au moins une de ces solutions. Chacune promettait de te redonner du temps.</p>
@@ -312,7 +312,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 6 : la solution, le mécanisme nommé (ses 2 premières étapes = l'appel gratuit) -->
-    <section class="bloc">
+    <section id="s-la-solution-le-mecanisme-nomme-ses-2-pre" class="bloc">
       <div class="col reveal">
         <h2>La méthode des 3 fuites : on trouve où ton temps s'échappe, avant de choisir l'outil</h2>
         <p class="grand">L'étape qui manquait : <strong>suivre ton travail d'une étape à l'autre, avant de choisir un outil.</strong></p>
@@ -327,13 +327,13 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         <div class="encart-gratuit">
           <p><strong>Les étapes 1 et 2 sont gratuites.</strong> C'est le diagnostic. Tu gardes ton plan écrit, même si on ne travaille jamais ensemble.</p>
           <PreuveCta type="garantie" />
-          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+          <a data-cta="2" class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
         </div>
       </div>
     </section>
 
     <!-- Étape 6a : pour qui, pas pour qui -->
-    <section class="bloc bloc-alt">
+    <section id="s-pour-qui-pas-pour-qui" class="bloc bloc-alt">
       <div class="col-large reveal">
         <h2>Fait pour les PME de services qui débordent</h2>
         <div class="pour-qui">
@@ -353,13 +353,13 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         <div class="centre">
           <p class="grand">Pas certain de quel côté tu es&nbsp;? C'est à ça que sert le diagnostic.</p>
           <PreuveCta type="diag" />
-          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+          <a data-cta="3" class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
         </div>
       </div>
     </section>
 
     <!-- Étape 6b : les 30 premiers jours -->
-    <section class="bloc">
+    <section id="s-les-30-premiers-jours" class="bloc">
       <div class="col-large reveal">
         <h2>Tes 30 premiers jours, semaine par semaine</h2>
         <p class="intro-large">Avant de commencer, il y a le diagnostic : 30 minutes ensemble, puis ton plan écrit en 48 heures. Si tu veux aller plus loin, on te présente l'accompagnement en personne, avec ce plan devant toi.</p>
@@ -388,7 +388,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 6c : chaque rencontre -->
-    <section class="bloc bloc-alt">
+    <section id="s-chaque-rencontre" class="bloc bloc-alt">
       <div class="col reveal">
         <h2>Aux deux semaines, une rencontre qui fait avancer ton chantier</h2>
         <p>En personne sur la Rive-Nord, à Laval et à Montréal, ou en visio partout au Québec. Chaque rencontre suit le même ordre :</p>
@@ -401,7 +401,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 7 : les références -->
-    <section class="bloc">
+    <section id="s-les-references" class="bloc">
       <div class="col qui reveal">
         <figure class="qui-fig">
           <Portrait classe="qui-photo" />
@@ -417,7 +417,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 8 : les bénéfices -->
-    <section class="bloc bloc-alt">
+    <section id="s-les-benefices" class="bloc bloc-alt">
       <div class="col reveal">
         <h2>Ce qui change dans ta semaine, chantier par chantier</h2>
         <p>Selon les chantiers que tu choisis :</p>
@@ -432,7 +432,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 9 : la preuve -->
-    <section class="bloc">
+    <section id="s-la-preuve" class="bloc">
       <div class="col-large reveal">
         <h2>Des systèmes qui roulent déjà chez des PME d'ici</h2>
         {/* Cartes d'avis nommées, à réactiver quand les oui écrits sont archivés (et décommenter `avis` plus haut) :
@@ -457,12 +457,12 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
           ))}
         </ul>
 
-        <div class="centre"><a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
+        <div class="centre"><a data-cta="4" class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
       </div>
     </section>
 
     <!-- Étape 9a : toi-même, une embauche ou une firme -->
-    <section class="bloc bloc-alt">
+    <section id="s-toi-meme-une-embauche-ou-une-firme" class="bloc bloc-alt">
       <div class="col-large reveal">
         <h2>Peu importe avec qui tu travailles, exige ces cinq choses</h2>
         <div class="exiger">
@@ -475,7 +475,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 9b : les 16 objections -->
-    <section class="bloc">
+    <section id="s-les-16-objections" class="bloc">
       <div class="col reveal">
         <h2>Les 16 raisons de remettre ça à plus tard, et nos réponses</h2>
         <div class="faq objections">
@@ -491,12 +491,12 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
           ))}
         </div>
         <div class="centre"><PreuveCta type="loi25" />
-          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
+          <a data-cta="5" class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
       </div>
     </section>
 
     <!-- Étapes 10, 12 et 13 : l'offre, c'est l'appel (le diagnostic gratuit) -->
-    <section class="bloc bloc-alt">
+    <section id="s-l-offre-c-est-l-appel-le-diagnostic-grat" class="bloc bloc-alt">
       <div class="col reveal">
         <h2>Ce que tu reçois de l'appel : tes 3 fuites, chiffrées, et ton plan écrit</h2>
         <p>Après l'appel, tu reçois :</p>
@@ -516,12 +516,12 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
 
         <h2 class="h2-suite">Il ne t'engage à rien</h2>
         <p>Si tu veux aller plus loin après, on te présente l'accompagnement en personne, avec le plan devant toi. Sinon, tu gardes ton diagnostic écrit, avec ce que tu peux faire toi-même.</p>
-        <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+        <a data-cta="6" class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
       </div>
     </section>
 
     <!-- Étape 10b : ce qui peut suivre l'appel -->
-    <section class="bloc bloc-alt">
+    <section id="s-ce-qui-peut-suivre-l-appel" class="bloc bloc-alt">
       <div class="col reveal">
         <h2>Si tu veux aller plus loin : l'accompagnement complet</h2>
         <div class="offre">
@@ -535,7 +535,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 11 : les bonus -->
-    <section class="bloc">
+    <section id="s-les-bonus" class="bloc">
       <div class="col-large reveal">
         <h2>En plus : ton dossier Loi 25, écrit pour chaque système</h2>
         <p class="bonus-intro">Inclus dans l'accompagnement, pour chaque système qui touche des renseignements personnels.</p>
@@ -560,7 +560,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 14 : rareté réelle -->
-    <section class="bloc">
+    <section id="s-rarete-reelle" class="bloc">
       <div class="col reveal">
         <h2>Trois accompagnements par mois, pour bien livrer chacun</h2>
         <p class="rarete">Nos équipes nous limitent à <em>3&nbsp;accompagnements par mois.</em></p>
@@ -570,7 +570,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 15 : la garantie -->
-    <section class="bloc bloc-alt">
+    <section id="s-la-garantie" class="bloc bloc-alt">
       <div class="col reveal">
         <h2>Chaque système livré est garanti 30 jours, par écrit</h2>
         <div class="garantie">
@@ -581,25 +581,25 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 16 : l'appel à l'action, étape par étape -->
-    <section class="bloc">
+    <section id="s-l-appel-a-l-action-etape-par-etape" class="bloc">
       <div class="col reveal">
         <h2>Ton diagnostic en 5 étapes, à partir d'un clic</h2>
         <ol class="etapes">
           <li><strong>Tu cliques sur le bouton</strong> ci-dessous.</li>
-          <li><strong>Tu réponds à 3 questions.</strong></li>
+          <li><strong>Tu réponds à 3 questions</strong> et tu laisses tes coordonnées.</li>
           <li><strong>Si c'est pour toi, tu choisis ton heure</strong> dans le calendrier.</li>
           <li><strong>On se parle 30 minutes.</strong> On regarde où ton temps part et par quoi commencer.</li>
           <li><strong>Tu reçois ton diagnostic écrit dans les 48 heures.</strong> Il est à toi, que tu travailles avec nous ou non.</li>
         </ol>
         <div class="cta-bloc">
           <PreuveCta type="diag" />
-          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+          <a data-cta="7" class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
         </div>
       </div>
     </section>
 
     <!-- Étape 16a : questions fréquentes -->
-    <section class="bloc bloc-alt">
+    <section id="s-questions-frequentes" class="bloc bloc-alt">
       <div class="col reveal">
         <h2>Tes questions, avant de réserver</h2>
         <p class="intro-large">Les questions à se poser avant de réserver, rangées par thème. Celle que tu te poses n'y est pas ? Pose-la pendant l'appel.</p>
@@ -627,7 +627,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     </section>
 
     <!-- Étape 17 : le P.S. -->
-    <section class="bloc bloc-ps">
+    <section id="s-le-ps" class="bloc bloc-ps">
       <div class="col reveal">
         <div class="ps">
           <p><span class="ps-tag">P.S.</span> Si tu es descendu directement ici, l'essentiel tient en quatre points&nbsp;:</p>
@@ -640,7 +640,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
           <p>Si tu ne fais rien, dans un an, tu auras la même semaine, avec les mêmes demandes qui attendent ta réponse et les mêmes soirées à rattraper.</p>
           <p>Clique sur le bouton, réponds à 3 questions et, si c'est pour toi, choisis ton heure.</p>
           <PreuveCta type="garantie" />
-          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+          <a data-cta="8" class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
           <p class="mini-cta mini-cta-ps">Ton plan écrit en 48&nbsp;h · sans engagement</p>
         </div>
         <p class="pps"><span class="ps-tag">P.P.S.</span> Pas sûr que ce soit pour une entreprise de ta taille&nbsp;? C'est à ça que sert le diagnostic&nbsp;: si un seul système suffit chez vous, on te le dit et on te bâtit celui-là, sans rien te vendre de plus.</p>
@@ -652,7 +652,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     <PreuveDirect />
 
     <div class="barre-cta" data-barre-cta aria-hidden="true">
-      <a class="btn btn-primary btn-cta" href={CTA} tabindex="-1">{ctaTexte} <span class="arrow">→</span></a>
+      <a data-cta="9" class="btn btn-primary btn-cta" href={CTA} tabindex="-1">{ctaTexte} <span class="arrow">→</span></a>
     </div>
   </main>
 
@@ -664,8 +664,10 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
       const lien = barre.querySelector('a');
       const visibles = new Set<Element>();
       let hautPasse = false;
+      // Cachée tant que le bandeau de consentement est ouvert : les deux se superposeraient en bas de l'écran.
+      const consentement = document.getElementById('consentement');
       const maj = () => {
-        const montrer = hautPasse && visibles.size === 0;
+        const montrer = hautPasse && visibles.size === 0 && !(consentement && !consentement.hidden);
         barre.classList.toggle('visible', montrer);
         barre.setAttribute('aria-hidden', montrer ? 'false' : 'true');
         lien?.setAttribute('tabindex', montrer ? '0' : '-1');
@@ -678,7 +680,18 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         maj();
       });
       document.querySelectorAll('main .btn-cta:not(.barre-cta .btn-cta)').forEach((b) => io.observe(b));
+      if (consentement) new MutationObserver(maj).observe(consentement, { attributes: true, attributeFilter: ['hidden'] });
     }
+
+    // Provenance : l'angle de la pub et les UTM suivent jusqu'au formulaire de /diagnostic/ (champs cachés).
+    // Jamais fbclid ni aucun identifiant publicitaire.
+    try {
+      const q = new URLSearchParams(location.search);
+      const garder = new URLSearchParams();
+      ['angle', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach((k) => { const v = q.get(k); if (v) garder.set(k, v.slice(0, 120)); });
+      garder.set('de', 'accompagnement-complet');
+      document.querySelectorAll<HTMLAnchorElement>('a[href="/diagnostic/"]').forEach((a) => { a.href = '/diagnostic/?' + garder.toString(); });
+    } catch (e) {}
   </script>
 </Base>
 
