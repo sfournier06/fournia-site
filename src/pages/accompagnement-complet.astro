@@ -184,9 +184,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         </script>
 
         <!-- Étape 3 : sous-titre, ouvrir une boucle -->
-        <p class="sous-titre st-long">En 30 minutes, on trouve les 3 fuites qui te coûtent le plus de temps. Dans les 48 heures, tu reçois ton plan écrit pour les boucher, dans les outils que tu as déjà. C'est gratuit. Et il y a une raison précise pour laquelle ton dernier outil dort.</p>
-        <!-- Mobile : même promesse, plus courte, pour que la vignette du VSL arrive plus haut -->
-        <p class="sous-titre st-court">En 30 minutes, on trouve tes 3 fuites. Ton plan écrit arrive en 48 heures, gratuit. Et ton dernier outil dort pour une raison précise.</p>
+        <p class="sous-titre">On trouve les 3 endroits où ton temps s'échappe, et on les règle dans les outils que tu as déjà. Regarde d'abord l'étape que presque personne ne fait.</p>
 
         <!-- Le VSL, dans le haut de page (événement d'optimisation Meta : VSL vu à 50 %). Le bouton est juste dessous. -->
         <div class="hero-vsl"><VslPlayer /></div>
@@ -254,7 +252,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         </ol>
         <div class="encart-gratuit">
           <p><strong>Les étapes 1 et 2 sont gratuites.</strong> C'est le diagnostic. Tu gardes ton plan écrit, même si on ne travaille jamais ensemble.</p>
-          <PreuveCta v={0} />
+          <PreuveCta type="ecran" />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
         </div>
       </div>
@@ -280,7 +278,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         </div>
         <div class="centre">
           <p class="grand">Pas certain de quel côté tu es&nbsp;? C'est à ça que sert le diagnostic.</p>
-          <PreuveCta v={1} />
+          <PreuveCta type="diag" />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
         </div>
       </div>
@@ -409,8 +407,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
             <figcaption>Le tableau de suivi des relances : chaque soumission, sa relance et son statut, au même endroit. <span class="pastille">légende proposée</span></figcaption>
           </figure>
         </div>
-        <div class="centre"><PreuveCta v={2} />
-          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
+        <div class="centre"><a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
       </div>
     </section>
 
@@ -460,7 +457,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
             </details>
           ))}
         </div>
-        <div class="centre"><PreuveCta v={3} />
+        <div class="centre"><PreuveCta type="garantie" />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
       </div>
     </section>
@@ -486,8 +483,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
 
         <h2 class="h2-suite">Il ne t'engage à rien</h2>
         <p>Si tu veux aller plus loin après, on te présente l'accompagnement en personne, avec le plan devant toi. Sinon, tu gardes ton diagnostic écrit, avec ce que tu peux faire toi-même.</p>
-        <PreuveCta v={4} />
-          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+        <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
       </div>
     </section>
 
@@ -564,7 +560,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
           <li><strong>Tu reçois ton diagnostic écrit dans les 48 heures.</strong> Il est à toi, que tu travailles avec nous ou non.</li>
         </ol>
         <div class="cta-bloc">
-          <PreuveCta v={5} />
+          <PreuveCta type="ecran" />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
           <p class="sous-cta"><span class="etoiles-w" set:html={etoiles}></span> 5,0 sur Google · <span class="pastille">[N] avis · à vérifier</span></p>
         </div>
@@ -603,7 +599,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
           </ul>
           <p>Si tu ne fais rien, dans un an, tu auras la même semaine, avec les mêmes appels manqués et les mêmes soirées à rattraper.</p>
           <p>Clique sur le bouton, réponds à 3 questions et, si c'est pour toi, choisis ton heure.</p>
-          <PreuveCta v={6} />
+          <PreuveCta type="diag" />
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
           <p class="note-cta note-cta-ps"><span class="etoiles-w" set:html={etoiles}></span><span class="pastille">5,0 · à vérifier</span> sur Google · <span class="pastille">[N] avis · à vérifier</span></p>
           <p class="mini-cta mini-cta-ps">Ton plan écrit en 48&nbsp;h · sans engagement</p>
@@ -712,7 +708,6 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
   .lp .mur-note { margin: 1rem 0 0; }
 
   .hero-vsl { width: min(820px, 100%); margin: .2rem auto 1.6rem; text-align: left; }
-  .lp .st-court { display: none; }
   .titre-geant.titre-long { font-size: clamp(2.6rem, 6.4vw, 5.2rem); }
   .btn-xl { font-size: 1.02rem; padding: 1.05rem 1.9rem; justify-content: center; text-align: center; margin-top: .6rem; }
   .cta-bloc { display: flex; flex-direction: column; align-items: flex-start; }
@@ -918,8 +913,6 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     .mur-grille { flex-wrap: nowrap; gap: 1.1rem; justify-content: space-between; }
     .mur-grille img { height: 24px; max-width: 76px; }
     .hero-vsl { margin: 0 auto 1.1rem; }
-    .lp .st-long { display: none; }
-    .lp .st-court { display: block; }
     .titre-geant.titre-long { font-size: 2.35rem; }
     .bloc { padding: 4.2rem 0; }
     .btn-xl { width: 100%; padding: 1rem 1.2rem; }
