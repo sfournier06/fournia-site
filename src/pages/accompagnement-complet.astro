@@ -129,7 +129,8 @@ const objections = [
 ];
 
 const delai = '<span class="pastille">[délai : 14 ou 30 jours, à trancher]</span>';
-const mecanisme = '<span class="pastille">[mécanisme : nom à trancher]</span>';
+// Mécanisme nommé (proposé le 2026-11-20, à confirmer par Simon) : change ici, partout d'un coup.
+const mecanisme = '<strong>la méthode des 3 fuites</strong>';
 
 const etoile = '<path d="M10 1.6l2.47 5.3 5.8.68-4.3 3.96 1.15 5.73L10 14.4l-5.12 2.87 1.15-5.73-4.3-3.96 5.8-.68z"/>';
 const etoiles = '<svg class="etoiles" viewBox="0 0 100 20" aria-hidden="true">' + [0, 1, 2, 3, 4].map((i) => '<g transform="translate(' + i * 20 + ' 0)">' + etoile + '</g>').join('') + '</svg>';
@@ -178,9 +179,9 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         </script>
 
         <!-- Étape 3 : sous-titre, ouvrir une boucle -->
-        <p class="sous-titre st-long">On automatise les tâches répétitives de ta PME, un système à la fois, dans les outils que tu as déjà. Ton premier système roule <Fragment set:html={delai} /> après tes accès, et chaque système est garanti 30&nbsp;jours. Et il y a une raison précise pour laquelle ton dernier outil dort.</p>
+        <p class="sous-titre st-long">En 30 minutes, on trouve les 3 fuites qui te coûtent le plus de temps. Dans les 48 heures, tu reçois ton plan écrit pour les boucher, dans les outils que tu as déjà. C'est gratuit. Et il y a une raison précise pour laquelle ton dernier outil dort.</p>
         <!-- Mobile : même promesse, plus courte, pour que la vignette du VSL arrive plus haut -->
-        <p class="sous-titre st-court">Un système à la fois, dans les outils que tu as déjà. Le premier roule <Fragment set:html={delai} /> après tes accès, garanti 30&nbsp;jours. Et voici pourquoi ton dernier outil dort.</p>
+        <p class="sous-titre st-court">En 30 minutes, on trouve tes 3 fuites. Ton plan écrit arrive en 48 heures, gratuit. Et voici pourquoi ton dernier outil dort.</p>
 
         <!-- Le VSL, dans le haut de page (événement d'optimisation Meta : VSL vu à 50 %). Le bouton est juste dessous. -->
         <div class="hero-vsl"><VslPlayer /></div>
@@ -233,21 +234,23 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
       </div>
     </section>
 
-    <!-- Étape 6 : la solution -->
+    <!-- Étape 6 : la solution, le mécanisme nommé (ses 2 premières étapes = l'appel gratuit) -->
     <section class="bloc">
       <div class="col reveal">
-        <h2>On regarde ton travail avant de choisir l'outil</h2>
+        <h2>La méthode des 3 fuites : on trouve où ton temps s'échappe, avant de choisir l'outil</h2>
         <p class="grand">L'étape qui manquait : <strong>suivre ton travail d'une étape à l'autre, avant de choisir un outil.</strong></p>
-        <p>On mesure le temps que prend chaque étape. On trouve ce qui te coûte le plus. On commence par là.</p>
-        <p>Ensuite, on bâtit le système dans les outils que tu utilises déjà. On le teste avec ton équipe. On la forme. Puis on passe au chantier suivant.</p>
-        <p>On appelle ça <Fragment set:html={mecanisme} /> : un chantier à la fois, une rencontre aux deux semaines, et un plan clair pour la suite.</p>
-        <ol class="etapes">
-          <li><strong>On regarde tout.</strong> On rencontre ton équipe et on mesure le temps de chaque étape.</li>
-          <li><strong>On te remet un plan.</strong> Quoi automatiser, dans quel ordre.</li>
-          <li><strong>On automatise, un chantier à la fois.</strong> Testé avec ton équipe, installé dans tes logiciels.</li>
-          <li><strong>On forme ton équipe à chaque livraison.</strong></li>
-          <li><strong>On reste là.</strong> Suivi, ajustements, et un bilan de ce qui a été gagné.</li>
+        <p>Une fuite, c'est un endroit où ton temps ou tes clients s'échappent chaque semaine : l'appel qui tombe sur la boîte vocale, la soumission que personne ne relance, l'information qu'on retape d'un logiciel à l'autre.</p>
+        <p>Toutes les PME en ont. On ne les bouche pas toutes en même temps. On trouve les 3 qui te coûtent le plus, on les chiffre, et on commence par la plus chère. On appelle ça <Fragment set:html={mecanisme} />.</p>
+        <ol class="etapes etapes-mecanisme">
+          <li><strong>Trouver tes 3 fuites.</strong> En 30 minutes, tu me racontes comment une demande passe chez vous, du premier appel jusqu'à la facture. Je pose des questions précises sur chaque étape.</li>
+          <li><strong>Les chiffrer.</strong> Dans les 48 heures, tu reçois ton diagnostic écrit : chaque fuite en heures par mois, la solution pour chacune, ce que tu peux faire toi-même, et l'ordre pour les boucher.</li>
+          <li><strong>Boucher la plus chère d'abord.</strong> On bâtit le système dans les outils que tu as déjà. On le teste avec ton équipe. On la forme. Chaque système livré est garanti 30 jours.</li>
+          <li><strong>Faire le bilan, puis passer à la suivante.</strong> On regarde ce qui a été gagné, et on s'attaque à la fuite suivante. Une rencontre aux deux semaines.</li>
         </ol>
+        <div class="encart-gratuit">
+          <p><strong>Les étapes 1 et 2 sont gratuites.</strong> C'est le diagnostic. Tu gardes ton plan écrit, même si on ne travaille jamais ensemble.</p>
+          <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+        </div>
       </div>
     </section>
 
@@ -382,6 +385,22 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
           ))}
         </ul>
         <p class="note-revue note-bas"><span class="pastille">noms et logos : trace écrite de l'accord à obtenir</span></p>
+
+        <h3 class="h3-real">Des écrans réels, pas des maquettes</h3>
+        <p class="intro-large">Ces captures viennent de systèmes qu'on a bâtis et livrés. Les données affichées sont fictives (mode démonstration), pour protéger nos clients et leurs propres clients.</p>
+        <div class="ecrans-reels">
+          <figure class="ecran-reel">
+            <div class="ecran-cadre">
+              <img src="/preuves/systeme-production-traiteur.webp" alt="Écran réel du système de plans de production d'un traiteur corporatif, en mode démonstration : plages horaires, quantités à produire, boutons Imprimer et Terminé, et une alerte de retard" width="592" height="736" loading="lazy" decoding="async" />
+              <span class="preuve-badge">Écran réel · produits fictifs</span>
+            </div>
+            <figcaption>Le plan de production d'un traiteur corporatif : ce qu'il faut produire à chaque heure, un bouton pour imprimer, et une alerte quand l'équipe prévue ne suffira pas. <span class="pastille">accord du client à confirmer, même sans nom</span></figcaption>
+          </figure>
+          <figure class="ecran-reel">
+            <div class="capture-vide"><span class="pastille">capture 2 à fournir par Simon (liste : marketing/publicites/preuves-visuelles.md)</span></div>
+            <figcaption>Le tableau de suivi des relances : chaque soumission, sa relance et son statut, au même endroit. <span class="pastille">légende proposée</span></figcaption>
+          </figure>
+        </div>
         <div class="centre"><a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
       </div>
     </section>
@@ -436,10 +455,35 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
       </div>
     </section>
 
-    <!-- Étape 10 : l'offre -->
+    <!-- Étapes 10, 12 et 13 : l'offre, c'est l'appel (le diagnostic gratuit) -->
     <section class="bloc bloc-alt">
       <div class="col reveal">
-        <h2>L'accompagnement complet : un plan, un système à la fois, ton équipe formée</h2>
+        <h2>Ce que tu reçois de l'appel : tes 3 fuites, chiffrées, et ton plan écrit</h2>
+        <p>Après 30 minutes, tu repars avec :</p>
+        <ul class="liste-coches">
+          <li><span set:html={coche}></span><span><strong>Tes 3 fuites</strong> (les 3 endroits où ton temps part le plus), nommées et chiffrées en heures par mois.</span></li>
+          <li><span set:html={coche}></span><span><strong>Pour chacune, la solution en mots simples</strong>, et ce que tu peux faire toi-même, sans nous.</span></li>
+          <li><span set:html={coche}></span><span><strong>L'ordre pour les boucher</strong> : maintenant, ensuite, plus tard.</span></li>
+        </ul>
+        <p>Le tout dans un diagnostic écrit de 2 pages, envoyé dans les 48 heures. Il est à toi.</p>
+        <figure class="preuve-doc">
+          <div class="preuve-page">
+            <img src="/preuves/exemple-diagnostic-p1.webp" alt="Page 1 d'un diagnostic écrit FournIA : ce que le client a dit, et le tableau des tâches avec le temps passé (exemple pour une entreprise fictive)" width="900" height="1165" loading="lazy" decoding="async" />
+            <span class="preuve-badge">Exemple · données fictives</span>
+          </div>
+          <figcaption>Ton diagnostic écrit ressemble à ça : tes tâches, tes heures par mois, et par où commencer.</figcaption>
+        </figure>
+
+        <h2 class="h2-suite">Il ne t'engage à rien</h2>
+        <p>Si tu veux aller plus loin après, on te présente l'accompagnement en personne, avec le plan devant toi. Sinon, tu gardes ton diagnostic écrit et tu boucles tes fuites toi-même.</p>
+        <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
+      </div>
+    </section>
+
+    <!-- Étape 10b : ce qui peut suivre l'appel -->
+    <section class="bloc bloc-alt">
+      <div class="col reveal">
+        <h2>Si tu veux aller plus loin : l'accompagnement complet</h2>
         <div class="offre">
           <p class="offre-titre">L'accompagnement complet <span class="wm">Fourn<span>IA</span></span></p>
           <ul class="liste-coches">
@@ -476,31 +520,6 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
       </div>
     </section>
 
-    <!-- Étapes 12 et 13 : le diagnostic gratuit -->
-    <section class="bloc bloc-alt">
-      <div class="col reveal">
-        <h2>Le diagnostic gratuit : en 30 minutes, tes 3 plus grosses pertes de temps, chiffrées</h2>
-        <p>Après 30 minutes, tu repars avec :</p>
-        <ul class="liste-coches">
-          <li><span set:html={coche}></span><span><strong>Tes 3 plus grosses pertes de temps</strong>, nommées et chiffrées en heures par mois.</span></li>
-          <li><span set:html={coche}></span><span><strong>Pour chacune, la solution en mots simples</strong>, et ce que tu peux faire toi-même, sans nous.</span></li>
-          <li><span set:html={coche}></span><span><strong>L'ordre pour les régler</strong> : maintenant, ensuite, plus tard.</span></li>
-        </ul>
-        <p>Le tout dans un diagnostic écrit de 2 pages, envoyé dans les 48 heures. Il est à toi.</p>
-        <figure class="preuve-doc">
-          <div class="preuve-page">
-            <img src="/preuves/exemple-diagnostic-p1.webp" alt="Page 1 d'un diagnostic écrit FournIA : ce que le client a dit, et le tableau des tâches avec le temps passé (exemple pour une entreprise fictive)" width="900" height="1165" loading="lazy" decoding="async" />
-            <span class="preuve-badge">Exemple · données fictives</span>
-          </div>
-          <figcaption>Ton diagnostic écrit ressemble à ça : tes tâches, tes heures par mois, et par où commencer.</figcaption>
-        </figure>
-
-        <h2 class="h2-suite">Il ne t'engage à rien</h2>
-        <p>Si tu veux aller plus loin après, on te présente l'accompagnement en personne, avec le plan devant toi. Sinon, tu gardes ton diagnostic écrit.</p>
-        <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
-      </div>
-    </section>
-
     <!-- Étape 14 : rareté réelle -->
     <section class="bloc">
       <div class="col reveal">
@@ -533,10 +552,6 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
           <li><strong>On se parle 30 minutes.</strong> On regarde où ton temps part et par quoi commencer.</li>
           <li><strong>Tu reçois ton diagnostic écrit dans les 48 heures.</strong> Il est à toi, que tu travailles avec nous ou non.</li>
         </ol>
-        <figure class="preuve-capture">
-          <div class="capture-vide"><span class="pastille">capture à fournir par Simon : un système livré, sur données fictives (sans capture, ce bloc sort)</span></div>
-          <figcaption>Le tableau de suivi des relances d'un système livré : chaque soumission, sa relance et son statut, au même endroit. <span class="pastille">légende proposée</span></figcaption>
-        </figure>
         <div class="cta-bloc">
           <a class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a>
           <p class="sous-cta"><span class="etoiles-w" set:html={etoiles}></span> 5,0 sur Google · <span class="pastille">[N] avis · à vérifier</span></p>
@@ -788,6 +803,16 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
   .preuve-badge { position: absolute; bottom: .8rem; left: .8rem; z-index: 1; font-size: .75rem; font-weight: 700; letter-spacing: .02em; color: #0b0b0c; background: #f3d36b; border-radius: 6px; padding: .25rem .55rem; }
   .preuve-doc figcaption, .preuve-capture figcaption { font-size: 1rem; line-height: 1.6; color: var(--texte); margin-top: .9rem; }
   .preuve-capture { margin: 0 0 2.2rem; }
+  .ecrans-reels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem; margin: 1.4rem 0 2.4rem; align-items: start; }
+  .ecran-reel { margin: 0; }
+  .ecran-reel figcaption { font-size: .98rem; line-height: 1.6; color: var(--texte); margin-top: .8rem; }
+  .ecran-cadre { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 18px 50px rgba(0,0,0,.45); background: #fdfbf5; }
+  .ecran-cadre img { display: block; width: 100%; height: auto; }
+  .ecran-cadre .preuve-badge { top: .7rem; bottom: auto; left: .7rem; }
+  .ecrans-reels .capture-vide { aspect-ratio: 592 / 736; }
+  .encart-gratuit { margin-top: 2rem; padding: 1.6rem; border-radius: 16px; border: 1px solid rgba(183,217,76,.35); background: rgba(183,217,76,.06); text-align: center; }
+  .encart-gratuit p { margin: 0 0 1.2rem; font-size: 1.1rem; }
+  @media (max-width: 760px) { .ecrans-reels { grid-template-columns: 1fr; } }
   .capture-vide { aspect-ratio: 16 / 9; border-radius: 14px; border: 1px dashed rgba(231,182,90,.55); background: rgba(255,255,255,.02); display: grid; place-items: center; padding: 1rem; text-align: center; }
 
   /* ── Page A longue : nouvelles sections ── */
