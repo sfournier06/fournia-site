@@ -57,7 +57,7 @@ const pourQui = [
 const pasPourQui = [
   'Tu cherches un outil à brancher ce soir, sans regarder comment ton équipe travaille.',
   "Tu veux tout automatiser d'un coup, en une semaine.",
-  'Tu veux qu\'on te garantisse un chiffre de ventes. Notre garantie porte sur une chose : chaque système livré fait ce qui est prévu au contrat.',
+  'Tu veux qu\'on te garantisse un chiffre de ventes. Notre garantie porte sur ton système : s\'il ne te convient pas dans les 30 jours suivant la livraison, tu es remboursé.',
   "L'IA t'intéresse par curiosité, sans tâche précise qui te coûte du temps.",
   'Tu travailles seul, sans employés. Un système précis te servira mieux qu\'un accompagnement complet.',
 ];
@@ -148,10 +148,10 @@ const faqGroupes = [
     { q: 'Est-ce que je dois changer de logiciels ?', a: ["En général, non. On part des outils que tu utilises déjà. On propose un nouvel outil seulement quand le tien ne peut pas faire le lien."] },
   ] },
   { titre: "La garantie", items: [
-    {q: "Et si le système fonctionne, mais que je ne vois pas de différence dans mes ventes ?", a: ["La garantie porte sur ce que le système fait, tel qu'écrit au contrat. On ne garantit aucun chiffre de ventes. Au bilan, on regarde avec toi ce que le système a changé, et on ajuste le chantier suivant."]},
-    {q: "Qu'est-ce qui compte comme un bogue ?", a: ["Un défaut qui empêche le système de faire ce que le contrat prévoit. Le contrat écrit, pour chaque système, ce qu'il doit faire pour être considéré comme livré. C'est la base de la garantie."]},
+    {q: "Et si le système fonctionne, mais que je ne vois pas de différence dans mes ventes ?", a: ["Si le système ne te convient pas dans les 30 jours suivant la livraison, tu es remboursé. On ne garantit aucun chiffre de ventes. Au bilan, on regarde avec toi ce que le système a changé, et on ajuste le chantier suivant."]},
+    {q: "Qui décide si le système me convient ?", a: ["Toi. Tu me l'écris dans les 30 jours suivant la livraison, et tu es remboursé au complet pour ce système."]},
     {q: "Si je suis remboursé, combien je reçois ?", a: ["Les sommes versées pour ce système, telles qu'écrites au contrat."]},
-    {q: "Comment je signale un problème ?", a: ["Par écrit, par courriel, dans les 30 jours suivant la livraison. Je travaille dessus gratuitement jusqu'à ce que le système fonctionne."]},
+    {q: "Comment je demande le remboursement ?", a: ["Par écrit, par courriel, dans les 30 jours suivant la livraison. Tu cesses alors d'utiliser le système et on retire ce qu'on a installé."]},
   ] },
   { titre: "FournIA et Simon", items: [
     {q: "Tu es jeune. Pourquoi te confier mon entreprise ?", a: ["Juge le travail. Le diagnostic est gratuit et écrit : tu vois comment je réfléchis à ton entreprise avant de dépenser un dollar. Si tu vas plus loin, on commence par un seul chantier, et chaque système livré est garanti 30 jours, par écrit."]},
@@ -172,7 +172,7 @@ const objections = [
   { q: '« Mon dernier fournisseur n\'était jamais disponible. »', citation: { t: "« […] il me dit tout le temps qu'il est pas disponible, qu'il est en voyage ou que quelque chose d'autre à faire. »", qui: 'Propriétaire, plusieurs entreprises de services' }, a: ['Tu as un seul interlocuteur, du début à la fin : la personne qui conçoit tes systèmes.', "La rencontre aux deux semaines est fixée d'avance. Après chaque rencontre, tu reçois la prochaine étape par écrit, avec une date.", 'Nos équipes nous limitent à 3 accompagnements par mois, pour bien livrer chacun.'] },
   { q: '« Mes clients vont trouver ça robotisé. »', a: ['Les messages sont écrits avec toi, dans tes mots, et ils partent à ton nom.', "Tu choisis lesquels partent seuls et lesquels passent par toi avant l'envoi. Au début, tu peux tout approuver. Tu laisses partir seuls ceux qui te ressemblent, quand tu es prêt."] },
   { q: '« L\'IA va remplacer mon équipe. »', a: ['On automatise des tâches précises : recopier, relancer, classer. Les décisions et les cas délicats restent à ton équipe.', 'Ton équipe teste chaque système avec nous, et elle est formée à chaque livraison. Elle sait ce que le système fait, et quand reprendre la main.'] },
-  { q: '« Si on touche à ce qui marche, tout va casser. »', a: ["Ton équipe teste chaque système avec nous avant qu'il roule pour vrai.", "Et chaque système livré est garanti : s'il ne fait pas ce qui était prévu au contrat, je travaille dessus gratuitement jusqu'à ce qu'il fonctionne, ou tu es remboursé."] },
+  { q: '« Si on touche à ce qui marche, tout va casser. »', a: ["Ton équipe teste chaque système avec nous avant qu'il roule pour vrai.", "Et si un système ne te convient pas dans les 30 jours suivant la livraison, tu es remboursé au complet pour ce système."] },
   { q: '« Je ne veux pas un abonnement de plus. »', a: ["Côté logiciels, on part de ceux que tu paies déjà. Un nouvel outil s'ajoute seulement quand le tien ne peut pas faire le lien, et on t'explique pourquoi avant de l'ajouter.", "L'accompagnement, lui, est mensuel, avec un engagement minimum de 3 mois. On te présente le montant en personne, avec ton plan, avant que tu signes."] },
   { q: '« Chez nous, chaque cas est différent. »', a: ["Les cas spéciaux restent à toi. On automatise la partie qui se répète d'une demande à l'autre : la réception, le classement, la relance, la saisie.", "Ce qui sort de l'ordinaire passe par une personne. C'est toi qui fixes la règle."] },
   { q: '« Je dois en parler à mon associé. »', a: ['Invite-le au diagnostic. En 30 minutes, vous voyez tous les deux vos 3 fuites, et le plan écrit arrive dans les 48 heures.', "S'il ne peut pas être là, tu lui transmets ton plan écrit tel quel."] },
@@ -245,7 +245,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
 
         <a data-cta="1" class="btn btn-primary btn-cta btn-geant" href={CTA} data-cta-haut>{ctaTexte} <span class="arrow">→</span></a>
         <ul class="badges-confiance" aria-label="Nos engagements">
-          <li><span set:html={icBouclier}></span>Garantie 30&nbsp;jours par système</li>
+          <li><span set:html={icBouclier}></span>Satisfait ou remboursé, 30&nbsp;jours</li>
           <li><span set:html={icDoc}></span>Dossier Loi&nbsp;25 écrit</li>
           <li><span set:html={icHorloge}></span>Plan écrit en 48&nbsp;h, sans engagement</li>
           <li><span set:html={icLieu}></span>Basé à Blainville, Québec</li>
@@ -576,11 +576,11 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     <!-- Étape 15 : la garantie -->
     <section id="s-la-garantie" class="bloc bloc-alt">
       <div class="col reveal">
-        <h2>Chaque système livré est garanti, par écrit : il fonctionne, ou tu es remboursé</h2>
+        <h2>Satisfait ou remboursé, 30 jours après la livraison</h2>
         <div class="garantie">
-          <p>Si un système ne fait pas ce qui était prévu au contrat, je travaille dessus gratuitement jusqu'à ce qu'il fonctionne. Et si je n'y arrive pas, tu es remboursé au complet pour ce système.</p>
+          <p>Si, dans les 30 jours suivant la livraison, un système ne te convient pas, tu me l'écris et tu es remboursé au complet pour ce système. C'est toi qui juges.</p>
         </div>
-        <p class="petit">La garantie couvre ce que tu signales dans les 30 jours suivant la livraison. Le remboursement se fait sur demande écrite ; tu cesses alors d'utiliser ce système et on le retire. La garantie ne s'applique pas quand le problème vient d'une obligation du client non remplie (accès, informations), d'un changement ou d'un refus d'un service tiers (par exemple Meta, Instagram, Stripe, OpenAI), ou d'un retrait de contenu pour une question de droits d'auteur.</p>
+        <p class="petit">La demande se fait par écrit, dans les 30 jours suivant la livraison. Tu cesses alors d'utiliser ce système et on retire ce qu'on a installé. La garantie ne s'applique pas si la livraison a été bloquée par un accès ou une information qu'on attendait de ton côté, ou par un fournisseur tiers (un refus, un délai ou un changement d'un service comme Meta, Stripe ou OpenAI).</p>
       </div>
     </section>
 
