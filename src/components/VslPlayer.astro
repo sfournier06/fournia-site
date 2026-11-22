@@ -5,15 +5,13 @@
 // VSL_SRC        : le MP4 final. Vide = on garde la vignette, et un clic affiche « La vidéo arrive bientôt ».
 // VSL_APERCU_SRC : boucle muette de 3 à 5 s qui joue à la place de la photo (autoplay muted loop playsinline).
 //                  Un clic charge alors VSL_SRC depuis le début, avec le son.
-const VSL_SRC = '';
-const VSL_APERCU_SRC = '';
+import { VSL_SRC, VSL_APERCU_SRC, VSL_DUREE } from '../data/vsl.mjs';
 
 // Vignette : photo réelle de Simon (séance du 17 nov., simon-fournier-portrait.webp), recadrée en 16:9 sur la bande
 // visible (y 144 à 684) et compressée : 6 Ko en 640 px, 14 Ko en 960 px, au lieu de 30 Ko. Dans le haut de page : chargée tout de suite.
 const VIGNETTE_640 = '/images/vsl-vignette-640.webp';
 const VIGNETTE_960 = '/images/vsl-vignette-960.webp';
-// Durée : le VSL v9 fait environ 4 min 40 (version A) ; remplacer par la durée exacte après le montage.
-const DUREE = 'moins de 5 min';
+const DUREE = VSL_DUREE;
 ---
 <div class="vsl-bloc" data-vsl data-src={VSL_SRC} data-apercu={VSL_APERCU_SRC}>
 
