@@ -12,11 +12,10 @@ const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 
 // Lien de booking (qualifies seulement).
 // Calendrier « Diagnostic gratuit de 30 minutes » de la plateforme (remplace Calendly le 2026-11-04).
-// tu : variante au « tu » pour la landing /accompagnement-complet/ (même ton que la page qui y mène). noindex.
-const { lang = 'fr', tu = false } = Astro.props;
+const { lang = 'fr' } = Astro.props;
 const en = lang === 'en';
 const booking = `https://liens.fournia.net/widget/booking/2Q3gAQkopvF9qtynB4Ct?lang=${en ? 'en' : 'fr'}`;
-const T0 = en ? {
+const T = en ? {
   html: 'en-CA', path: '/en/diagnostic/', locale: 'en_CA',
   title: 'Free AI assessment for Quebec small businesses | FournIA',
   desc: 'Answer 3 questions. If AI can really save you time, we book a free 30-minute assessment.',
@@ -24,8 +23,8 @@ const T0 = en ? {
   eyebrow: 'Free AI assessment', h1a: 'Can AI help you ', h1b: 'save time', h1c: '?',
   lead: 'FournIA automates the manual tasks of Quebec small businesses. We design, set up and train your team. You keep the time saved.',
   chips: ['Assessment', 'Custom automations', 'Training included'],
-  proof1: 'We have delivered systems for small businesses in catering, event equipment rental, tutoring, online training, financial services and exhibit manufacturing.',
-  proof2: 'A written Law 25 file for every system that touches personal information.',
+  proof1: 'We already automate small businesses in corporate catering, accounting, finance and property management.',
+  proof2: 'Compliant with Quebec privacy law (Law 25). Your data stays protected.',
   hint: '3 questions, then where to reach you. If it is a fit, we book the call right away.',
   vous: 'You are', choisir: 'Choose...', pme: 'A business (SMB)', autonome: 'A self-employed worker', particulier: 'An individual',
   employes: 'How many employees?', moi: 'Just me', e1: '2 to 10', e2: '11 to 50', e3: '50 or more',
@@ -43,8 +42,8 @@ const T0 = en ? {
   eyebrow: 'Diagnostic IA gratuit', h1a: "L'IA peut-elle vous faire ", h1b: 'gagner du temps', h1c: ' ?',
   lead: 'FournIA automatise les tâches manuelles des PME québécoises. On conçoit, on implante, on forme votre équipe. Vous gardez le temps gagné.',
   chips: ['Audit', 'Automatisations sur mesure', 'Formation incluse'],
-  proof1: "On a livré des systèmes pour des PME en traiteur, en location d'équipement événementiel, en tutorat, en formation en ligne, en services financiers et en fabrication de kiosques d'exposition.",
-  proof2: 'Un dossier Loi 25 écrit pour chaque système qui touche des renseignements personnels.',
+  proof1: 'On automatise déjà des PME en restauration corporative, comptabilité, finance et gestion immobilière.',
+  proof2: 'Conforme Loi 25. Vos données restent protégées.',
   hint: "3 questions, puis où vous joindre. Si c'est un fit, on réserve l'appel tout de suite.",
   vous: 'Vous êtes', choisir: 'Choisir...', pme: 'Une entreprise (PME)', autonome: 'Un travailleur autonome', particulier: 'Un particulier',
   employes: "Combien d'employés ?", moi: 'Juste moi', e1: '2 à 10', e2: '11 à 50', e3: '50 et plus',
@@ -55,18 +54,6 @@ const T0 = en ? {
   noTitle: "Pas un fit pour l'instant.", noSub: "Le diagnostic est pour les PME avec une équipe et un besoin concret. On a vos coordonnées : si ça change, écrivez-nous.",
   confid: 'Politique de confidentialité',
 };
-
-const TU = {
-  desc: "Réponds à 3 questions. Si l'IA peut vraiment te faire gagner du temps, tu réserves un diagnostic gratuit de 30 minutes.",
-  h1a: "L'IA peut-elle te faire ",
-  lead: 'FournIA automatise les tâches manuelles des PME québécoises. On conçoit, on implante, on forme ton équipe. Tu gardes le temps gagné.',
-  hint: "3 questions, puis où te joindre. Si c'est un fit, tu réserves ton appel tout de suite.",
-  vous: 'Tu es', intention: 'Où en es-tu ?',
-  consent: "En envoyant, tu acceptes que FournIA te contacte au sujet de ta demande. Pas d'infolettre, aucune revente.",
-  okTitle: "C'est un fit. Réserve ton appel.",
-  noSub: "Le diagnostic est pour les PME avec une équipe et un besoin concret. On a tes coordonnées : si ça change, écris-nous.",
-};
-const T = (!en && tu) ? { ...T0, ...TU } : T0;
 
 // Pixel Meta : inactif tant que vide. Pre-requis : /confidentialite en ligne + artefact Loi 25.
 const FB_PIXEL_ID = '2092349601673992';
@@ -91,7 +78,6 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{T.title}</title>
 <meta name="description" content={T.desc}>
-{tu && <meta name="robots" content="noindex, nofollow" />}
 <link rel="canonical" href={`${siteUrl}${T.path}`} />
 <link rel="alternate" hreflang="fr-CA" href={`${siteUrl}/diagnostic/`} />
 <link rel="alternate" hreflang="en-CA" href={`${siteUrl}/en/diagnostic/`} />
@@ -200,13 +186,6 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
         <input type="hidden" name="form-name" value="diagnostic-qualification" />
         <input type="hidden" name="qualifie" id="f-qualifie" value="" />
         <input type="hidden" name="langue" value={lang} />
-        <!-- Provenance (remplie par le script ci-dessous depuis l'adresse : angle de la pub + UTM ; jamais fbclid) -->
-        <input type="hidden" name="angle" value="" />
-        <input type="hidden" name="de" value="" />
-        <input type="hidden" name="utm_source" value="" />
-        <input type="hidden" name="utm_medium" value="" />
-        <input type="hidden" name="utm_campaign" value="" />
-        <input type="hidden" name="utm_content" value="" />
         <p class="hp"><label>Ne pas remplir <input name="bot-field" /></label></p>
 
         <div class="field">
@@ -260,7 +239,7 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
       <div class="result-icon ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h2>{T.okTitle}</h2>
       <p>{T.okSub}</p>
-      <a id="book-link" class="btn btn-primary book-btn" href={booking}>{T.book} <span class="arrow">&#8594;</span></a>
+      <a id="book-link" class="btn btn-primary book-btn" href={booking} target="_blank" rel="noopener">{T.book} <span class="arrow">&#8594;</span></a>
     </div>
 
     <!-- ETAPE 2B : non qualifie -->
@@ -279,14 +258,6 @@ const markSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" a
 
 <script is:inline>
   const form = document.getElementById('qualForm');
-  // Provenance : angle de la pub et UTM, recopiés dans les champs cachés (aucun identifiant publicitaire).
-  try {
-    const q = new URLSearchParams(location.search);
-    ['angle', 'de', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach((k) => {
-      const v = q.get(k); const el = form.querySelector('input[name="' + k + '"]');
-      if (v && el) el.value = v.slice(0, 120);
-    });
-  } catch (_) {}
   const bookLink = document.getElementById('book-link');
   const stepForm = document.getElementById('step-form');
   const stepOk = document.getElementById('step-qualified');

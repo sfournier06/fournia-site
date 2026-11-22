@@ -7,8 +7,7 @@ import '../styles/global.css';
 import { GOOGLE_VERIFICATION, BING_VERIFICATION, SERVICES, SERVICES_EN } from '../data/entite.mjs';
 
 // lang : 'fr' (défaut) ou 'en'. alt : chemin de la même page dans l'autre langue (hreflang + bouton FR | EN).
-// minimal : page d'atterrissage sans issue (pas de menu, pas de pied à liens, logo non cliquable).
-const { title, description, canonical, ogType = 'website', lang = 'fr', alt, minimal = false } = Astro.props;
+const { title, description, canonical, ogType = 'website', lang = 'fr', alt } = Astro.props;
 const en = lang === 'en';
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://fournia.net';
 const cta = en ? '/en/diagnostic/' : '/diagnostic/';
@@ -25,8 +24,6 @@ const autreLangue = altTrouve ?? (en ? '/' : '/en/');
 const frPath = en ? altTrouve : cheminActuel;
 const enPath = en ? cheminActuel : altTrouve;
 // Monogramme officiel (references/brand/assets/fournia-monogram.svg, copié dans public/brand/).
-// Polices servies par le site pour les pages minimal (landing). Fichiers et licences : public/fonts/.
-const POLICES_LOCALES = "@font-face{font-family:'Inter';src:url('/fonts/inter-fr.woff2') format('woff2');font-weight:300 700;font-style:normal;font-display:swap}@font-face{font-family:'Space Grotesk';src:url('/fonts/spacegrotesk-fr.woff2') format('woff2');font-weight:300 700;font-style:normal;font-display:swap}@font-face{font-family:'Syne';src:url('/fonts/syne-logo.woff2') format('woff2');font-weight:400 800;font-style:normal;font-display:swap}";
 const markSvg = '<img src="/brand/fournia-monogram.svg" alt="" width="40" height="40" />';
 import Reseaux from '../components/Reseaux.astro';
 import { autreLangue as cheminAutreLangue } from '../data/traductions.mjs';
@@ -38,7 +35,7 @@ import { autreLangue as cheminAutreLangue } from '../data/traductions.mjs';
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script is:inline>document.documentElement.classList.add('js');</script>
   <link rel="icon" type="image/svg+xml" href="/brand/fournia-favicon.svg" />
-  <link rel="icon" type="image/png" sizes="64x64" href="/brand/fournia-favicon-64.png" />
+  <link rel="icon" type="image/png" href="/brand/fournia-icon-512.png" />
   <link rel="apple-touch-icon" href="/brand/fournia-icon-512.png" />
   <title>{title}</title>
   {description && <meta name="description" content={description} />}
@@ -55,22 +52,11 @@ import { autreLangue as cheminAutreLangue } from '../data/traductions.mjs';
   <meta property="og:image" content="https://fournia.net/brand/fournia-lockup-horizontal-dark.png" />
   {GOOGLE_VERIFICATION && <meta name="google-site-verification" content={GOOGLE_VERIFICATION} />}
   {BING_VERIFICATION && <meta name="msvalidate.01" content={BING_VERIFICATION} />}
-  {minimal ? (
-    <>
-      {/* Landing (minimal) : polices servies par le site, en sous-ensemble français (aucune connexion à Google).
-          Fichiers et licences OFL : public/fonts/. Le reste du site garde Google Fonts. */}
-      <link rel="preload" href="/fonts/syne-logo.woff2" as="font" type="font/woff2" crossorigin />
-      <style is:inline set:html={POLICES_LOCALES}></style>
-    </>
-  ) : (
-    <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
-      <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" /></noscript>
-    </>
-  )}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" /></noscript>
   <slot name="head" />
 </head>
 <body>
@@ -80,74 +66,60 @@ import { autreLangue as cheminAutreLangue } from '../data/traductions.mjs';
     <div class="grain"></div>
   </div>
 
-  {minimal ? (
-    <nav id="nav" class="nav-minimal">
-      <div class="nav-inner">
-        <span class="logo" aria-label="FournIA"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></span>
-      </div>
-    </nav>
-  ) : (
-    <nav id="nav">
-      <div class="nav-inner">
-        <a href={L.accueil} class="logo" aria-label="FournIA"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
-        <ul class="nav-links">
-          <li><a href={`${L.accueil}#services`}>{L.services}</a></li>
-          <li><a href={`${L.accueil}#exemples`}>{L.real}</a></li>
-          <li><a href={en ? '/en/about/' : '/a-propos/'}>{L.apropos}</a></li>
-          <li><a href={en ? '/en/blog/' : '/blog/'}>{L.blog}</a></li>
-          <li><a href={autreLangue} class="lien-langue" lang={en ? 'fr' : 'en'} hreflang={en ? 'fr-CA' : 'en-CA'} aria-label={en ? 'Version française' : 'English version'}>{en ? 'FR' : 'EN'}</a></li>
-        </ul>
-        <a href={cta} class="btn btn-primary cta-nav">{L.cta} <span class="arrow">→</span></a>
-        <button type="button" class="hamburger" id="burger" aria-label={L.menu} aria-expanded="false"><span></span><span></span><span></span></button>
-      </div>
-    </nav>
-  )}
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href={L.accueil} class="logo" aria-label="FournIA"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
+      <ul class="nav-links">
+        <li><a href={`${L.accueil}#services`}>{L.services}</a></li>
+        <li><a href={`${L.accueil}#exemples`}>{L.real}</a></li>
+        <li><a href={en ? '/en/about/' : '/a-propos/'}>{L.apropos}</a></li>
+        <li><a href={en ? '/en/blog/' : '/blog/'}>{L.blog}</a></li>
+        <li><a href={autreLangue} class="lien-langue" lang={en ? 'fr' : 'en'} hreflang={en ? 'fr-CA' : 'en-CA'} aria-label={en ? 'Version française' : 'English version'}>{en ? 'FR' : 'EN'}</a></li>
+      </ul>
+      <a href={cta} class="btn btn-primary cta-nav">{L.cta} <span class="arrow">→</span></a>
+      <button type="button" class="hamburger" id="burger" aria-label={L.menu} aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
 
   <slot />
 
-  {minimal ? (
-    <footer class="foot-minimal">
-      <div class="wrap foot-bottom">{L.droits} · <a href={en ? "/en/privacy/" : "/confidentialite/"}>{en ? "Privacy policy" : "Politique de confidentialité"}</a> · <a href="#" onclick="window.fourniaTemoins&&fourniaTemoins();return false">{L.temoins}</a></div>
-    </footer>
-  ) : (
-    <footer>
-      <div class="wrap">
-        <div class="foot-grid">
-          <div>
-            <a href={L.accueil} class="logo" style="font-size:1.5rem"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
-            <p style="color:var(--mute); margin-top:1rem; max-width:280px; font-size:.92rem;">{L.desc}</p>
-            <Reseaux lang={lang} />
-          </div>
-          <div class="foot-contact">
-            <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>
-            <a href="tel:+15148632973">514 863 2973</a>
-            <a href="/">fournia.net</a>
-          </div>
-          <div class="foot-contact">
-            {en ? (
-              <Fragment>
-                <a href="/en/about/">{L.apropos}</a>
-                <a href="/en/testimonials/">{L.temoignages}</a>
-                {SERVICES_EN.map((sv) => <a href={sv.href}>{sv.label}</a>)}
-                <a href="/en/blog/">{L.blog}</a>
-                <a href={cta}>{L.cta}</a>
-              </Fragment>
-            ) : (
-              <Fragment>
-                <a href="/a-propos/">À propos</a>
-                <a href="/temoignages/">Témoignages</a>
-                {SERVICES.map((sv) => <a href={sv.href}>{sv.label}</a>)}
-                <a href="/#processus">Processus</a>
-                <a href="/blog">Blogue</a>
-                <a href={cta}>Réserver un appel</a>
-              </Fragment>
-            )}
-          </div>
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a href={L.accueil} class="logo" style="font-size:1.5rem"><span class="mark" set:html={markSvg}></span><span>Fourn<span class="ia">IA</span></span></a>
+          <p style="color:var(--mute); margin-top:1rem; max-width:280px; font-size:.92rem;">{L.desc}</p>
+          <Reseaux lang={lang} />
         </div>
-        <div class="foot-bottom">{L.droits} · <a href="#" onclick="window.fourniaTemoins&&fourniaTemoins();return false">{L.temoins}</a></div>
+        <div class="foot-contact">
+          <a href="mailto:s.fournier@fournia.net">s.fournier@fournia.net</a>
+          <a href="tel:+15148632973">514 863 2973</a>
+          <a href="/">fournia.net</a>
+        </div>
+        <div class="foot-contact">
+          {en ? (
+            <Fragment>
+              <a href="/en/about/">{L.apropos}</a>
+              <a href="/en/testimonials/">{L.temoignages}</a>
+              {SERVICES_EN.map((sv) => <a href={sv.href}>{sv.label}</a>)}
+              <a href="/en/blog/">{L.blog}</a>
+              <a href={cta}>{L.cta}</a>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <a href="/a-propos/">À propos</a>
+              <a href="/temoignages/">Témoignages</a>
+              {SERVICES.map((sv) => <a href={sv.href}>{sv.label}</a>)}
+              <a href="/#processus">Processus</a>
+              <a href="/blog">Blogue</a>
+              <a href={cta}>Réserver un appel</a>
+            </Fragment>
+          )}
+        </div>
       </div>
-    </footer>
-  )}
+      <div class="foot-bottom">{L.droits} · <a href="#" onclick="window.fourniaTemoins&&fourniaTemoins();return false">{L.temoins}</a></div>
+    </div>
+  </footer>
 
   <script is:inline>
     const nav = document.getElementById('nav');
@@ -163,7 +135,7 @@ import { autreLangue as cheminAutreLangue } from '../data/traductions.mjs';
     document.addEventListener('click', (e) => { if (!nav.contains(e.target)) nav.classList.remove('open'); });
   </script>
   <!-- Bulle de clavardage SaaS AI System : les messages arrivent dans la boite unifiee du CRM. -->
-  {!minimal && <ChatDiffere />}
+  <ChatDiffere />
   <Consentement lang={lang} />
 </body>
 </html>

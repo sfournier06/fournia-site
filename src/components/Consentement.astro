@@ -95,7 +95,7 @@ const pixelInit = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n
   // Sections vues (éléments <section> avec un id), une fois chacune.
   if('IntersectionObserver' in window){
     var vu={}; var io=new IntersectionObserver(function(es){es.forEach(function(en){
-      if(en.isIntersecting && !vu[en.target.id]){vu[en.target.id]=1;window.fourniaEvent('section_vue',{page:P(),section:en.target.id});}});},{threshold:0,rootMargin:'-40% 0px -40% 0px'});
+      if(en.isIntersecting && !vu[en.target.id]){vu[en.target.id]=1;window.fourniaEvent('section_vue',{page:P(),section:en.target.id});}});},{threshold:0.2});
     document.querySelectorAll('section[id]').forEach(function(s){io.observe(s)});
   }
   // Bulle de clavardage (bouton dans le shadow DOM du widget de la plateforme).
