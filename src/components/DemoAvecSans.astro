@@ -9,7 +9,7 @@ const SCENARIOS = [
     etapes: [
       { quand: 'Jour 3', quoi: 'Le système lui écrit un texto poli, à ton nom.' },
       { quand: 'Jour 3, 16 h', quoi: 'Il répond : « On en reparle mardi ? »' },
-      { quand: 'Aussitôt', quoi: 'La réponse est notée au dossier, et un rappel est mis à ton agenda.' },
+      { quand: 'Aussitôt', quoi: 'La réponse est notée au dossier, avec la date où reprendre.' },
     ],
     sans: [
       { who: 'out', t: 'Lundi', txt: 'Bonjour M. Tremblay, voici votre soumission pour les travaux.' },
@@ -21,14 +21,14 @@ const SCENARIOS = [
       { who: 'sys', t: 'Jour 3, 9 h', txt: 'Pas de réponse : relance automatique', step: 0 },
       { who: 'out', t: 'Jour 3, 9 h', txt: 'Bonjour M. Tremblay, avez-vous eu le temps de regarder la soumission ? Je peux répondre à vos questions.' },
       { who: 'in', t: 'Jour 3, 16 h', txt: 'Oui ! On en reparle mardi ?', step: 1 },
-      { who: 'sys', t: 'Aussitôt', txt: 'Noté au dossier · Rappel mardi 9 h à ton agenda', step: 2 },
+      { who: 'sys', t: 'Aussitôt', txt: 'Noté au dossier · À reprendre mardi', step: 2 },
     ],
     resultat: 'Tu reprends la conversation au bon moment, sans rien avoir à retenir.' },
   { id: 'soumissions', titre: 'Les soumissions', pour: 'Demandes à chiffrer', contact: 'Formulaire du site', canal: 'Demande',
     avant: 'Chaque demande prend une heure à chiffrer et à mettre en page, souvent le soir.',
     etapes: [
       { quand: 'La demande arrive', quoi: 'Le système lit la demande : date, nombre de personnes, options.' },
-      { quand: '1 minute après', quoi: 'Il calcule le prix selon ta grille.' },
+      { quand: 'Quelques minutes après', quoi: 'Il calcule le prix selon ta grille.' },
       { quand: 'Ensuite', quoi: "Un brouillon à ton image t'attend. Tu valides." },
     ],
     sans: [
@@ -38,9 +38,9 @@ const SCENARIOS = [
     ],
     avec: [
       { who: 'in', t: '19 h 40', txt: "Bonjour, j'aurais besoin d'un prix pour 120 personnes le 12 décembre." },
-      { who: 'sys', t: '19 h 41', txt: 'Demande lue · 120 personnes · 12 décembre', step: 0 },
-      { who: 'sys', t: '19 h 41', txt: 'Prix calculé selon ta grille', step: 1 },
-      { who: 'sys', t: '19 h 42', txt: 'Brouillon prêt · En attente de ta validation', step: 2 },
+      { who: 'sys', t: '19 h 44', txt: 'Demande lue · 120 personnes · 12 décembre', step: 0 },
+      { who: 'sys', t: '19 h 44', txt: 'Prix calculé selon ta grille', step: 1 },
+      { who: 'sys', t: '19 h 45', txt: 'Brouillon prêt · En attente de ta validation', step: 2 },
       { who: 'out', t: '19 h 50', txt: 'Bonjour ! Voici votre soumission pour le 12 décembre. Au plaisir.' },
     ],
     resultat: 'Tu relis, tu ajustes au besoin, tu envoies.' },
@@ -48,7 +48,7 @@ const SCENARIOS = [
     avant: "Une demande arrive pendant que tu es avec un client. Elle attend jusqu'au soir, et la personne a déjà écrit à quelqu'un d'autre.",
     etapes: [
       { quand: '14 h 12', quoi: 'Une demande arrive pendant que tu es occupé.' },
-      { quand: '1 minute après', quoi: 'Le système répond à ton nom, avec les bonnes questions.' },
+      { quand: 'Quelques minutes après', quoi: 'Le système répond à ton nom, avec les bonnes questions.' },
       { quand: 'Ensuite', quoi: 'La demande est classée au dossier. Tu reprends la suite.' },
     ],
     sans: [
@@ -58,7 +58,7 @@ const SCENARIOS = [
     ],
     avec: [
       { who: 'in', t: '14 h 12', txt: 'Bonjour, êtes-vous disponibles le 12 décembre pour 80 personnes ?', step: 0 },
-      { who: 'out', t: '14 h 13', txt: 'Bonjour ! Merci pour votre message. On regarde ça. Pour quelles heures, et à quelle adresse ?', step: 1 },
+      { who: 'out', t: '14 h 16', txt: 'Bonjour ! Merci pour votre message. On regarde ça. Pour quelles heures, et à quelle adresse ?', step: 1 },
       { who: 'in', t: '14 h 20', txt: 'De 18 h à 23 h, à Laval.' },
       { who: 'sys', t: '14 h 20', txt: 'Classée au dossier · À reprendre par toi', step: 2 },
     ],

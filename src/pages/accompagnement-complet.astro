@@ -127,7 +127,7 @@ const objections = [
   { q: "« Je n'ai pas le temps pour ça. »", a: ['De ton côté : 30 minutes pour le diagnostic. Deux rencontres d\'environ une heure pour démarrer. Ensuite, une rencontre aux deux semaines, plus les tests et la formation de ton équipe à chaque livraison.', 'Le reste est notre travail : bâtir, tester, installer, former.', 'Ton calendrier est plein ce mois-ci ? Fais le diagnostic maintenant. Ton plan écrit sera prêt le jour où tu voudras commencer.'] },
   { q: '« Mon équipe va avoir peur. »', a: ["On le prévoit dès le départ. Ton équipe teste chaque système avec nous avant qu'il roule. On la forme à chaque livraison, en mots simples : ce que l'IA fait bien, ce qu'elle fait mal, et quoi faire quand elle se trompe.", "Les messages importants passent par une personne avant de partir, aussi longtemps que tu le veux."] },
   { q: "« J'ai déjà essayé un outil. Ça n'a pas marché. »", a: ["Chez les PME que je rencontre, un outil installé sans regarder comment l'équipe travaille finit souvent par dormir. On fait l'étape d'avant : on suit ton travail d'une étape à l'autre, puis on choisit.", "Si l'outil que tu paies déjà peut faire le travail, on part de lui. On en propose un nouveau seulement quand le tien ne peut pas."] },
-  { q: '« Mes données vont aller où ? »', citation: { t: '« […] Je suis un peu parano sur ça. »', qui: 'Direction marketing et ventes, traiteur' }, a: ['Tu as raison de poser la question. Avant de bâtir un système qui touche des renseignements personnels, on passe une vérification Loi 25. Tu reçois un document écrit : quelles données le système touche, où elles vont, et qui y a accès.', "On porte une attention particulière aux données qui sortiraient du Québec quand un modèle d'IA est utilisé."] },
+  { q: '« Mes données vont aller où ? »', citation: { t: '« […] Je suis un peu parano sur ça. »', qui: 'Direction marketing et ventes, PME de services' }, a: ['Tu as raison de poser la question. Avant de bâtir un système qui touche des renseignements personnels, on passe une vérification Loi 25. Tu reçois un document écrit : quelles données le système touche, où elles vont, et qui y a accès.', "On porte une attention particulière aux données qui sortiraient du Québec quand un modèle d'IA est utilisé."] },
   { q: '« Je peux le faire moi-même avec ChatGPT. »', a: ['Pour une partie, oui. Ton diagnostic écrit te dit même ce que tu peux faire toi-même, sans nous.', "ChatGPT répond quand tu lui écris. Un système part seul quand une demande arrive : il relance à la bonne date et range l'information au bon endroit, même quand tu es sur un chantier.", 'Reste à savoir qui va le bâtir, le tester et le garder à jour. Si c\'est toi, ça se fera le soir.'] },
   { q: "« Ce n'est pas pour une entreprise de ma taille. »", a: ["C'est à ça que sert le diagnostic. On mesure tes tâches en heures par mois. Si un seul système suffit chez vous, on te le dit, et on te bâtit celui-là, sans rien te vendre de plus. Si l'automatisation ne vaut pas la peine chez vous, on te le dit aussi."] },
   { q: '« Je ne suis pas techno. »', citation: { t: '« Ben honnêtement, je comprends pas comment ces choses-là fonctionnent. »', qui: 'Propriétaire, plusieurs entreprises de services' }, a: ["Tu n'as pas besoin de l'être. Ton travail, c'est de nous expliquer comment une demande passe chez vous. Le nôtre, c'est de bâtir, tester et installer.", "À chaque livraison, on t'explique le système en mots simples et on forme ton équipe. Tu sais ce qu'il fait, quand il le fait, et quoi faire s'il se trompe."] },
@@ -252,6 +252,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
       <div class="col-xl reveal">
         <p class="etiquette-lp">Avec ou sans le système</p>
         <h2>Trois tâches, vues des deux côtés</h2>
+        <p class="note-scenes">Scènes types, noms fictifs.</p>
         <DemoAvecSans />
       </div>
     </section>
@@ -306,7 +307,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
       <div class="col-xl reveal">
         <p class="etiquette-lp">Réalisations</p>
         <h2>Des systèmes qui roulent déjà chez des PME d'ici</h2>
-        <Realisations court={true} lang="fr" />
+        <Realisations court={true} lang="fr" sansImageSecteur />
         <div class="centre"><a data-cta="4" class="btn btn-primary btn-cta btn-xl" href={CTA}>{ctaTexte} <span class="arrow">→</span></a></div>
       </div>
     </section>
@@ -832,6 +833,7 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
   /* Version courte (2026-11-22) : étiquettes de section, colonne large, listes compactes */
   .lp .etiquette-lp, .lp p.etiquette-lp { color: var(--lime); font-family: 'Space Grotesk', 'Space Grotesk Repli', sans-serif; font-size: .9rem; font-weight: 500; letter-spacing: .01em; margin: 0 0 .8rem; }
   .col-xl { width: min(1120px, 92vw); margin: 0 auto; }
+  .lp .note-scenes { font-size: .85rem; color: var(--mute); margin: -.4rem 0 1.4rem; }
   .fuites-liste { list-style: none; margin: 1.6rem 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
   .fuites-liste li { padding: .9rem 1rem; border-radius: 12px; border: 1px solid var(--line); background: rgba(255,255,255,.025); color: var(--texte); font-size: .98rem; line-height: 1.45;
     border-left: 3px solid rgba(229,72,77,.55); }

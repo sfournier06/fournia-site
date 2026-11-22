@@ -6,7 +6,8 @@ import { REALISATIONS } from '../data/realisations.mjs';
 import { APERCU } from '../data/apercu.mjs';
 import { enAnglais } from '../data/traductions.mjs';
 
-const { limite, court = false, lang = 'fr' } = Astro.props;
+// sansImageSecteur : la landing n'affiche aucune photo décorative de secteur (leçon du 2026-11-20 : chaque image est une preuve).
+const { limite, court = false, lang = 'fr', sansImageSecteur = false } = Astro.props;
 const en = lang === 'en';
 // Textes de l'interface. En anglais, le lien « Voir le secteur » mène à la page anglaise du secteur (enAnglais).
 const T = en
@@ -31,11 +32,11 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
             <div class="bandeau-photo client"><img src={r.photo} alt={r.client ?? ''} loading="lazy" decoding="async" width="800" height="600" /></div>
           ) : ok && r.logo && !(r.prefereImage && r.image) ? (
             <div class="bandeau-logo"><img src={r.logo} alt={r.client ?? ''} loading="lazy" decoding="async" /></div>
-          ) : r.image ? (
+          ) : r.image && !sansImageSecteur ? (
             <div class="bandeau-photo"><img src={r.image} alt="" loading="lazy" decoding="async" width="800" height="600" /></div>
           ) : null}
           <div class="tete">
-            {!(ok && r.logo) && !r.image && <span class="monogramme" aria-hidden="true">{initiale(ok && r.client ? r.client : tr(r, 'secteur'))}</span>}
+            {!(ok && r.logo) && !(r.image && !sansImageSecteur) && <span class="monogramme" aria-hidden="true">{initiale(ok && r.client ? r.client : tr(r, 'secteur'))}</span>}
             <div>
               <p class="secteur">{ok && r.client ? r.client : tr(r, 'secteur')}</p>
               <p class="sous-secteur">{ok && r.client ? tr(r, 'secteur') : T.confidentiel}</p>
@@ -62,7 +63,7 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
               <button type="button" class="fermer" data-fermer aria-label={T.fermer}>×</button>
               {ok && r.photo ? <div class="detail-visuel photo"><img src={r.photo} alt="" /></div>
                 : ok && r.logo ? <div class="detail-visuel"><img src={r.logo} alt="" /></div>
-                : r.image ? <div class="detail-visuel photo"><img src={r.image} alt="" /></div> : null}
+                : r.image && !sansImageSecteur ? <div class="detail-visuel photo"><img src={r.image} alt="" /></div> : null}
               <div class="detail-corps">
               <p class="secteur">{ok && r.client ? r.client : tr(r, 'secteur')}</p>
               <p class="sous-secteur">{ok && r.client ? tr(r, 'secteur') : T.confidentiel}</p>
