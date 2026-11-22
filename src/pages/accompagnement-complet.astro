@@ -211,7 +211,10 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
         <!-- Étape 1 : la preuve d'abord, puis la personne visée -->
         <div class="preuve-barre">
           <span class="preuve-note"><span class="etoiles-w" set:html={etoiles}></span><span><strong>5,0</strong> sur Google · 5 avis</span></span>
-          <span class="client-logo"><span class="logo-rond"><img src="/clients/mini/avecplaisirs.webp" alt="" width="40" height="40" decoding="async" /></span><span>Client : AvecPlaisirs</span></span>
+          <span class="client-logo" role="img" aria-label="Clients : AvecPlaisirs, Pubsphere, Arbour Aide Académique, SeniorTech">
+            <span class="logos">{['avecplaisirs', 'pubsphere', 'arbour', 'seniortech'].map((n) => <span class="logo-rond"><img src={`/clients/mini/${n}.webp`} alt="" width="40" height="40" decoding="async" /></span>)}</span>
+            <span>Ils nous font confiance</span>
+          </span>
         </div>
         <p class="interpelle">Propriétaire d'une PME de services au Québec : tes appels, tes soumissions et tes relances passent encore tous par toi&nbsp;?</p>
 
@@ -1010,7 +1013,8 @@ const croix = '<svg class="croix" viewBox="0 0 20 20" aria-hidden="true"><path d
     border: 1px solid rgba(255,255,255,.12); background: rgba(11,11,12,.45); }
   .badges-confiance li :global(svg) { width: 17px; height: 17px; color: var(--lime); flex: none; }
   .client-logo { display: inline-flex; align-items: center; gap: .5rem; font-size: .88rem; color: var(--texte); }
-  .client-logo .logo-rond { width: 2rem; height: 2rem; margin-left: 0; }
+  .client-logo .logo-rond { width: 2rem; height: 2rem; }
+  .client-logo .logo-rond:first-child { margin-left: 0; }
   @media (max-width: 560px) {
     .badges-confiance { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; width: 100%; }
     .badges-confiance li { font-size: .74rem; padding: .4rem .55rem; border-radius: 10px; justify-content: flex-start; text-align: left; line-height: 1.25; }
