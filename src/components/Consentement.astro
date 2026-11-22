@@ -13,8 +13,8 @@
 // loi-25-artefact.md (données de navigation seulement, aucune identité).
 const { lang = 'fr' } = Astro.props;
 const T = lang === 'en'
-  ? { aria: 'Cookies', texte: "We use cookies to measure visits to the site and how well our ads work. Nothing is turned on without your consent.", plus: 'Learn more', non: 'Decline', oui: 'Accept' }
-  : { aria: 'Témoins', texte: "On utilise des témoins pour mesurer les visites du site et l'efficacité de nos publicités. Rien n'est activé sans votre accord.", plus: 'En savoir plus', non: 'Refuser', oui: 'Accepter' };
+  ? { aria: 'Cookies', texte: "Google and Meta measurement cookies, only with your consent.", plus: 'Learn more', non: 'Decline', oui: 'Accept' }
+  : { aria: 'Témoins', texte: "Témoins de mesure Google et Meta, seulement avec votre accord.", plus: 'En savoir plus', non: 'Refuser', oui: 'Accepter' };
 const FB_PIXEL_ID = '2092349601673992';
 const pixelInit = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${FB_PIXEL_ID}');fbq('track','PageView');`;
 ---
@@ -33,7 +33,8 @@ const pixelInit = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n
   .consentement-btns{display:flex;gap:8px;justify-content:flex-end}
   .consentement button{font:600 14px Inter,system-ui,sans-serif;border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid #3a3b38;background:transparent;color:#E8E8E6}
   .consentement button.ok{background:#B7D94C;border-color:#B7D94C;color:#0B0B0C}
-  @media (max-width:520px){.consentement{left:12px;right:12px;bottom:12px;max-width:none}}
+  /* Compact sur mobile (2026-11-22) : une ligne de texte, boutons égaux à droite, environ 70 px de haut */
+  @media (max-width:520px){.consentement{left:10px;right:10px;bottom:10px;max-width:none;display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:12.5px;line-height:1.35}.consentement p{margin:0;flex:1}.consentement-btns{flex:none;gap:6px}.consentement button{font-size:13px;padding:8px 11px}}
 </style>
 <script is:inline set:html={`if(typeof window.__fourniaPixel!=="function"){window.__fourniaPixel=function(){${pixelInit}};}`} />
 <script is:inline>
