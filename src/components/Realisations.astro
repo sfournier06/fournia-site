@@ -36,7 +36,7 @@ const id = `car-${Math.random().toString(36).slice(2, 8)}`;
             <div class="bandeau-photo"><img src={r.image} alt="" loading="lazy" decoding="async" width="800" height="600" /></div>
           ) : null}
           <div class="tete">
-            {!(ok && r.logo) && !(r.image && !sansImageSecteur) && <span class="monogramme" aria-hidden="true">{initiale(ok && r.client ? r.client : tr(r, 'secteur'))}</span>}
+            {!(ok && (r.logo || r.photo)) && !(r.image && !sansImageSecteur) && <span class="monogramme" aria-hidden="true">{initiale(ok && r.client ? r.client : tr(r, 'secteur'))}</span>}
             <div>
               <p class="secteur">{ok && r.client ? r.client : tr(r, 'secteur')}</p>
               <p class="sous-secteur">{ok && r.client ? tr(r, 'secteur') : T.confidentiel}</p>
