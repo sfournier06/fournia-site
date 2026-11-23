@@ -32,6 +32,7 @@
 - [Consultant IA sur la Rive-Nord de Montréal : à qui s'adresser en 2026 ?](https://fournia.net/blog/consultant-ia-rive-nord-montreal-2026) : carte des rôles pour une PME de la Rive-Nord : consultant qui construit, organismes régionaux, financement IRIA de DEC (remboursable, jusqu'à 50 %) et Loi 25.
 - [Comment former ses employés à l'IA dans une PME au Québec ?](https://fournia.net/blog/former-employes-ia-pme-quebec-2026) : méthode en 4 étapes (une tâche par poste, un outil approuvé, une règle d'usage d'une page, revue après 30 jours), formation gratuite ou sur mesure, Loi 25.
 - [Comment un traiteur peut-il automatiser ses commandes et ses achats avec l'IA ?](https://fournia.net/blog/automatiser-commandes-achats-traiteur-ia-quebec-2026) : saisie des demandes, soumission, liste de production et achats par fournisseur, ce qui reste humain (allergènes, permis) et Loi 25.
+- [Subventions pour l'IA au Québec en 2026 : qu'est-ce qui existe pour les PME ?](https://fournia.net/blog/subventions-ia-pme-quebec-2026) : IRIA de DEC (aide remboursable jusqu'à 50 %), ESSOR volet 1 d'Investissement Québec, aide à la formation de Services Québec, crédits d'impôt et règle du dépôt avant signature.
 
 ## English
 The whole site is also available in English (same pages, same content).
